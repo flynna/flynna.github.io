@@ -1,0 +1,246 @@
+<a href="<%= theme.blog_path ? theme.blog_path.lastIndexOf("/") === theme.blog_path.length - 1 ? theme.blog_path.slice(0, theme.blog_path.length - 1) : theme.blog_path : '' %>/"
+    class="avatar_target">
+     <img class="avatar"
+          src="<%= theme.blog_path ? theme.blog_path.lastIndexOf("/") === theme.blog_path.length - 1 ? theme.blog_path.slice(0, theme.blog_path.length - 1) : theme.blog_path : '' %><%= theme.avatar %>"/>
+ </a>
+ <div class="author">
+     <span><%= config.author %></span>
+ </div>
+ 
+ <div class="icon">
+     <% for (var key in theme.link.items){ %>
+         <% if(theme.link.items[key]){ %>
+             <a title="<%= key %>"
+                href="<% if(key === 'qq') { %>http://wpa.qq.com/msgrd?v=3&uin=<%= theme.link.items[key] %>&site=qq&menu=yes<% }else{ if(key === 'email') { %>mailto:<% } %><%= theme.link.items[key] %><% } %>"
+                target="_blank">
+                 <% if(theme.link.theme === 'white'){ %>
+                     <i class="iconfont icon-<%= key %>"></i>
+                 <% } else { %>
+                     <svg class="iconfont-svg" aria-hidden="true">
+                         <use xlink:href="#icon-<%= key %>"></use>
+                     </svg>
+                 <% } %>
+             </a>
+         <% } %>
+     <% } %>
+     <% if (theme.binft) { %>
+        <div id="binft" style="height: 44px; margin: 10px 0 15px; padding: 0 5px; text-indent: 1em; text-align: center;"></div>
+        <script>
+        var binft = function (r) {
+            function t() {
+                return b[Math.floor(Math.random() * b.length)];
+            }
+            function e() {
+                return String.fromCharCode(94 * Math.random() + 33);
+            }
+            function n(rr) {
+                for (var n = document.createDocumentFragment(), i = 0; rr > i; i++) {
+                var l = document.createElement("span");
+                (l.textContent = e()), (l.style.color = t()), n.appendChild(l);
+                }
+                return n;
+            }
+            function i() {
+                var t = o[c.skillI];
+                c.step
+                ? c.step--
+                : ((c.step = g),
+                    c.prefixP < l.length
+                    ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++)
+                    : "forward" === c.direction
+                    ? c.skillP < t.length
+                        ? ((c.text += t[c.skillP]), c.skillP++)
+                        : c.delay
+                        ? c.delay--
+                        : ((c.direction = "backward"), (c.delay = a))
+                    : c.skillP > 0
+                    ? ((c.text = c.text.slice(0, -1)), c.skillP--)
+                    : ((c.skillI = (c.skillI + 1) % o.length),
+                        (c.direction = "forward"))),
+                (r.textContent = c.text),
+                r.appendChild(
+                    n(
+                    c.prefixP < l.length
+                        ? Math.min(s, s + c.prefixP)
+                        : Math.min(s, t.length - c.skillP)
+                    )
+                ),
+                setTimeout(i, d);
+            }
+            var l = "",
+                o = [
+                "白日依山尽，黄河入海流。",
+                "人生得意须尽欢，莫使金樽空对月。",
+                "春花秋月何时了？往事知多少。",
+                "问君能有几多愁？恰似一江春水向东流 。",
+                "遥知不是雪，为有暗香来。",
+                "莫愁前路无知己，天下谁人不识君。",
+                "国破山河在，城春草木深。",
+                "玲珑骰子安红豆，入骨相思知不知。",
+                "山无陵，江水为竭，冬雷震震，夏雨雪。",
+                "人生自是有情痴，此恨不关风与月。",
+                "十年生死两茫茫，不思量，自难忘。",
+                ].map(function (v) {
+                return v + "";
+                }),
+                a = 2,
+                g = 1,
+                s = 5,
+                d = 100,
+                b = [
+                "rgb(110,64,170)",
+                "rgb(150,61,179)",
+                "rgb(191,60,175)",
+                "rgb(228,65,157)",
+                "rgb(254,75,131)",
+                "rgb(255,94,99)",
+                "rgb(255,120,71)",
+                "rgb(251,150,51)",
+                "rgb(226,183,47)",
+                "rgb(198,214,60)",
+                "rgb(175,240,91)",
+                "rgb(127,246,88)",
+                "rgb(82,246,103)",
+                "rgb(48,239,130)",
+                "rgb(29,223,163)",
+                "rgb(26,199,194)",
+                "rgb(35,171,216)",
+                "rgb(54,140,225)",
+                "rgb(76,110,219)",
+                "rgb(96,84,200)",
+                ],
+                c = {
+                text: "",
+                prefixP: -s,
+                skillI: 0,
+                skillP: 0,
+                direction: "forward",
+                delay: a,
+                step: g,
+                };
+            i();
+            };
+            binft(document.getElementById("binft"));
+        </script>
+    <% } %>
+ </div>
+ <% var menus = 0 %>
+ <% for (var menu in theme.menu.menus) {
+     if (theme.menu.menus[menu].on) {
+         menus++
+     }
+ } %>
+ <% if (menus > 0){ %>
+     <a class="more-menus">更多菜单</a>
+ <% } %>
+ <%
+ if (theme.category && theme.category.sub) {
+     var childCategory = {};
+     site.myCategories.forEach(function (category) {
+         if (category.parent) {
+             if (childCategory[category.parent]) {
+                 childCategory[category.parent].push(category);
+             } else {
+                 childCategory[category.parent] = [category];
+             }
+         }
+     })
+ }
+ %>
+ <ul>
+     <li>
+         <div class="all active" data-rel="<%= __('all_articles') %>"><%= __('all_articles') %>
+             <% if (theme.category && theme.category.num) { %>
+                 <small>(<%= site.posts.length %>)</small>
+             <% } %>
+         </div>
+     </li>
+     <% site.myCategories.forEach(function(category){ %>
+         <% if (theme.category && theme.category.sub) { %>
+             <% if(!category.parent) { %>
+                 <li>
+                     <div data-rel="<%= category.name %>">
+                         <% if (childCategory[category._id]) { %><i class="fold iconfont icon-right"></i>
+                         <% } %>
+                         <%= category.name %>
+                         <% if (theme.category && theme.category.num) { %><small>(<%= category.posts.length %>)</small>
+                         <% } %>
+                     </div>
+                     <% if (childCategory[category._id]) { %>
+                         <ul class="sub hide">
+                             <% childCategory[category._id].forEach(function (child) { %>
+                                 <li>
+                                     <div data-rel="<%= category.name %><---><%= child.name %>">
+                                         <% if (childCategory[child._id]) { %><i class="fold iconfont icon-right"></i>
+                                         <% } %>
+                                         <%= child.name %>
+                                         <% if (theme.category && theme.category.num) { %>
+                                             <small>(<%= child.posts.length %>
+                                                 )</small>
+                                         <% } %>
+                                     </div>
+                                     <% if (childCategory[child._id]) { %>
+                                         <ul class="sub hide">
+                                             <% childCategory[child._id].forEach(function (child2) { %>
+                                                 <li>
+                                                     <div data-rel="<%= category.name %><---><%= child.name %><%= child2.name %>">
+                                                         <% if (childCategory[child2._id]) { %><i
+                                                                 class="fold iconfont icon-right"></i>
+                                                         <% } %>
+                                                         <%= child2.name %>
+                                                         <% if (theme.category && theme.category.num) { %>
+                                                             <small>(<%= child2.posts.length %>)</small>
+                                                         <% } %>
+                                                     </div>
+                                                 </li>
+                                             <% }) %>
+                                         </ul>
+                                     <% } %>
+                                 </li>
+                             <% }) %>
+                         </ul>
+                     <% } %>
+                 </li>
+             <% } %>
+         <% } else { %>
+             <li>
+                 <div data-rel="<%= category.name %>"><%= category.name %>
+                     <% if (theme.category && theme.category.num) { %><small>(<%= category.posts.length %>)</small>
+                     <% } %>
+                 </div>
+             </li>
+         <% } %>
+     <% }) %>
+ </ul>
+ <div class="left-bottom">
+     <div class="menus">
+         <% for (var menu in theme.menu.menus) { %>
+             <% if (theme.menu.menus[menu].on) { %>
+                 <a class="dynamic-menu <%= (theme.menu.menus[menu].type == 1 ? 'site_url' : '') %>"
+                    <% if(theme.menu.menus[menu].type == 2){ %>target="_self"
+                    <% }else if(theme.menu.menus[menu].type == 3){ %>target="_blank"
+                         <% } %>
+                    href="<%= theme.menu.menus[menu].url %>"><%= menu %></a>
+         <% }} %>
+     </div>
+     <div>
+         <% if (theme.menu.about.on) { %>
+             <a class="about <% if(theme.menu.friend.on){ %> hasFriend <% } %> <%= (theme.menu.about.type == 1 ? 'site_url' : '') %>"
+                <% if(theme.menu.about.type == 2){ %>target="_self"
+                <% }else if(theme.menu.about.type == 3){ %>target="_blank"
+                     <% } %>
+                href="<%= theme.menu.about.url %>"><%= __('about') %></a>
+         <% } %>
+         <% if (theme.menu.friend.on){ %><a <% if (theme.menu.about.on) { %>style="width: 50%"
+                 <% } %>
+                                            class="friends"><%= __('friends') %></a>
+         <% } %>
+     </div>
+ </div>
+ <input type="hidden" id="yelog_site_posts_number" value="<%= site.posts.length %>">
+ <% if(theme.word_count){ %><input type="hidden" id="yelog_site_word_count" value="<%= totalcount(site) %>"><% } %>
+ <div style="display: none">
+     <span id="busuanzi_value_site_uv"></span>
+     <span id="busuanzi_value_site_pv"></span>
+ </div>
+ 
