@@ -94,7 +94,9 @@ theme: 3-hexo
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ""
+  type: git
+   repo: git@github.com:flynna/flynna.github.io.git
+   branch: master
 
 aplayer:
   meting: true # MetingJS 支持
