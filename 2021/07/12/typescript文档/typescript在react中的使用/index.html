@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>typescript在react中的使用 | flynn-zhl的博客</title>
+  <meta name="keywords" content=" react , ts使用 ">
+  <meta name="description" content="typescript在react中的使用 | flynn-zhl的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="umi--antd-pro--openApi插件">
+<meta property="og:url" content="http://zhanghlin.cn/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="flynn-zhl的博客">
+<meta property="og:description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142638506.png">
+<meta property="article:published_time" content="2021-07-11T23:05:42.000Z">
+<meta property="article:modified_time" content="2021-07-12T09:23:57.269Z">
+<meta property="article:author" content="flynn-zhl">
+<meta property="article:tag" content="umi">
+<meta property="article:tag" content="openApi">
+<meta property="article:tag" content="antd-pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+    class="avatar_target">
+     <img class="avatar"
+          src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>flynn-zhl</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+            href="https://github.com/flynna"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+            href="https://www.zhihu.com/people/flynn-zhl"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+            href="https://blog.csdn.net/baidu_41828042"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+            href="mailto:flynnzhl@qq.com"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+            href="http://wpa.qq.com/msgrd?v=3&uin=2274105875&site=qq&menu=yes"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+            href="https://music.163.com/#/user/home?id=502374002"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+    
+    <div id="binft" style="height: 44px; margin: 10px 0 15px; padding: 0 5px; text-indent: 1em; text-align: center;"></div>
+    <script>
+    var binft = function (r) {
+        function t() {
+            return b[Math.floor(Math.random() * b.length)];
+        }
+        function e() {
+            return String.fromCharCode(94 * Math.random() + 33);
+        }
+        function n(rr) {
+            for (var n = document.createDocumentFragment(), i = 0; rr > i; i++) {
+            var l = document.createElement("span");
+            (l.textContent = e()), (l.style.color = t()), n.appendChild(l);
+            }
+            return n;
+        }
+        function i() {
+            var t = o[c.skillI];
+            c.step
+            ? c.step--
+            : ((c.step = g),
+                c.prefixP < l.length
+                ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++)
+                : "forward" === c.direction
+                ? c.skillP < t.length
+                    ? ((c.text += t[c.skillP]), c.skillP++)
+                    : c.delay
+                    ? c.delay--
+                    : ((c.direction = "backward"), (c.delay = a))
+                : c.skillP > 0
+                ? ((c.text = c.text.slice(0, -1)), c.skillP--)
+                : ((c.skillI = (c.skillI + 1) % o.length),
+                    (c.direction = "forward"))),
+            (r.textContent = c.text),
+            r.appendChild(
+                n(
+                c.prefixP < l.length
+                    ? Math.min(s, s + c.prefixP)
+                    : Math.min(s, t.length - c.skillP)
+                )
+            ),
+            setTimeout(i, d);
+        }
+        var l = "",
+            o = [
+            "白日依山尽，黄河入海流。",
+            "人生得意须尽欢，莫使金樽空对月。",
+            "春花秋月何时了？往事知多少。",
+            "问君能有几多愁？恰似一江春水向东流 。",
+            "遥知不是雪，为有暗香来。",
+            "莫愁前路无知己，天下谁人不识君。",
+            "国破山河在，城春草木深。",
+            "玲珑骰子安红豆，入骨相思知不知。",
+            "山无陵，江水为竭，冬雷震震，夏雨雪。",
+            "人生自是有情痴，此恨不关风与月。",
+            "十年生死两茫茫，不思量，自难忘。",
+            ].map(function (v) {
+            return v + "";
+            }),
+            a = 2,
+            g = 1,
+            s = 5,
+            d = 100,
+            b = [
+            "rgb(110,64,170)",
+            "rgb(150,61,179)",
+            "rgb(191,60,175)",
+            "rgb(228,65,157)",
+            "rgb(254,75,131)",
+            "rgb(255,94,99)",
+            "rgb(255,120,71)",
+            "rgb(251,150,51)",
+            "rgb(226,183,47)",
+            "rgb(198,214,60)",
+            "rgb(175,240,91)",
+            "rgb(127,246,88)",
+            "rgb(82,246,103)",
+            "rgb(48,239,130)",
+            "rgb(29,223,163)",
+            "rgb(26,199,194)",
+            "rgb(35,171,216)",
+            "rgb(54,140,225)",
+            "rgb(76,110,219)",
+            "rgb(96,84,200)",
+            ],
+            c = {
+            text: "",
+            prefixP: -s,
+            skillI: 0,
+            skillP: 0,
+            direction: "forward",
+            delay: a,
+            step: g,
+            };
+        i();
+        };
+        binft(document.getElementById("binft"));
+    </script>
+
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(20)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="工具">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        工具
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="工具<--->Hexo">
+                                        
+                                        Hexo
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="大前端">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        大前端
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="大前端<--->CSS">
+                                        
+                                        CSS
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->JavaScript">
+                                        
+                                        JavaScript
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->Node">
+                                        
+                                        Node
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->React">
+                                        
+                                        React
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->TypeScript">
+                                        
+                                        TypeScript
+                                        
+                                            <small>(3
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->Vue">
+                                        
+                                        Vue
+                                        
+                                            <small>(10
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        <a 
+                                        class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="20">
+<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+    #evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+    }
+</style>
+<script src="/js/evanyou.js"></script>
+
+
+<script type="text/javascript" src="/js/snow.js"></script>
+
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态组件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>继承</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>箭头函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>路由守卫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>自动化注册</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>antd-pro</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Aplayer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>async-component</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>css3</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>css4</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>directive</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>element-ui</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo插件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>is属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>key属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>less</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>less基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MetingJS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm-adduser</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm-publish</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>openApi</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>react</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ref属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>render函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>scope</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>slot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>slot-scope</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>svg-icon</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>this</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts操作符</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts初识</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts使用</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>typescript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>umi</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>v-指令</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue-jsx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vuex</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 大前端 React "
+           href="/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6/"
+           data-tag="umi,openApi,antd-pro"
+           data-author="" >
+            <span class="post-title" title="umi--antd-pro--openApi插件">umi--antd-pro--openApi插件</span>
+            <span class="post-date" title="2021-07-12 07:05:42">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="react,ts使用"
+           data-author="" >
+            <span class="post-title" title="typescript在react中的使用">typescript在react中的使用</span>
+            <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 工具 Hexo "
+           href="/2021/07/10/%E5%B7%A5%E5%85%B7%E6%96%87%E6%A1%A3/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/"
+           data-tag="hexo插件,Aplayer,MetingJS"
+           data-author="" >
+            <span class="post-title" title="给Hexo添加音乐播放器插件">给Hexo添加音乐播放器插件</span>
+            <span class="post-date" title="2021-07-10 17:43:42">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Node "
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           data-tag="npm,npm-adduser,npm-publish"
+           data-author="" >
+            <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
+            <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
+           data-tag="ts操作符"
+           data-author="" >
+            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
+            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/06/15/typescript%E6%96%87%E6%A1%A3/%E5%88%9D%E6%AD%A5%E6%8E%A5%E8%A7%A6typescript/"
+           data-tag="ts初识"
+           data-author="" >
+            <span class="post-title" title="初步接触typescript">初步接触typescript</span>
+            <span class="post-date" title="2021-06-15 13:52:33">2021/06/15</span>
+        </a>
+        
+        <a  class="全部文章 大前端 CSS "
+           href="/2021/06/14/css%E6%96%87%E6%A1%A3/less%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"
+           data-tag="less基础"
+           data-author="" >
+            <span class="post-title" title="less基础使用">less基础使用</span>
+            <span class="post-date" title="2021-06-14 15:42:11">2021/06/14</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
+           data-tag="slot,scope,slot-scope"
+           data-author="" >
+            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           data-tag="自动化注册"
+           data-author="" >
+            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E5%8A%A8%E6%80%81&%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E7%90%86%E8%A7%A3/"
+           data-tag="动态组件,async-component"
+           data-author="" >
+            <span class="post-title" title="vue-动态&amp;异步组件理解">vue-动态&amp;异步组件理解</span>
+            <span class="post-date" title="2021-06-08 16:40:39">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
+           data-author="" >
+            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           data-tag="is属性,key属性,ref属性"
+           data-author="" >
+            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           data-tag="路由守卫"
+           data-author="" >
+            <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
+            <span class="post-date" title="2021-06-07 10:25:02">2021/06/07</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
+           data-tag="render函数,vue-jsx"
+           data-author="" >
+            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
+        </a>
+        
+        <a  class="全部文章 大前端 CSS "
+           href="/2021/06/05/css%E6%96%87%E6%A1%A3/css3_4%E5%A5%BD%E7%94%A8%E4%BD%86%E4%B8%8D%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/"
+           data-tag="less,css3,css4"
+           data-author="" >
+            <span class="post-title" title="css3_4 好用但不常见属性">css3_4 好用但不常见属性</span>
+            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           data-tag="v-指令,directive"
+           data-author="" >
+            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 JavaScript "
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%8F%8A%E5%85%B6this%E7%90%86%E8%A7%A3/"
+           data-tag="ES6,this,箭头函数"
+           data-author="" >
+            <span class="post-title" title="箭头函数及其this理解">箭头函数及其this理解</span>
+            <span class="post-date" title="2021-05-16 17:00:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 JavaScript "
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           data-tag="继承"
+           data-author="" >
+            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/05/16/vue%E6%96%87%E6%A1%A3/element-ui%E8%87%AA%E5%AE%9A%E4%B9%89message/"
+           data-tag="element-ui"
+           data-author="" >
+            <span class="post-title" title="element-ui 自定义挂载message">element-ui 自定义挂载message</span>
+            <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/05/16/vue%E6%96%87%E6%A1%A3/vuex-typescript/"
+           data-tag="typescript,vuex"
+           data-author="" >
+            <span class="post-title" title="vuex-typescript 状态管理器">vuex-typescript 状态管理器</span>
+            <span class="post-date" title="2021-05-16 13:48:06">2021/05/16</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-typescript文档/typescript在react中的使用" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">typescript在react中的使用</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="大前端">大前端</a> > 
+            
+            <a  data-rel="大前端&lt;---&gt;TypeScript">TypeScript</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">react</a>
+            
+            <a class="color5">ts使用</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-07-12 06:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#type-%E5%92%8C-interface-%E5%A6%82%E4%BD%95%E6%8A%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">type 和 interface 如何抉择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义接口数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">泛型的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9B%B8%E5%85%B3-Props"><span class="toc-text">页面相关 Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA-Window-%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="toc-text">为 Window 添加参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%9B%B4%E6%96%B0-Object-%E7%9A%84-key"><span class="toc-text">动态更新 Object 的 key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E5%8C%85%E6%B2%A1%E6%9C%89%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84-types"><span class="toc-text">装包没有相对应的 @types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ts-ignore"><span class="toc-text">@ts-ignore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-tsx-%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义 tsx 组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">事件对象类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Promise 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BD%BF%E7%94%A8-typeof"><span class="toc-text">反向使用 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8Partial"><span class="toc-text">巧用Partial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#type-%E5%92%8C-interface-%E5%A6%82%E4%BD%95%E6%8A%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">type 和 interface 如何抉择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义接口数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">泛型的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9B%B8%E5%85%B3-Props"><span class="toc-text">页面相关 Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA-Window-%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="toc-text">为 Window 添加参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%9B%B4%E6%96%B0-Object-%E7%9A%84-key"><span class="toc-text">动态更新 Object 的 key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E5%8C%85%E6%B2%A1%E6%9C%89%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84-types"><span class="toc-text">装包没有相对应的 @types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ts-ignore"><span class="toc-text">@ts-ignore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-tsx-%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义 tsx 组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">事件对象类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Promise 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BD%BF%E7%94%A8-typeof"><span class="toc-text">反向使用 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8Partial"><span class="toc-text">巧用Partial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol></div></p>
+<h2 id="type-和-interface-如何抉择？"><a href="#type-和-interface-如何抉择？" class="headerlink" title="type 和 interface 如何抉择？"></a>type 和 interface 如何抉择？</h2><p>推荐任何时候都是用 type， type 使用起来更像一个变量，与 interface 相比，type 的特点如下：</p>
+<ul>
+<li>表达功能更强大，不局限于 object/class/function</li>
+<li>要扩展已有 type 需要创建新 type，不可以重名</li>
+<li>支持更复杂的类型操作</li>
+</ul>
+<p>基本上所有用 interface 表达的类型都有其等价的 type 表达。 除了 往函数上挂载属性：</p>
+<pre><code class="typescript">interface FuncWithAttachment &#123;
+  (param: string): boolean;
+  someProperty: number;
+&#125;
+
+const testFunc: FuncWithAttachment = &#123;&#125;;
+const result = testFunc(&quot;mike&quot;); // 有类型提醒
+testFunc.someProperty = 3; // 有类型提醒
+</code></pre>
+<ul>
+<li>枚举类型时，用 type or enum;</li>
+</ul>
+<pre><code class="typescript">type A = &quot;a&quot; | &quot;b&quot; | &quot;c&quot;;
+</code></pre>
+<h2 id="定义接口数据类型"><a href="#定义接口数据类型" class="headerlink" title="定义接口数据类型"></a>定义接口数据类型</h2><p>任何一个项目都离不开对数据和接口的处理，拼接数据和接口是形成业务逻辑也是前端的主要工作之一，将接口返回的数据定义 TypeScript 类型可以减少很多维护成本和查询 api 的时间 。</p>
+<p><code>API.d.ts</code> <code>d.ts</code> 结尾的文件会被 TypeScript 默认导入到全局 , 无需再手动导出。</p>
+<pre><code class="typescript">// 不能使用 import 语法，如果需要引用需要使用三斜杠
+declare module API &#123;
+  type A = &quot;&quot;;
+  interface B &#123;&#125;
+&#125;
+// or
+declare namespace CAPI &#123;
+  interface CurrentUser &#123;
+    avatar?: string;
+    name?: string;
+    title?: string;
+  &#125;
+&#125;
+
+// 使用 API.A | API.B |  CAPI.CurrentUser
+</code></pre>
+<h2 id="泛型的使用场景"><a href="#泛型的使用场景" class="headerlink" title="泛型的使用场景"></a>泛型的使用场景</h2><ul>
+<li>接口返回数据类型约束</li>
+</ul>
+<pre><code class="typescript">// 有这么一个 interface ,显然， 很多接口返回数据都是这种结构，所以这里使用了 泛型约束
+interface A&lt;T&gt; &#123;
+  page: number;
+  size: number;
+  results: T[];
+  total: number;
+&#125;
+interface B &#123;
+  name: string;
+  age?: number;
+&#125;
+
+// 使用
+const res = await request&lt;A&lt;B&gt;&gt;(&quot;/api/xx&quot;);
+</code></pre>
+<ul>
+<li>函数参数类型不唯一</li>
+</ul>
+<pre><code class="typescript">// 数组去重
+function uniquefn&lt;T&gt;(args: T[]): T[] &#123;
+  // ...
+&#125;
+
+// 使用
+const arr1 = uniquefn&lt;&#123; name: string; age?: number &#125;&gt;([
+  &#123; name: &quot;张三&quot;, age: 18 &#125;,
+  &#123; name: &quot;李四&quot;, age: 20 &#125;,
+]);
+</code></pre>
+<ul>
+<li>函数式组件中 hooks 类型约束</li>
+</ul>
+<pre><code class="typescript">const [state, setState] = useState&lt;string&gt;(&quot;&quot;);
+</code></pre>
+<ul>
+<li>event 事件类型</li>
+</ul>
+<pre><code class="typescript">// click 使用 React.MouseEvent 加 dom 类型的泛型
+// HTMLInputElement 代表 input标签 另外一个常用的是 HTMLDivElement
+const onClick = (e: React.MouseEvent&lt;HTMLInputElement&gt;) =&gt; &#123;&#125;;
+</code></pre>
+<ul>
+<li>定义函数式组件的 props 类型</li>
+</ul>
+<pre><code class="typescript">interface PropInterface &#123;
+  title: string;
+&#125;
+
+const fn: React.FC&lt;PropInterface&gt; = (props) =&gt; &lt;&gt;&#123;props.title&#125;&lt;&gt;;
+// or
+export default function (props: React.PropsWithChildren&lt;PropInterface&gt;) &#123;
+  // return ...
+&#125;
+</code></pre>
+<h2 id="页面相关-Props"><a href="#页面相关-Props" class="headerlink" title="页面相关 Props"></a>页面相关 Props</h2><p><code>IRouteComponentProps</code> 是被配置在 <code>config.ts</code> 中组件的 props 类型，其中带入了一些 react-router 相关的 props</p>
+<pre><code class="typescript">export interface IRouteComponentProps&lt;
+  Params extends &#123; [K in keyof Params]?: string &#125; = &#123;&#125;,
+  Query extends &#123; [K in keyof Query]?: string &#125; = &#123;&#125;
+&gt; &#123;
+  children: JSX.Element;
+  location: Location &amp; &#123; query: Query &#125;;
+  route: IRoute;
+  routes: IRoute[];
+  history: History;
+  match: match&lt;Params&gt;;
+&#125;
+</code></pre>
+<p>使用：</p>
+<pre><code class="typescript">import React from &quot;antd&quot;;
+import &#123; IRouteComponentProps &#125; from &quot;umi&quot;;
+
+const Page: React.FC&lt;IRouteComponentProps&gt; = () =&gt; &#123;
+  return &lt;Layout /&gt;;
+&#125;;
+</code></pre>
+<h2 id="为-Window-添加参数"><a href="#为-Window-添加参数" class="headerlink" title="为 Window 添加参数"></a>为 Window 添加参数</h2><pre><code class="typescript">interface Window &#123;
+  ga: (
+    command: &quot;send&quot;,
+    hitType: &quot;event&quot; | &quot;pageview&quot;,
+    fieldsObject: GAFieldsObject | string
+  ) =&gt; void;
+  reloadAuthorized: () =&gt; void;
+&#125;
+</code></pre>
+<p>不想在 Window 中增加，但是想要全局使用，比如通过 define 注入的参数，我们通过 <code>declare</code> 关键字在 <code>/src/typings.d.ts</code> 注入。</p>
+<pre><code class="typescript">declare const REACT_APP_ENV: &quot;test&quot; | &quot;dev&quot; | &quot;pre&quot; | false;
+</code></pre>
+<h2 id="动态更新-Object-的-key"><a href="#动态更新-Object-的-key" class="headerlink" title="动态更新 Object 的 key"></a>动态更新 Object 的 key</h2><pre><code class="typescript">type Person = &#123;
+  name: string;
+  age?: number;
+  [k: string]: any; // 指定 k 可以为任意的 string
+&#125;;
+</code></pre>
+<h2 id="装包没有相对应的-types"><a href="#装包没有相对应的-types" class="headerlink" title="装包没有相对应的 @types"></a>装包没有相对应的 @types</h2><ul>
+<li><p>安装包对应的 @types 文件包，如 @types/react 、 @types/react-dom</p>
+</li>
+<li><p>可以直接将其定义为 any。</p>
+</li>
+</ul>
+<pre><code class="typescript">declare module &quot;xxx&quot;; // d.ts
+import xxx from &quot;xxx&quot;; // tsx
+</code></pre>
+<h2 id="ts-ignore"><a href="#ts-ignore" class="headerlink" title="@ts-ignore"></a>@ts-ignore</h2><pre><code class="typescript">// @ts-ignore
+xxx;
+</code></pre>
+<p>遇到动态性比较强的代码，不妨使用 <code>as unknown as XXX</code></p>
+<h2 id="定义-tsx-组件类型"><a href="#定义-tsx-组件类型" class="headerlink" title="定义 tsx 组件类型"></a>定义 tsx 组件类型</h2><ul>
+<li>使用泛型进行 <code>Props</code>、 <code>State</code> 的类型定义。</li>
+</ul>
+<pre><code class="tsx">import * as React from &quot;react&quot;;
+
+interface IProps &#123;
+  color: string;
+  size?: string;
+&#125;
+interface IState &#123;
+  count: number;
+&#125;
+
+class App extends React.Component&lt;IProps, IState&gt; &#123;
+  public state = &#123;
+    count: 1,
+  &#125;;
+  public render() &#123;
+    return &lt;div&gt;Hello world&lt;/div&gt;;
+  &#125;
+&#125;
+</code></pre>
+<ul>
+<li>React.Component 泛型定义源码：</li>
+</ul>
+<pre><code class="typescript">// Readonly 将 props 的所有属性都设置为只读属性。
+class Component&lt;P, S&gt; &#123;
+  readonly props: Readonly&lt;&#123; children?: ReactNode &#125;&gt; &amp; Readonly&lt;P&gt;;
+  state: Readonly&lt;S&gt;;
+&#125;
+</code></pre>
+<ul>
+<li>约束 state 只读：</li>
+</ul>
+<pre><code class="tsx">class App extends React.PureComponent&lt;IProps, IState&gt; &#123;
+  public readonly state: Readonly&lt;IState&gt; = &#123;
+    count: 1,
+  &#125;;
+  public render() &#123;
+    return &lt;div&gt;&lt;/div&gt;;
+  &#125;
+&#125;
+</code></pre>
+<ul>
+<li>无状态组件 <code>SFC</code> 类型-实现源码（SFC 即将废弃）：</li>
+</ul>
+<pre><code class="typescript">type SFC&lt;P = &#123;&#125;&gt; = StatelessComponent&lt;P&gt;;
+interface StatelessComponent&lt;P = &#123;&#125;&gt; &#123;
+  (
+    props: P &amp; &#123; children?: ReactNode &#125;,
+    context?: any
+  ): ReactElement&lt;any&gt; | null;
+  propTypes?: ValidationMap&lt;P&gt;;
+  contextTypes?: ValidationMap&lt;any&gt;;
+  defaultProps?: Partial&lt;P&gt;;
+  displayName?: string;
+&#125;
+</code></pre>
+<ul>
+<li>函数式组件开发：</li>
+</ul>
+<pre><code class="tsx">import &#123; SFC, FC &#125; from &quot;react&quot;;
+const FBtn: SFC&lt;IProps&gt; = (props) =&gt; &lt;div&gt;&#123;props.title&#125;&lt;/div&gt;;
+// or React.FunctionComponent
+const FBtn: FC&lt;IProps&gt; = (props) =&gt; &lt;div&gt;&#123;props.title&#125;&lt;/div&gt;;
+</code></pre>
+<h2 id="事件对象类型"><a href="#事件对象类型" class="headerlink" title="事件对象类型"></a>事件对象类型</h2><p><code>React 的声明文件提供了</code>Event 对象的类型声明。 具体的 <code>EventHandler</code> 、 <code>EventTarget</code> 可以到相应的 modules 文件夹下查看。</p>
+<ul>
+<li><code>ClipboardEvent&lt;T = Element&gt;</code> 剪贴板事件对象</li>
+<li><code>DragEvent&lt;T = Element&gt;</code> 拖拽事件对象</li>
+<li><code>ChangeEvent&lt;T = Element&gt;</code> Change 事件对象</li>
+<li><code>KeyboardEvent&lt;T = Element&gt;</code> 键盘事件对象</li>
+<li><code>MouseEvent&lt;T = Element&gt;</code> 鼠标事件对象</li>
+<li><code>TouchEvent&lt;T = Element&gt;</code> 触摸事件对象</li>
+<li><code>WheelEvent&lt;T = Element&gt;</code> 滚轮事件对象</li>
+<li><code>AnimationEvent&lt;T = Element&gt;</code> 动画事件对象</li>
+<li><code>TransitionEvent&lt;T = Element&gt;</code> 过渡事件对象</li>
+</ul>
+<h2 id="Promise-类型"><a href="#Promise-类型" class="headerlink" title="Promise 类型"></a>Promise 类型</h2><p>​ 在做异步操作时我们经常使用 <code>async</code> 函数，函数调用时会 <code>return</code> 一个 <code>Promise</code> 对象，可以使用 <code>then</code> 方法添加回调函数。</p>
+<p>​ <code>Promise</code> 是一个泛型类型，<code>T</code> 泛型变量用于确定使用 <code>then</code> 方法时接收的第一个回调函数（onfulfilled）的参数类型。</p>
+<pre><code class="typescript">// 某 props 接收异步处理函数
+onTaskRequest?: (args: API.X[]) =&gt; Promise&lt;API.X[]&gt;;
+</code></pre>
+<h2 id="反向使用-typeof"><a href="#反向使用-typeof" class="headerlink" title="反向使用 typeof"></a>反向使用 typeof</h2><pre><code class="typescript">// NewsCard 组件接收的 props 类型
+interface NewsCardProps &#123;
+  className?: string;
+  title: string;
+  moreNavLink: string;
+  type: string;
+  // typeof 反向获取类型：(params: API.NewsQuery) =&gt; Promise&lt;API.PaginationNewsResult&lt;API.News&gt;&gt;
+  provider: typeof ficusService.getNews;
+&#125;
+
+// News 组件中定义 provider
+const newsProvider = useCallback(
+  (type: API.NewsType) =&gt; ficusService.getNews(&#123; page: 1, size: 10, type &#125;),
+  [],
+);
+
+// 传入
+&lt;NewsCard &#123; /* 其他 props */ &#125; provider=&#123;() =&gt; newsProvider(&#39;xxx&#39;) /&gt;
+
+// NewsCard data： 根据 typeof 推断得到类型 API.PaginationNewsResult&lt;API.News&gt;，无需再指定类型
+const &#123; data, loading &#125; = useRequest(props.provider, &#123; cacheKey: `NEWS_$&#123;props.type&#125;` &#125;);
+</code></pre>
+<h2 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h2><pre><code class="typescript">// props.color 的值只可以是字符串 red、blue、yellow
+type color = &quot;red&quot; | &quot;blue&quot; | &quot;yellow&quot;;
+</code></pre>
+<h2 id="巧用Partial"><a href="#巧用Partial" class="headerlink" title="巧用Partial"></a>巧用<code>Partial</code></h2><p>使用 <code>Partial</code> 将所有的 <code>props</code> 属性都变为可选值。—— 这对我们在接口定义时很有用</p>
+<pre><code class="typescript">type Partial&lt;T&gt; = &#123; [P in keyof T]?: T[P] &#125;;
+</code></pre>
+<pre><code class="typescript">// 在 A 接口中, 我们使用 interface X 完成了对某数据的返回类型定义。
+// 在 B 接口中, 我们可能会对 X 中定义的字段的部分字段进行更新， 但在 A 接口 为必选字段， B 接口为可选
+
+export const conditionService = &#123;
+  async query(query: Query) &#123;
+    const res = await axios.get&lt;PageResult&lt;ConditionTemp&gt;&gt;(`/v1.0/condition`, &#123;
+      params: query,
+    &#125;);
+    return res.data;
+  &#125;,
+  async update(data: Partial&lt;ConditionTemp&gt;) &#123;
+    await axios.put(`/v1.0/condition`, data);
+  &#125;,
+&#125;;
+</code></pre>
+<h2 id="其他内置类型"><a href="#其他内置类型" class="headerlink" title="其他内置类型"></a>其他内置类型</h2><ul>
+<li><code>Required</code> 。与 <code>Partial</code> 相反</li>
+</ul>
+<p>​ <code>-?</code> 的功能就是把可选属性的 <code>?</code> 去掉使该属性变成必选项，对应的还有 <code>+?</code> ，作用与 <code>-?</code> 相反，是把属性变为可选项。</p>
+<pre><code class="typescript">type Required&lt;T&gt; = &#123; [P in keyof T]-?: T[P] &#125;;
+</code></pre>
+<ul>
+<li><p>Exclude&lt;T,U&gt;</p>
+<p>从 <code>T</code> 中排除那些可以赋值给 <code>U</code> 的类型。 (T ∩ U) 在 T 的 补集</p>
+</li>
+</ul>
+<pre><code class="typescript">type Exclude&lt;T, U&gt; = T extends U ? never : T;
+type T = Exclude&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 1|2|5
+</code></pre>
+<ul>
+<li><p>Extract&lt;T,U&gt;</p>
+<p>从 <code>T</code> 中提取那些可以赋值给 <code>U</code> 的类型。 类型 T ∩ U</p>
+</li>
+</ul>
+<pre><code class="typescript">type Extract&lt;T, U&gt; = T extends U ? T : never;
+type T = Extract&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 3|4
+</code></pre>
+<ul>
+<li><p>Pick&lt;T, K&gt;</p>
+<p>从 对象<code>T</code> 中取出一系列 <code>K</code> 的属性</p>
+</li>
+</ul>
+<pre><code class="typescript">type Pick&lt;T, K extends keyof T&gt; = &#123;
+  [P in K]: T[P];
+&#125;;
+
+interface Person &#123;
+  name: string;
+  age: number;
+  sex: string;
+&#125;
+const person: Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt; = &#123;
+  name: &quot;小王&quot;,
+  age: 21,
+&#125;;
+</code></pre>
+<ul>
+<li><p>Record&lt;K, T&gt;</p>
+<p>将 <code>K</code> 中所有的属性的值转化为 <code>T</code> 类型。</p>
+</li>
+</ul>
+<pre><code class="typescript">type Record&lt;K extends string, T&gt; = &#123;
+  [P in K]: T;
+&#125;;
+
+const person: Record&lt;keyof Person, string&gt; = &#123;
+  name: &quot;小王&quot;,
+  age: &quot;12&quot;,
+&#125;;
+</code></pre>
+<ul>
+<li>更多的内置——&gt; typescript 操作符及元素类型</li>
+</ul>
+<h2 id="Omit-lt-T-K-gt-（没有内置）"><a href="#Omit-lt-T-K-gt-（没有内置）" class="headerlink" title="Omit&lt;T,K&gt;（没有内置）"></a>Omit&lt;T,K&gt;（没有内置）</h2><p>从对象 <code>T</code> 中排除 <code>key</code> 是 <code>K</code> 的属性 。 与 Pick 相反</p>
+<pre><code class="typescript">type Omit&lt;T, K&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;
+</code></pre>
+<pre><code class="typescript">interface Person &#123;
+  name: string;
+  age: number;
+  sex: string;
+&#125;
+const person: Omit&lt;Person, &quot;name&quot;&gt; = &#123;
+  age: 1,
+  sex: &quot;男&quot;,
+&#125;;
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    
+</p>
+<p class="footer-entry">Built by <a href="http://zhanghlin.cn/" target="_blank">flynn-zhl</a></p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 140px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 462px;
+        }
+        .nav.fullscreen {
+            margin-left: -462px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 462px;
+            margin-left: -462px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #c1bfc1;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+<div 
+    class="aplayer" 
+    data-id="2176799008" 
+    data-server="tencent" 
+    data-type="playlist" 
+    data-fixed="true" 
+    data-listfolded="true"
+    data-autoplay="false" 
+    data-order="list" 
+    data-volume="0.5" 
+    data-theme="#1da496" 
+    data-preload="auto" >
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+
+<style>
+.aplayer.aplayer-fixed .aplayer-lrc,
+.aplayer.aplayer-fixed .aplayer-body {
+    position: absolute !important;
+    z-index: 999 !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ccc;
+}
+</style>
+
+</html>

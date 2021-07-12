@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>给Hexo添加音乐播放器插件 | flynn-zhl的博客</title>
+  <meta name="keywords" content=" hexo插件 , Aplayer , MetingJS ">
+  <meta name="description" content="给Hexo添加音乐播放器插件 | flynn-zhl的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="umi--antd-pro--openApi插件">
+<meta property="og:url" content="http://zhanghlin.cn/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="flynn-zhl的博客">
+<meta property="og:description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142638506.png">
+<meta property="article:published_time" content="2021-07-11T23:05:42.000Z">
+<meta property="article:modified_time" content="2021-07-12T09:23:57.269Z">
+<meta property="article:author" content="flynn-zhl">
+<meta property="article:tag" content="umi">
+<meta property="article:tag" content="openApi">
+<meta property="article:tag" content="antd-pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+    class="avatar_target">
+     <img class="avatar"
+          src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>flynn-zhl</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+            href="https://github.com/flynna"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+            href="https://www.zhihu.com/people/flynn-zhl"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+            href="https://blog.csdn.net/baidu_41828042"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+            href="mailto:flynnzhl@qq.com"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+            href="http://wpa.qq.com/msgrd?v=3&uin=2274105875&site=qq&menu=yes"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+            href="https://music.163.com/#/user/home?id=502374002"
+            target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+    
+    <div id="binft" style="height: 44px; margin: 10px 0 15px; padding: 0 5px; text-indent: 1em; text-align: center;"></div>
+    <script>
+    var binft = function (r) {
+        function t() {
+            return b[Math.floor(Math.random() * b.length)];
+        }
+        function e() {
+            return String.fromCharCode(94 * Math.random() + 33);
+        }
+        function n(rr) {
+            for (var n = document.createDocumentFragment(), i = 0; rr > i; i++) {
+            var l = document.createElement("span");
+            (l.textContent = e()), (l.style.color = t()), n.appendChild(l);
+            }
+            return n;
+        }
+        function i() {
+            var t = o[c.skillI];
+            c.step
+            ? c.step--
+            : ((c.step = g),
+                c.prefixP < l.length
+                ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++)
+                : "forward" === c.direction
+                ? c.skillP < t.length
+                    ? ((c.text += t[c.skillP]), c.skillP++)
+                    : c.delay
+                    ? c.delay--
+                    : ((c.direction = "backward"), (c.delay = a))
+                : c.skillP > 0
+                ? ((c.text = c.text.slice(0, -1)), c.skillP--)
+                : ((c.skillI = (c.skillI + 1) % o.length),
+                    (c.direction = "forward"))),
+            (r.textContent = c.text),
+            r.appendChild(
+                n(
+                c.prefixP < l.length
+                    ? Math.min(s, s + c.prefixP)
+                    : Math.min(s, t.length - c.skillP)
+                )
+            ),
+            setTimeout(i, d);
+        }
+        var l = "",
+            o = [
+            "白日依山尽，黄河入海流。",
+            "人生得意须尽欢，莫使金樽空对月。",
+            "春花秋月何时了？往事知多少。",
+            "问君能有几多愁？恰似一江春水向东流 。",
+            "遥知不是雪，为有暗香来。",
+            "莫愁前路无知己，天下谁人不识君。",
+            "国破山河在，城春草木深。",
+            "玲珑骰子安红豆，入骨相思知不知。",
+            "山无陵，江水为竭，冬雷震震，夏雨雪。",
+            "人生自是有情痴，此恨不关风与月。",
+            "十年生死两茫茫，不思量，自难忘。",
+            ].map(function (v) {
+            return v + "";
+            }),
+            a = 2,
+            g = 1,
+            s = 5,
+            d = 100,
+            b = [
+            "rgb(110,64,170)",
+            "rgb(150,61,179)",
+            "rgb(191,60,175)",
+            "rgb(228,65,157)",
+            "rgb(254,75,131)",
+            "rgb(255,94,99)",
+            "rgb(255,120,71)",
+            "rgb(251,150,51)",
+            "rgb(226,183,47)",
+            "rgb(198,214,60)",
+            "rgb(175,240,91)",
+            "rgb(127,246,88)",
+            "rgb(82,246,103)",
+            "rgb(48,239,130)",
+            "rgb(29,223,163)",
+            "rgb(26,199,194)",
+            "rgb(35,171,216)",
+            "rgb(54,140,225)",
+            "rgb(76,110,219)",
+            "rgb(96,84,200)",
+            ],
+            c = {
+            text: "",
+            prefixP: -s,
+            skillI: 0,
+            skillP: 0,
+            direction: "forward",
+            delay: a,
+            step: g,
+            };
+        i();
+        };
+        binft(document.getElementById("binft"));
+    </script>
+
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(20)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="工具">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        工具
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="工具<--->Hexo">
+                                        
+                                        Hexo
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="大前端">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        大前端
+                        <small>(19)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="大前端<--->CSS">
+                                        
+                                        CSS
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->JavaScript">
+                                        
+                                        JavaScript
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->Node">
+                                        
+                                        Node
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->React">
+                                        
+                                        React
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->TypeScript">
+                                        
+                                        TypeScript
+                                        
+                                            <small>(3
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                                <li>
+                                    <div data-rel="大前端<--->Vue">
+                                        
+                                        Vue
+                                        
+                                            <small>(10
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        <a 
+                                        class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="20">
+<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+    #evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+    }
+</style>
+<script src="/js/evanyou.js"></script>
+
+
+<script type="text/javascript" src="/js/snow.js"></script>
+
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态组件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>继承</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>箭头函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>路由守卫</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>自动化注册</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>antd-pro</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Aplayer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>async-component</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>css3</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>css4</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>directive</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>element-ui</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo插件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>is属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>key属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>less</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>less基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MetingJS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm-adduser</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>npm-publish</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>openApi</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>react</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ref属性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>render函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>scope</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>slot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>slot-scope</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>svg-icon</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>this</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts操作符</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts初识</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ts使用</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>typescript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>umi</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>v-指令</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vue-jsx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vuex</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 大前端 React "
+           href="/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6/"
+           data-tag="umi,openApi,antd-pro"
+           data-author="" >
+            <span class="post-title" title="umi--antd-pro--openApi插件">umi--antd-pro--openApi插件</span>
+            <span class="post-date" title="2021-07-12 07:05:42">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="react,ts使用"
+           data-author="" >
+            <span class="post-title" title="typescript在react中的使用">typescript在react中的使用</span>
+            <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 工具 Hexo "
+           href="/2021/07/10/%E5%B7%A5%E5%85%B7%E6%96%87%E6%A1%A3/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/"
+           data-tag="hexo插件,Aplayer,MetingJS"
+           data-author="" >
+            <span class="post-title" title="给Hexo添加音乐播放器插件">给Hexo添加音乐播放器插件</span>
+            <span class="post-date" title="2021-07-10 17:43:42">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Node "
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           data-tag="npm,npm-adduser,npm-publish"
+           data-author="" >
+            <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
+            <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
+           data-tag="ts操作符"
+           data-author="" >
+            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
+            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/06/15/typescript%E6%96%87%E6%A1%A3/%E5%88%9D%E6%AD%A5%E6%8E%A5%E8%A7%A6typescript/"
+           data-tag="ts初识"
+           data-author="" >
+            <span class="post-title" title="初步接触typescript">初步接触typescript</span>
+            <span class="post-date" title="2021-06-15 13:52:33">2021/06/15</span>
+        </a>
+        
+        <a  class="全部文章 大前端 CSS "
+           href="/2021/06/14/css%E6%96%87%E6%A1%A3/less%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"
+           data-tag="less基础"
+           data-author="" >
+            <span class="post-title" title="less基础使用">less基础使用</span>
+            <span class="post-date" title="2021-06-14 15:42:11">2021/06/14</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
+           data-tag="slot,scope,slot-scope"
+           data-author="" >
+            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           data-tag="自动化注册"
+           data-author="" >
+            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E5%8A%A8%E6%80%81&%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E7%90%86%E8%A7%A3/"
+           data-tag="动态组件,async-component"
+           data-author="" >
+            <span class="post-title" title="vue-动态&amp;异步组件理解">vue-动态&amp;异步组件理解</span>
+            <span class="post-date" title="2021-06-08 16:40:39">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
+           data-author="" >
+            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           data-tag="is属性,key属性,ref属性"
+           data-author="" >
+            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           data-tag="路由守卫"
+           data-author="" >
+            <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
+            <span class="post-date" title="2021-06-07 10:25:02">2021/06/07</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
+           data-tag="render函数,vue-jsx"
+           data-author="" >
+            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
+        </a>
+        
+        <a  class="全部文章 大前端 CSS "
+           href="/2021/06/05/css%E6%96%87%E6%A1%A3/css3_4%E5%A5%BD%E7%94%A8%E4%BD%86%E4%B8%8D%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/"
+           data-tag="less,css3,css4"
+           data-author="" >
+            <span class="post-title" title="css3_4 好用但不常见属性">css3_4 好用但不常见属性</span>
+            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           data-tag="v-指令,directive"
+           data-author="" >
+            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 大前端 JavaScript "
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%8F%8A%E5%85%B6this%E7%90%86%E8%A7%A3/"
+           data-tag="ES6,this,箭头函数"
+           data-author="" >
+            <span class="post-title" title="箭头函数及其this理解">箭头函数及其this理解</span>
+            <span class="post-date" title="2021-05-16 17:00:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 JavaScript "
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           data-tag="继承"
+           data-author="" >
+            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/05/16/vue%E6%96%87%E6%A1%A3/element-ui%E8%87%AA%E5%AE%9A%E4%B9%89message/"
+           data-tag="element-ui"
+           data-author="" >
+            <span class="post-title" title="element-ui 自定义挂载message">element-ui 自定义挂载message</span>
+            <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 大前端 Vue "
+           href="/2021/05/16/vue%E6%96%87%E6%A1%A3/vuex-typescript/"
+           data-tag="typescript,vuex"
+           data-author="" >
+            <span class="post-title" title="vuex-typescript 状态管理器">vuex-typescript 状态管理器</span>
+            <span class="post-date" title="2021-05-16 13:48:06">2021/05/16</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-工具文档/给Hexo添加音乐播放器插件" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">给Hexo添加音乐播放器插件</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="工具">工具</a> > 
+            
+            <a  data-rel="工具&lt;---&gt;Hexo">Hexo</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">hexo插件</a>
+            
+            <a class="color3">Aplayer</a>
+            
+            <a class="color4">MetingJS</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-07-10 17:43</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%A4%96%E9%93%BE%E7%94%9F%E6%88%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6"><span class="toc-text">转：基于外链生成播放器插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90"><span class="toc-text">网易云音乐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E9%93%BE%E5%BC%95%E5%85%A5%E5%8D%9A%E5%AE%A2-3-hexo-%E4%B8%BB%E9%A2%98"><span class="toc-text">外链引入博客: 3-hexo 主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E4%BD%8D%E7%BD%AE"><span class="toc-text">调整位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E6%8B%96%E5%8A%A8"><span class="toc-text">自由拖动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EAplayer-%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">基于Aplayer  插件使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EMetingJS-%E7%94%9F%E6%88%90"><span class="toc-text">基于MetingJS 生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8md%E6%96%87%E7%AB%A0%E5%86%85%E7%94%9F%E6%88%90%E6%92%AD%E6%94%BE%E5%99%A8"><span class="toc-text">在md文章内生成播放器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%92%AD%E6%94%BE%E5%AE%9E%E7%8E%B0"><span class="toc-text">全局播放实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="toc-text">最终效果</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%A4%96%E9%93%BE%E7%94%9F%E6%88%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6"><span class="toc-text">转：基于外链生成播放器插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90"><span class="toc-text">网易云音乐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E9%93%BE%E5%BC%95%E5%85%A5%E5%8D%9A%E5%AE%A2-3-hexo-%E4%B8%BB%E9%A2%98"><span class="toc-text">外链引入博客: 3-hexo 主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E4%BD%8D%E7%BD%AE"><span class="toc-text">调整位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E6%8B%96%E5%8A%A8"><span class="toc-text">自由拖动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EAplayer-%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">基于Aplayer  插件使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EMetingJS-%E7%94%9F%E6%88%90"><span class="toc-text">基于MetingJS 生成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8md%E6%96%87%E7%AB%A0%E5%86%85%E7%94%9F%E6%88%90%E6%92%AD%E6%94%BE%E5%99%A8"><span class="toc-text">在md文章内生成播放器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%92%AD%E6%94%BE%E5%AE%9E%E7%8E%B0"><span class="toc-text">全局播放实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="toc-text">最终效果</span></a></li></ol></div></p>
+<h2 id="转：基于外链生成播放器插件"><a href="#转：基于外链生成播放器插件" class="headerlink" title="转：基于外链生成播放器插件"></a>转：<a target="_blank" rel="noopener" href="https://yelog.org/2019/10/08/3-hexo-add-music/">基于外链生成播放器插件</a></h2><h3 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h3><p>前往<a target="_blank" rel="noopener" href="https://music.163.com/">网易云音乐官网</a>，搜索一个作为背景音乐的歌曲，并进入播放页面，点击 <strong>生成外链播放器</strong></p>
+<p><img src="/images/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/image-20210710165708010.png" alt="image-20210710165708010"></p>
+<p>设置好想要显示的样式后，复制 <code>html</code> 代码</p>
+<p><img src="/images/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/image-20210710165810418.png" alt="image-20210710165810418"></p>
+<p>最好外层在加一个 <code>div</code>，如下，可直接将上一步复制的 <code>iframe</code> 替换下方里面的 <code>iframe</code></p>
+<pre><code class="html">&lt;div
+  id=&quot;musicMouseDrag&quot;
+  style=&quot;position:fixed; z-index: 9999; bottom: 0; right: 0;&quot;
+&gt;
+  &lt;div
+    id=&quot;musicDragArea&quot;
+    style=&quot;position: absolute; top: 0; left: 0; width: 100%;height: 10px;cursor: move; z-index: 10;&quot;
+  &gt;&lt;/div&gt;
+  &lt;iframe
+    frameborder=&quot;no&quot;
+    border=&quot;0&quot;
+    marginwidth=&quot;0&quot;
+    marginheight=&quot;0&quot;
+    width=&quot;330&quot;
+    height=&quot;86&quot;
+    src=&quot;//music.163.com/outchain/player?type=2&amp;id=38592976&amp;auto=1&amp;height=66&quot;
+  &gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="外链引入博客-3-hexo-主题"><a href="#外链引入博客-3-hexo-主题" class="headerlink" title="外链引入博客: 3-hexo 主题"></a>外链引入博客: <code>3-hexo</code> 主题</h3><p>将上一步加过 <code>div</code> 的代码粘贴到主题下 <code>layout/_partial/footer.ejs</code> 的最后面</p>
+<h3 id="调整位置"><a href="#调整位置" class="headerlink" title="调整位置"></a>调整位置</h3><p>默认给的样式是显示在右下角，可以通过调整上一步粘贴的 <code>div</code> 的 <code>style</code> 中 <code>bottom</code> 和 <code>right</code> 来调整位置。</p>
+<h3 id="自由拖动"><a href="#自由拖动" class="headerlink" title="自由拖动"></a>自由拖动</h3><p>如果需要自由拖动，在刚才添加的代码后面，再添加下面代码即可，鼠标就可以在音乐控件的 <strong>上边沿</strong> 点击拖动。</p>
+<pre><code class="html">&lt;!--以下代码是为了支持随时拖动音乐控件的位置，如没有需求，可去掉下面代码--&gt;
+&lt;script&gt;
+  var $DOC = $(document);
+  $(&quot;#musicMouseDrag&quot;).on(&quot;mousedown&quot;, function (e) &#123;
+    // 阻止文本选中
+    $DOC.bind(&quot;selectstart&quot;, function () &#123;
+      return false;
+    &#125;);
+    $(&quot;#musicDragArea&quot;).css(&quot;height&quot;, &quot;100%&quot;);
+    var $moveTarget = $(&quot;#musicMouseDrag&quot;);
+    $moveTarget.css(&quot;border&quot;, &quot;1px dashed grey&quot;);
+    var div_x = e.pageX - $moveTarget.offset().left;
+    var div_y = e.pageY - $moveTarget.offset().top;
+    $DOC
+      .on(&quot;mousemove&quot;, function (e) &#123;
+        var targetX = e.pageX - div_x;
+        var targetY = e.pageY - div_y;
+        targetX =
+          targetX &lt; 0
+            ? 0
+            : targetX + $moveTarget.outerWidth() &gt;= window.innerWidth
+            ? window.innerWidth - $moveTarget.outerWidth()
+            : targetX;
+        targetY =
+          targetY &lt; 0
+            ? 0
+            : targetY + $moveTarget.outerHeight() &gt;= window.innerHeight
+            ? window.innerHeight - $moveTarget.outerHeight()
+            : targetY;
+        $moveTarget.css(&#123;
+          left: targetX + &quot;px&quot;,
+          top: targetY + &quot;px&quot;,
+          bottom: &quot;inherit&quot;,
+          right: &quot;inherit&quot;,
+        &#125;);
+      &#125;)
+      .on(&quot;mouseup&quot;, function () &#123;
+        $DOC.unbind(&quot;selectstart&quot;);
+        $DOC.off(&quot;mousemove&quot;);
+        $DOC.off(&quot;mouseup&quot;);
+        $moveTarget.css(&quot;border&quot;, &quot;none&quot;);
+        $(&quot;#musicDragArea&quot;).css(&quot;height&quot;, &quot;10px&quot;);
+      &#125;);
+  &#125;);
+&lt;/script&gt;
+</code></pre>
+<hr>
+<p><code>网易云单曲外链没什么问题，但是否能满足list需求呢？于是接入了歌单等外链，经测试发现，歌单外链并不可用，循环播放始终是同一首歌，并且经常会资源加载失败！，于是又开始了对 hexo 中添加列表音乐插件查询...</code></p>
+<h2 id="基于Aplayer-插件使用"><a href="#基于Aplayer-插件使用" class="headerlink" title="基于Aplayer  插件使用"></a>基于<code>Aplayer </code> 插件使用</h2><p><a target="_blank" rel="noopener" href="https://easyhexo.com/3-Plugins-use-and-config/3-1-hexo-tag-aplayer/#%E4%BB%8B%E7%BB%8D">hexo-tag-aplayer</a></p>
+<p>安装 <code>hexo-tag-aplayer</code> 插件 ,在根目录执行：</p>
+<pre><code class="bash">npm install hexo-tag-aplayer -s
+npm install aplayer --save
+</code></pre>
+<p>修改 <code>Hexo</code> 的配置文件 <code>_config.yml</code>:</p>
+<pre><code class="yaml">aplayer:
+  script_dir: some/place # Public 目录下脚本目录路径，默认: &#39;assets/js&#39;
+  style_dir: some/place # Public 目录下样式目录路径，默认: &#39;assets/css&#39;
+  cdn: http://xxx/aplayer.min.js # 引用 APlayer.js 外部 CDN 地址 (默认不开启)
+  style_cdn: http://xxx/aplayer.min.css # 引用 APlayer.css 外部 CDN 地址 (默认不开启)
+  meting: true # MetingJS 支持
+  meting_api: http://xxx/api.php # 自定义 Meting API 地址
+  meting_cdn: http://xxx/Meing.min.js # 引用 Meting.js 外部 CDN 地址 (默认不开启)
+  asset_inject: true # 自动插入 Aplayer.js 与 Meting.js 资源脚本, 默认开启
+  externalLink: http://xxx/aplayer.min.js # 老版本参数，功能与参数 cdn 相同
+</code></pre>
+<p>使用 <code>hexo-tag-aplayer</code> 非常简单，只需要在 <code>MarkDown </code>文件中插入正确的标记就可以了。</p>
+<pre><code class="markdown">&#123;% aplayer title author url [picture_url, narrow, autoplay, width:xxx, lrc:xxx] %&#125;
+</code></pre>
+<p>开启了<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders.html#%E6%96%87%E7%AB%A0%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9">文章资源文件夹 (opens new window)</a>功能, 可以这样使用：</p>
+<pre><code class="markdown">&#123;% aplayer "Caffeine" "Jeff Williams" "caffeine.mp3" "picture.jpg" "lrc:caffeine.txt" %&#125;
+</code></pre>
+<hr>
+<p><code>以为这样就结束了吗，并没有。。。我发现这样使用确实可以实现在文章内部完成对播放器的生成及使用，同时满足了对单曲，歌单列表等不同类型的插件加载。但是核心需求，在全局生成次模块并没有实现，怎样在不大范围的修改代码同时，最简单的实习对播放器插件的引入呢？</code></p>
+<h2 id="基于MetingJS-生成"><a href="#基于MetingJS-生成" class="headerlink" title="基于MetingJS 生成"></a>基于<code>MetingJS</code> 生成</h2><h3 id="在md文章内生成播放器"><a href="#在md文章内生成播放器" class="headerlink" title="在md文章内生成播放器"></a>在<code>md</code>文章内生成播放器</h3><p>通过引入<code>MetingJS</code>，播放器将支持<code>QQ</code>音乐、网易云音乐、虾米、酷狗、百度等平台的音乐播放。<br>这种方式比较方便添加在线音乐播放列表。引入需要在<code>Hexo</code>的配置文件<code>_config.yml</code>中设置</p>
+<pre><code class="yaml">aplayer:
+  meting: true # MetingJS 支持
+  asset_inject: true # 自动插入Aplayer.js与Meting.js资源脚本（默认开启）
+</code></pre>
+<p>设置后页面在初始化播放器时会引入 1.2.0 版本的<code>Meting.min.js</code>文件<br>注意不是在主题配置文件<code>_config.yml</code>设置，设置后要重启<code>hexo</code>服务才能生效 。</p>
+<p>meting 格式：</p>
+<pre><code class="markdown">&#123;% meting "id" "server" "type"%&#125;
+</code></pre>
+<p>具体的选项列表见：<a target="_blank" rel="noopener" href="https://easyhexo.com/3-Plugins-use-and-config/3-1-hexo-tag-aplayer/#metingjs">MetingJS</a></p>
+<h3 id="全局播放实现"><a href="#全局播放实现" class="headerlink" title="全局播放实现"></a>全局播放实现</h3><ul>
+<li>先完成根目录 <code>_config.yml</code> 的配置。如上</li>
+<li>在 global 的页面文件内插入代码，如在 <code>3-hexo</code> 主题中，我选择了在 <code>layout/_partial/footer.ejs</code> 最后面添加：</li>
+</ul>
+<pre><code class="html">&lt;!-- Meting 配置需要添加 data- 前缀, 具体含义见文档 --&gt;
+&lt;div
+  class=&quot;aplayer&quot;
+  data-id=&quot;2176799008&quot;
+  data-server=&quot;tencent&quot;
+  data-type=&quot;playlist&quot;
+  data-fixed=&quot;true&quot;
+  data-listfolded=&quot;true&quot;
+  data-autoplay=&quot;false&quot;
+  data-order=&quot;list&quot;
+  data-volume=&quot;0.5&quot;
+  data-theme=&quot;#1da496&quot;
+  data-preload=&quot;auto&quot;
+&gt;&lt;/div&gt;
+&lt;link
+  rel=&quot;stylesheet&quot;
+  href=&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;
+/&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p><code>注意 script 的引入顺序关系。 引入的metingjs版本得是1.2.0的，最新版本2.0.0与APlayer不兼容。看hexo-tag-aplayer的github仓库两年前更新后就没动了，只支持到metingjs的v1.2.0</code></p>
+<ul>
+<li>修改根目录下 刚刚配置的 <code>config.yml</code>:</li>
+</ul>
+<pre><code class="yaml">aplayer:
+  meting: true
+  asset_inject: false # 关闭自动脚本插入
+</code></pre>
+<p>这个时候 重启项目 <code>hexo server</code> 刷新页面即可看到吸底的播放器插件。</p>
+<ul>
+<li>样式调整。发现歌词出现在了播放器外，可能设计是这样的，但是我想把它放到播放器内部进度条位置：</li>
+</ul>
+<pre><code class="html">&lt;style&gt;
+  .aplayer.aplayer-fixed .aplayer-lrc,
+  .aplayer.aplayer-fixed .aplayer-body &#123;
+    position: absolute !important;
+    z-index: 999 !important;
+  &#125;
+&lt;/style&gt;
+</code></pre>
+<ul>
+<li>如果想又吸底。直接暴力修改样式：</li>
+</ul>
+<pre><code class="html">&lt;style&gt;
+  .aplayer.aplayer-fixed &#123;
+    left: unset !important;
+  &#125;
+  .aplayer .aplayer-miniswitcher &#123;
+    right: unset !important;
+    left: -18px;
+  &#125;
+&lt;/style&gt;
+</code></pre>
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><ul>
+<li>最小化:</li>
+</ul>
+<p><img src="/images/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/image-20210710174012507.png" alt="image-20210710174012507"></p>
+<ul>
+<li>展开：</li>
+</ul>
+<p><img src="/images/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/image-20210710174055194.png" alt="image-20210710174055194"></p>
+<ul>
+<li>最大化：</li>
+</ul>
+<p><img src="/images/%E7%BB%99Hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E6%8F%92%E4%BB%B6/image-20210710174125346.png" alt="image-20210710174125346"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    
+</p>
+<p class="footer-entry">Built by <a href="http://zhanghlin.cn/" target="_blank">flynn-zhl</a></p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 502px;
+    }
+    .nav.fullscreen {
+        margin-left: -502px;
+    }
+    .nav-left {
+        width: 140px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 462px;
+        }
+        .nav.fullscreen {
+            margin-left: -462px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 462px;
+            margin-left: -462px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #c1bfc1;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+<div 
+    class="aplayer" 
+    data-id="2176799008" 
+    data-server="tencent" 
+    data-type="playlist" 
+    data-fixed="true" 
+    data-listfolded="true"
+    data-autoplay="false" 
+    data-order="list" 
+    data-volume="0.5" 
+    data-theme="#1da496" 
+    data-preload="auto" >
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+
+<style>
+.aplayer.aplayer-fixed .aplayer-lrc,
+.aplayer.aplayer-fixed .aplayer-body {
+    position: absolute !important;
+    z-index: 999 !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ccc;
+}
+</style>
+
+</html>
