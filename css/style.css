@@ -1219,7 +1219,6 @@
 }
 #post .pjax article {
   padding: 2.5em;
-  background: rgba(255,255,255,0.7);
 /* Inline code */
 }
 #post .pjax article .article-entry>p:nth-child(1) {
