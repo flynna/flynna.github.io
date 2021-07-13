@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>typescript 操作符 | flynn-zhl的博客</title>
-  <meta name="keywords" content=" ts操作符 ">
-  <meta name="description" content="typescript 操作符 | flynn-zhl的博客">
+  <title>vue-global组件自动化注册 | flynn-zhl的博客</title>
+  <meta name="keywords" content=" 自动化注册 ">
+  <meta name="description" content="vue-global组件自动化注册 | flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
@@ -209,7 +209,7 @@
             }),
             a = 2,
             g = 1,
-            s = 5,
+            s = 1,
             d = 100,
             b = [
             "rgb(110,64,170)",
@@ -346,7 +346,7 @@
                                         
                                         React
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -358,7 +358,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(3
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -427,7 +427,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -437,8 +437,27 @@
 <script type="text/javascript" src="/js/love.js"></script>
 
 
-<script type="text/javascript" src="/js/snow.js"></script>
 
+<!-- 低占用 -->
+
+    <script type="text/javascript" src="/js/snowflakes.min.1.0.0.js"></script>
+    <script type="text/javascript" src="/js/snowscript.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+#evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+}
+</style>
+<script src="/js/evanyou.js"></script>
 
     </div>
     <div class="nav-right">
@@ -580,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>render函数</a>
+                <i class="iconfont icon-tag"></i><a>render</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -601,10 +620,6 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>this</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts操作符</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -667,19 +682,19 @@
         </a>
         
         <a  class="全部文章 大前端 Node "
-           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/node-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
            data-tag="npm,npm-adduser,npm-publish"
            data-author="" >
             <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
             <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
-           data-tag="ts操作符"
+        <a  class="全部文章 大前端 React "
+           href="/2021/06/20/react%E6%96%87%E6%A1%A3/react-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
-            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+            <span class="post-title" title="自定义react-svg-icon">自定义react-svg-icon</span>
+            <span class="post-date" title="2021-06-20 15:51:00">2021/06/20</span>
         </a>
         
         <a  class="全部文章 大前端 TypeScript "
@@ -702,15 +717,15 @@
            href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
            data-tag="slot,scope,slot-scope"
            data-author="" >
-            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-title" title="vue-slot插槽细谈">vue-slot插槽细谈</span>
             <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-global%E7%BB%84%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/"
            data-tag="自动化注册"
            data-author="" >
-            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-title" title="vue-global组件自动化注册">vue-global组件自动化注册</span>
             <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
         </a>
         
@@ -723,23 +738,23 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
            data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-title" title="自定义vue-svg-icon">自定义vue-svg-icon</span>
             <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7is-key-ref%E4%BB%8B%E7%BB%8D/"
            data-tag="is属性,key属性,ref属性"
            data-author="" >
-            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-title" title="vue 特殊属性is-key-ref介绍">vue 特殊属性is-key-ref介绍</span>
             <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%94%A8%E6%B3%95/"
            data-tag="路由守卫"
            data-author="" >
             <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
@@ -747,10 +762,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
-           data-tag="render函数,vue-jsx"
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"
+           data-tag="render,vue-jsx"
            data-author="" >
-            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-title" title="vue-render函数详解">vue-render函数详解</span>
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
@@ -763,10 +778,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-directive%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
            data-tag="v-指令,directive"
            data-author="" >
-            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-title" title="vue-directive自定义指令">vue-directive自定义指令</span>
             <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
         </a>
         
@@ -779,10 +794,10 @@
         </a>
         
         <a  class="全部文章 大前端 JavaScript "
-           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript-%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9/"
            data-tag="继承"
            data-author="" >
-            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-title" title="javascript几种继承方式及各自优缺点">javascript几种继承方式及各自优缺点</span>
             <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
         </a>
         
@@ -821,9 +836,9 @@
 <div id="post">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article id="post-typescript文档/typescript操作符" class="article article-type-post" itemscope itemprop="blogPost">
+            <article id="post-vue文档/vue-global组件自动化注册" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">typescript 操作符</h1>
+        <h1 class="article-title">vue-global组件自动化注册</h1>
     
     <div class="article-meta">
         
@@ -835,7 +850,7 @@
             
             <a  data-rel="大前端">大前端</a> > 
             
-            <a  data-rel="大前端&lt;---&gt;TypeScript">TypeScript</a>
+            <a  data-rel="大前端&lt;---&gt;Vue">Vue</a>
             
         </span>
         
@@ -843,19 +858,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">ts操作符</a>
+            <a class="color1">自动化注册</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-07-02 15:34</time>
+            发布时间 : <time class="date" title='最后更新: 2021-07-13 09:49:49'>2021-06-10 17:25</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:676</span>
+        <span>字数:575</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -874,7 +889,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">索引类型查询操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BF%E9%97%AE%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">索引访问操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-text">映射类型操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%B1%BB%E5%9E%8B"><span class="toc-text">元素类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">交叉类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">通用类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="toc-text">枚举类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E7%B1%BB%E5%9E%8B"><span class="toc-text">类类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B"><span class="toc-text">泛型类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">预定义类型</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%84%E4%BB%B6"><span class="toc-text">获取组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE-componentsContext%EF%BC%8C%E5%AE%8C%E6%88%90%E7%BB%84%E4%BB%B6%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-text">枚举 componentsContext，完成组件全局注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%B9%B6%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7-%E7%95%A5"><span class="toc-text">注册并设置组件配置属性(略)</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -890,117 +905,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><h4 id="索引类型查询操作符"><a href="#索引类型查询操作符" class="headerlink" title="索引类型查询操作符"></a>索引类型查询操作符</h4><p><code>keyof T； [索引类型查询操作符] 结果为 T 上已知的 公共属性名的 联合。 &#39;XXX&#39; | &#39;YYY&#39;...</code></p>
-<pre><code class="typescript">// 例：枚举已知属性的集合
-type Keys = &quot;A&quot; | &quot;B&quot; | &quot;C&quot;;
-or;
-interface KeysProps &#123;
-  A: string;
-  B: string;
-  C: string;
-&#125;
-type Keys = keyof KeysProps;
-</code></pre>
-<h4 id="索引访问操作符"><a href="#索引访问操作符" class="headerlink" title="索引访问操作符"></a>索引访问操作符</h4><p><code>T[K]; [索引访问操作符] 可以通过索引的方式 取到 T上属性为 K 的 Type</code></p>
-<pre><code class="typescript">// 例：
-interface A &#123;
-  b: boolean;
-  c: string;
-&#125;
-type C = A[&#39;b&#39;] ---------- C = boolean;
-</code></pre>
-<h4 id="映射类型操作符"><a href="#映射类型操作符" class="headerlink" title="映射类型操作符"></a>映射类型操作符</h4><p><code>in T 以及 in keyof T [映射类型]</code></p>
-<pre><code class="typescript">// 例1  in T   [此时的 T 应该为联合类型] 当需要为指定的 key 集合约束类型时 很有用
-type C = &quot;aa&quot; | &quot;bb&quot; | &quot;cc&quot;;
-type D = &#123; [k in C]: string &#125;;
-
-//↓ 得到的结果
-
-type D = &#123;
-  aa: string;
-  bb: string;
-  cc: string;
-&#125;;
-
-// 例2 in keyof T [此时的 T 为 interface 对象类型] 在已知 key集合的情况下 重约束 key的类型
-interface A &#123;
-  aa: string;
-  bb: number;
-  cc: string;
-&#125;
-type C = &#123; [k in keyof A]: boolean &#125;;
-
-//↓ 得到的结果
-
-type C = &#123;
-  aa: boolean;
-  bb: boolean;
-  cc: boolean;
-&#125;;
-</code></pre>
-<h3 id="元素类型"><a href="#元素类型" class="headerlink" title="元素类型"></a>元素类型</h3><h4 id="交叉类型"><a href="#交叉类型" class="headerlink" title="交叉类型"></a>交叉类型</h4><p><code>type C = A &amp; B; 类型 C 为同时包含类型 A、B 的新类型</code></p>
-<pre><code class="typescript">interface A &#123;
-  name: string;
-  age?: number;
-&#125;
-
-interface B &#123;
-  eat(): void;
-  say?: (name: string) =&gt; void;
-&#125;
-
-// 交叉类型实现方式 1： 继承
-interface C extends A, B &#123;&#125;
-
-// 交叉类型实现方式 2： &amp; (正常情况下)
-type C = A &amp; B;
-
-// 交叉类型实现方式 3：映射(类似遍历赋值...不推荐)
-</code></pre>
-<h4 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h4><p><code>type C = A | B; 类型 C 为 A 或 B 其中一种类型</code></p>
-<pre><code class="typescript">// 定义如上
-// ....
-
-// 正常使用：
-const c: C = &#123; age: 18, name: &quot;张三&quot; &#125; as A;
-
-// or
-const fn = (arg: C) =&gt; &#123;
-  // 通过访问 arg.name 属性，隐式判断当前 type 类型。A 中 name 为必选项
-  if (arg.name) &#123;
-    console.log(arg.name);
-  &#125; else &#123;
-    arg.eat();
-  &#125;
-&#125;;
-</code></pre>
-<h4 id="通用类型"><a href="#通用类型" class="headerlink" title="通用类型"></a>通用类型</h4><pre><code class="typescript">// 接口通用
-interface A &#123;
-  [k: string]: any;
-&#125;
-</code></pre>
-<h4 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h4><h4 id="类类型"><a href="#类类型" class="headerlink" title="类类型"></a>类类型</h4><h4 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h4><h4 id="预定义类型"><a href="#预定义类型" class="headerlink" title="预定义类型"></a>预定义类型</h4><p><code>TypeScript 2.8在lib.d.ts里增加了一些预定义的有条件类型：</code></p>
-<ul>
-<li><code>Exclude&lt;T, U&gt;</code> – 从 T 中剔除可以赋值给 U 的类型。</li>
-<li><code>Extract&lt;T, U&gt;</code> – 提取 T 中可以赋值给 U 的类型。</li>
-<li><code>NonNullable&lt;T&gt;</code> – 从 T 中剔除 null 和 undefined。</li>
-<li><code>ReturnType&lt;T&gt;</code> – 获取函数返回值类型。</li>
-<li><code>InstanceType&lt;T&gt;</code> – 获取构造函数类型的实例类型。</li>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%84%E4%BB%B6"><span class="toc-text">获取组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE-componentsContext%EF%BC%8C%E5%AE%8C%E6%88%90%E7%BB%84%E4%BB%B6%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-text">枚举 componentsContext，完成组件全局注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%B9%B6%E8%AE%BE%E7%BD%AE%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7-%E7%95%A5"><span class="toc-text">注册并设置组件配置属性(略)</span></a></li></ol></div></p>
+<h3 id="获取组件"><a href="#获取组件" class="headerlink" title="获取组件"></a>获取组件</h3><ul>
+<li><code>require.context</code></li>
+<li><code>params</code>： directory {String} -读取文件的路径、 <code>useSubdirectories</code> {Boolean} -是否遍历文件的子目录、<code>regExp &#123;RegExp&#125;</code> -匹配文件的正则</li>
+<li>return: function - 此函数挂载了三个属性<ul>
+<li>resolve {Function} -接受一个参数 request,request 为 test 文件夹下面匹配文件的相对路径,返回这个匹配文件相对于整个工程的相对路径</li>
+<li>keys {Function} -返回匹配成功模块的名字组成的数组</li>
+<li>id {String} -执行环境的 id,返回的是一个字符串,主要用在 <code>module.hot.accept</code></li>
 </ul>
-<pre><code class="typescript">// typescript 标准库内的一些实现
-type Proxy&lt;T&gt; = &#123;
-  get(): T;
-  set(value: T): void;
-&#125;;
-type Partial&lt;T&gt; = &#123;
-  [P in keyof T]?: T[P];
-&#125;;
-type Pick&lt;T, K extends keyof T&gt; = &#123;
-  [P in K]: T[P];
-&#125;;
-type Record&lt;K extends string, T&gt; = &#123;
-  [P in K]: T;
-&#125;;
+</li>
+</ul>
+<blockquote>
+<p>语法: <code>require.context(directory, useSubdirectories = false, regExp = /^.//)</code>;</p>
+</blockquote>
+<p><code>示例 获取该路径下所有的 .vue文件</code></p>
+<pre><code class="typescript">const componentsContext = require.context(&quot;./customized&quot;, true, /\.vue$/);
+</code></pre>
+<h3 id="枚举-componentsContext，完成组件全局注册"><a href="#枚举-componentsContext，完成组件全局注册" class="headerlink" title="枚举 componentsContext，完成组件全局注册"></a>枚举 <code>componentsContext</code>，完成组件全局注册</h3><p><code>main.ts</code> 中 <code>import &#39;当前自动化文件&#39;</code></p>
+<pre><code class="typescript">import Vue from &quot;vue&quot;;
+import &#123; kebabCase &#125; from &quot;lodash&quot;;
+
+componentsContext.keys().forEach((component) =&gt; &#123;
+  const componentConfig = componentsContext(component);
+
+  // 兼容 import export 和 require module.export 两种规范
+  const ctrl = componentConfig.default || componentConfig;
+
+  if (ctrl.prototype instanceof Vue) &#123;
+    // 读取 vue 组件name属性 || 文件名
+    const compName = kebabCase(ctrl.options.name || ctrl.name);
+
+    // 完成注册
+    Vue.component(compName, ctrl);
+  &#125;
+&#125;);
+</code></pre>
+<hr>
+<p><code>其他附带配置(案例中使用到，实际使运用中不需要)</code></p>
+<hr>
+<h3 id="注册并设置组件配置属性-略"><a href="#注册并设置组件配置属性-略" class="headerlink" title="注册并设置组件配置属性(略)"></a>注册并设置组件配置属性(略)</h3><p><code>场景： 自动化注册自定义组件，同时支持对组件配置， 在引入组件时，读取配置设置组件的相关属性，更加灵活(用于表单自动化构建)</code></p>
+<ul>
+<li>基于配置的组件注册 需要<code>Meun配置</code>组件提供 <code>getConfig</code> 方法</li>
+<li>单个组件需配套 提供用于渲染的 组件 A，以及用于配置组件相关属性的 <code>Meun-A</code> 组件</li>
+</ul>
+<p><code>interface</code></p>
+<pre><code class="typescript">import Vue from &quot;vue&quot;;
+export interface PluginConfig &#123;
+  config: any;
+&#125;
+export default abstract class PluginConfiguratorBase extends Vue &#123;
+  protected abstract getConfig(): PluginConfig;
+&#125;
+</code></pre>
+<p><code>./customized/a/menu.vue</code> a 组件的配置组件</p>
+<pre><code class="vue">// ...
+&lt;script lang=&quot;ts&quot;&gt;
+import &#123; Component, Vue &#125; from &quot;vue-property-decorator&quot;;
+import PluginConfiguratorBase, &#123; PluginConfig &#125; from &quot;./PluginBase&quot;;
+
+@Component(&#123; name: &quot;a-menu&quot; &#125;)
+export default class AMenu extends PluginConfiguratorBase &#123;
+  protected getConfig(): PluginConfig &#123;
+    /* 可以任意追加自定义的配置项 */
+    return &#123;
+      __vModel__: &quot;&quot;,
+      __config__: &#123; title: &quot;多选框&quot;, description: &quot;&quot;, defaultValue: [] &#125;,
+    &#125;;
+  &#125;
+&#125;
+&lt;/script&gt;
+</code></pre>
+<pre><code class="typescript">// 存储自定义组件的基础配置
+const customizedComponents = [];
+// ...
+if (ctrl.prototype instanceof Vue) &#123;
+  // ...
+  if (ctrl?.options?.methods?.getConfig) &#123;
+    const config = ctrl.options.methods.getConfig() as PluginConfig;
+    customizedComponents.push(config);
+  &#125;
+  // ...
+&#125;
+export customizedComponents;
 </code></pre>
 
       
@@ -1034,22 +1021,6 @@ type Record&lt;K extends string, T&gt; = &#123;
         </div>
     </div>
 </div>
-
-<!-- 随机三角丝带背景--点击切换 -->
-
-<canvas id="evanyou"></canvas>
-<style>
-#evanyou {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: -1;
-}
-</style>
-<script src="/js/evanyou.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>

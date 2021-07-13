@@ -209,7 +209,7 @@
             }),
             a = 2,
             g = 1,
-            s = 5,
+            s = 1,
             d = 100,
             b = [
             "rgb(110,64,170)",
@@ -346,7 +346,7 @@
                                         
                                         React
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -358,7 +358,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(3
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -427,7 +427,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -437,8 +437,27 @@
 <script type="text/javascript" src="/js/love.js"></script>
 
 
-<script type="text/javascript" src="/js/snow.js"></script>
 
+<!-- 低占用 -->
+
+    <script type="text/javascript" src="/js/snowflakes.min.1.0.0.js"></script>
+    <script type="text/javascript" src="/js/snowscript.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+#evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+}
+</style>
+<script src="/js/evanyou.js"></script>
 
     </div>
     <div class="nav-right">
@@ -580,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>render函数</a>
+                <i class="iconfont icon-tag"></i><a>render</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -601,10 +620,6 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>this</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts操作符</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -667,19 +682,19 @@
         </a>
         
         <a  class="全部文章 大前端 Node "
-           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/node-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
            data-tag="npm,npm-adduser,npm-publish"
            data-author="" >
             <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
             <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
-           data-tag="ts操作符"
+        <a  class="全部文章 大前端 React "
+           href="/2021/06/20/react%E6%96%87%E6%A1%A3/react-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
-            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+            <span class="post-title" title="自定义react-svg-icon">自定义react-svg-icon</span>
+            <span class="post-date" title="2021-06-20 15:51:00">2021/06/20</span>
         </a>
         
         <a  class="全部文章 大前端 TypeScript "
@@ -702,15 +717,15 @@
            href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
            data-tag="slot,scope,slot-scope"
            data-author="" >
-            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-title" title="vue-slot插槽细谈">vue-slot插槽细谈</span>
             <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-global%E7%BB%84%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/"
            data-tag="自动化注册"
            data-author="" >
-            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-title" title="vue-global组件自动化注册">vue-global组件自动化注册</span>
             <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
         </a>
         
@@ -723,23 +738,23 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
            data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-title" title="自定义vue-svg-icon">自定义vue-svg-icon</span>
             <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7is-key-ref%E4%BB%8B%E7%BB%8D/"
            data-tag="is属性,key属性,ref属性"
            data-author="" >
-            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-title" title="vue 特殊属性is-key-ref介绍">vue 特殊属性is-key-ref介绍</span>
             <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%94%A8%E6%B3%95/"
            data-tag="路由守卫"
            data-author="" >
             <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
@@ -747,10 +762,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
-           data-tag="render函数,vue-jsx"
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"
+           data-tag="render,vue-jsx"
            data-author="" >
-            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-title" title="vue-render函数详解">vue-render函数详解</span>
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
@@ -763,10 +778,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-directive%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
            data-tag="v-指令,directive"
            data-author="" >
-            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-title" title="vue-directive自定义指令">vue-directive自定义指令</span>
             <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
         </a>
         
@@ -779,10 +794,10 @@
         </a>
         
         <a  class="全部文章 大前端 JavaScript "
-           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript-%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9/"
            data-tag="继承"
            data-author="" >
-            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-title" title="javascript几种继承方式及各自优缺点">javascript几种继承方式及各自优缺点</span>
             <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
         </a>
         
@@ -959,22 +974,6 @@ npm i @umijs/plugin-openapi --save
         </div>
     </div>
 </div>
-
-<!-- 随机三角丝带背景--点击切换 -->
-
-<canvas id="evanyou"></canvas>
-<style>
-#evanyou {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: -1;
-}
-</style>
-<script src="/js/evanyou.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>

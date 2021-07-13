@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>vue_react中自定义svg-icon | flynn-zhl的博客</title>
-  <meta name="keywords" content=" svg-icon ">
-  <meta name="description" content="vue_react中自定义svg-icon | flynn-zhl的博客">
+  <title>flynn-zhl的博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
@@ -62,7 +62,7 @@
 
 
 <body>
-<aside class="nav">
+<aside class="nav mobile">
     <div class="nav-left">
         <a href="/"
     class="avatar_target">
@@ -209,7 +209,7 @@
             }),
             a = 2,
             g = 1,
-            s = 5,
+            s = 1,
             d = 100,
             b = [
             "rgb(110,64,170)",
@@ -346,7 +346,7 @@
                                         
                                         React
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -358,7 +358,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(3
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -427,7 +427,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -437,8 +437,27 @@
 <script type="text/javascript" src="/js/love.js"></script>
 
 
-<script type="text/javascript" src="/js/snow.js"></script>
 
+<!-- 低占用 -->
+
+    <script type="text/javascript" src="/js/snowflakes.min.1.0.0.js"></script>
+    <script type="text/javascript" src="/js/snowscript.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+#evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+}
+</style>
+<script src="/js/evanyou.js"></script>
 
     </div>
     <div class="nav-right">
@@ -580,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>render函数</a>
+                <i class="iconfont icon-tag"></i><a>render</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -601,10 +620,6 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>this</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts操作符</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -667,19 +682,19 @@
         </a>
         
         <a  class="全部文章 大前端 Node "
-           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/node-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
            data-tag="npm,npm-adduser,npm-publish"
            data-author="" >
             <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
             <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
-           data-tag="ts操作符"
+        <a  class="全部文章 大前端 React "
+           href="/2021/06/20/react%E6%96%87%E6%A1%A3/react-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
-            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+            <span class="post-title" title="自定义react-svg-icon">自定义react-svg-icon</span>
+            <span class="post-date" title="2021-06-20 15:51:00">2021/06/20</span>
         </a>
         
         <a  class="全部文章 大前端 TypeScript "
@@ -702,15 +717,15 @@
            href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
            data-tag="slot,scope,slot-scope"
            data-author="" >
-            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-title" title="vue-slot插槽细谈">vue-slot插槽细谈</span>
             <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-global%E7%BB%84%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/"
            data-tag="自动化注册"
            data-author="" >
-            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-title" title="vue-global组件自动化注册">vue-global组件自动化注册</span>
             <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
         </a>
         
@@ -723,23 +738,23 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
            data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-title" title="自定义vue-svg-icon">自定义vue-svg-icon</span>
             <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7is-key-ref%E4%BB%8B%E7%BB%8D/"
            data-tag="is属性,key属性,ref属性"
            data-author="" >
-            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-title" title="vue 特殊属性is-key-ref介绍">vue 特殊属性is-key-ref介绍</span>
             <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%94%A8%E6%B3%95/"
            data-tag="路由守卫"
            data-author="" >
             <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
@@ -747,10 +762,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
-           data-tag="render函数,vue-jsx"
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"
+           data-tag="render,vue-jsx"
            data-author="" >
-            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-title" title="vue-render函数详解">vue-render函数详解</span>
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
@@ -763,10 +778,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-directive%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
            data-tag="v-指令,directive"
            data-author="" >
-            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-title" title="vue-directive自定义指令">vue-directive自定义指令</span>
             <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
         </a>
         
@@ -779,10 +794,10 @@
         </a>
         
         <a  class="全部文章 大前端 JavaScript "
-           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript-%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9/"
            data-tag="继承"
            data-author="" >
-            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-title" title="javascript几种继承方式及各自优缺点">javascript几种继承方式及各自优缺点</span>
             <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
         </a>
         
@@ -818,63 +833,13 @@
         </div>
     </div>
 </aside>
-<div id="post">
+<div id="post" class="index">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article id="post-vue文档/vue_react中自定义svg-icon" class="article article-type-post" itemscope itemprop="blogPost">
+            <article class="index">
+                <div class="toc-ref">
     
-        <h1 class="article-title">vue_react中自定义svg-icon</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="大前端">大前端</a> > 
-            
-            <a  data-rel="大前端&lt;---&gt;Vue">Vue</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color4">svg-icon</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-06-08 15:51</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>字数:637</span>
-        
-        
-        <span id="busuanzi_container_page_pv">
-            阅读 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-%E4%B8%AD%E5%AE%9A%E4%B9%89-svg-icon"><span class="toc-text">vue 中定义 svg-icon</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#svg-icon-%E7%BB%84%E4%BB%B6"><span class="toc-text">svg-icon 组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-text">全局注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react-%E4%B8%AD%E5%AE%9A%E4%B9%89-svg-icon"><span class="toc-text">react 中定义 svg-icon</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -887,183 +852,22 @@
     }
 </style>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="vue-中定义-svg-icon"><a href="#vue-中定义-svg-icon" class="headerlink" title="vue 中定义 svg-icon"></a>vue 中定义 svg-icon</h3><h4 id="svg-icon-组件"><a href="#svg-icon-组件" class="headerlink" title="svg-icon 组件"></a>svg-icon 组件</h4><pre><code class="vue">&lt;template&gt;
-  &lt;div
-    v-if=&quot;isExternal&quot;
-    :style=&quot;styleExternalIcon&quot;
-    class=&quot;svg-external-icon svg-icon&quot;
-    v-on=&quot;$listeners&quot;
-  /&gt;
-  &lt;svg v-else :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot; v-on=&quot;$listeners&quot;&gt;
-    &lt;title v-if=&quot;title&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/title&gt;
-    &lt;use :xlink:href=&quot;iconName&quot; /&gt;
-  &lt;/svg&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-// doc: https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage
-function isExternal(path) &#123;
-  return /^(https?:|mailto:|tel:)/.test(path);
-&#125;
-
-export default &#123;
-  name: &quot;SvgIcon&quot;,
-  props: &#123;
-    iconClass: &#123;
-      type: String,
-      required: true,
-    &#125;,
-    className: &#123;
-      type: String,
-      default: &quot;&quot;,
-    &#125;,
-    title: &#123;
-      type: String,
-      default: null,
-    &#125;,
-  &#125;,
-  computed: &#123;
-    isExternal() &#123;
-      return isExternal(this.iconClass);
-    &#125;,
-    iconName() &#123;
-      return `#icon-$&#123;this.iconClass&#125;`;
-    &#125;,
-    svgClass() &#123;
-      if (this.className) &#123;
-        return `svg-icon $&#123;this.className&#125;`;
-      &#125;
-      return &quot;svg-icon&quot;;
-    &#125;,
-    styleExternalIcon() &#123;
-      return &#123;
-        mask: `url($&#123;this.iconClass&#125;) no-repeat 50% 50%`,
-        &quot;-webkit-mask&quot;: `url($&#123;this.iconClass&#125;) no-repeat 50% 50%`,
-      &#125;;
-    &#125;,
-  &#125;,
-&#125;;
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-.svg-icon &#123;
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-&#125;
-
-.svg-external-icon &#123;
-  background-color: currentColor;
-  mask-size: cover !important;
-  display: inline-block;
-&#125;
-&lt;/style&gt;
-</code></pre>
-<h4 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h4><p><code> 默认情况下，Svg Icon 组件注册在</code><a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/blob/master/src/icons/index.js#L6">@/icons 中</a><code>，可以在项目的任何地方使用。所有图标都可以在</code><a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/tree/master/src/icons/svg">@/icons/svg 中找到</a><code>您可以自行添加或删除图标，图标会自动导入，无需手动操作。 </code></p>
-<p><code>@/icons/index.js</code></p>
-<pre><code class="javascript">import Vue from &quot;vue&quot;;
-import SvgIcon from &quot;@/components/SvgIcon&quot;; // svg component
-// register globally
-Vue.component(&quot;svg-icon&quot;, SvgIcon);
-
-const req = require.context(&quot;./svg&quot;, false, /\.svg$/);
-const requireAll = (requireContext) =&gt;
-  requireContext.keys().map(requireContext);
-requireAll(req);
-</code></pre>
-<p><code>main.ts</code> 中引入</p>
+                <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
 <blockquote>
-<p>import ‘@/icons’;</p>
+<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
 </blockquote>
-<h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a><a target="_blank" rel="noopener" href="https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage">文档</a></h4><ul>
-<li>使用: icon-class 名称默认为 svg 对应文件名</li>
-</ul>
 <blockquote>
-<pre><code class="html">&lt;!-- 从网址导入 &lt;svg-icon icon-class=&quot;https://xxxx.svg&quot; /&gt; --&gt;
-&lt;svg-icon icon-class=&quot;password&quot; class-name=&quot;custom-class&quot; /&gt;
-</code></pre>
+<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
 </blockquote>
-<ul>
-<li>设置 svg-icon 颜色</li>
-</ul>
 <blockquote>
-<p>默认值为 父级元素的 color，如果需要改变，直接更改父级 color 或自身 fill 属性</p>
+<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
 </blockquote>
-<hr>
-<h3 id="react-中定义-svg-icon"><a href="#react-中定义-svg-icon" class="headerlink" title="react 中定义 svg-icon"></a>react 中定义 svg-icon</h3><p><code>使用时导入即可</code></p>
-<pre><code class="tsx">import React, &#123; FC &#125; from &quot;react&quot;;
+<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
+<p>通过博客，我们可以记录自己的生活和成长的轨迹。</p>
 
-interface SvgIconProps &#123;
-  iconClass: string;
-  title?: string;
-  className?: string;
-  style?: &#123;
-    [key: string]: string | number;
-  &#125;;
-  otherOptions?: &#123;
-    [key: string]: string | CallableFunction;
-  &#125;;
-
-  /**
-   * click 点击事件
-   * @return &#123;*&#125;  &#123;(boolean | void)&#125; 返回值为 true 时，阻止默认行为及事件冒泡
-   * @memberof SvgIconProps
-   */
-  onClick?(): boolean | void;
-&#125;
-
-const SvgIcon: FC&lt;SvgIconProps&gt; = (&#123;
-  iconClass,
-  title,
-  className,
-  onClick,
-  ...otherProps
-&#125;) =&gt; &#123;
-  return (
-    &lt;svg
-      className=&#123;className ? `svgIcon $&#123;className&#125;` : &quot;svgIcon&quot;&#125;
-      aria-hidden=&quot;true&quot;
-      onClick=&#123;(e) =&gt; &#123;
-        if (onClick) &#123;
-          const isStop = onClick();
-          if (isStop) &#123;
-            e.preventDefault();
-            e.stopPropagation();
-          &#125;
-        &#125;
-      &#125;&#125;
-      &#123;...otherProps&#125;
-    &gt;
-      &#123;title &amp;&amp; &lt;title title=&#123;title&#125;&gt;&#123;title&#125;&lt;/title&gt;&#125;
-      &lt;use xlinkHref=&#123;`#$&#123;iconClass&#125;`&#125; /&gt;
-    &lt;/svg&gt;
-  );
-&#125;;
-
-export default SvgIcon;
-</code></pre>
-
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
-    </div>
-</article>
-
-
-
-
-
-
-
-    
-
-
-
-
+            </article>
+            
+            
         </div>
         <div class="copyright">
             <p class="footer-entry">
@@ -1072,29 +876,13 @@ export default SvgIcon;
 <p class="footer-entry">Built by <a href="http://zhanghlin.cn/" target="_blank">flynn-zhl</a></p>
 
         </div>
-        <div class="full-toc">
-            <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
-<a class="" id="rocket" ></a>
-
-        </div>
     </div>
 </div>
+<div class="full-toc">
+    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
 
-<!-- 随机三角丝带背景--点击切换 -->
-
-<canvas id="evanyou"></canvas>
-<style>
-#evanyou {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: -1;
-}
-</style>
-<script src="/js/evanyou.js"></script>
+</div>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>

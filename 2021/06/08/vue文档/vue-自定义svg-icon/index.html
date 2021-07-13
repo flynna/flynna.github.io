@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>vue-特殊属性_is_key_ref_介绍 | flynn-zhl的博客</title>
-  <meta name="keywords" content=" is属性 , key属性 , ref属性 ">
-  <meta name="description" content="vue-特殊属性_is_key_ref_介绍 | flynn-zhl的博客">
+  <title>自定义vue-svg-icon | flynn-zhl的博客</title>
+  <meta name="keywords" content=" svg-icon ">
+  <meta name="description" content="自定义vue-svg-icon | flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
@@ -209,7 +209,7 @@
             }),
             a = 2,
             g = 1,
-            s = 5,
+            s = 1,
             d = 100,
             b = [
             "rgb(110,64,170)",
@@ -346,7 +346,7 @@
                                         
                                         React
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -358,7 +358,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(3
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -427,7 +427,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -437,8 +437,27 @@
 <script type="text/javascript" src="/js/love.js"></script>
 
 
-<script type="text/javascript" src="/js/snow.js"></script>
 
+<!-- 低占用 -->
+
+    <script type="text/javascript" src="/js/snowflakes.min.1.0.0.js"></script>
+    <script type="text/javascript" src="/js/snowscript.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+#evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+}
+</style>
+<script src="/js/evanyou.js"></script>
 
     </div>
     <div class="nav-right">
@@ -580,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>render函数</a>
+                <i class="iconfont icon-tag"></i><a>render</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -601,10 +620,6 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>this</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts操作符</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -667,19 +682,19 @@
         </a>
         
         <a  class="全部文章 大前端 Node "
-           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/node-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
            data-tag="npm,npm-adduser,npm-publish"
            data-author="" >
             <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
             <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
-           data-tag="ts操作符"
+        <a  class="全部文章 大前端 React "
+           href="/2021/06/20/react%E6%96%87%E6%A1%A3/react-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
-            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+            <span class="post-title" title="自定义react-svg-icon">自定义react-svg-icon</span>
+            <span class="post-date" title="2021-06-20 15:51:00">2021/06/20</span>
         </a>
         
         <a  class="全部文章 大前端 TypeScript "
@@ -702,15 +717,15 @@
            href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
            data-tag="slot,scope,slot-scope"
            data-author="" >
-            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-title" title="vue-slot插槽细谈">vue-slot插槽细谈</span>
             <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-global%E7%BB%84%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/"
            data-tag="自动化注册"
            data-author="" >
-            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-title" title="vue-global组件自动化注册">vue-global组件自动化注册</span>
             <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
         </a>
         
@@ -723,23 +738,23 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
            data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-title" title="自定义vue-svg-icon">自定义vue-svg-icon</span>
             <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7is-key-ref%E4%BB%8B%E7%BB%8D/"
            data-tag="is属性,key属性,ref属性"
            data-author="" >
-            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-title" title="vue 特殊属性is-key-ref介绍">vue 特殊属性is-key-ref介绍</span>
             <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%94%A8%E6%B3%95/"
            data-tag="路由守卫"
            data-author="" >
             <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
@@ -747,10 +762,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
-           data-tag="render函数,vue-jsx"
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"
+           data-tag="render,vue-jsx"
            data-author="" >
-            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-title" title="vue-render函数详解">vue-render函数详解</span>
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
@@ -763,10 +778,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-directive%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
            data-tag="v-指令,directive"
            data-author="" >
-            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-title" title="vue-directive自定义指令">vue-directive自定义指令</span>
             <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
         </a>
         
@@ -779,10 +794,10 @@
         </a>
         
         <a  class="全部文章 大前端 JavaScript "
-           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript-%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9/"
            data-tag="继承"
            data-author="" >
-            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-title" title="javascript几种继承方式及各自优缺点">javascript几种继承方式及各自优缺点</span>
             <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
         </a>
         
@@ -821,9 +836,9 @@
 <div id="post">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article id="post-vue文档/vue-特殊属性_is_key_ref_介绍" class="article article-type-post" itemscope itemprop="blogPost">
+            <article id="post-vue文档/vue-自定义svg-icon" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">vue-特殊属性_is_key_ref_介绍</h1>
+        <h1 class="article-title">自定义vue-svg-icon</h1>
     
     <div class="article-meta">
         
@@ -843,23 +858,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">is属性</a>
-            
-            <a class="color1">key属性</a>
-            
-            <a class="color1">ref属性</a>
+            <a class="color4">svg-icon</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-06-08 14:41</time>
+            发布时间 : <time class="date" title='最后更新: 2021-07-13 09:49:49'>2021-06-08 15:51</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:587</span>
+        <span>字数:458</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -878,7 +889,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#is"><span class="toc-text">is</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key"><span class="toc-text">key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-text">ref</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#svg-icon-%E7%BB%84%E4%BB%B6"><span class="toc-text">svg-icon 组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%B3%A8%E5%86%8C"><span class="toc-text">全局注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -894,52 +905,111 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="is"><a href="#is" class="headerlink" title="is"></a>is</h3><p><code>常用于构建动态组件 或 基于 DOM 内模板的解析</code></p>
-<blockquote>
-<p>场景 1：作为动态组件 <component is="aaa" /> 的属性，动态切换组件显示<br>场景 2：作为普通 html-dom 的属性，动态指定当前标签渲染的组件 如 li，tr 绑定 is 属性后，将不受特殊 dom 树的影响 如 ul 子级组件 为 li。</p>
-</blockquote>
-<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><p><code>作用于 vue 的虚拟 dom算法，辨识新旧的 nodes 对比 VNodes。</code></p>
-<blockquote>
-<p>场景 1：最常见的即为 在 v-for 指令 DOM 中使用，以便维护内部组件及子树的状态，提升渲染效率，更加高效的更新虚拟 DOM，避免临时数据混淆。</p>
-<p>场景 2：对于部分组件，我们不希望状态被缓存。如 &lt;component 动态组件，动态从 A -&gt; A 的过程中，（即两个相同的组件切换）可能会存在 model 状态遗留，绑定 key 即可解决。</p>
-<p>场景 3：部分特殊组件，在使用过程中，DOM 需要动态销毁重建。（如我在项目中遇到的 handsontable 基于 hot-column 渲染自定义组件时， 无法通过 api 添加或删除列数据，以及无法通过修改 data 触发 hot-column 组件更新，采用动态更新绑定的 key 值解决这一问题。—当然方法不唯一）。</p>
-</blockquote>
-<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><p><code>作为元素或组件的引用，存储于父组件的 $refs 对象上。如果在普通 DOM 上使用，则获取的就是 DOM ，如果在子组件上使用，则指向其组件实例。</code></p>
-<blockquote>
-<p>场景 1：普通 DOM 绑定 ref</p>
-<p>场景 2：组件绑定 ref</p>
-<p>场景 3：v-for 内绑定 ref (this.$refs.xxx 获取到的是 vm 数组)</p>
-</blockquote>
-<pre><code class="vue">&lt;template&gt;
-  &lt;p ref=&quot;pp&quot;&gt;hello&lt;/p&gt;
+        <h4 id="svg-icon-组件"><a href="#svg-icon-组件" class="headerlink" title="svg-icon 组件"></a>svg-icon 组件</h4><pre><code class="vue">&lt;template&gt;
+  &lt;div
+    v-if=&quot;isExternal&quot;
+    :style=&quot;styleExternalIcon&quot;
+    class=&quot;svg-external-icon svg-icon&quot;
+    v-on=&quot;$listeners&quot;
+  /&gt;
+  &lt;svg v-else :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot; v-on=&quot;$listeners&quot;&gt;
+    &lt;title v-if=&quot;title&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/title&gt;
+    &lt;use :xlink:href=&quot;iconName&quot; /&gt;
+  &lt;/svg&gt;
 &lt;/template&gt;
+
 &lt;script&gt;
+// doc: https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage
+function isExternal(path) &#123;
+  return /^(https?:|mailto:|tel:)/.test(path);
+&#125;
+
 export default &#123;
-  mounted() &#123;
-    console.log(this.$refs.pp.textContent); // hello
+  name: &quot;SvgIcon&quot;,
+  props: &#123;
+    iconClass: &#123;
+      type: String,
+      required: true,
+    &#125;,
+    className: &#123;
+      type: String,
+      default: &quot;&quot;,
+    &#125;,
+    title: &#123;
+      type: String,
+      default: null,
+    &#125;,
   &#125;,
-&#125;;
-&lt;/script&gt;
-</code></pre>
-<ul>
-<li>作用于组件，获取组件实例的方法或属性</li>
-</ul>
-<p><code>通过绑定 ref 到组件本身，使当前组件能访问其子组件内部定义的变量(属性)或者方法。</code></p>
-<pre><code class="vue">&lt;!-- 如果需要获取 DOM 相关数据或节点 需搭配 await this.$nextTick() 使用 --&gt;
-&lt;template&gt;
-  &lt;A&gt;&lt;B ref=&quot;bb&quot;&gt;&lt;/B&gt;&lt;/A&gt;
-&lt;/template&gt;
-&lt;script&gt;
-export default &#123;
-  methods: &#123;
-    getBm() &#123;
-      console.log(this.$refs.bb.val);
-      this.$refs.bb.changeVal(&quot;sss&quot;);
+  computed: &#123;
+    isExternal() &#123;
+      return isExternal(this.iconClass);
+    &#125;,
+    iconName() &#123;
+      return `#icon-$&#123;this.iconClass&#125;`;
+    &#125;,
+    svgClass() &#123;
+      if (this.className) &#123;
+        return `svg-icon $&#123;this.className&#125;`;
+      &#125;
+      return &quot;svg-icon&quot;;
+    &#125;,
+    styleExternalIcon() &#123;
+      return &#123;
+        mask: `url($&#123;this.iconClass&#125;) no-repeat 50% 50%`,
+        &quot;-webkit-mask&quot;: `url($&#123;this.iconClass&#125;) no-repeat 50% 50%`,
+      &#125;;
     &#125;,
   &#125;,
 &#125;;
 &lt;/script&gt;
+
+&lt;style scoped&gt;
+.svg-icon &#123;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+&#125;
+
+.svg-external-icon &#123;
+  background-color: currentColor;
+  mask-size: cover !important;
+  display: inline-block;
+&#125;
+&lt;/style&gt;
 </code></pre>
+<h4 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h4><p><code> 默认情况下，Svg Icon 组件注册在</code><a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/blob/master/src/icons/index.js#L6">@/icons 中</a><code>，可以在项目的任何地方使用。所有图标都可以在</code><a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/tree/master/src/icons/svg">@/icons/svg 中找到</a><code>您可以自行添加或删除图标，图标会自动导入，无需手动操作。 </code></p>
+<p><code>@/icons/index.js</code></p>
+<pre><code class="javascript">import Vue from &quot;vue&quot;;
+import SvgIcon from &quot;@/components/SvgIcon&quot;; // svg component
+// register globally
+Vue.component(&quot;svg-icon&quot;, SvgIcon);
+
+const req = require.context(&quot;./svg&quot;, false, /\.svg$/);
+const requireAll = (requireContext) =&gt;
+  requireContext.keys().map(requireContext);
+requireAll(req);
+</code></pre>
+<p><code>main.ts</code> 中引入</p>
+<blockquote>
+<p>import ‘@/icons’;</p>
+</blockquote>
+<h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a><a target="_blank" rel="noopener" href="https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage">文档</a></h4><ul>
+<li>使用: icon-class 名称默认为 svg 对应文件名</li>
+</ul>
+<blockquote>
+<pre><code class="html">&lt;!-- 从网址导入 &lt;svg-icon icon-class=&quot;https://xxxx.svg&quot; /&gt; --&gt;
+&lt;svg-icon icon-class=&quot;password&quot; class-name=&quot;custom-class&quot; /&gt;
+</code></pre>
+</blockquote>
+<ul>
+<li>设置 svg-icon 颜色</li>
+</ul>
+<blockquote>
+<p>默认值为 父级元素的 color，如果需要改变，直接更改父级 color 或自身 fill 属性</p>
+</blockquote>
+<hr>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
@@ -972,22 +1042,6 @@ export default &#123;
         </div>
     </div>
 </div>
-
-<!-- 随机三角丝带背景--点击切换 -->
-
-<canvas id="evanyou"></canvas>
-<style>
-#evanyou {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: -1;
-}
-</style>
-<script src="/js/evanyou.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>

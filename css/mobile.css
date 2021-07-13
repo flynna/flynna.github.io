@@ -45,12 +45,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 30;
     -webkit-overflow-scrolling: touch;
     margin-left: -492px;
   }
   .nav.fullscreen {
     margin-left: 0;
+    z-index: 30;
   }
   .nav.mobile {
     margin-left: 0;

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>vue-路由守卫场景及用法 | flynn-zhl的博客</title>
-  <meta name="keywords" content=" 路由守卫 ">
-  <meta name="description" content="vue-路由守卫场景及用法 | flynn-zhl的博客">
+  <title>vue-directive自定义指令 | flynn-zhl的博客</title>
+  <meta name="keywords" content=" v-指令 , directive ">
+  <meta name="description" content="vue-directive自定义指令 | flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
@@ -209,7 +209,7 @@
             }),
             a = 2,
             g = 1,
-            s = 5,
+            s = 1,
             d = 100,
             b = [
             "rgb(110,64,170)",
@@ -346,7 +346,7 @@
                                         
                                         React
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -358,7 +358,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(3
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -427,7 +427,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="20.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -437,8 +437,27 @@
 <script type="text/javascript" src="/js/love.js"></script>
 
 
-<script type="text/javascript" src="/js/snow.js"></script>
 
+<!-- 低占用 -->
+
+    <script type="text/javascript" src="/js/snowflakes.min.1.0.0.js"></script>
+    <script type="text/javascript" src="/js/snowscript.js"></script>
+
+<!-- 随机三角丝带背景--点击切换 -->
+
+<canvas id="evanyou"></canvas>
+<style>
+#evanyou {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    z-index: -1;
+}
+</style>
+<script src="/js/evanyou.js"></script>
 
     </div>
     <div class="nav-right">
@@ -580,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>render函数</a>
+                <i class="iconfont icon-tag"></i><a>render</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -601,10 +620,6 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>this</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts操作符</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -667,19 +682,19 @@
         </a>
         
         <a  class="全部文章 大前端 Node "
-           href="/2021/07/05/node%E6%96%87%E6%A1%A3/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
+           href="/2021/07/05/node%E6%96%87%E6%A1%A3/node-%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAnpm%E5%8C%85(%E6%A8%A1%E5%9D%97)/"
            data-tag="npm,npm-adduser,npm-publish"
            data-author="" >
             <span class="post-title" title="发布一个npm包(模块)">发布一个npm包(模块)</span>
             <span class="post-date" title="2021-07-05 19:53:34">2021/07/05</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/02/typescript%E6%96%87%E6%A1%A3/typescript%E6%93%8D%E4%BD%9C%E7%AC%A6/"
-           data-tag="ts操作符"
+        <a  class="全部文章 大前端 React "
+           href="/2021/06/20/react%E6%96%87%E6%A1%A3/react-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="typescript 操作符">typescript 操作符</span>
-            <span class="post-date" title="2021-07-02 15:34:23">2021/07/02</span>
+            <span class="post-title" title="自定义react-svg-icon">自定义react-svg-icon</span>
+            <span class="post-date" title="2021-06-20 15:51:00">2021/06/20</span>
         </a>
         
         <a  class="全部文章 大前端 TypeScript "
@@ -702,15 +717,15 @@
            href="/2021/06/11/vue%E6%96%87%E6%A1%A3/vue-%E7%BB%86%E8%B0%88slot%E6%8F%92%E6%A7%BD/"
            data-tag="slot,scope,slot-scope"
            data-author="" >
-            <span class="post-title" title="vue-细谈slot插槽">vue-细谈slot插槽</span>
+            <span class="post-title" title="vue-slot插槽细谈">vue-slot插槽细谈</span>
             <span class="post-date" title="2021-06-11 09:36:12">2021/06/11</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/"
+           href="/2021/06/10/vue%E6%96%87%E6%A1%A3/vue-global%E7%BB%84%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/"
            data-tag="自动化注册"
            data-author="" >
-            <span class="post-title" title="vue-自动化注册全局组件">vue-自动化注册全局组件</span>
+            <span class="post-title" title="vue-global组件自动化注册">vue-global组件自动化注册</span>
             <span class="post-date" title="2021-06-10 17:25:02">2021/06/10</span>
         </a>
         
@@ -723,23 +738,23 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue_react%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89svg-icon/"
            data-tag="svg-icon"
            data-author="" >
-            <span class="post-title" title="vue_react中自定义svg-icon">vue_react中自定义svg-icon</span>
+            <span class="post-title" title="自定义vue-svg-icon">自定义vue-svg-icon</span>
             <span class="post-date" title="2021-06-08 15:51:00">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7_is_key_ref_%E4%BB%8B%E7%BB%8D/"
+           href="/2021/06/08/vue%E6%96%87%E6%A1%A3/vue-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7is-key-ref%E4%BB%8B%E7%BB%8D/"
            data-tag="is属性,key属性,ref属性"
            data-author="" >
-            <span class="post-title" title="vue-特殊属性_is_key_ref_介绍">vue-特殊属性_is_key_ref_介绍</span>
+            <span class="post-title" title="vue 特殊属性is-key-ref介绍">vue 特殊属性is-key-ref介绍</span>
             <span class="post-date" title="2021-06-08 14:41:12">2021/06/08</span>
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/"
+           href="/2021/06/07/vue%E6%96%87%E6%A1%A3/vue-%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB%E5%9C%BA%E6%99%AF%E5%8F%8A%E7%94%A8%E6%B3%95/"
            data-tag="路由守卫"
            data-author="" >
             <span class="post-title" title="vue-路由守卫场景及用法">vue-路由守卫场景及用法</span>
@@ -747,10 +762,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0/"
-           data-tag="render函数,vue-jsx"
+           href="/2021/06/06/vue%E6%96%87%E6%A1%A3/vue-render%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"
+           data-tag="render,vue-jsx"
            data-author="" >
-            <span class="post-title" title="vue-render 渲染函数">vue-render 渲染函数</span>
+            <span class="post-title" title="vue-render函数详解">vue-render函数详解</span>
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
@@ -763,10 +778,10 @@
         </a>
         
         <a  class="全部文章 大前端 Vue "
-           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
+           href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue-directive%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"
            data-tag="v-指令,directive"
            data-author="" >
-            <span class="post-title" title="vue-directive 自定义指令">vue-directive 自定义指令</span>
+            <span class="post-title" title="vue-directive自定义指令">vue-directive自定义指令</span>
             <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
         </a>
         
@@ -779,10 +794,10 @@
         </a>
         
         <a  class="全部文章 大前端 JavaScript "
-           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"
+           href="/2021/05/16/javascript%E6%96%87%E6%A1%A3/javascript-%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E5%8F%8A%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9/"
            data-tag="继承"
            data-author="" >
-            <span class="post-title" title="javascript 的几种继承方式及优缺点">javascript 的几种继承方式及优缺点</span>
+            <span class="post-title" title="javascript几种继承方式及各自优缺点">javascript几种继承方式及各自优缺点</span>
             <span class="post-date" title="2021-05-16 15:05:00">2021/05/16</span>
         </a>
         
@@ -821,9 +836,9 @@
 <div id="post">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article id="post-vue文档/vue-路由守卫" class="article article-type-post" itemscope itemprop="blogPost">
+            <article id="post-vue文档/vue-directive自定义指令" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">vue-路由守卫场景及用法</h1>
+        <h1 class="article-title">vue-directive自定义指令</h1>
     
     <div class="article-meta">
         
@@ -843,19 +858,21 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">路由守卫</a>
+            <a class="color5">v-指令</a>
+            
+            <a class="color5">directive</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-06-07 10:25</time>
+            发布时间 : <time class="date" title='最后更新: 2021-07-13 09:49:49'>2021-06-05 16:07</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:535</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -874,7 +891,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-text">全局路由守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%8B%AC%E4%BA%AB%E5%AE%88%E5%8D%AB"><span class="toc-text">路由独享守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-text">组件路由守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">指令参数介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%89%E9%92%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E6%A1%88"><span class="toc-text">1. 按钮自定义文案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="toc-text">2. 按钮权限控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%81%AE%E7%BD%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 自定义遮罩指令</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -890,112 +907,237 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="全局路由守卫"><a href="#全局路由守卫" class="headerlink" title="全局路由守卫"></a>全局路由守卫</h3><ul>
-<li><code>beforeEach</code>(主) 、<code>afterEach</code>、<code>beforeResolve</code>2.5.0+ 似 <code>beforeEach</code> (<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%85%A8%E5%B1%80%E8%A7%A3%E6%9E%90%E5%AE%88%E5%8D%AB">区别</a>)</li>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">指令参数介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8C%89%E9%92%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E6%A1%88"><span class="toc-text">1. 按钮自定义文案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="toc-text">2. 按钮权限控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%81%AE%E7%BD%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 自定义遮罩指令</span></a></li></ol></div></p>
+<h3 id="指令参数介绍"><a href="#指令参数介绍" class="headerlink" title="指令参数介绍"></a>指令参数介绍</h3><ul>
+<li><p><code>el</code>：指令所绑定的元素，可以用来直接操作 DOM。</p>
+</li>
+<li><pre><code>binding
+</code></pre>
+<p>：一个对象，包含以下 property：</p>
+<ul>
+<li><code>name</code>：指令名，不包括 <code>v-</code> 前缀。</li>
+<li><code>value</code>：指令的绑定值，例如：<code>v-my-directive=&quot;1 + 1&quot;</code> 中，绑定值为 <code>2</code>。</li>
+<li><code>oldValue</code>：指令绑定的前一个值，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。无论值是否改变都可用。</li>
+<li><code>expression</code>：字符串形式的指令表达式。例如 <code>v-my-directive=&quot;1 + 1&quot;</code> 中，表达式为 <code>&quot;1 + 1&quot;</code>。</li>
+<li><code>arg</code>：传给指令的参数，可选。例如 <code>v-my-directive:foo</code> 中，参数为 <code>&quot;foo&quot;</code>。</li>
+<li><code>modifiers</code>：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code> 中，修饰符对象为 <code>&#123; foo: true, bar: true &#125;</code>。</li>
 </ul>
-<p><code>通常情况全局 beforeEach 使用居多，完成系统访问前的一些逻辑</code></p>
-<pre><code class="typescript">import &#123; transform2IntegrationEnv &#125; from &quot;@/store/modules/global&quot;;
-import &#123; SET_SUPRRESS_LAYOUT &#125; from &quot;@/store/modules/global/types&quot;;
-import &#123; GET_ME, GET_COMMON_CONFIG &#125; from &quot;@/store/modules/user/types&quot;;
-import store from &quot;../store&quot;;
-import access from &quot;./access&quot;; // 权限文件
-const router = new VueRouter(&#123; routes &#125;);
+</li>
+<li><p><code>vnode</code>：Vue 编译生成的虚拟节点。</p>
+</li>
+<li><p><code>oldVnode</code>：上一个虚拟节点，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。</p>
+</li>
+</ul>
+<p><code>举栗项目中 实际运用到的场景</code></p>
+<h3 id="1-按钮自定义文案"><a href="#1-按钮自定义文案" class="headerlink" title="1. 按钮自定义文案"></a>1. 按钮自定义文案</h3><p><code>config.ts</code></p>
+<pre><code class="typescript">export interface ButtonTextSetting &#123;
+  action:
+    | &quot;saveDraft&quot;
+    | &quot;submit&quot;
+    | &quot;pass&quot;
+    | &quot;refuse&quot;
+    | &quot;rollback&quot;
+    | &quot;tempSave&quot;
+    | &quot;dataExport&quot;;
+  type: string;
+  defaultText: string;
+  text: string;
+  visible: boolean;
+&#125;
 
-router.beforeEach(async (to, from, next) =&gt; &#123;
-  /* 访问 403 页面(添加 meta标识)， 不做任何处理 */
-  if (to.meta.errorPage) &#123;
-    next();
-    return;
-  &#125;
+export const DefaultBtnSettings: ButtonTextSetting[] = [
+  &#123;
+    action: &quot;saveDraft&quot;,
+    type: &quot;info&quot;,
+    defaultText: &quot;存至草稿箱&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;submit&quot;,
+    type: &quot;primary&quot;,
+    defaultText: &quot;提交&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;pass&quot;,
+    type: &quot;primary&quot;,
+    defaultText: &quot;通过&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;refuse&quot;,
+    type: &quot;danger&quot;,
+    defaultText: &quot;拒绝&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;rollback&quot;,
+    type: &quot;warning&quot;,
+    defaultText: &quot;回退&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;tempSave&quot;,
+    type: &quot;plain&quot;,
+    defaultText: &quot;暂存&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+  &#123;
+    action: &quot;dataExport&quot;,
+    type: &quot;plain&quot;,
+    defaultText: &quot;打印数据&quot;,
+    text: &quot;&quot;,
+    visible: true,
+  &#125;,
+];
+</code></pre>
+<p><code>@/src/directives/buttonText.ts</code></p>
+<pre><code class="typescript">import &#123;
+  ButtonTextSetting,
+  DefaultBtnSettings,
+&#125; from &quot;@/components/processNodeSetting/components/ButtonTextConfig&quot;;
+import &#123; deepClone &#125; from &quot;@/utils&quot;;
+import Vue from &quot;vue&quot;;
 
-  /* 场景1：读取 yml 配置，修改系统基础信息 如 logo */
-  if (!store.state.commonConfig) &#123;
-    await store.dispatch(GET_COMMON_CONFIG);
-  &#125;
+Vue.directive(&quot;button-text&quot;, &#123;
+  async bind(el, binding) &#123;
+    const value = deepClone(binding.value) as &#123;
+      action: ButtonTextSetting[&quot;action&quot;];
+      buttonTextSettings: ButtonTextSetting[];
+    &#125;;
 
-  /* 需要登录才能访问的页面 */
-  if (!to.meta.allowAnonymous) &#123;
-    /* 场景2：页面刷新，vuex 用户信息丢失 */
-    if (!store.state.user?.me) &#123;
-      await store.dispatch(GET_ME);
+    const &#123; action, buttonTextSettings &#125; = value;
+    const defaultBtnSettings = DefaultBtnSettings;
+    let btnConfig = buttonTextSettings.find(
+      (btnSetting) =&gt; btnSetting.action === action
+    );
+    // 节点上没有配置则读默认配置
+    if (!btnConfig) &#123;
+      btnConfig = defaultBtnSettings.find(
+        (btnSetting) =&gt; btnSetting.action === action
+      );
     &#125;
 
-    /* 场景3：根据当前登录用户的信息，对路由访问添加限制 */
-    if (to.meta.access) &#123;
-      const canEnter = access()[to.meta.access]();
-      if (!canEnter) &#123;
-        return next(&quot;/error/403&quot;);
-      &#125;
+    if (!btnConfig) &#123;
+      return console.warn(&quot;没有找到按钮配置&quot;);
     &#125;
-  &#125;
 
-  /* 场景4：通过 query 给系统添加标识，供 iframe 集成 */
-  if (to.query.suppressLayout !== undefined) &#123;
-    const integrationEnv = transformIntegrationEnv(suppressLayout);
-    store.commit(SET_SUPRRESS_LAYOUT, integrationEnv);
-  &#125;
-  if (store.state.global?.suppressLayout || suppressLayout) &#123;
-    window.parent.postMessage(&#123; type: &quot;page:mounted&quot;, payload: to.name &#125;, &quot;*&quot;);
-  &#125;
+    if (!btnConfig.visible) &#123;
+      await Vue.nextTick();
+      el.parentNode?.removeChild(el);
+      return;
+    &#125;
 
-  next();
+    // 当指令用于 el-button 时
+    if (el.classList.contains(&quot;el-button&quot;)) &#123;
+      const span = el.querySelector(&quot;span&quot;);
+      span &amp;&amp; (span.innerText = btnConfig.text || btnConfig.defaultText);
+
+      // 修改按钮的class
+      el.classList.remove(&quot;el-button--default&quot;);
+      el.classList.add(`el-button--$&#123;btnConfig.type&#125;`);
+    &#125; else &#123;
+      // 用于移动端的按钮时( 前提：需要保证移动端的按钮必须包含一个classname为custom-text的span子元素 )
+      const span = el.querySelector(&quot;.custom-text&quot;) as HTMLSpanElement;
+      span &amp;&amp; (span.innerText = btnConfig.text || btnConfig.defaultText);
+    &#125;
+  &#125;,
 &#125;);
 </code></pre>
-<h3 id="路由独享守卫"><a href="#路由独享守卫" class="headerlink" title="路由独享守卫"></a>路由独享守卫</h3><ul>
-<li><code>beforeEnter</code></li>
-</ul>
-<pre><code class="typescript">const router = new VueRouter(&#123;
-  routes: [
-    &#123;
-      path: &quot;/foo&quot;,
-      component: Foo,
-      beforeEnter: (to, from, next) =&gt; &#123;
-        // ... 在配置路由时 即可配置 独享守卫
-      &#125;,
-    &#125;,
-  ],
-&#125;);
+<p><code>具体使用：</code></p>
+<pre><code class="vue">&lt;!-- buttonTextSettings 参数同 config --&gt;
+&lt;el-button
+  v-button-text=&quot;&#123; buttonTextSettings, action: &#39;saveDraft&#39; &#125;&quot;
+  type=&quot;info&quot;
+  plain
+&gt;存至草稿箱&lt;/el-button&gt;
 </code></pre>
-<h3 id="组件路由守卫"><a href="#组件路由守卫" class="headerlink" title="组件路由守卫"></a>组件路由守卫</h3><ul>
-<li><code>beforeRouteEnter</code>、<code>beforeRouteUpdate</code> (2.2+)、<code>beforeRouteLeave</code></li>
-</ul>
-<p><code>部分情况下，需要通过组件内守卫完成特殊处理</code></p>
-<ul>
-<li><code>vue+js</code></li>
-</ul>
-<pre><code class="vue">&lt;template&gt;&lt;/template&gt;
-&lt;script&gt;
-export default &#123;
-  beforeRouteEnter(to, from, next) &#123;&#125;,
-  beforeRouteUpdate(to, from, next) &#123;&#125;,
-  beforeRouteLeave(to, from, next) &#123;&#125;,
-&#125;;
-&lt;/script&gt;
-</code></pre>
-<ul>
-<li><code>vue+ts</code><br><code>ts 中 引入class， 需要手动注册组件内的路由守卫</code></li>
-</ul>
-<pre><code class="typescript">// @src/hooks/routeHooks.ts  vue3.0-
-import Component from &quot;vue-class-component&quot;;
-Component.registerHooks([
-  &quot;beforeRouteEnter&quot;,
-  &quot;beforeRouteLeave&quot;,
-  &quot;beforeRouteUpdate&quot;,
-]);
+<h3 id="2-按钮权限控制"><a href="#2-按钮权限控制" class="headerlink" title="2. 按钮权限控制"></a>2. 按钮权限控制</h3><p><code>顾名思义，通过判断登录用户的权限，控制按钮是否应该渲染</code></p>
+<pre><code class="typescript">import Vue from &quot;vue&quot;;
+import &#123; DirectiveBinding &#125; from &quot;vue/types/options&quot;;
 
-// vue3.0+
-// vue-class-component组件中Component上未声明 registerHooks
-// registerHooks 挂载到 Vue, 作为 Vue 的属性
-import &#123; Vue &#125; from &quot;vue-property-decorator&quot;;
-Vue.registerHooks([
-  &quot;beforeRouteEnter&quot;,
-  &quot;beforeRouteLeave&quot;,
-  &quot;beforeRouteUpdate&quot;,
-]);
+export interface PermissionFlag &#123;
+  [index: string]: boolean | undefined;
+  isDefaultRole: boolean;
+  isAppManager: boolean;
+  isAppCreator?: boolean;
+  isFormManager?: boolean;
+  isFormMember?: boolean;
+  isOwner?: boolean;
+&#125;
+
+Vue.directive(&quot;permissions&quot;, &#123;
+  async bind(el, banding) &#123;
+    await permissionDirective_combined(el, banding);
+  &#125;,
+&#125;);
+
+async function permissionDirective_combined(
+  el: HTMLElement,
+  banding: DirectiveBinding
+) &#123;
+  // 是否是系统管理员 是则不屏蔽
+  const isDefaultRole = !!store.getters.isSysManager;
+  if (isDefaultRole) return;
+
+  // 当前用户的权限信息
+  const permissions = store.getters.permissions;
+
+  // permission 按钮自身权限的 action 及 module, permissionFlag (非配置的权限信息，如是否为应用创建者)
+  const &#123; permission, permissionFlag &#125; = banding.value as &#123;
+    permission: string;
+    permissionFlag?: Partial&lt;PermissionFlag&gt;;
+  &#125;;
+  // 当前需要完成权限控制的按钮  action 及 module
+  const [module, action] = permission.split(&quot;:&quot;);
+
+  const accredited = permissionCheck(module, action, permissions);
+
+  const flag = permissionFlag ? ObjectPropsOrOperation(permissionFlag) : true;
+
+  if (!(accredited &amp;&amp; flag)) &#123;
+    await Vue.nextTick();
+    el.parentNode?.removeChild(el);
+  &#125;
+&#125;
+
+function ObjectPropsOrOperation&lt;T extends Partial&lt;PermissionFlag&gt;&gt;(obj: T) &#123;
+  let res = false;
+  Object.keys(obj).forEach((item) =&gt; &#123;
+    res = res || Boolean(obj[item]);
+  &#125;);
+  return res;
+&#125;
 </code></pre>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><code>除此之外，可以通过监听路由变化实现相关逻辑</code></p>
-<pre><code class="typescript">watch(&#39;$route&#39;, &#123; immediate: true &#125;)
-public onRouteChange(to, from)&#123;&#125;
+<h3 id="3-自定义遮罩指令"><a href="#3-自定义遮罩指令" class="headerlink" title="3. 自定义遮罩指令"></a>3. 自定义遮罩指令</h3><p><code>部分组件场景需要给元素添加遮罩层，禁止用户点击</code></p>
+<pre><code class="typescript">import Vue from &quot;vue&quot;;
+
+Vue.directive(&quot;mask&quot;, &#123;
+  bind(el) &#123;
+    // 父元素没有定位属性设置为 relative
+    const position = getComputedStyle(el).position;
+    if (![&quot;relative, absolute&quot;].includes(position)) &#123;
+      el.style.position = &quot;relative&quot;;
+    &#125;
+    const maskDiv = document.createElement(&quot;div&quot;);
+    Object.assign(maskDiv.style, &#123;
+      height: &quot;100%&quot;,
+      width: &quot;100%&quot;,
+      position: &quot;absolute&quot;,
+      top: &quot;0&quot;,
+      left: &quot;0&quot;,
+      background: &quot;transparent&quot;,
+      zIndex: 1,
+    &#125;);
+    el.appendChild(maskDiv);
+  &#125;,
+&#125;);
 </code></pre>
 
       
@@ -1029,22 +1171,6 @@ public onRouteChange(to, from)&#123;&#125;
         </div>
     </div>
 </div>
-
-<!-- 随机三角丝带背景--点击切换 -->
-
-<canvas id="evanyou"></canvas>
-<style>
-#evanyou {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    z-index: -1;
-}
-</style>
-<script src="/js/evanyou.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
