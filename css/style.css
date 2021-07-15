@@ -647,6 +647,42 @@
 .nav-left .left-bottom a.dynamic-menu {
   display: block;
 }
+.cursor {
+  border-right: 2px solid transparent;
+  animation: blink-caret 0.75s step-end infinite;
+}
+@-moz-keyframes blink-caret {
+  from, to {
+    box-shadow: 1px 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 1px 0 0 0;
+  }
+}
+@-webkit-keyframes blink-caret {
+  from, to {
+    box-shadow: 1px 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 1px 0 0 0;
+  }
+}
+@-o-keyframes blink-caret {
+  from, to {
+    box-shadow: 1px 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 1px 0 0 0;
+  }
+}
+@keyframes blink-caret {
+  from, to {
+    box-shadow: 1px 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 1px 0 0 0;
+  }
+}
 .nav-right {
   width: 360px;
   height: 100%;
