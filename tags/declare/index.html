@@ -2,22 +2,27 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>typescript在react中的使用 | flynn-zhl的博客</title>
-  <meta name="keywords" content=" react , ts使用 ">
-  <meta name="description" content="typescript在react中的使用 | flynn-zhl的博客">
+  <title>flynn-zhl的博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="flynn-zhl的技术分享博客">
+<meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flynn-zhl的博客">
-<meta property="og:url" content="http://zhanghlin.cn/2021/07/15/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:title" content="umi-antd-pro-openApi插件介绍">
+<meta property="og:url" content="http://zhanghlin.cn/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="flynn-zhl的博客">
-<meta property="og:description" content="flynn-zhl的技术分享博客">
+<meta property="og:description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-15T10:37:27.202Z">
-<meta property="article:modified_time" content="2021-07-15T10:37:27.202Z">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142638506.png">
+<meta property="article:published_time" content="2021-07-11T23:05:42.000Z">
+<meta property="article:modified_time" content="2021-07-15T10:33:52.587Z">
 <meta property="article:author" content="flynn-zhl">
-<meta property="article:tag" content="flynn zhl 技术博客">
+<meta property="article:tag" content="umi">
+<meta property="article:tag" content="openApi">
+<meta property="article:tag" content="antd-pro">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -85,7 +90,7 @@
 
 
 <body>
-<aside class="nav">
+<aside class="nav mobile">
     <div class="nav-left">
         <a href="/"
     class="avatar_target">
@@ -286,7 +291,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(21)</small>
+                <small>(20)</small>
             
         </div>
     </li>
@@ -329,7 +334,7 @@
                         <i class="fold iconfont icon-right"></i>
                         
                         大前端
-                        <small>(18)</small>
+                        <small>(19)</small>
                         
                     </div>
                     
@@ -340,7 +345,7 @@
                                         
                                         CSS
                                         
-                                            <small>(2
+                                            <small>(1
                                                 )</small>
                                         
                                     </div>
@@ -376,7 +381,7 @@
                                         
                                         React
                                         
-                                            <small>(2
+                                            <small>(3
                                                 )</small>
                                         
                                     </div>
@@ -388,7 +393,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -456,8 +461,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="21">
-<input type="hidden" id="yelog_site_word_count" value="19.3k">
+<input type="hidden" id="yelog_site_posts_number" value="20">
+<input type="hidden" id="yelog_site_word_count" value="20.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -534,11 +539,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>css3</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>css4</a>
+                <i class="iconfont icon-tag"></i><a>declare</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -558,6 +559,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>interface</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>is属性</a>
             </li>
         
@@ -571,6 +576,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MetingJS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>namespace</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -590,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>react</a>
+                <i class="iconfont icon-tag"></i><a>react-ts</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -622,7 +631,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts使用</a>
+                <i class="iconfont icon-tag"></i><a>ts类型</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -652,22 +661,6 @@
     
     <nav id="title-list-nav">
         
-        <a  class="全部文章 "
-           href="/2021/07/15/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-07-15 18:37:27">2021/07/15</span>
-        </a>
-        
-        <a  class="全部文章 "
-           href="/2021/07/15/typescript%E6%96%87%E6%A1%A3/%E4%BA%86%E8%A7%A3%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8typescript%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-07-15 18:30:31">2021/07/15</span>
-        </a>
-        
         <a  class="全部文章 大前端 React "
            href="/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/"
            data-tag="umi,openApi,antd-pro"
@@ -676,11 +669,19 @@
             <span class="post-date" title="2021-07-12 07:05:42">2021/07/12</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
-           data-tag="react,ts使用"
+        <a  class="全部文章 大前端 React "
+           href="/2021/07/12/react%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="react-ts"
            data-author="" >
             <span class="post-title" title="typescript在react中的使用">typescript在react中的使用</span>
+            <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/%E4%BA%86%E8%A7%A3typescript%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/"
+           data-tag="declare,namespace,interface"
+           data-author="" >
+            <span class="post-title" title="了解typescript的正确使用姿势">了解typescript的正确使用姿势</span>
             <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
         </a>
         
@@ -690,6 +691,14 @@
            data-author="" >
             <span class="post-title" title="给Hexo添加音乐播放器插件">给Hexo添加音乐播放器插件</span>
             <span class="post-date" title="2021-07-10 17:43:42">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/09/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/"
+           data-tag="ts类型"
+           data-author="" >
+            <span class="post-title" title="typescript 高级类型介绍">typescript 高级类型介绍</span>
+            <span class="post-date" title="2021-07-09 10:22:45">2021/07/09</span>
         </a>
         
         <a  class="全部文章 大前端 Node "
@@ -772,14 +781,6 @@
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
-        <a  class="全部文章 大前端 CSS "
-           href="/2021/06/05/css%E6%96%87%E6%A1%A3/css3_4%E5%A5%BD%E7%94%A8%E4%BD%86%E4%B8%8D%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/"
-           data-tag="less,css3,css4"
-           data-author="" >
-            <span class="post-title" title="css3_4 好用但不常见属性">css3_4 好用但不常见属性</span>
-            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
-        </a>
-        
         <a  class="全部文章 大前端 Vue "
            href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue%E4%B8%ADdirective%E6%8C%87%E4%BB%A4%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E4%BA%AB/"
            data-tag="v-指令,directive"
@@ -836,65 +837,13 @@
         </div>
     </div>
 </aside>
-<div id="post">
+<div id="post" class="index">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article id="post-typescript文档/typescript在react中的使用" class="article article-type-post" itemscope itemprop="blogPost">
+            <article class="index">
+                <div class="toc-ref">
     
-        <h1 class="article-title">typescript在react中的使用</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="大前端">大前端</a> > 
-            
-            <a  data-rel="大前端&lt;---&gt;TypeScript">TypeScript</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color1">react</a>
-            
-            <a class="color5">ts使用</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-            发布时间 : <time class="date" title='最后更新: 2021-07-12 09:58:01'>2021-07-12 06:42</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>字数:2.1k</span>
-        
-        
-        <span id="busuanzi_container_page_pv">
-            阅读 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#type-%E5%92%8C-interface-%E5%A6%82%E4%BD%95%E6%8A%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">type 和 interface 如何抉择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义接口数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">泛型的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9B%B8%E5%85%B3-Props"><span class="toc-text">页面相关 Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA-Window-%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="toc-text">为 Window 添加参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%9B%B4%E6%96%B0-Object-%E7%9A%84-key"><span class="toc-text">动态更新 Object 的 key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E5%8C%85%E6%B2%A1%E6%9C%89%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84-types"><span class="toc-text">装包没有相对应的 @types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ts-ignore"><span class="toc-text">@ts-ignore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-tsx-%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义 tsx 组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">事件对象类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Promise 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BD%BF%E7%94%A8-typeof"><span class="toc-text">反向使用 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8Partial"><span class="toc-text">巧用Partial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -907,372 +856,22 @@
     }
 </style>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#type-%E5%92%8C-interface-%E5%A6%82%E4%BD%95%E6%8A%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">type 和 interface 如何抉择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义接口数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">泛型的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%9B%B8%E5%85%B3-Props"><span class="toc-text">页面相关 Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA-Window-%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="toc-text">为 Window 添加参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%9B%B4%E6%96%B0-Object-%E7%9A%84-key"><span class="toc-text">动态更新 Object 的 key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E5%8C%85%E6%B2%A1%E6%9C%89%E7%9B%B8%E5%AF%B9%E5%BA%94%E7%9A%84-types"><span class="toc-text">装包没有相对应的 @types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ts-ignore"><span class="toc-text">@ts-ignore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-tsx-%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-text">定义 tsx 组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-text">事件对象类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Promise 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BD%BF%E7%94%A8-typeof"><span class="toc-text">反向使用 typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A7%E7%94%A8Partial"><span class="toc-text">巧用Partial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol></div></p>
-<h2 id="type-和-interface-如何抉择？"><a href="#type-和-interface-如何抉择？" class="headerlink" title="type 和 interface 如何抉择？"></a>type 和 interface 如何抉择？</h2><p>推荐任何时候都是用 type， type 使用起来更像一个变量，与 interface 相比，type 的特点如下：</p>
-<ul>
-<li>表达功能更强大，不局限于 object/class/function</li>
-<li>要扩展已有 type 需要创建新 type，不可以重名</li>
-<li>支持更复杂的类型操作</li>
-</ul>
-<p>基本上所有用 interface 表达的类型都有其等价的 type 表达。 除了 往函数上挂载属性：</p>
-<pre><code class="typescript">interface FuncWithAttachment &#123;
-  (param: string): boolean;
-  someProperty: number;
-&#125;
+                <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
+<blockquote>
+<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
+</blockquote>
+<blockquote>
+<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
+</blockquote>
+<blockquote>
+<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
+</blockquote>
+<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
+<p>通过博客，我们可以记录自己的生活和成长的轨迹。</p>
 
-const testFunc: FuncWithAttachment = &#123;&#125;;
-const result = testFunc(&quot;mike&quot;); // 有类型提醒
-testFunc.someProperty = 3; // 有类型提醒
-</code></pre>
-<ul>
-<li>枚举类型时，用 type or enum;</li>
-</ul>
-<pre><code class="typescript">type A = &quot;a&quot; | &quot;b&quot; | &quot;c&quot;;
-</code></pre>
-<h2 id="定义接口数据类型"><a href="#定义接口数据类型" class="headerlink" title="定义接口数据类型"></a>定义接口数据类型</h2><p>任何一个项目都离不开对数据和接口的处理，拼接数据和接口是形成业务逻辑也是前端的主要工作之一，将接口返回的数据定义 TypeScript 类型可以减少很多维护成本和查询 api 的时间 。</p>
-<p><code>API.d.ts</code> <code>d.ts</code> 结尾的文件会被 TypeScript 默认导入到全局 , 无需再手动导出。</p>
-<pre><code class="typescript">// 不能使用 import 语法，如果需要引用需要使用三斜杠
-declare module API &#123;
-  type A = &quot;&quot;;
-  interface B &#123;&#125;
-&#125;
-// or
-declare namespace CAPI &#123;
-  interface CurrentUser &#123;
-    avatar?: string;
-    name?: string;
-    title?: string;
-  &#125;
-&#125;
-
-// 使用 API.A | API.B |  CAPI.CurrentUser
-</code></pre>
-<h2 id="泛型的使用场景"><a href="#泛型的使用场景" class="headerlink" title="泛型的使用场景"></a>泛型的使用场景</h2><ul>
-<li>接口返回数据类型约束</li>
-</ul>
-<pre><code class="typescript">// 有这么一个 interface ,显然， 很多接口返回数据都是这种结构，所以这里使用了 泛型约束
-interface A&lt;T&gt; &#123;
-  page: number;
-  size: number;
-  results: T[];
-  total: number;
-&#125;
-interface B &#123;
-  name: string;
-  age?: number;
-&#125;
-
-// 使用
-const res = await request&lt;A&lt;B&gt;&gt;(&quot;/api/xx&quot;);
-</code></pre>
-<ul>
-<li>函数参数类型不唯一</li>
-</ul>
-<pre><code class="typescript">// 数组去重
-function uniquefn&lt;T&gt;(args: T[]): T[] &#123;
-  // ...
-&#125;
-
-// 使用
-const arr1 = uniquefn&lt;&#123; name: string; age?: number &#125;&gt;([
-  &#123; name: &quot;张三&quot;, age: 18 &#125;,
-  &#123; name: &quot;李四&quot;, age: 20 &#125;,
-]);
-</code></pre>
-<ul>
-<li>函数式组件中 hooks 类型约束</li>
-</ul>
-<pre><code class="typescript">const [state, setState] = useState&lt;string&gt;(&quot;&quot;);
-</code></pre>
-<ul>
-<li>event 事件类型</li>
-</ul>
-<pre><code class="typescript">// click 使用 React.MouseEvent 加 dom 类型的泛型
-// HTMLInputElement 代表 input标签 另外一个常用的是 HTMLDivElement
-const onClick = (e: React.MouseEvent&lt;HTMLInputElement&gt;) =&gt; &#123;&#125;;
-</code></pre>
-<ul>
-<li>定义函数式组件的 props 类型</li>
-</ul>
-<pre><code class="typescript">interface PropInterface &#123;
-  title: string;
-&#125;
-
-const fn: React.FC&lt;PropInterface&gt; = (props) =&gt; &lt;&gt;&#123;props.title&#125;&lt;&gt;;
-// or
-export default function (props: React.PropsWithChildren&lt;PropInterface&gt;) &#123;
-  // return ...
-&#125;
-</code></pre>
-<h2 id="页面相关-Props"><a href="#页面相关-Props" class="headerlink" title="页面相关 Props"></a>页面相关 Props</h2><p><code>IRouteComponentProps</code> 是被配置在 <code>config.ts</code> 中组件的 props 类型，其中带入了一些 react-router 相关的 props</p>
-<pre><code class="typescript">export interface IRouteComponentProps&lt;
-  Params extends &#123; [K in keyof Params]?: string &#125; = &#123;&#125;,
-  Query extends &#123; [K in keyof Query]?: string &#125; = &#123;&#125;
-&gt; &#123;
-  children: JSX.Element;
-  location: Location &amp; &#123; query: Query &#125;;
-  route: IRoute;
-  routes: IRoute[];
-  history: History;
-  match: match&lt;Params&gt;;
-&#125;
-</code></pre>
-<p>使用：</p>
-<pre><code class="typescript">import React from &quot;antd&quot;;
-import &#123; IRouteComponentProps &#125; from &quot;umi&quot;;
-
-const Page: React.FC&lt;IRouteComponentProps&gt; = () =&gt; &#123;
-  return &lt;Layout /&gt;;
-&#125;;
-</code></pre>
-<h2 id="为-Window-添加参数"><a href="#为-Window-添加参数" class="headerlink" title="为 Window 添加参数"></a>为 Window 添加参数</h2><pre><code class="typescript">interface Window &#123;
-  ga: (
-    command: &quot;send&quot;,
-    hitType: &quot;event&quot; | &quot;pageview&quot;,
-    fieldsObject: GAFieldsObject | string
-  ) =&gt; void;
-  reloadAuthorized: () =&gt; void;
-&#125;
-</code></pre>
-<p>不想在 Window 中增加，但是想要全局使用，比如通过 define 注入的参数，我们通过 <code>declare</code> 关键字在 <code>/src/typings.d.ts</code> 注入。</p>
-<pre><code class="typescript">declare const REACT_APP_ENV: &quot;test&quot; | &quot;dev&quot; | &quot;pre&quot; | false;
-</code></pre>
-<h2 id="动态更新-Object-的-key"><a href="#动态更新-Object-的-key" class="headerlink" title="动态更新 Object 的 key"></a>动态更新 Object 的 key</h2><pre><code class="typescript">type Person = &#123;
-  name: string;
-  age?: number;
-  [k: string]: any; // 指定 k 可以为任意的 string
-&#125;;
-</code></pre>
-<h2 id="装包没有相对应的-types"><a href="#装包没有相对应的-types" class="headerlink" title="装包没有相对应的 @types"></a>装包没有相对应的 @types</h2><ul>
-<li><p>安装包对应的 @types 文件包，如 @types/react 、 @types/react-dom</p>
-</li>
-<li><p>可以直接将其定义为 any。</p>
-</li>
-</ul>
-<pre><code class="typescript">declare module &quot;xxx&quot;; // d.ts
-import xxx from &quot;xxx&quot;; // tsx
-</code></pre>
-<h2 id="ts-ignore"><a href="#ts-ignore" class="headerlink" title="@ts-ignore"></a>@ts-ignore</h2><pre><code class="typescript">// @ts-ignore
-xxx;
-</code></pre>
-<p>遇到动态性比较强的代码，不妨使用 <code>as unknown as XXX</code></p>
-<h2 id="定义-tsx-组件类型"><a href="#定义-tsx-组件类型" class="headerlink" title="定义 tsx 组件类型"></a>定义 tsx 组件类型</h2><ul>
-<li>使用泛型进行 <code>Props</code>、 <code>State</code> 的类型定义。</li>
-</ul>
-<pre><code class="tsx">import * as React from &quot;react&quot;;
-
-interface IProps &#123;
-  color: string;
-  size?: string;
-&#125;
-interface IState &#123;
-  count: number;
-&#125;
-
-class App extends React.Component&lt;IProps, IState&gt; &#123;
-  public state = &#123;
-    count: 1,
-  &#125;;
-  public render() &#123;
-    return &lt;div&gt;Hello world&lt;/div&gt;;
-  &#125;
-&#125;
-</code></pre>
-<ul>
-<li>React.Component 泛型定义源码：</li>
-</ul>
-<pre><code class="typescript">// Readonly 将 props 的所有属性都设置为只读属性。
-class Component&lt;P, S&gt; &#123;
-  readonly props: Readonly&lt;&#123; children?: ReactNode &#125;&gt; &amp; Readonly&lt;P&gt;;
-  state: Readonly&lt;S&gt;;
-&#125;
-</code></pre>
-<ul>
-<li>约束 state 只读：</li>
-</ul>
-<pre><code class="tsx">class App extends React.PureComponent&lt;IProps, IState&gt; &#123;
-  public readonly state: Readonly&lt;IState&gt; = &#123;
-    count: 1,
-  &#125;;
-  public render() &#123;
-    return &lt;div&gt;&lt;/div&gt;;
-  &#125;
-&#125;
-</code></pre>
-<ul>
-<li>无状态组件 <code>SFC</code> 类型-实现源码（SFC 即将废弃）：</li>
-</ul>
-<pre><code class="typescript">type SFC&lt;P = &#123;&#125;&gt; = StatelessComponent&lt;P&gt;;
-interface StatelessComponent&lt;P = &#123;&#125;&gt; &#123;
-  (
-    props: P &amp; &#123; children?: ReactNode &#125;,
-    context?: any
-  ): ReactElement&lt;any&gt; | null;
-  propTypes?: ValidationMap&lt;P&gt;;
-  contextTypes?: ValidationMap&lt;any&gt;;
-  defaultProps?: Partial&lt;P&gt;;
-  displayName?: string;
-&#125;
-</code></pre>
-<ul>
-<li>函数式组件开发：</li>
-</ul>
-<pre><code class="tsx">import &#123; SFC, FC &#125; from &quot;react&quot;;
-const FBtn: SFC&lt;IProps&gt; = (props) =&gt; &lt;div&gt;&#123;props.title&#125;&lt;/div&gt;;
-// or React.FunctionComponent
-const FBtn: FC&lt;IProps&gt; = (props) =&gt; &lt;div&gt;&#123;props.title&#125;&lt;/div&gt;;
-</code></pre>
-<h2 id="事件对象类型"><a href="#事件对象类型" class="headerlink" title="事件对象类型"></a>事件对象类型</h2><p><code>React 的声明文件提供了</code>Event 对象的类型声明。 具体的 <code>EventHandler</code> 、 <code>EventTarget</code> 可以到相应的 modules 文件夹下查看。</p>
-<ul>
-<li><code>ClipboardEvent&lt;T = Element&gt;</code> 剪贴板事件对象</li>
-<li><code>DragEvent&lt;T = Element&gt;</code> 拖拽事件对象</li>
-<li><code>ChangeEvent&lt;T = Element&gt;</code> Change 事件对象</li>
-<li><code>KeyboardEvent&lt;T = Element&gt;</code> 键盘事件对象</li>
-<li><code>MouseEvent&lt;T = Element&gt;</code> 鼠标事件对象</li>
-<li><code>TouchEvent&lt;T = Element&gt;</code> 触摸事件对象</li>
-<li><code>WheelEvent&lt;T = Element&gt;</code> 滚轮事件对象</li>
-<li><code>AnimationEvent&lt;T = Element&gt;</code> 动画事件对象</li>
-<li><code>TransitionEvent&lt;T = Element&gt;</code> 过渡事件对象</li>
-</ul>
-<h2 id="Promise-类型"><a href="#Promise-类型" class="headerlink" title="Promise 类型"></a>Promise 类型</h2><p>​ 在做异步操作时我们经常使用 <code>async</code> 函数，函数调用时会 <code>return</code> 一个 <code>Promise</code> 对象，可以使用 <code>then</code> 方法添加回调函数。</p>
-<p>​ <code>Promise</code> 是一个泛型类型，<code>T</code> 泛型变量用于确定使用 <code>then</code> 方法时接收的第一个回调函数（onfulfilled）的参数类型。</p>
-<pre><code class="typescript">// 某 props 接收异步处理函数
-onTaskRequest?: (args: API.X[]) =&gt; Promise&lt;API.X[]&gt;;
-</code></pre>
-<h2 id="反向使用-typeof"><a href="#反向使用-typeof" class="headerlink" title="反向使用 typeof"></a>反向使用 typeof</h2><pre><code class="typescript">// NewsCard 组件接收的 props 类型
-interface NewsCardProps &#123;
-  className?: string;
-  title: string;
-  moreNavLink: string;
-  type: string;
-  // typeof 反向获取类型：(params: API.NewsQuery) =&gt; Promise&lt;API.PaginationNewsResult&lt;API.News&gt;&gt;
-  provider: typeof ficusService.getNews;
-&#125;
-
-// News 组件中定义 provider
-const newsProvider = useCallback(
-  (type: API.NewsType) =&gt; ficusService.getNews(&#123; page: 1, size: 10, type &#125;),
-  [],
-);
-
-// 传入
-&lt;NewsCard &#123; /* 其他 props */ &#125; provider=&#123;() =&gt; newsProvider(&#39;xxx&#39;) /&gt;
-
-// NewsCard data： 根据 typeof 推断得到类型 API.PaginationNewsResult&lt;API.News&gt;，无需再指定类型
-const &#123; data, loading &#125; = useRequest(props.provider, &#123; cacheKey: `NEWS_$&#123;props.type&#125;` &#125;);
-</code></pre>
-<h2 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h2><pre><code class="typescript">// props.color 的值只可以是字符串 red、blue、yellow
-type color = &quot;red&quot; | &quot;blue&quot; | &quot;yellow&quot;;
-</code></pre>
-<h2 id="巧用Partial"><a href="#巧用Partial" class="headerlink" title="巧用Partial"></a>巧用<code>Partial</code></h2><p>使用 <code>Partial</code> 将所有的 <code>props</code> 属性都变为可选值。—— 这对我们在接口定义时很有用</p>
-<pre><code class="typescript">type Partial&lt;T&gt; = &#123; [P in keyof T]?: T[P] &#125;;
-</code></pre>
-<pre><code class="typescript">// 在 A 接口中, 我们使用 interface X 完成了对某数据的返回类型定义。
-// 在 B 接口中, 我们可能会对 X 中定义的字段的部分字段进行更新， 但在 A 接口 为必选字段， B 接口为可选
-
-export const conditionService = &#123;
-  async query(query: Query) &#123;
-    const res = await axios.get&lt;PageResult&lt;ConditionTemp&gt;&gt;(`/v1.0/condition`, &#123;
-      params: query,
-    &#125;);
-    return res.data;
-  &#125;,
-  async update(data: Partial&lt;ConditionTemp&gt;) &#123;
-    await axios.put(`/v1.0/condition`, data);
-  &#125;,
-&#125;;
-</code></pre>
-<h2 id="其他内置类型"><a href="#其他内置类型" class="headerlink" title="其他内置类型"></a>其他内置类型</h2><ul>
-<li><code>Required</code> 。与 <code>Partial</code> 相反</li>
-</ul>
-<p>​ <code>-?</code> 的功能就是把可选属性的 <code>?</code> 去掉使该属性变成必选项，对应的还有 <code>+?</code> ，作用与 <code>-?</code> 相反，是把属性变为可选项。</p>
-<pre><code class="typescript">type Required&lt;T&gt; = &#123; [P in keyof T]-?: T[P] &#125;;
-</code></pre>
-<ul>
-<li><p>Exclude&lt;T,U&gt;</p>
-<p>从 <code>T</code> 中排除那些可以赋值给 <code>U</code> 的类型。 (T ∩ U) 在 T 的 补集</p>
-</li>
-</ul>
-<pre><code class="typescript">type Exclude&lt;T, U&gt; = T extends U ? never : T;
-type T = Exclude&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 1|2|5
-</code></pre>
-<ul>
-<li><p>Extract&lt;T,U&gt;</p>
-<p>从 <code>T</code> 中提取那些可以赋值给 <code>U</code> 的类型。 类型 T ∩ U</p>
-</li>
-</ul>
-<pre><code class="typescript">type Extract&lt;T, U&gt; = T extends U ? T : never;
-type T = Extract&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 3|4
-</code></pre>
-<ul>
-<li><p>Pick&lt;T, K&gt;</p>
-<p>从 对象<code>T</code> 中取出一系列 <code>K</code> 的属性</p>
-</li>
-</ul>
-<pre><code class="typescript">type Pick&lt;T, K extends keyof T&gt; = &#123;
-  [P in K]: T[P];
-&#125;;
-
-interface Person &#123;
-  name: string;
-  age: number;
-  sex: string;
-&#125;
-const person: Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt; = &#123;
-  name: &quot;小王&quot;,
-  age: 21,
-&#125;;
-</code></pre>
-<ul>
-<li><p>Record&lt;K, T&gt;</p>
-<p>将 <code>K</code> 中所有的属性的值转化为 <code>T</code> 类型。</p>
-</li>
-</ul>
-<pre><code class="typescript">type Record&lt;K extends string, T&gt; = &#123;
-  [P in K]: T;
-&#125;;
-
-const person: Record&lt;keyof Person, string&gt; = &#123;
-  name: &quot;小王&quot;,
-  age: &quot;12&quot;,
-&#125;;
-</code></pre>
-<ul>
-<li>更多的内置——&gt; typescript 操作符及元素类型</li>
-</ul>
-<h2 id="Omit-lt-T-K-gt-（没有内置）"><a href="#Omit-lt-T-K-gt-（没有内置）" class="headerlink" title="Omit&lt;T,K&gt;（没有内置）"></a>Omit&lt;T,K&gt;（没有内置）</h2><p>从对象 <code>T</code> 中排除 <code>key</code> 是 <code>K</code> 的属性 。 与 Pick 相反</p>
-<pre><code class="typescript">type Omit&lt;T, K&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;
-</code></pre>
-<pre><code class="typescript">interface Person &#123;
-  name: string;
-  age: number;
-  sex: string;
-&#125;
-const person: Omit&lt;Person, &quot;name&quot;&gt; = &#123;
-  age: 1,
-  sex: &quot;男&quot;,
-&#125;;
-</code></pre>
-
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
-    </div>
-</article>
-
-
-
-
-
-
-
-    
-
-
-
-
+            </article>
+            
+            
         </div>
         <div class="copyright">
             <p class="footer-entry">
@@ -1281,12 +880,12 @@ const person: Omit&lt;Person, &quot;name&quot;&gt; = &#123;
 <p class="footer-entry">Built by <a href="//flynna.github.io" target="_blank">flynn-zhl</a></p>
 
         </div>
-        <div class="full-toc">
-            <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    </div>
+</div>
+<div class="full-toc">
+    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
-        </div>
-    </div>
 </div>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>

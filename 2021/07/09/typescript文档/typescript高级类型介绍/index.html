@@ -2,22 +2,27 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>flynn-zhl的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="flynn-zhl的博客">
+  <title>typescript 高级类型介绍 | flynn-zhl的博客</title>
+  <meta name="keywords" content=" ts类型 ">
+  <meta name="description" content="typescript 高级类型介绍 | flynn-zhl的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="flynn-zhl的技术分享博客">
+<meta name="description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flynn-zhl的博客">
-<meta property="og:url" content="http://zhanghlin.cn/2021/07/15/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:title" content="umi-antd-pro-openApi插件介绍">
+<meta property="og:url" content="http://zhanghlin.cn/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="flynn-zhl的博客">
-<meta property="og:description" content="flynn-zhl的技术分享博客">
+<meta property="og:description" content="[toc] 插件介绍 在 Pro 中我们引入了一个 openAPI 的插件，在脚手架中自带了这个功能, 可以生成相关的接口和文档。 插件安装yarn add @umijs&#x2F;plugin-openapi &#x2F;&#x2F; or npm i @umijs&#x2F;plugin-openapi --save  插件配置config&#x2F;config.ts 配置文件, 添加如下配置： openAPI: &amp;#123;     &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-15T10:37:27.202Z">
-<meta property="article:modified_time" content="2021-07-15T10:37:27.202Z">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
+<meta property="og:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142638506.png">
+<meta property="article:published_time" content="2021-07-11T23:05:42.000Z">
+<meta property="article:modified_time" content="2021-07-15T10:33:52.587Z">
 <meta property="article:author" content="flynn-zhl">
-<meta property="article:tag" content="flynn zhl 技术博客">
+<meta property="article:tag" content="umi">
+<meta property="article:tag" content="openApi">
+<meta property="article:tag" content="antd-pro">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhanghlin.cn/images/umi--antd-pro--openApi%E6%8F%92%E4%BB%B6/image-20210707142036045.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -85,7 +90,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
     class="avatar_target">
@@ -286,7 +291,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(21)</small>
+                <small>(20)</small>
             
         </div>
     </li>
@@ -329,7 +334,7 @@
                         <i class="fold iconfont icon-right"></i>
                         
                         大前端
-                        <small>(18)</small>
+                        <small>(19)</small>
                         
                     </div>
                     
@@ -340,7 +345,7 @@
                                         
                                         CSS
                                         
-                                            <small>(2
+                                            <small>(1
                                                 )</small>
                                         
                                     </div>
@@ -376,7 +381,7 @@
                                         
                                         React
                                         
-                                            <small>(2
+                                            <small>(3
                                                 )</small>
                                         
                                     </div>
@@ -388,7 +393,7 @@
                                         
                                         TypeScript
                                         
-                                            <small>(1
+                                            <small>(2
                                                 )</small>
                                         
                                     </div>
@@ -456,8 +461,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="21">
-<input type="hidden" id="yelog_site_word_count" value="19.3k">
+<input type="hidden" id="yelog_site_posts_number" value="20">
+<input type="hidden" id="yelog_site_word_count" value="20.2k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -534,11 +539,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>css3</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>css4</a>
+                <i class="iconfont icon-tag"></i><a>declare</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -558,6 +559,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>interface</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>is属性</a>
             </li>
         
@@ -571,6 +576,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MetingJS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>namespace</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -590,7 +599,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>react</a>
+                <i class="iconfont icon-tag"></i><a>react-ts</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -622,7 +631,7 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>ts使用</a>
+                <i class="iconfont icon-tag"></i><a>ts类型</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -652,22 +661,6 @@
     
     <nav id="title-list-nav">
         
-        <a  class="全部文章 "
-           href="/2021/07/15/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-07-15 18:37:27">2021/07/15</span>
-        </a>
-        
-        <a  class="全部文章 "
-           href="/2021/07/15/typescript%E6%96%87%E6%A1%A3/%E4%BA%86%E8%A7%A3%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8typescript%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-07-15 18:30:31">2021/07/15</span>
-        </a>
-        
         <a  class="全部文章 大前端 React "
            href="/2021/07/12/react%E6%96%87%E6%A1%A3/umi-antd-pro-openApi%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/"
            data-tag="umi,openApi,antd-pro"
@@ -676,11 +669,19 @@
             <span class="post-date" title="2021-07-12 07:05:42">2021/07/12</span>
         </a>
         
-        <a  class="全部文章 大前端 TypeScript "
-           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
-           data-tag="react,ts使用"
+        <a  class="全部文章 大前端 React "
+           href="/2021/07/12/react%E6%96%87%E6%A1%A3/typescript%E5%9C%A8react%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="react-ts"
            data-author="" >
             <span class="post-title" title="typescript在react中的使用">typescript在react中的使用</span>
+            <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/12/typescript%E6%96%87%E6%A1%A3/%E4%BA%86%E8%A7%A3typescript%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF/"
+           data-tag="declare,namespace,interface"
+           data-author="" >
+            <span class="post-title" title="了解typescript的正确使用姿势">了解typescript的正确使用姿势</span>
             <span class="post-date" title="2021-07-12 06:42:51">2021/07/12</span>
         </a>
         
@@ -690,6 +691,14 @@
            data-author="" >
             <span class="post-title" title="给Hexo添加音乐播放器插件">给Hexo添加音乐播放器插件</span>
             <span class="post-date" title="2021-07-10 17:43:42">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 大前端 TypeScript "
+           href="/2021/07/09/typescript%E6%96%87%E6%A1%A3/typescript%E9%AB%98%E7%BA%A7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/"
+           data-tag="ts类型"
+           data-author="" >
+            <span class="post-title" title="typescript 高级类型介绍">typescript 高级类型介绍</span>
+            <span class="post-date" title="2021-07-09 10:22:45">2021/07/09</span>
         </a>
         
         <a  class="全部文章 大前端 Node "
@@ -772,14 +781,6 @@
             <span class="post-date" title="2021-06-06 13:41:25">2021/06/06</span>
         </a>
         
-        <a  class="全部文章 大前端 CSS "
-           href="/2021/06/05/css%E6%96%87%E6%A1%A3/css3_4%E5%A5%BD%E7%94%A8%E4%BD%86%E4%B8%8D%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7/"
-           data-tag="less,css3,css4"
-           data-author="" >
-            <span class="post-title" title="css3_4 好用但不常见属性">css3_4 好用但不常见属性</span>
-            <span class="post-date" title="2021-06-05 16:07:22">2021/06/05</span>
-        </a>
-        
         <a  class="全部文章 大前端 Vue "
            href="/2021/06/05/vue%E6%96%87%E6%A1%A3/vue%E4%B8%ADdirective%E6%8C%87%E4%BB%A4%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E4%BA%AB/"
            data-tag="v-指令,directive"
@@ -836,13 +837,63 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div style="background: rgba(255,255,255,0.75)">
         <div class="pjax">
-            <article class="index">
-                <div class="toc-ref">
+            <article id="post-typescript文档/typescript高级类型介绍" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li></ol></li></ol>
+        <h1 class="article-title">typescript 高级类型介绍</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="大前端">大前端</a> > 
+            
+            <a  data-rel="大前端&lt;---&gt;TypeScript">TypeScript</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">ts类型</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2021-07-16 14:52:11'>2021-07-09 10:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%9B%9E%E9%A1%BE"><span class="toc-text">基础类型回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">交叉类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">通用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">接口数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">预定义类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -855,22 +906,205 @@
     }
 </style>
 </div>
-                <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
-<blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
-</blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
-</blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B%E5%9B%9E%E9%A1%BE"><span class="toc-text">基础类型回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">交叉类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">通用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E9%9D%A2%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-text">字面量类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">接口数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B"><span class="toc-text">预定义类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">其他内置类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Omit-lt-T-K-gt-%EF%BC%88%E6%B2%A1%E6%9C%89%E5%86%85%E7%BD%AE%EF%BC%89"><span class="toc-text">Omit&lt;T,K&gt;（没有内置）</span></a></li></ol></div></p>
+<h3 id="基础类型回顾"><a href="#基础类型回顾" class="headerlink" title="基础类型回顾"></a>基础类型回顾</h3><p>  <code>TypeScript</code>支持与JavaScript几乎相同的数据类型，此外还提供了实用的枚举类型方便我们使用。</p>
+<ul>
+<li>数字：number；</li>
+<li>字符串： string；</li>
+<li>布尔类型：boolean；</li>
+<li>数组类型：元素类型后跟 number[]；或者使用数组泛型 Array&lt; number&gt;;</li>
+<li>元组类型： 允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。如： [string, number]; </li>
+<li>枚举类型：用于定义数值集合</li>
+<li>any类型：任意类型，可以赋予任意类型的值；</li>
+<li>void类型：与 any 相反，表示没有任何类型；</li>
+<li>null 和 undefined 类型：只能指 null 与 undefined 元素本身；</li>
+<li>never类型： never 是其它类型（包括 null 和 undefined）的子类型，代表从不会出现的值 </li>
+</ul>
+<h3 id="交叉类型"><a href="#交叉类型" class="headerlink" title="交叉类型"></a>交叉类型</h3><p><code>type C = A &amp; B; 类型 C 为同时包含类型 A、B 的新类型</code></p>
+<pre><code class="typescript">interface A &#123;
+  name: string;
+  age?: number;
+&#125;
 
-            </article>
-            
-            
+interface B &#123;
+  eat(): void;
+  say?: (name: string) =&gt; void;
+&#125;
+
+// 交叉类型实现方式 1： 继承
+interface C extends A, B &#123;&#125;
+
+// 交叉类型实现方式 2： &amp; (正常情况下)
+type C = A &amp; B;
+
+// 交叉类型实现方式 3：映射(类似遍历赋值...不推荐)
+</code></pre>
+<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><p><code>type C = A | B; 类型 C 为 A 或 B 其中一种类型</code></p>
+<pre><code class="typescript">// 定义如上
+// ....
+
+// 正常使用：
+const c: C = &#123; age: 18, name: &quot;张三&quot; &#125; as A;
+
+// or
+const fn = (arg: C) =&gt; &#123;
+  // 通过访问 arg.name 属性，隐式判断当前 type 类型。A 中 name 为必选项
+  if (arg.name) &#123;
+    console.log(arg.name);
+  &#125; else &#123;
+    arg.eat();
+  &#125;
+&#125;;
+</code></pre>
+<h3 id="通用类型"><a href="#通用类型" class="headerlink" title="通用类型"></a>通用类型</h3><pre><code class="typescript">// 接口通用
+interface A &#123;
+  [k: string]: any;
+&#125;
+</code></pre>
+<h3 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h3><pre><code class="typescript">// color 的值只可以是字符串 red、blue、yellow
+type color = &quot;red&quot; | &quot;blue&quot; | &quot;yellow&quot;;
+</code></pre>
+<h3 id="接口数据类型"><a href="#接口数据类型" class="headerlink" title="接口数据类型"></a>接口数据类型</h3><p>任何一个项目都离不开对数据和接口的处理，拼接数据和接口是形成业务逻辑也是前端的主要工作之一，将接口返回的数据定义 TypeScript 类型可以减少很多维护成本和查询 api 的时间 。</p>
+<p><code>API.d.ts</code> <code>d.ts</code> 结尾的文件会被 TypeScript 默认导入到全局 , 无需再手动导出。</p>
+<pre><code class="typescript">// 不能使用 import 语法，如果需要引用需要使用三斜杠
+declare module API &#123;
+  type A = &quot;&quot;;
+  interface B &#123;&#125;
+&#125;
+// or
+declare namespace CAPI &#123;
+  interface CurrentUser &#123;
+    avatar?: string;
+    name?: string;
+    title?: string;
+  &#125;
+&#125;
+
+// 使用 API.A | API.B |  CAPI.CurrentUser
+</code></pre>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>类型变量<code>T</code> 。通过类型变量来帮助捕获用户传入的类型 ，以此来适配多个类型使用。</p>
+<p>你可以这样：</p>
+<pre><code class="typescript">function uniquefn(args: any): any &#123;
+  // ...   大可不必
+&#125;
+</code></pre>
+<p>很明显，去重函数的参数可以是任意的类型，使用<code>any</code>类型会导致这个函数可以接收任何类型的<code>arg</code>参数，这样就丢失了一些信息 。因此，我们需要一种方法使返回值的类型与传入参数的类型是相同的。 </p>
+<pre><code class="typescript">// 举栗 数组去重
+function uniquefn&lt;T&gt;(args: T[]): T[] &#123;
+  // ... 
+&#125;
+
+// 使用
+const arr1 = uniquefn&lt;&#123; name: string; age?: number &#125;&gt;([
+  &#123; name: &quot;张三&quot;, age: 18 &#125;,
+  &#123; name: &quot;李四&quot;, age: 20 &#125;,
+]);
+// or 利用了类型推论 —— 即编译器会根据传入的参数自动地帮助我们确定T的类型
+uniquefn([&#123; name: &quot;张三&quot;, age: 18 &#125;, &#123; name: &quot;李四&quot;, age: 20 &#125;]);
+</code></pre>
+<h3 id="预定义类型"><a href="#预定义类型" class="headerlink" title="预定义类型"></a>预定义类型</h3><p><code>TypeScript 2.8在lib.d.ts里增加了一些预定义的有条件类型：</code></p>
+<ul>
+<li><code>NonNullable&lt;T&gt;</code> – 从 T 中剔除 null 和 undefined。</li>
+<li><code>ReturnType&lt;T&gt;</code> – 获取函数返回值类型。</li>
+<li><code>InstanceType&lt;T&gt;</code> – 获取构造函数类型的实例类型。</li>
+</ul>
+<pre><code class="typescript">// typescript 标准库内的一些实现
+type Proxy&lt;T&gt; = &#123;
+  get(): T;
+  set(value: T): void;
+&#125;;
+</code></pre>
+<h3 id="其他内置类型"><a href="#其他内置类型" class="headerlink" title="其他内置类型"></a>其他内置类型</h3><ul>
+<li><code>Required</code> 。与 <code>Partial</code> 相反</li>
+</ul>
+<p> <code>-?</code> 的功能就是把可选属性的 <code>?</code> 去掉使该属性变成必选项，对应的还有 <code>+?</code> ，作用与 <code>-?</code> 相反，是把属性变为可选项。</p>
+<pre><code class="typescript">type Required&lt;T&gt; = &#123; [P in keyof T]-?: T[P] &#125;;
+</code></pre>
+<ul>
+<li><p>Exclude&lt;T,U&gt;</p>
+<p>从 <code>T</code> 中排除那些可以赋值给 <code>U</code> 的类型。 (T ∩ U) 在 T 的 补集</p>
+</li>
+</ul>
+<pre><code class="typescript">type Exclude&lt;T, U&gt; = T extends U ? never : T;
+type T = Exclude&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 1|2|5
+</code></pre>
+<ul>
+<li><p>Extract&lt;T,U&gt;</p>
+<p>从 <code>T</code> 中提取那些可以赋值给 <code>U</code> 的类型。 类型 T ∩ U</p>
+</li>
+</ul>
+<pre><code class="typescript">type Extract&lt;T, U&gt; = T extends U ? T : never;
+type T = Extract&lt;1 | 2 | 3 | 4 | 5, 3 | 4&gt;; // T = 3|4
+</code></pre>
+<ul>
+<li><p>Pick&lt;T, K&gt;</p>
+<p>从 对象<code>T</code> 中取出一系列 <code>K</code> 的属性</p>
+</li>
+</ul>
+<pre><code class="typescript">type Pick&lt;T, K extends keyof T&gt; = &#123;
+  [P in K]: T[P];
+&#125;;
+
+interface Person &#123;
+  name: string;
+  age: number;
+  sex: string;
+&#125;
+const person: Pick&lt;Person, &quot;name&quot; | &quot;age&quot;&gt; = &#123;
+  name: &quot;小王&quot;,
+  age: 21,
+&#125;;
+</code></pre>
+<ul>
+<li><p>Record&lt;K, T&gt;</p>
+<p>将 <code>K</code> 中所有的属性的值转化为 <code>T</code> 类型。</p>
+</li>
+</ul>
+<pre><code class="typescript">type Record&lt;K extends string, T&gt; = &#123;
+  [P in K]: T;
+&#125;;
+
+const person: Record&lt;keyof Person, string&gt; = &#123;
+  name: &quot;小王&quot;,
+  age: &quot;12&quot;,
+&#125;;
+</code></pre>
+<ul>
+<li>更多的内置——&gt; typescript 操作符及元素类型</li>
+</ul>
+<h3 id="Omit-lt-T-K-gt-（没有内置）"><a href="#Omit-lt-T-K-gt-（没有内置）" class="headerlink" title="Omit&lt;T,K&gt;（没有内置）"></a>Omit&lt;T,K&gt;（没有内置）</h3><p>从对象 <code>T</code> 中排除 <code>key</code> 是 <code>K</code> 的属性 。 与 Pick 相反</p>
+<pre><code class="typescript">type Omit&lt;T, K&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;;
+</code></pre>
+<pre><code class="typescript">interface Person &#123;
+  name: string;
+  age: number;
+  sex: string;
+&#125;
+const person: Omit&lt;Person, &quot;name&quot;&gt; = &#123;
+  age: 1,
+  sex: &quot;男&quot;,
+&#125;;
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，若文章有任何错误或不够清晰的表达，可以邮件至 flynnzhl@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
         </div>
         <div class="copyright">
             <p class="footer-entry">
@@ -879,12 +1113,12 @@
 <p class="footer-entry">Built by <a href="//flynna.github.io" target="_blank">flynn-zhl</a></p>
 
         </div>
-    </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+        <div class="full-toc">
+            <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+        </div>
+    </div>
 </div>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
