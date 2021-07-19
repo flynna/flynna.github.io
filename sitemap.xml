@@ -200,14 +200,14 @@
   </url>
   
   <url>
-    <loc>https://flynna.github.io/tags/svg-icon/</loc>
+    <loc>https://flynna.github.io/tags/react-ts/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://flynna.github.io/tags/react-ts/</loc>
+    <loc>https://flynna.github.io/tags/svg-icon/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -235,13 +235,6 @@
   </url>
   
   <url>
-    <loc>https://flynna.github.io/tags/ts%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://flynna.github.io/tags/declare/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
@@ -263,112 +256,7 @@
   </url>
   
   <url>
-    <loc>https://flynna.github.io/tags/render/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/vue-jsx/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/v-%E6%8C%87%E4%BB%A4/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/directive/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/is%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/key%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/ref%E5%B1%9E%E6%80%A7/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/async-component/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/element-ui/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/slot/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/scope/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/slot-scope/</loc>
-    <lastmod>2021-07-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://flynna.github.io/tags/vuex/</loc>
+    <loc>https://flynna.github.io/tags/ts%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -411,6 +299,118 @@
   
   <url>
     <loc>https://flynna.github.io/tags/MetingJS/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/render/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/vue-jsx/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/v-%E6%8C%87%E4%BB%A4/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/directive/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/async-component/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/is%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/key%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/ref%E5%B1%9E%E6%80%A7/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B3%A8%E5%86%8C/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/slot/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/scope/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/slot-scope/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/element-ui/</loc>
+    <lastmod>2021-07-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://flynna.github.io/tags/vuex/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -461,14 +461,14 @@
   </url>
   
   <url>
-    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/JavaScript/</loc>
+    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/TypeScript/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/TypeScript/</loc>
+    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/JavaScript/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -489,14 +489,14 @@
   </url>
   
   <url>
-    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/Node/</loc>
+    <loc>https://flynna.github.io/categories/%E5%B7%A5%E5%85%B7/Hexo/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://flynna.github.io/categories/%E5%B7%A5%E5%85%B7/Hexo/</loc>
+    <loc>https://flynna.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/Node/</loc>
     <lastmod>2021-07-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
