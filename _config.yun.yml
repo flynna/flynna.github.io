@@ -1,0 +1,342 @@
+# 自定义的一下配置项
+
+favicon: /images/avatar.jpg
+
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  opacity: 1
+  mickey_mouse: false
+  status:
+    enable: true
+    emoji: 🍋
+    message: Looking for dawn.
+
+# 首屏
+banner:
+  enable: true
+  title: 相信土豆真的会飞
+  border: true
+  cloud:
+    enable: true
+    color: white
+  go_down:
+    enable: true
+    icon: icon-arrow-down-s-line
+
+# pjax:
+#   enable: true
+
+# 字数统计
+wordcount:
+  enable: true
+  count: true
+  time: true
+wordcloud:
+  enable: true
+
+# 在线编辑
+# post_edit:
+#   enable: true
+#   url: https://github.com/flynna/flynna.github.io/tree/hexo/source/
+
+menu:
+  custom:
+    title: 留言板
+    path: /about/#comment
+    icon: ri:clipboard-line
+
+cursor:
+  enable: true
+
+# 公告
+notice:
+  enable: false
+#   content: Thanks for playing my game.
+
+# 可选 light | dark | auto | time
+mode: auto
+
+# dark: 暗色主题下的背景
+bg_image:
+  enable: true
+  url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0-blur-30px.jpg
+  # dark:
+  # blur: 30px # 设置背景模糊程度
+  opacity: 0.8
+
+local_search:
+  enable: true
+engine_search:
+  enable: false
+  # href: 'https://www.google.com/search?q=site:'
+  # href: "https://www.baidu.com/s?wd=site:"
+  # href: "https://www.bing.com/search?q=site:"
+  # domain:
+search:
+  modal: true
+  bg_image: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-2.jpg
+  # dark_bg_image: xxx
+  # placeholder:
+
+# 鼠标点击特效
+# fireworks:
+#   enable: true
+#   colors:
+#     - '102, 167, 221'
+#     - '62, 131, 225'
+#     - '33, 78, 194'
+
+head:
+  js:
+    base:
+      iconfont: //at.alicdn.com/t/font_1140697_dxory92pb0h.js
+
+footer:
+  # 起始年份
+  since: 2022
+  # 备案
+  # beian:
+  #   enable: true
+  #   icp: ICP备xxxxxxxx号
+  live_time:
+    enable: true
+    prefix: 本博客已萌萌哒地运行
+    suffix: (●'◡'●)
+    start_time: '2022-07-07T00:00:00'
+
+# 灰色默哀模式
+mourn:
+  enable: true
+  days:
+    - 4-4
+
+albums:
+  enable: true
+
+# girls:
+#   enable: true
+
+comment:
+  candidates:
+    - giscus
+  tips:
+    - 如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/flynna/flynna.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。
+# 评论插件
+# https://github.com/laymonage/giscus
+# https://giscus.app/zh-CN 获取自定义的配置参数
+giscus:
+  enable: true
+  repo: flynna/flynna.github.io
+  repo-id: MDEwOlJlcG9zaXRvcnkzNDE0MDgyNjE=
+  category-id: DIC_kwDOFFl6Bc4CQHuO
+  category: Announcements
+  mapping: pathname
+  reactions-enabled: 1
+  emit-metadata: 0
+  theme: light
+  input-position: top
+  lang: zh-CN
+# utterances:
+#   enable: true
+#   repo: flynna/flynna.github.io
+#   issue-term: pathname
+#   # label: comment
+#   theme: github-light
+
+# 代码高亮
+prismjs:
+  enable: true
+  preprocess: true
+  line_number: false
+  tab_replace: ''
+
+# 打赏功能
+reward:
+  enable: false
+#   comment: 我很可爱，请给我钱
+#   methods:
+#     - name: 支付宝
+#       path: https://cdn.yunyoujun.cn/img/donate/alipay-qrcode.jpg
+#       color: '#00A3EE'
+#       icon: ri:alipay-line
+#     - name: QQ 支付
+#       path: https://cdn.yunyoujun.cn/img/donate/qqpay-qrcode.png
+#       color: '#12B7F5'
+#       icon: ri:qq-line
+#     - name: 微信支付
+#       path: https://cdn.yunyoujun.cn/img/donate/wechatpay-qrcode.jpg
+#       color: '#2DC100'
+#       icon: ri:wechat-pay-line
+
+# 自定义主题的主色调。
+# colors:
+#   primary: '#6200ee'
+#   # bg: "#F5F5F5"
+#   selection_bg: '#8e71c1' # 选取文字时的背景色
+#   # 标签云中标签的起始色和结束色
+#   # tag_start_color:
+#   # tag_end_color:
+
+# 自定义标签颜色
+# tags:
+#   Vue: '#4fc08d'
+#   Hexo: '#0E834D'
+#   CSS: '#5298d1'
+#   Node.js: '#026E00'
+#   Git: '#F14E32'
+#   React: '#61dafb'
+#   Python: '#3776ab'
+#   PHP: '#8892BF'
+#   VS Code: '#0066B8'
+#   JavaScript: '#F4DF4F'
+#   TypeScript: '#317AC6'
+#   Laravel: '#F4645F'
+
+# 自定义分类颜色
+categories:
+  土豆の学习笔记: dimgray
+  土豆の踩坑之路:
+  土豆の随笔日记:
+  土豆の收藏分享:
+  土豆の日常回忆:
+  土豆の教程安利:
+
+pages:
+#   - name: 我的小伙伴们
+#     url: /links/
+#     icon: ri:genderless-line
+#     color: dodgerblue
+#   - name: 喜欢的女孩子
+#     url: /girls/
+#     icon: ri:women-line
+#     color: hotpink
+
+# 社交
+social:
+  # - name: RSS
+  #   # set rss in your root config
+  #   # https://github.com/hexojs/hexo-generator-feed
+  #   link: /atom.xml # config.feed.path
+  #   icon: icon-rss-line
+  #   color: orange
+  - name: QQ
+    # https://isux.tencent.com/wp-content/uploads/2016/05/20160512101222609.pdf
+    link: https://wpa.qq.com/msgrd?v=3&uin=2274105875&site=qq&menu=yes
+    icon: icon-qq-line
+    color: '#12B7F5'
+  - name: GitHub
+    link: https://github.com/flynna
+    icon: icon-github-line
+    color: '#181717'
+  - name: E-Mail
+    link: flynnzhl@qq.com
+    icon: icon-mail-line
+    color: '#8E71C1'
+  - name: 微博
+    link: https://weibo.com/flynna
+    icon: icon-weibo-line
+    color: '#E6162D'
+  # - name: 豆瓣
+  #   link: https://www.douban.com/people/yunyoujun/
+  #   icon: icon-douban-line
+  #   color: '#007722'
+  - name: 网易云音乐
+    link: https://music.163.com/#/user/home?id=502374002
+    icon: icon-netease-cloud-music-line
+    color: '#C10D0C'
+  - name: 知乎
+    link: https://www.zhihu.com/people/flynn-zhl
+    icon: icon-zhihu-line
+    color: '#0084FF'
+  - name: 哔哩哔哩动画
+    link: https://space.bilibili.com/482340176
+    icon: icon-bilibili-line
+    color: '#FF8EB3'
+  # - name: POPI
+  #   link: https://www.popiask.cn/elpsycn
+  #   icon: icon-questionnaire-line
+  #   color: '#525252'
+  # - name: 微信公众号
+  #   link: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg
+  #   icon: icon-wechat-2-line
+  #   color: '#1AAD19'
+  # - name: Twitter
+  #   link: https://twitter.com/YunYouJun
+  #   icon: icon-twitter-line
+  #   color: '#1da1f2'
+  # - name: Telegram
+  #   link: https://t.me/YunYouJun
+  #   icon: icon-telegram-line
+  #   color: '#0088CC'
+  # - name: Telegram Channel
+  #   link: https://t.me/elpsycn
+  #   icon: icon-telegram-fill
+  #   color: '#0088CC'
+  # - name: Travelling
+  #   link: https://travellings.link
+  #   icon: icon-send-plane-2-line
+  #   color: black
+
+# 文章 type，支持自定义
+types:
+  link:
+    color: blue
+    icon: icon-external-link-line
+  bilibili:
+    color: '#FF8EB3'
+    icon: icon-bilibili-line
+  douban:
+    color: '#007722'
+    icon: icon-douban-line
+  github:
+    color: black
+    icon: icon-github-line
+  netease-cloud-music:
+    color: '#C10D0C'
+    icon: icon-netease-cloud-music-line
+  notion:
+    color: black
+    icon: icon-notion
+  twitter:
+    color: '#1da1f2'
+    icon: icon-twitter-line
+  wechat:
+    color: '#1AAD19'
+    icon: icon-wechat-2-line
+  weibo:
+    color: '#E6162D'
+    icon: icon-weibo-line
+  yuque:
+    color: '#25b864'
+    icon: icon-yuque
+  zhihu:
+    color: '#0084FF'
+    icon: icon-zhihu-line
+
+# aplayer:
+#   global: false
+#   meting: true
+#   # https://github.com/metowolf/MetingJS/tree/v1.2#option
+#   widget:
+#     enable: false
+#     autoplay: false
+#     # theme: "#2980b9"
+#     loop: all
+#     order: list
+#     preload: auto
+#     volume: 0.7
+#     mutex: true
+#     lrcType: 0
+#     listFolded: false
+#     listMaxHeight: 340px
+#     audio:
+#       - name: 星宿计时
+#         artist: 杉田朗/洛天依
+#         url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
+#         cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
+#     meting:
+#       enable: true
+#       id: 308168565
+#       server: netease
+#       type: playlist
