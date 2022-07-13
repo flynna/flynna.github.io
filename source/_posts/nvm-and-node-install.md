@@ -107,7 +107,7 @@ npm install --global yarn
 ```bash
 # 默认源
 npm config set registry https://registry.npmjs.org
-npm config set registry https://registry.yarnpkg.com
+yarn config set registry https://registry.yarnpkg.com
 
 # 配置到内网环境
 npm config --global set registry http://172.xxx/repository/npm/
@@ -115,7 +115,7 @@ npm config --global set registry http://172.xxx/repository/npm/
 # 配置淘宝镜像
 # (截止22-5-31)
 npm config set registry https://registry.npm.taobao.org
-yarn config set registry http://registry.npm.taobao.org/
+yarn config set registry https://registry.npm.taobao.org
 # new
 npm config set registry https://registry.npmmirror.com
 
