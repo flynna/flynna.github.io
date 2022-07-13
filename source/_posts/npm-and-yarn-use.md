@@ -10,7 +10,7 @@ categories:
   - 土豆の教程安利
 ---
 
-### `npm，npx`概念及指令简单介绍
+> ### `npm，npx`概念及指令简单介绍
 
 `tips：相关配置指令在环境配置章节`
 
@@ -90,7 +90,7 @@ npm view package version/versions
 # npm publish 发布组件包的流程单独开文章说明
 ```
 
-### `yarn`常用指令介绍
+> ### `yarn`常用指令介绍
 
 大部分指令与`npm`大同小异，主要介绍一些项目常用的：
 

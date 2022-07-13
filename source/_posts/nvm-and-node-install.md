@@ -12,13 +12,13 @@ categories:
   - 土豆の教程安利
 ---
 
-### `nvm`下载及安装
+> ### `nvm`下载及安装
 
-> 下载地址：[链接](https://github.com/coreybutler/nvm-windows/releases)
+下载地址：[链接](https://github.com/coreybutler/nvm-windows/releases)
 
 `下载exe的package文件，选择自定义的安装盘符，傻瓜式安装即可，环境变量会自动添加。`
 
-> 安装完成后，配置`node`及`nvm`的`mirror`地址 (不配置会导致下载`node`后，在下载`npm`过程中可能会发生错误，需要手动下载安装`npm`)。配置如下：
+安装完成后，配置`node`及`nvm`的`mirror`地址 (不配置会导致下载`node`后，在下载`npm`过程中可能会发生错误，需要手动下载安装`npm`)。配置如下：
 
 ```bash
 # 方式一：手动添加到配置文件中：nvm安装目录/settings.txt 末尾追加
@@ -30,7 +30,7 @@ nvm node_mirror [url]
 nvm npm_mirror [url]
 ```
 
-### 安装`node`以及`npm`
+> ### 安装`node`以及`npm`
 
 `打开windows terminal，并以管理员身份运行(避免权限问题导致安装过程抛出异常)`
 
@@ -68,7 +68,7 @@ npm -v
 
 - 在当前目录打开终端，输入`npm -v`，出现版本号表示安装成功，如果换了文件夹后提示指令不存在，可在环境变量`path`内添加当前路径
 
-### `nrm`的安装及切换镜像源
+> ### `nrm`的安装及切换镜像源
 
 `nrm`提供了快速切换镜像源的方案，如果通过`npm`指令配置，则无需安装
 
@@ -89,7 +89,7 @@ nrm test
 nrm use [镜像名称]
 ```
 
-### `npm`全局配置及`yarn`安装
+> ### `npm`全局配置及`yarn`安装
 
 - 安装`yarn`
 
