@@ -193,14 +193,14 @@ reward:
 #   TypeScript: '#317AC6'
 #   Laravel: '#F4645F'
 
-# 自定义分类颜色
+# 自定义分类颜色 - 同目录顺序
 categories:
-  土豆の学习笔记: dimgray
   土豆の踩坑之路:
   土豆の随笔日记:
-  土豆の收藏分享:
-  土豆の日常回忆:
-  土豆の教程安利:
+  土豆の趣味生活:
+  土豆の学习笔记: dimgray
+  土豆の收藏安利:
+  土豆の教程分享:
 
 pages:
 #   - name: 我的小伙伴们
@@ -313,7 +313,6 @@ types:
   zhihu:
     color: '#0084FF'
     icon: icon-zhihu-line
-
 # aplayer:
 #   global: false
 #   meting: true

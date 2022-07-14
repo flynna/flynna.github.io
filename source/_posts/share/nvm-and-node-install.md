@@ -9,7 +9,8 @@ tags:
   - npm
   - yarn
 categories:
-  - 土豆の教程安利
+  - 土豆の教程分享
+  - 环境搭建
 ---
 
 > ### `nvm`下载及安装
