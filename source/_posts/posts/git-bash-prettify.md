@@ -70,7 +70,7 @@ MSYS2_PS1="$PS1"
 
 ### 效果
 
-!['git-bash-preview'](/images/posts/git-bash-prettify/p1.png)
+[!['git-bash-preview'](/images/posts/git-bash-prettify/p1.png)](/images/posts/git-bash-prettify/p1.png)
 
 <div class="primary">
 
