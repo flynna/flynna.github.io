@@ -15,7 +15,9 @@ categories:
 
 ### 工具下载
 
-`-傻瓜式安装，选择盘符- 注意安装过程中会提示是否将bash加入右键菜单，勾选`
+`傻瓜式安装，选择盘符- 注意安装过程中会提示是否将bash加入右键菜单，勾选`
+
+<!-- more -->
 
 [windows 下载](https://git-scm.com/download/win)
 
