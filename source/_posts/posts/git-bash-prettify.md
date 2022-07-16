@@ -2,7 +2,6 @@
 title: windows环境的git-bash终端美化
 date: 2022-07-16 21:01:38
 updated: 2022-07-16 21:01:38
-type: git
 tags:
   - git-bash
   - terminal

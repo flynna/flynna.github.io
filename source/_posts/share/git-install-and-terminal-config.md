@@ -2,7 +2,6 @@
 title: git环境搭建，vscode配置git-bash作为默认的terminal
 date: 2022-07-16 19:12:54
 updated: 2022-07-16 19:12:54
-type: git
 tags:
   - git
   - autocrlf
