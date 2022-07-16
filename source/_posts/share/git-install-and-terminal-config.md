@@ -96,3 +96,15 @@ git config --global https.proxy http:\127.0.0.1:xxx
 - 配置默认的`terminal`为`GitBash`, 方式一：设置中搜索`Default Profile: Windows`，选择`GitBash`，方式二：直接在`settings`中添加下面配置。
 
 !['vscode-terminal'](/images/share/git-install-and-terminal-config/p1.png)
+
+### 配置指令的`alias`
+
+打开文件`bash.bashrc`，在安装目录下的`Git/etc/bash.bashrc`。
+
+末尾添加：
+
+```bash
+alias blog='cd /e/flynn/flynna.github.io'
+alias serve='yarn serve'
+# ...
+```
