@@ -40,6 +40,12 @@ categories:
 
 > Eol: \n
 
+#### 自动保存
+
+避免一些不可逆的异常关闭导致数据丢失。`onFocusChange`-文件焦点变化时自动保存。
+
+> autoSave: onFocusChange
+
 #### `tab`相关
 
 配置一个制表符等于的空格数以及是否启用`tab`补全。
