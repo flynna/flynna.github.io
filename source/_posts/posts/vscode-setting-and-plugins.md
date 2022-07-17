@@ -24,6 +24,8 @@ categories:
 
 - 方式二：插件安装。打开扩展搜索`Chinese (Simplified) (简体中文) Language Pack`安装，重启生效。
 
+---
+
 ### vscode 推荐的用户设置
 
 左下角设置图标，点击，选择设置，搜索设置，设置以下内容(推荐)。或者直接`Ctrl+Shift+P`搜索`setting.json`，直接在文件中编辑修改，界面化操作的设置最终也会同步到该文件中。
@@ -85,6 +87,8 @@ categories:
 差异编辑器是否忽略前导空格或尾随空格中的更改。
 
 > Ignore Trim Whitespace: false
+
+---
 
 ### 插件(`plugins`)推荐
 
@@ -249,6 +253,8 @@ export * from './b';
 
 #### [`Material Icon Theme`](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)-`vscode文件图标主题`
 
+---
+
 ### 常用快捷键
 
 #### 跳转到代码行
@@ -267,11 +273,17 @@ export * from './b';
 
 `Ctrl + n`新建文件，`Ctrl + Shift + n`新开`vscode`。
 
+#### 新键行
+
+`Ctrl + 回车`，效果类似在行尾按下回车。带来的便捷就是不需要先将光标移动到行尾。
+
 #### 打开文件`Ctrl + o`，打开、关闭终端`Ctrl + ~`
 
 #### 代码行快速复制、剪贴
 
 当需要对整行代码操作时，无需选中直接`Ctrl + c`即可复制，`Ctrl + x`即可剪贴。
+
+同时按住`Shift + Alt + 方向键（上/下）`，可实现基于当前行的向上向下复制粘贴。
 
 #### 缩进调整
 
