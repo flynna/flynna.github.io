@@ -88,9 +88,12 @@ search:
 #     - '33, 78, 194'
 
 head:
+  css:
+    customIcon: /font/iconfont.css
   js:
     base:
       iconfont: //at.alicdn.com/t/font_1140697_dxory92pb0h.js
+      customIcon: /font/iconfont.js
 
 footer:
   # 起始年份
@@ -179,19 +182,20 @@ reward:
 #   # tag_end_color:
 
 # 自定义标签颜色
-# tags:
-#   Vue: '#4fc08d'
-#   Hexo: '#0E834D'
-#   CSS: '#5298d1'
-#   Node.js: '#026E00'
-#   Git: '#F14E32'
-#   React: '#61dafb'
-#   Python: '#3776ab'
-#   PHP: '#8892BF'
-#   VS Code: '#0066B8'
-#   JavaScript: '#F4DF4F'
-#   TypeScript: '#317AC6'
-#   Laravel: '#F4645F'
+tags:
+  hexo: '#0E834D'
+  vscode: '#0066B8'
+  git: '#F14E32'
+  git-bash: '#F14E32'
+  node: '#026E00'
+  javascript: '#F4DF4F'
+  # CSS: '#5298d1'
+  # React: '#61dafb'
+  # Python: '#3776ab'
+  # PHP: '#8892BF'
+  # Vue: '#4fc08d'
+  # TypeScript: '#317AC6'
+  # Laravel: '#F4645F'
 
 # 自定义分类颜色 - 同目录顺序
 categories:
@@ -313,6 +317,9 @@ types:
   zhihu:
     color: '#0084FF'
     icon: icon-zhihu-line
+  juejin:
+    icon: icon-juejin
+    color: '#006CFF'
 # aplayer:
 #   global: false
 #   meting: true
