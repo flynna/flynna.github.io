@@ -92,6 +92,12 @@ categories:
 
 ### 插件(`plugins`)推荐
 
+#### [`Guides`](https://marketplace.visualstudio.com/items?itemName=spywhere.guides)
+
+带色竖线提示所属区域块，效果如下：
+
+[![vscode-setting-and-plugins-p1](/images/posts/vscode-setting-and-plugins/p1.png)](/images/posts/vscode-setting-and-plugins/p1.png)
+
 #### [`ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)-代码语法规范校验
 
 该扩展使用安装在打开的工作区文件夹中的`ESLint`库。如果该文件夹没有提供一个，则扩展程序会查找全局安装版本。(需要先安装-一般安装在项目的`devDependenice`)
