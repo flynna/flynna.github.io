@@ -319,7 +319,7 @@ types:
     icon: icon-zhihu-line
   juejin:
     icon: icon-juejin
-    color: '#006CFF'
+    color: '#0022FF'
 # aplayer:
 #   global: false
 #   meting: true

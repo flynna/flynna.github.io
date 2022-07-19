@@ -218,6 +218,8 @@ export * from './b';
 
 在写`html`文件的时候，方便快速在浏览器打开该文件。`Alt + b`快捷键打开，或者右键 `open in browser`。对应还有一个插件`View In Browser`，不过作者已经不再维护了。
 
+#### [`Flutter Color`](https://marketplace.visualstudio.com/items?itemName=circlecodesolution.ccs-flutter-color)-颜色代码效果实时预览
+
 <div class="success">
 
 > 框架相关
