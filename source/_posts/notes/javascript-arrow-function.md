@@ -1,5 +1,5 @@
 ---
-title: javascript中的箭头函数学习理解
+title: javascript[ES6] 中的箭头函数学习理解
 date: 2022-07-20 23:13:06
 updated: 2022-07-20 23:13:06
 tags:
