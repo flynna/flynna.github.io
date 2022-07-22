@@ -1,7 +1,7 @@
 ---
 title: javascript[ES6] 中的箭头函数学习理解
 date: 2022-07-20 23:13:06
-updated: 2022-07-20 23:13:06
+updated: 2022-07-22 23:54:15
 tags:
   - javascript
   - 箭头函数
@@ -165,11 +165,23 @@ console.log(result); // 19
 
 - 箭头函数形式上做了改变，简化了函数体。
 
-- 普通函数支持通过`arguments`获取未知个数的实参，而箭头函数不支持`arguments`用法，究其原因：箭头函数没有自身的`this、arguments`，但是...如若它的父级存在，那么在箭头函数内获取的就是其父级对应的`this、arguments`。
+- 普通函数支持通过`arguments`获取未知个数的实参，而箭头函数不支持`arguments`用法，究其原因：箭头函数没有自身的`this、arguments`，但是...如若它的父级存在，那么在箭头函数内获取的就是其父级对应的`this、arguments`。如果在箭头函数中有这个获取自身的`arguments`需求，可以用`...rest`替代。
 
 - 箭头函数在`ES6`标准下可使用，普通函数则没有这个限制。
 
 - `this`指向的修改。箭头函数的`this`指向外部，常在对类的方法进行构造时使用，使函数体内的`this`始终指向这个类。如果需要 `this`指向当前源，建议使用普通函数。
+
+<div class="primary">
+
+> 补充说明：
+
+</div>
+
+> **箭头函数除了没有自身的 this、arguments 外，new.target、super 也没有**。（注意只是自身没有，它会从它的外部获取，就近原则，如果外部还是没有自身的，继续向外...）；另：**不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数**。
+
+> **箭头函数有作用域**（词法作用域），词法作用域简单来讲就是，一切变量（包括 this）都根据作用域链来查找。
+
+> 至于为啥箭头函数自身没有？这玩意儿连 ES6 规范原文里都没写原因（[https://262.ecma-international.org/6.0/#sec-arrow-function-definitions](https://262.ecma-international.org/6.0/#sec-arrow-function-definitions)），只要知道是规范标准就行，也可以理解为是箭头函数的特性...
 
 ### 箭头函数中的`this`
 
