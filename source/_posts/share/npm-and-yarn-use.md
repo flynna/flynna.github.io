@@ -50,6 +50,8 @@ npm i --global package
 
 #### 其他指令及附带配置说明：
 
+> npm help 查看全部指令
+
 ```bash
 # 清除缓存
 npm cache clean --force
@@ -94,6 +96,8 @@ npm view package version/versions
 ```
 
 > ### `yarn`常用指令介绍
+
+> yarn help 查看全部指令
 
 大部分指令与`npm`大同小异，主要介绍一些项目常用的：
 

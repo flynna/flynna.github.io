@@ -10,8 +10,13 @@ categories:
   - 工具使用
 ---
 
-### Why lerna?
+### Before...
 
+在使用`lerna`之前，建议先了解如何`发布一个 npm-package`。[-> 戳这里](/share/npm-publish)
+
+### `lerna`是什么？
+
+<!-- more -->
 
 cd lerna 根目录
 
@@ -26,4 +31,3 @@ lerna publish
 lerna from-package
 
 npm addUser --registry=xxx
-
