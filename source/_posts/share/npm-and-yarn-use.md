@@ -1,7 +1,7 @@
 ---
 title: npm以及yarn的指令使用
 date: 2022-07-14 00:13:32
-updated: 2022-07-14 00:13:32
+updated: 2022-07-23 18:26:11
 tags:
   - npm
   - npx
@@ -90,10 +90,9 @@ npm whoami
 
 # 查看一个 npm 包的最新版本/所有版本
 npm view package version/versions
-
-# npm link 单独开文章说明
-# npm publish 发布组件包的流程单独开文章说明
 ```
+
+补充： `npm link`详见：[手把手教你使用 npm-link 软链](/share/npm-link)，`npm publish`详见：[如何发布一个 npm-package?](/share/npm-publish)
 
 > ### `yarn`常用指令介绍
 
