@@ -23,7 +23,7 @@ categories:
 
 #### 常用安装指令说明
 
-安装使用 i or install。`卸载时使用 uni or uninstall，就不另外说明了`。其他指令[-> 详见 v7](https://docs.npmjs.com/cli/v7/commands/npm-install)
+安装使用 i or install。`卸载时使用 uni or uninstall，就不另外说明了`。
 
 ```bash
 # 安装 npm 包 i 为 install 简写
@@ -56,19 +56,20 @@ npm i --global package
 # 清除缓存
 npm cache clean --force
 
+# config 别名 c
 # 设置全局安装位置
 npm config set prefix 'C:\Users\xx\AppData\Roaming\npm'
 
 # 设置缓存路径，默认在 c 盘
 npm config set cache "C:\Users\xx\AppData\Roaming\npm_cache"
 
-# 其他 npm 配置，格式均同上，set 设置，get 读取，例如：
+# 其他 npm 配置，格式均同上，set 设置，get 读取，delete删除，例如：
 npm config get registry
 # 当然可以添加限制参数，表示是本地配置、全局配置、用户配置
 npm config --global set registry xxx
 
 # 查看配置
-npm config ls
+npm config ls -l
 
 # 版本号 -v or --version
 npm -v
@@ -93,6 +94,8 @@ npm view package version/versions
 ```
 
 补充： `npm link`详见：[手把手教你使用 npm-link 软链](/share/npm-link)，`npm publish`详见：[如何发布一个 npm-package?](/share/npm-publish)
+
+其他指令：[-> 详见 v7](https://docs.npmjs.com/cli/v7/commands/npm-install)
 
 > ### `yarn`常用指令介绍
 
