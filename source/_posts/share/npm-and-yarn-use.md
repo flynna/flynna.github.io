@@ -23,7 +23,7 @@ categories:
 
 #### 常用安装指令说明
 
-`安装使用 i or install，卸载时使用 uni or uninstall，就不另外说明了`
+安装使用 i or install。`卸载时使用 uni or uninstall，就不另外说明了`。其他指令[-> 详见 v7](https://docs.npmjs.com/cli/v7/commands/npm-install)
 
 ```bash
 # 安装 npm 包 i 为 install 简写
