@@ -4,7 +4,6 @@ date: 2022-07-16 19:12:54
 updated: 2022-07-16 19:12:54
 tags:
   - git
-  - autocrlf
   - git-bash
   - vscode
   - terminal
