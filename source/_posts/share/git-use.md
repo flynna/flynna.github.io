@@ -68,6 +68,7 @@ git pull origin [分支名]
 # git fetch origin [分支名] ：先拉取目标分支的最新代码，拉取之后由用户决定是否合并
 
 # 将改动的代码文件添加至暂存区
+git add .
 # 也可以 git add [文件名] 来单独添加某一个文件
 git add -A
 
@@ -256,6 +257,9 @@ git merge feature/xxx
 
 # 遇到冲突 --- 丢弃 不合并了
 git merge --abort
+
+# 另外一种变基合并
+git rebase branch
 ```
 
 #### 为某次提交打标签
