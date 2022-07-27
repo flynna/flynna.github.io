@@ -162,16 +162,18 @@ lerna create package-a
 
 ##### 安装共用的`dependencices`or`devDependencices`
 
-`eg: typescript、eslint...`
+设置`root`的依赖，通常为一些开发工具. `eg: typescript、eslint、babel...`
 
 ```bash
-yarn add -WD typescript 解释[-WD --ignore-workspace-root-check --dev]
+yarn add -W -D typescript [-W -D == --ignore-workspace-root-check --dev]
+# 卸载
+yarn remove -W -D typescript
 ```
 
-`or`：
+添加所有的`package`依赖（不包含`root`，而是在各自的`package.json`）：
 
 ```bash
-lerna add typescript
+lerna add lodash -D
 ```
 
 ##### 给指定的 packageA 安装依赖`A`模块
@@ -183,7 +185,8 @@ lerna add A packages/packageA
 # 或者指定 --scope
 lerna add A --scope=packageA
 lerna add A --scope=packageA --dev
-# 或
+
+# 或（这种方式安装的 A 如果是当前工作区的开发模块，需要带上版本号）
 yarn workspace packageA add A
 
 # 安装 A 到指定前缀为 prefix- 的包
@@ -262,6 +265,19 @@ lerna changed
 > lerna 每次发布都会为对应的版本打 TAG，变动检测其实是依据 `git diff --name-only v版本`收集变动信息.
 
 > `lerna diff`查看自上次发布以来的所有包或者指定包的 git diff 变化。
+
+#### `lerna run`执行脚本
+
+通过`lerna run xx`执行脚本时，`lerna`会先检测符合条件（含有`xx`命令）的`package`，然后再各自内部执行`npm run xx`.
+
+```bash
+lerna run test
+lerna run build
+```
+
+区别于`yarn workspaces run`：
+
+> yarn workspaces run 执行 xx 指令时，必须所有的包都含有该 xx 命令，否则在执行过程中会抛出异常.
 
 #### 发布
 
