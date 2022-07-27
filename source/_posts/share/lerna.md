@@ -286,6 +286,10 @@ lerna publish -y
 
 ### 问题记录
 
+#### 关于`--scope`的说明
+
+> 不管是安装还是卸载，`--scope=packageA`中的`packageA`均是指的具体包名，而非`path`，而另外一种方式`packages/packageA`则是指具体路径.
+
 #### 包名带有`scope`的发布?
 
 形如`@xxx/xx`，在你的子包（具体要发布的那个包）的`package.json`中添加`publishConfig.access`字段：
