@@ -136,7 +136,7 @@ mkdir package-a package-b package-c
 cd package-a && npm init -y
 ```
 
-or
+`or`：
 
 ```bash
 # name：包名，loc 位置 [可选，不指定时默认就是 workspaces[0] 所指位置]
@@ -226,7 +226,7 @@ lerna link + yarn install
 lerna clean
 ```
 
-[更多的 `bootstrap` 细节](https://lerna.js.org/docs/features/bootstrap)
+[更多的 `bootstrap`细节](https://lerna.js.org/docs/features/bootstrap)
 
 #### 列出工作区所有的`package`
 
@@ -244,9 +244,9 @@ lerna ls
 lerna changed
 ```
 
-> lerna 每次发布都会为对应的版本打 TAG，变动检测其实是依据 `git diff --name-only v版本` 收集变动信息.
+> lerna 每次发布都会为对应的版本打 TAG，变动检测其实是依据 `git diff --name-only v版本`收集变动信息.
 
-> `lerna diff` 查看自上次发布以来的所有包或者指定包的 git diff 变化。
+> `lerna diff`查看自上次发布以来的所有包或者指定包的 git diff 变化。
 
 #### 发布
 
@@ -257,19 +257,19 @@ lerna publish
 lerna publish -y
 ```
 
-**建议**：
+##### 建议
 
-> 不要自己手动为 lerna 管理的仓库添加 tag，防止 package 变更检测异常，导致无法正常升级发布
+> 不要自己手动为`lerna`管理的仓库添加`tag`，防止 `package`变更检测异常，导致无法正常升级发布
 
 > 尽量只在一个分支上发布，避免多个分支同时进行且生成相同版本
 
-> 每次 publish 之前，先 commit 代码，保证工作区是干净的
+> 每次`publish`之前，先`commit`代码，保证工作区是干净的
 
-> 确保你的 npm 账号是登录状态，否则会发布失败。 npm whoami 查看状态，可以指定 registry
+> 确保你的`npm`账号是登录状态，否则会发布失败。`npm whoami`查看状态，可以指定`registry`
 
-> 确保你的 package 设置了正确的 npm registry 地址，且发布的包与已存在的包之间不会存在冲突
+> 确保你的`package`设置了正确的`npm registry`地址，且发布的包与已存在的包之间不会存在冲突
 
-> 按顺序执行 lerna bootstrap -> lerna run build(根据自身需求) -> lerna publish.
+> 按顺序执行`lerna bootstrap -> lerna run build(根据自身需求) -> lerna publish.`
 
 ### 问题记录
 

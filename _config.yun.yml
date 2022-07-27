@@ -102,6 +102,8 @@ footer:
   # beian:
   #   enable: true
   #   icp: ICP备xxxxxxxx号
+  powered:
+    enable: false
   live_time:
     enable: true
     prefix: 本博客已萌萌哒地运行
