@@ -1,7 +1,7 @@
 ---
 title: 基于 lerna 管理 monorepo 的一次实践记录
 date: 2022-07-26 20:25:37
-updated: 2022-07-26 20:25:37
+updated: 2022-07-27 14:28:32
 tags:
   - lerna
   - monorepo
@@ -36,7 +36,9 @@ categories:
 
 ### 全局安装`lerna`
 
-> npm i -g lerna
+`tips: 注意 lerna@5.1.0 前后区别.`
+
+> npm i -g lerna@4.0.0
 
 ### `lerna`使用实践
 
