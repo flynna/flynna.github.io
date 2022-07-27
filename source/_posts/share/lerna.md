@@ -220,7 +220,20 @@ lerna link + yarn install
 
 > node_modules 统一安装，生成单一 lock 文件，方便 yarn 更好的管理并构建依赖。
 
-##### 删除所有包的`node_modules`
+#### 卸载依赖
+
+> lerna exec -- <command> \[..args\] # 在所有包中运行该命令
+
+可以依据这个命令来实现指定模块的包卸载，`eg`：
+
+```bash
+lerna exec --scope=packageA  yarn remove A # 将 packageA 包下的 A 卸载
+lerna exec -- yarn remove A # 将所有包下的 A 卸载
+```
+
+#### 清理依赖包
+
+快速删除所有模块中的`node_modules`文件夹。
 
 ```bash
 lerna clean
