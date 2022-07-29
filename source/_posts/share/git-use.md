@@ -1,7 +1,7 @@
 ---
 title: git 的基本使用
 date: 2022-07-24 13:44:42
-updated: 2022-07-24 13:44:42
+updated: 2022-07-29 18:18:57
 tags:
   - git
   - git指令
@@ -90,6 +90,27 @@ git status
 
 ```bash
 git log
+```
+
+#### **移动、重命名文件**
+
+<div class="success">
+
+> `git mv`命令用于移动或重命名一个文件、目录或软连接，可以解决`windows`环境下`git`对文件及文件夹大小写不敏感问题。（~~当然删除再提交，重新添加再提交也是可以滴 😂😂😂~~）
+
+</div>
+
+```bash
+# 先 cd 到你要重命名的文件夹，然后执行下面命令
+git mv [file] [newfile]
+# eg. root/static/images -> root/static/image
+cd ./static
+git mv images image
+
+# 重命名的文件夹 已存在，此时的 mv 就是移动指令指--移动到--   如果想移动到 上一级：
+git mv files ..
+# 对于文件而言，如果已存在，添加 -f 强制修改
+git mv -f [file] [newfile]
 ```
 
 #### 存储文件改动
