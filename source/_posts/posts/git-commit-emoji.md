@@ -23,7 +23,12 @@ categories:
 
 `:code:`**注意这里的冒号是英文，且与 code 之间没有空格**.
 
-`eg. git commit -m ':bug: 修复了xxx功能'`
+`eg.`
+
+```bash
+git commit -m ':bug: 修复了xxx功能'
+git commit -m ':xxx: :xxx: 完成了一系列功能'
+```
 
 ### `emoji`代码
 
