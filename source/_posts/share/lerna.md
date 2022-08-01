@@ -167,7 +167,7 @@ lerna create package-a
 ```bash
 yarn add -W -D typescript [-W -D == --ignore-workspace-root-check --dev]
 # 卸载
-yarn remove -W -D typescript
+yarn remove -W typescript
 ```
 
 添加所有的`package`依赖（不包含`root`，而是在各自的`package.json`）：
