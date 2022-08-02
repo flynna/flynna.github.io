@@ -272,7 +272,8 @@ lerna changed
 
 ```bash
 lerna run test
-lerna run build
+# 区别于普通项目之处在于各个package之间存在相互依赖，如packageB只有在packageA构建完之后才能进行构建，否则就会出错，这实际上要求我们以一种拓扑排序的规则进行构建。
+lerna run --stream --sort build
 ```
 
 区别于`yarn workspaces run`：
@@ -300,7 +301,7 @@ lerna publish -y
 
 > 确保你的`package`设置了正确的`npm registry`地址，且发布的包与已存在的包之间不会存在冲突
 
-> 按顺序执行`lerna bootstrap -> lerna run build（我在单个 package 中定义了一些 npm scripts，例如 prepublishOnly 钩子来执行 build，然而 npm-client 使用 yarn 后，这些钩子似乎并没有按预期进行工作，导致最终 publish 失败。通过 lerna run build 可以触发所有 package 执行 build，如果无此需求可以跳过该步骤）-> lerna publish.`
+> 按顺序执行`lerna bootstrap -> lerna run --stream --sort build（我在单个 package 中定义了一些 npm scripts，例如 prepublishOnly 钩子来执行 build，然而 npm-client 使用 yarn 后，这些钩子似乎并没有按预期进行工作，导致最终 publish 失败。通过 lerna run build 可以触发所有 package 执行 build，如果无此需求可以跳过该步骤）-> lerna publish.`
 
 ### 问题记录
 

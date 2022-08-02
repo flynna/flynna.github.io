@@ -124,11 +124,11 @@ npm set-script lint "vue-cli-service lint"
 
 [![git-precommit-and-commitmsg-hooks-p1](/images/share/git-precommit-and-commitmsg-hooks/p1.png)](/images/share/git-precommit-and-commitmsg-hooks/p1.png)
 
+### `pre-commit`搭配`lint-staged`
+
 上面只是举了一个栗子...`pre-commit`的时候，还可以做得到事情有很多，例如执行测试脚本...
 
 **But...每次触发 pre-commit 都对所有的文件执行 lint，属实是有一点点恶趣味了，这里使用 lint-staged 工具做一点优化.** ~~如果你不介意...可以跳过下面的`lint-staged`😢😢😢~~
-
-### `pre-commit`搭配`lint-staged`
 
 #### 安装
 
@@ -173,4 +173,72 @@ npm run lint-staged
 cd pc && yarn run lint-staged && cd ../mobile && yarn run lint-staged
 ```
 
+更多`lint-staged`了解
+
 ### `commit-msg`搭配`commitlint`
+
+`commit-msg`是`git`提交时校验提交信息的钩子（此时由`husky`来指定），当触发时便会使用`commitlit`来校验。安装配置完成后，想通过`git commit`或者其它第三方工具提交时，只要提交信息不符合规范就无法提交，并提示。
+
+#### 安装
+
+```bash
+# 场景1
+yarn add -W -D @commitlint/cli @commitlint/conventional-commit
+# 场景2
+yarn add -D @commitlint/cli @commitlint/conventional-commit
+# 场景3
+cd ./commit && yarn add -D @commitlint/cli @commitlint/conventional-commit
+```
+
+#### 配置`commmitlint`
+
+```javascript
+// commmitlint.config.js
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+};
+```
+
+然后添加`husky`的`commit-msg`钩子：
+
+```bash
+npx husky add .husky/commit-msg 'npx commitlint -E HUSKY_GIT_PARAMS'
+# 场景3需要改造一下该 cmd，方便 commitlint 能够正确寻址，非安装
+cd ./commit && npx commitlint -E HUSKY_GIT_PARAMS
+```
+
+~~这么做其实已经完成了咱想要的效果，我这里添加了`commitizen`优化方案使用，不需要可以跳过。~~
+
+#### 配置`commitizen`
+
+通过界面化问答的方式完成提交信息录入。
+
+```bash
+# 场景1
+yarn add -W -D commitizen cz-conventional-changelog
+# 场景2
+yarn add -D commitizen cz-conventional-changelog
+# 场景3
+cd ./commit && yarn add -D commitizen cz-conventional-changelog
+```
+
+配置`commitizen`并添加`commit`为`npm script`：
+
+```json
+// package.json
+{
+  // ...
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
+```
+
+后续`commit`，就可以使用`yarn commit`进行`commit`，其会自动做出如下提示：
+
+[![git-precommit-and-commitmsg-hooks-p2](/images/share/git-precommit-and-commitmsg-hooks/p2.png)](/images/share/git-precommit-and-commitmsg-hooks/p2.png)
