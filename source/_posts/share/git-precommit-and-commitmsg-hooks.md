@@ -27,38 +27,20 @@ categories:
 
 ### **新版`husky`使用**
 
-这里介绍了几种情况下的`husky`使用，本文后续也将统称`场景1、场景2、场景3...`
-
 #### 安装`husky`
 
 ```bash
-# 场景1：如果是 lerna 管理的 monorepo
-yarn add -W -D husky
-
-# 场景2：如果是单项目，那么 cd 到根目录
-yarn add -D husky
-
-# 场景3：如果是同个项目对应多端的 monorepo，例如的 vue-client、node-server
-# 创建用于校验的 commit 文件夹
-mkdir commit && cd ./commit
-# 在该文件夹中 install 校验模块及工具，例如：
 yarn add -D husky
 ```
 
 #### 卸载`husky`
 
 ```bash
-# 场景1、场景2
 yarn remove husky
 git config --unset core.hooksPath
-# 场景3
-cd ./commit && yarn remove husky
-cd .. && git config --unset core.hooksPath
 ```
 
 #### 初始化`husky`
-
-**场景 1 and 场景 2：**
 
 ```bash
 npx husky install
@@ -69,26 +51,6 @@ yarn prepare
 # install 到指定的目录
 npx husky install .config/husky
 ```
-
----
-
-**场景 3：**
-
-先`cd`到创建的`commit`文件夹下：
-
-```bash
-cd ./commit
-```
-
-再添加`npm`钩子初始化`husky`：
-
-```json
-{
-  "postinstall": "cd .. && husky install"
-}
-```
-
----
 
 #### 创建`hooks`
 
@@ -135,15 +97,12 @@ npm set-script lint "vue-cli-service lint"
 #### 安装
 
 ```bash
-# 场景1：
-yarn add -W -D lint-staged
-# 场景2、3
 yarn add -D lint-staged
 ```
 
 #### 配置
 
-`场景1、2`：在`root`下的`package.json`中添加，`场景3`：在各自项目的根目录的`package.json`中添加：
+在项目的`package.json`中添加：
 
 ```json
 {
@@ -164,20 +123,16 @@ yarn add -D lint-staged
 修改`.husky/pre-commit`钩子，改用`lint-staged`：
 
 ```bash
-# 场景1、2 .husky/pre-commit 文件，修改之前生成的 cmd
+# 打开 .husky/pre-commit 文件，修改之前生成的 cmd
 npx lint-staged
-# or 配置 lint-staged 脚本（场景1 在 root 的 package.json 中添加）
-npm run lint-staged
 
+# or 配置 lint-staged 脚本
+npm run lint-staged
 # {
 #   "scripts": {
 #     "lint-staged": "lint-staged"
 #   }
 # }
-
-# 场景3：对于同 repo 的多个项目，分别添加上面的 lint-staged 脚本命令，然后修改 .husky/pre-commit
-# 通过 cd 大法，挨个执行 lint-staged 脚本，eg：
-cd pc && yarn run lint-staged && cd ../mobile && yarn run lint-staged
 ```
 
 [了解更多`lint-staged`](https://github.com/okonet/lint-staged)
@@ -193,12 +148,7 @@ cd pc && yarn run lint-staged && cd ../mobile && yarn run lint-staged
 #### 安装
 
 ```bash
-# 场景1
-yarn add -W -D @commitlint/cli @commitlint/config-conventional
-# 场景2
 yarn add -D @commitlint/cli @commitlint/config-conventional
-# 场景3
-cd ./commit && yarn add -D @commitlint/cli @commitlint/config-conventional
 ```
 
 #### 配置`commmitlint`
@@ -215,15 +165,12 @@ module.exports = {
   // 第三位该 rule 的值
   // rules: {}
 };
-// 场景3 -> 在 commit 文件夹下添加依赖并配置
 ```
 
 然后添加`husky`的`commit-msg`钩子：
 
 ```bash
 npx husky add .husky/commit-msg 'npx --no-install commitlint -e'
-# 场景3:
-# cd commit && npx --no-install commitlint -e
 ```
 
 貌似已经很完美了，`emmm~~`但开始对规范使用不熟悉的童鞋，可能不太友好...我下面添加了`commitizen`优化方案使用，不需要可以跳过 😌😌😌
@@ -233,19 +180,12 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint -e'
 `commitizen`可以让用户通过界面化问答的方式完成提交信息的录入，并由用户决定是否推送（这个过程仅相当于命令`git commit -m 'xxx'`）
 
 ```bash
-# 场景1
-yarn add -W -D commitizen cz-conventional-changelog
-# 场景2
 yarn add -D commitizen cz-conventional-changelog
-# 场景3
-cd ./commit && yarn add -D commitizen cz-conventional-changelog
 ```
 
 配置`commitizen`并添加`commit`为`npm script`：
 
 ```json
-// 场景1、2： root 的 package.json
-// 场景3：各子项目的 root 的 package.json
 {
   // ...
   "scripts": {
