@@ -12,7 +12,7 @@ categories:
 
 ### 效果展示
 
-[![github-easy-to-use-p1](/images/posts/github-easy-to-use/p1.png)](/images/posts/github-easy-to-use/p1.png)
+[![github-code-read-p1](/images/posts/github-code-read/p1.png)](/images/posts/github-code-read/p1.png)
 
 <!-- more -->
 

@@ -84,7 +84,7 @@ git status
 
 如图：
 
-[![git-use-p1](/images/share/git-use/p1.png)](/images/share/git-use/p1.png)
+[![git-p1](/images/share/git/p1.png)](/images/share/git/p1.png)
 
 #### 查看提交日志
 
