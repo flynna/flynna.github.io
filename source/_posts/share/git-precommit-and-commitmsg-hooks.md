@@ -88,6 +88,8 @@ cd ./commit
 }
 ```
 
+---
+
 #### 创建`hooks`
 
 > 语法：`husky add <file> [cmd]`
@@ -114,15 +116,15 @@ git commit -m "test" --no-verify
 `eg.`当触发`pre-commit`的时候，对代码执行`lint`脚本检查：
 
 ```bash
-npx husky add .husky/pre-commit 'npx eslint --ext .js,.ts,.vue src'
-# or 如果你的项目使用了脚手架的 lint，例如 vue-cli-service...
 npx husky add .husky/pre-commit 'npm run lint'
+# or 如果你的项目使用了脚手架的 lint，例如 vue-cli-service...
 npm set-script lint "vue-cli-service lint"
 ```
 
-效果图如下：
+> 钩子里配置的`npm run lint`，请确认你的项目已经包含了`lint`校验配置，并自行安装`devDependencies`。~~只是个栗子，不一定就是做`lint`校验 ❤❤❤~~ 效果图如下：
 
 [![git-precommit-and-commitmsg-hooks-p1](/images/share/git-precommit-and-commitmsg-hooks/p1.png)](/images/share/git-precommit-and-commitmsg-hooks/p1.png)
+[![git-precommit-and-commitmsg-hooks-p2](/images/share/git-precommit-and-commitmsg-hooks/p2.png)](/images/share/git-precommit-and-commitmsg-hooks/p2.png)
 
 ### `pre-commit`搭配`lint-staged`
 
@@ -141,7 +143,7 @@ yarn add -D lint-staged
 
 #### 配置
 
-`场景1`：在`packages/`下的每个模块的`package.json`中添加，`场景2、3`：在各自项目的根目录的`package.json`中添加：
+`场景1、2`：在`root`下的`package.json`中添加，`场景3`：在各自项目的根目录的`package.json`中添加：
 
 ```json
 {
@@ -157,61 +159,78 @@ yarn add -D lint-staged
 }
 ```
 
-> 提交前会自动执行`eslint --fix`尝试帮你自动修复，修复成功执行`add`操作，修复失败抛出异常，此时需要手动修复。
+> 提交前会自动顺序执行`cmd`。例如上面配置，会先`eslint --fix`尝试修复，修复成功执行`add`操作，修复失败抛出异常，此时需要手动修复，然后再提交。
 
-然后修改`.husky/pre-commit`钩子，因为我们不需要每次提交都用`eslint`对所有文件检测，而是改用`lint-staged`：
+修改`.husky/pre-commit`钩子，改用`lint-staged`：
 
 ```bash
-# 场景2 .husky/pre-commit 文件，修改之前生成的 cmd
+# 场景1、2 .husky/pre-commit 文件，修改之前生成的 cmd
 npx lint-staged
-
-# 场景1、3：对于同 repo 的多个项目，此时可以分别添加 lint-staged 脚本，然后修改 .husky/pre-commit。注意：下面两个场景的命令均同场景2，是对 .husky/pre-commit 文件的 cmd 修改，而非手动执行
-
-# 场景1: lerna run lint-staged 或者在 lerna 的 root 的 package.json 添加 lint-staged 脚本，然后修改 cmd：
+# or 配置 lint-staged 脚本（场景1 在 root 的 package.json 中添加）
 npm run lint-staged
-# 场景3：通过 cd 大法，挨个执行 lint-staged 脚本，eg：
+
+# {
+#   "scripts": {
+#     "lint-staged": "lint-staged"
+#   }
+# }
+
+# 场景3：对于同 repo 的多个项目，分别添加上面的 lint-staged 脚本命令，然后修改 .husky/pre-commit
+# 通过 cd 大法，挨个执行 lint-staged 脚本，eg：
 cd pc && yarn run lint-staged && cd ../mobile && yarn run lint-staged
 ```
 
-更多`lint-staged`了解
+[了解更多`lint-staged`](https://github.com/okonet/lint-staged)
+
+除了在`commit`之前添加代码校验外，我们也可以对提交的`message(-m)`作规范约束。如何做？往下看 ↓
 
 ### `commit-msg`搭配`commitlint`
 
-`commit-msg`是`git`提交时校验提交信息的钩子（此时由`husky`来指定），当触发时便会使用`commitlit`来校验。安装配置完成后，想通过`git commit`或者其它第三方工具提交时，只要提交信息不符合规范就无法提交，并提示。
+`commit-msg`是`git`提交时校验提交信息的钩子（此时由`husky`来指定），当触发时便会使用`commitlit`来校验。安装配置完成后，想通过`git commit`或者其它第三方工具提交时，只要提交信息（`-m`指定的`message`）不符合规范就无法提交，并提示。
+
+> 约定格式： git commit -m \<type\>[optional scope]: \<description\>
 
 #### 安装
 
 ```bash
 # 场景1
-yarn add -W -D @commitlint/cli @commitlint/conventional-commit
+yarn add -W -D @commitlint/cli @commitlint/config-conventional
 # 场景2
-yarn add -D @commitlint/cli @commitlint/conventional-commit
+yarn add -D @commitlint/cli @commitlint/config-conventional
 # 场景3
-cd ./commit && yarn add -D @commitlint/cli @commitlint/conventional-commit
+cd ./commit && yarn add -D @commitlint/cli @commitlint/config-conventional
 ```
 
 #### 配置`commmitlint`
 
+[更多配置项参考](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/index.js)
+
 ```javascript
-// commmitlint.config.js
+// commmitlint.config.js or .commmitlintrc.js
 module.exports = {
   extends: ['@commitlint/config-conventional'],
+  // rules：kv组成的对象，eg. 'name:[0, 'always', 72]'
+  // 数组中第一位为 level，可选0,1,2，0为disable，1为warning，2为error
+  // 第二位为应用与否，可选 always|never
+  // 第三位该 rule 的值
+  // rules: {}
 };
+// 场景3 -> 在 commit 文件夹下添加依赖并配置
 ```
 
 然后添加`husky`的`commit-msg`钩子：
 
 ```bash
-npx husky add .husky/commit-msg 'npx commitlint -E HUSKY_GIT_PARAMS'
-# 场景3需要改造一下该 cmd，方便 commitlint 能够正确寻址，非安装
-cd ./commit && npx commitlint -E HUSKY_GIT_PARAMS
+npx husky add .husky/commit-msg 'npx --no-install commitlint -e'
+# 场景3:
+# cd commit && npx --no-install commitlint -e
 ```
 
-~~这么做其实已经完成了咱想要的效果，我这里添加了`commitizen`优化方案使用，不需要可以跳过。~~
+貌似已经很完美了，`emmm~~`但开始对规范使用不熟悉的童鞋，可能不太友好...我下面添加了`commitizen`优化方案使用，不需要可以跳过 😌😌😌
 
 #### 配置`commitizen`
 
-通过界面化问答的方式完成提交信息录入。
+`commitizen`可以让用户通过界面化问答的方式完成提交信息的录入，并由用户决定是否推送（这个过程仅相当于命令`git commit -m 'xxx'`）
 
 ```bash
 # 场景1
@@ -225,10 +244,12 @@ cd ./commit && yarn add -D commitizen cz-conventional-changelog
 配置`commitizen`并添加`commit`为`npm script`：
 
 ```json
-// package.json
+// 场景1、2： root 的 package.json
+// 场景3：各子项目的 root 的 package.json
 {
   // ...
   "scripts": {
+    // cz 本质就是 commitizen 一段短命令，代替 git commit 生成专业的 commit-message
     "commit": "git-cz"
   },
   "config": {
@@ -241,4 +262,10 @@ cd ./commit && yarn add -D commitizen cz-conventional-changelog
 
 后续`commit`，就可以使用`yarn commit`进行`commit`，其会自动做出如下提示：
 
-[![git-precommit-and-commitmsg-hooks-p2](/images/share/git-precommit-and-commitmsg-hooks/p2.png)](/images/share/git-precommit-and-commitmsg-hooks/p2.png)
+[![git-precommit-and-commitmsg-hooks-p3](/images/share/git-precommit-and-commitmsg-hooks/p3.png)](/images/share/git-precommit-and-commitmsg-hooks/p3.png)
+
+<div class="warning">
+
+> 因为你，我的心脏总是忙个不停
+
+</div>
