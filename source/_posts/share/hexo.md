@@ -73,10 +73,15 @@ hexo new [layout] <title>
 -s, --slug	文章的 Slug，作为新文章的文件名和发布后的 URL
 ```
 
-例如，我想在`_posts/share`文件夹下创建一片`a.md`的文章，且文章的页面`title`为‘这是 A’
+`eg`. 我想在`_posts/share`文件夹下创建一片`a.md`的文章，且文章的页面`title`为‘这是 A’
 
 ```bash
 hexo new post -p share/a '这是A'
+
+# 创建一篇草稿
+hexo new draft ...
+# 发布
+hexo publish [layout] <title>
 ```
 
 > 其他常用指令说明：
