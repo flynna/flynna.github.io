@@ -1,7 +1,7 @@
 ---
 title: vscode的使用，设置分享以及插件推荐
 date: 2022-07-14 18:48:37
-updated: 2022-07-22 23:56:01
+updated: 2022-08-07 0:17:31
 tags:
   - vscode
   - plugins
@@ -75,6 +75,16 @@ categories:
 控制在删除括号或者引号时编辑器是否应删除相邻的右引号或右方括号。
 
 > Auto Closing Delete: always
+
+在保存文件时自动运行`ESLint`的自动修复命令`eslint --fix`，修改`setting.json`
+
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
 
 超出显示范围，自动换行（只是显示效果上，并没有真正换行）
 
