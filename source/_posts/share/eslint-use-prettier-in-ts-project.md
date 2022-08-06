@@ -1,7 +1,7 @@
 ---
 title: 在 typescript 项目中使用 eslint 和 prettier
-date: 2022-08-07 0:16:34
-updated: 2022-08-07 0:16:34
+date: 2022-08-06 10:16:34
+updated: 2022-08-06 10:16:34
 tags:
   - eslint
   - prettier
@@ -18,6 +18,8 @@ categories:
 > 对`typescript`代码进行`linting`时，有两个主要的`linting`工具可供选择：`tslint、eslint`，`tslint`是一个只能用于`typescript`项目的`linter`，而`eslint`同时支持`typescript、javascript`.
 
 > 据`typescript`核心团队解释：`eslint的架构比tslint更高`，并且在为`typescript`中`linting`集成时，`只会关注eslint`，另外官方自`2019`起已经弃用`tslint`，**[TSLint has been deprecated as of 2019](https://palantir.github.io/tslint/)**
+
+<!-- more -->
 
 ### 在`typescript`项目中搭建`eslint`
 
