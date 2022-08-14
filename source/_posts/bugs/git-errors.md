@@ -1,7 +1,7 @@
 ---
 title: git 使用过程中的踩坑记录
 date: 2022-07-31 16:32:50
-updated: 2022-07-31 16:32:50
+updated: 2022-08-14 21:47:45
 tags:
   - bug
   - git
@@ -64,5 +64,11 @@ git branch --set-upstream-to=origin/xxx
 ### 行尾结束符统一
 
 问题描述及解决方案详见[-> git 环境搭建](/share/git-install-and-terminal-config)
+
+### HttpRequestException encountered
+
+使用`Git`下载或者更新代码时出现`fatal：HttpRequestException encountered`提示信息，但是它又不会影响 Git 的正常使用
+
+> 解决办法：更新`Windows`的`git`凭证管理器，打开链接，下载安装即可 [https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/tag/v1.14.0](https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/tag/v1.14.0)
 
 ### 持续更新中...
