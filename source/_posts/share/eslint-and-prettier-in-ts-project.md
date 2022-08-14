@@ -97,7 +97,7 @@ module.exports = {
 
 当然你也可以配置`eslint`的`ignore`文件`.eslintignore`，符合其配置规则（语法同其他的`ignore`配置，如`.gitignore`）的文件将忽略`lint`检测。
 
-😍😍😍[查看更多的配置项及规则](https://eslint.org/docs/latest/)
+😍😍😍[查看更多的配置项及规则](https://eslint.org/docs/latest/) -> [中文文档](http://eslint.cn/docs/rules/)
 
 ### 混入`prettier`配置
 
