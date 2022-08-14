@@ -1,7 +1,7 @@
 ---
 title: git 的基本使用
 date: 2022-07-24 13:44:42
-updated: 2022-07-29 18:18:57
+updated: 2022-08-14 22:12:13
 tags:
   - git
   - git指令
@@ -32,7 +32,23 @@ categories:
 
 ```bash
 git config <scope> <key> <value>
+# 列出用户级的所有配置信息
+git config --global -l
+# 增加配置项 默认是获取local配置中内容
+git config [--local|--global|--system] --get section.key
+# 获取一个配置项
+git config [--local|--global|--system] --get section.key
+# 删除一个配置项
+git config [--local|--global|--system] --unset section.key
 ```
+
+`git`的配置级别主要有三类，按优先级顺序分为：`local(仓库级)、global(用户级)、system(系统级)`：
+
+> `local`(仓库级)：对应的配置文件是当前仓库下的`.git/config` （默认是隐藏的）
+
+> `global`(用户级)：对应的配置文件是用户宿主目录下的`~/.gitconfig`
+
+> `system`(系统级)：对应的配置文件是`git`安装目录下的`/etc/gitconfig`
 
 #### 初始化项目仓库
 
