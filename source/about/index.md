@@ -73,6 +73,7 @@ aplayer: true
 - [ ] 重学`java`, 每个工作日只看一篇视频回顾(大概半小时，前面课程可适当跳过)
 - [ ] 了解，学习 `docker`，并掌握常规指令
 - [ ] 除去`javascript`，至少会一种其他的脚本语言
+- [ ] `websocket`技术学习
 
 </details>
 

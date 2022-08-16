@@ -1,7 +1,7 @@
 ---
 title: vscode的使用，设置分享以及插件推荐
 date: 2022-07-14 18:48:37
-updated: 2022-08-07 20:17:31
+updated: 2022-08-16 16:40:31
 tags:
   - vscode
   - plugins
@@ -183,7 +183,7 @@ arrowParens: always
 
 #### [`Search node_modules`](https://marketplace.visualstudio.com/items?itemName=jasonnutter.search-node-modules)-`node_modules`文件搜索
 
-`Ctrl + Shift + p`，或者`Ctrl + p 输入 >`。在打开的面板中输入或者选择`Search node_modules`。点击查询出来的`Search node_modules`后，会根据当前的工作区文件夹查找`node_modules`并打开，支持**类似**`Ctrl + f`对路径的文件夹或者文件进行搜索。
+`Ctrl + Shift + p`，或者`Ctrl + p 输入 >` 或者按下 `F1`。在打开的面板中输入或者选择`Search node_modules`。点击查询出来的`Search node_modules`后，会根据当前的工作区文件夹查找`node_modules`并打开，支持**类似**`Ctrl + f`对路径的文件夹或者文件进行搜索。
 
 #### [`DotENV`](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)-`.env`文件代码高亮
 
@@ -234,7 +234,31 @@ export * from './b';
 
 在写`html`文件的时候，方便快速在浏览器打开该文件。`Alt + b`快捷键打开，或者右键 `open in browser`。对应还有一个插件`View In Browser`，不过作者已经不再维护了。
 
-#### [`Flutter Color`](https://marketplace.visualstudio.com/items?itemName=circlecodesolution.ccs-flutter-color)-颜色代码效果实时预览
+#### [`Color Highlight`](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)-颜色代码效果实时预览
+
+#### [`Code Spell Checker`](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-单词拼写检测
+
+自动捕获常见的（单词）拼写错误，同时降低误报，适用于驼峰式代码。
+
+#### [`filesize`](https://marketplace.visualstudio.com/items?itemName=mkxml.vscode-filesize)-实时观测文件`bundle`
+
+在状态栏中显示当前文件大小，点击状态栏中的文件大小时，会在`OUTPUT`中输出`Gzip`大小。
+
+#### [`json2ts`](https://marketplace.visualstudio.com/items?itemName=GregorBiswanger.json2ts)-将剪贴板内容转为`ts-interface`
+
+简直`yyds...`，实际开发过程中，如果你使用到了`ts`，可以为你省去很多定义类型的时间。~~比如：将接口返回的数据转为 interface ~~
+
+除了这个插件以外，你也可以到 [http://json2ts.com/](http://json2ts.com/) 实现更完整的转换（因为插件只会提取`json`内容进行转换）
+
+#### [`koroFileHeader` or `fileheader`]-在文件头生成作者信息
+
+感觉很鸡肋的一个功能 ~~git 的 文件变更记录同样可以查看，且更加强大~~ ...目前没怎么用到，不排除别的项目组有这种爱好...
+
+#### [vscode-pdf](https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf)-预览`pdf`
+
+#### [`LeetCode`](https://marketplace.visualstudio.com/items?itemName=LeetCode.vscode-leetcode)
+
+LeetCode 在 VS Code 中刷题。~~（如果你觉得有必要）~~
 
 <div class="success">
 
@@ -243,6 +267,8 @@ export * from './b';
 </div>
 
 #### [`ES7+ React/Redux/React-Native snippets`](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)-`React`代码片段
+
+集成了`ES7`标准及一下的语法片段...意味着例如`JavaScript (ES6) code snippets`提供的片段，也是支持的...
 
 #### [`Vue 3 Snippets`](https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets)-`Vue`代码片段
 
