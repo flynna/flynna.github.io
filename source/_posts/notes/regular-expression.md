@@ -155,6 +155,8 @@ str = str.replace(reg, '*');
 console.log(str); // *asnonas*sdf*as*
 ```
 
+当然标识符不仅仅是上面介绍的这两个，[https://regex101.com/](https://regex101.com/)可以在这个网站上测试及学习...
+
 ### 正则表达式原型上的方法
 
 `eg.`正则表达式`reg = /xxx/`.
