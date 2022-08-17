@@ -236,6 +236,8 @@ export * from './b';
 
 #### [`Color Highlight`](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)-颜色代码效果实时预览
 
+如果你不仅仅是想预览颜色，而是需要类似`picker`的颜色选择器来对已有的颜色进行修改，可以安装另外一个插件`Flutter Color`，又或者你可以两者一起使用。
+
 #### [`Code Spell Checker`](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-单词拼写检测
 
 自动捕获常见的（单词）拼写错误，同时降低误报，适用于驼峰式代码。
