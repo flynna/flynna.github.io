@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="会飞的土豆"><meta name="copyright" content="会飞的土豆"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>在 typescript 项目中使用 eslint 和 prettier | 土豆子的躺平日常</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/images/avatar.jpg"><link rel="mask-icon" href="/images/avatar.jpg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"flynna.github.io","root":"/","title":"相信土豆真的会飞","version":"1.10.4","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="/font/iconfont.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js"></script><script src="/font/iconfont.js"></script><meta name="description" content="为什么是eslint和prettier？ 在ESlint推出--fix参数前ESLint并没有自动化格式代码的功能，要对一些格式问题做批量格式化只能用Prettier这样的工具。并且Prettier在代码风格的检测上比ESlint更全面，所以两者通常是结合在一起使用的。   对typescript代码进行linting时，有两个主要的linting工具可供选择：tslint、eslint，tsli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 typescript 项目中使用 eslint 和 prettier">
+<meta property="og:url" content="https://flynna.github.io/share/eslint-and-prettier-in-ts-project/index.html">
+<meta property="og:site_name" content="土豆子的躺平日常">
+<meta property="og:description" content="为什么是eslint和prettier？ 在ESlint推出--fix参数前ESLint并没有自动化格式代码的功能，要对一些格式问题做批量格式化只能用Prettier这样的工具。并且Prettier在代码风格的检测上比ESlint更全面，所以两者通常是结合在一起使用的。   对typescript代码进行linting时，有两个主要的linting工具可供选择：tslint、eslint，tsli">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-07T02:27:23.000Z">
+<meta property="article:modified_time" content="2022-08-07T02:27:23.000Z">
+<meta property="article:author" content="会飞的土豆">
+<meta property="article:tag" content="eslint">
+<meta property="article:tag" content="prettier">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="会飞的土豆"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="会飞的土豆"><span class="site-author-status" title="Looking for dawn.">🍋</span></a><div class="site-author-name"><a href="/about/">会飞的土豆</a></div><span class="site-name">土豆子的躺平日常</span><sub class="site-subtitle">just do it</sub><div class="site-description">星光不问赶路人, 岁月不负有心人</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">28</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">10</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">45</span></a></div><a class="site-state-item hty-icon-button" href="/about/#comment" title="留言板"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:clipboard-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2274105875&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/flynna" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="flynnzhl@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/flynna" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=502374002" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/flynn-zhl" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/482340176" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFeslint%E5%92%8Cprettier%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为什么是eslint和prettier？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8typescript%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%90%AD%E5%BB%BAeslint"><span class="toc-number">2.</span> <span class="toc-text">在typescript项目中搭建eslint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%85%A5prettier%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">混入prettier配置</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://flynna.github.io/share/eslint-and-prettier-in-ts-project/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="会飞的土豆"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="土豆子的躺平日常"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">在 typescript 项目中使用 eslint 和 prettier</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-08-07 10:27:23" itemprop="dateCreated datePublished" datetime="2022-08-07T10:27:23+08:00">2022-08-07</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">755</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">3m</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%9C%9F%E8%B1%86%E3%81%AE%E6%95%99%E7%A8%8B%E5%88%86%E4%BA%AB/" style="--text-color:null" itemprop="url" rel="index"><span itemprop="text">土豆の教程分享</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%9C%9F%E8%B1%86%E3%81%AE%E6%95%99%E7%A8%8B%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">工具使用</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/eslint/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">eslint</span></a><a class="tag-item" href="/tags/prettier/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">prettier</span></a><a class="tag-item" href="/tags/typescript/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">typescript</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h3 id="为什么是eslint和prettier？"><a href="#为什么是eslint和prettier？" class="headerlink" title="为什么是eslint和prettier？"></a>为什么是<code>eslint</code>和<code>prettier</code>？</h3><blockquote>
+<p>在<code>ESlint</code>推出<code>--fix</code>参数前<code>ESLint</code>并没有自动化格式代码的功能，要对一些格式问题做批量格式化只能用<code>Prettier</code>这样的工具。并且<code>Prettier</code>在代码风格的检测上比<code>ESlint</code>更全面，所以两者通常是结合在一起使用的。</p>
+</blockquote>
+<blockquote>
+<p>对<code>typescript</code>代码进行<code>linting</code>时，有两个主要的<code>linting</code>工具可供选择：<code>tslint、eslint</code>，<code>tslint</code>是一个只能用于<code>typescript</code>项目的<code>linter</code>，而<code>eslint</code>同时支持<code>typescript、javascript</code>.</p>
+</blockquote>
+<blockquote>
+<p>据<code>typescript</code>核心团队解释：<code>ESLint 具有比 TSLint 更高性能的架构</code>，并且后续在为<code>typescript</code>中<code>linting</code>集成时，<code>只会关注eslint</code>，另外官方自<code>2019</code>起已经弃用<code>tslint</code>，**<a target="_blank" rel="noopener" href="https://palantir.github.io/tslint/">TSLint has been deprecated as of 2019</a>**</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="在typescript项目中搭建eslint"><a href="#在typescript项目中搭建eslint" class="headerlink" title="在typescript项目中搭建eslint"></a>在<code>typescript</code>项目中搭建<code>eslint</code></h3><blockquote>
+<p><code>tips</code>：如果是<code>create-react-app</code>创建的项目，<code>eslint</code>已经被作为依赖项集成，无需另外安装.</p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># @typescript-eslint/parser 允许 ESLint 对 TypeScript 代码进行 lint 解析</span>
+<span class="token comment"># @typescript-eslint/eslint-plugin 包含一堆特定于 TypeScript 的 ESLint 规则</span>
+<span class="token function">yarn</span> <span class="token function">add</span> -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin</code></pre>
+
+<p><code>then..</code>在项目根目录添加<code>.eslintrc.js</code>的配置文件，<code>eg</code>：</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">root</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">env</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">node</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">parser</span><span class="token operator">:</span> <span class="token string">'@typescript-eslint/parser'</span><span class="token punctuation">,</span> <span class="token comment">// Specifies the ESLint parser</span>
+  <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'plugin:@typescript-eslint/recommended'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">parserOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">ecmaVersion</span><span class="token operator">:</span> <span class="token number">2020</span><span class="token punctuation">,</span> <span class="token comment">// Allows for the parsing of modern ECMAScript features</span>
+    <span class="token literal-property property">sourceType</span><span class="token operator">:</span> <span class="token string">'module'</span><span class="token punctuation">,</span> <span class="token comment">// Allows for the use of imports</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'plugin:@typescript-eslint/recommended'</span><span class="token punctuation">,</span> <span class="token comment">// Uses the recommended rules from the @typescript-eslint/eslint-plugin</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs</span>
+    <span class="token string-property property">'no-console'</span><span class="token operator">:</span>
+      process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'production'</span>
+        <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token string">'error'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">allow</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'error'</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+        <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'warn'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">allow</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'error'</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'no-debugger'</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'production'</span> <span class="token operator">?</span> <span class="token string">'warn'</span> <span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token comment">// -----</span>
+    <span class="token comment">// 配置 unused-imports 规则需要单独安装插件 yarn add -D eslint-plugin-unused-imports 然后在最外层添加配置项 plugins: ['unused-imports']</span>
+    <span class="token comment">// 'unused-imports/no-unused-imports': 'error',</span>
+    <span class="token comment">// -----</span>
+    <span class="token comment">// typescript configs e.g.</span>
+    <span class="token string-property property">'@typescript-eslint/no-unused-vars'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/explicit-function-return-type'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/no-explicit-any'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/consistent-type-imports'</span><span class="token operator">:</span> <span class="token string">'warn'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/explicit-module-boundary-types'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/no-empty-function'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/no-non-null-assertion'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'@typescript-eslint/no-this-alias'</span><span class="token operator">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<blockquote>
+<p>如果在<code>react的ts</code>項目中使用，另外安装 <code>eslint-plugin-react dev</code>依赖项，并在上面配置的<code>.eslintrc</code>中添加配置：</p>
+</blockquote>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// ... others</span>
+  <span class="token literal-property property">settings</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">react</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">version</span><span class="token operator">:</span> <span class="token string">'detect'</span><span class="token punctuation">,</span> <span class="token comment">// Tells eslint-plugin-react to automatically detect the version of React to use</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">parserOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ... others</span>
+    <span class="token literal-property property">ecmaFeatures</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">jsx</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Allows for the parsing of JSX</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ... others</span>
+    <span class="token string">'plugin:react/recommended'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>当然你也可以配置<code>eslint</code>的<code>ignore</code>文件<code>.eslintignore</code>，符合其配置规则（语法同其他的<code>ignore</code>配置，如<code>.gitignore</code>）的文件将忽略<code>lint</code>检测。</p>
+<p>😍😍😍<a target="_blank" rel="noopener" href="https://eslint.org/docs/latest/">查看更多的配置项及规则</a> -&gt; <a target="_blank" rel="noopener" href="http://eslint.cn/docs/rules/">中文文档</a></p>
+<h3 id="混入prettier配置"><a href="#混入prettier配置" class="headerlink" title="混入prettier配置"></a>混入<code>prettier</code>配置</h3><blockquote>
+<p>混用后，就可以通过 eslint –fix 来自动修复不符合 prettier 规则的代码</p>
+</blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># eslint-config-prettier 禁用可能与 prettier 冲突的 ESLint 规则</span>
+<span class="token comment"># eslint-plugin-prettier 将 prettier 作为 eslint 规则运行</span>
+<span class="token function">yarn</span> <span class="token function">add</span> -D prettier eslint-config-prettier eslint-plugin-prettier</code></pre>
+
+<p>接下来在项目的根目录下添加一个<code>.prettierrc</code>文件，用以配置<code>prettier</code>，<code>eg:</code></p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"singleQuote"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">"trailingComma"</span><span class="token operator">:</span> <span class="token string">"all"</span><span class="token punctuation">,</span>
+  <span class="token property">"printWidth"</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+  <span class="token property">"arrowParens"</span><span class="token operator">:</span> <span class="token string">"always"</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>继续…在原有的配置基础上，更新<code>.eslintrc.js</code>配置，用以支持混用：</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// ... others</span>
+  <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ... others</span>
+    <span class="token comment">// 确保添加的 'plugin:prettier/recommended' 在 extends 配置的最后一项</span>
+    <span class="token string">'plugin:prettier/recommended'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>会飞的土豆</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://flynna.github.io/share/eslint-and-prettier-in-ts-project/" title="在 typescript 项目中使用 eslint 和 prettier">https://flynna.github.io/share/eslint-and-prettier-in-ts-project/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/notes/regular-expression/" rel="prev" title="如何构建你想要的正则表达式?"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">如何构建你想要的正则表达式?</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/share/git-precommit-and-commitmsg-hooks/" rel="next" title="基于husky和commitlint实现git提交规范校验"><span class="post-nav-text">基于husky和commitlint实现git提交规范校验</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/flynna/flynna.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><style>.utterances {
+  max-width: 100%;
+}</style><script src="https://giscus.app/client.js" data-repo="flynna/flynna.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkzNDE0MDgyNjE=" data-category="Announcements" data-category-id="DIC_kwDOFFl6Bc4CQHuO" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-theme="light" crossorigin="anonymous" async></script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> 会飞的土豆</span></div><div class="live-time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-07T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = ` ${passDay} 天 ${passHour} 小时 ${passMinute} 分 ${passSecond} 秒`;
+}
+blog_live_time();
+</script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
