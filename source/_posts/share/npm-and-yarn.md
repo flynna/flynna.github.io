@@ -97,6 +97,8 @@ npm view package version/versions
 
 其他指令：[-> 详见 v7](https://docs.npmjs.com/cli/v7/commands/npm-install)
 
+> tips: npm config 读取的内容是有优先级的，项目下的 `.npmrc` -> 用户级`~/.npmrc` -> 全局`安装目录/etc/.npmrc`（稍不注意就会存在你配置的 global registry 不生效...）
+
 > ### `yarn`常用指令介绍
 
 > yarn help 查看全部指令
