@@ -9,7 +9,7 @@ categories:
   - 大前端
 ---
 
-`typescript`支持与`javascript`几乎相同的数据类型，此外还提供了实用的枚举类型方便我们使用。
+`typescript`支持与`javascript`几乎相同的数据类型，此外还提供了其他实用的类型方便我们使用。
 
 <!-- more -->
 
