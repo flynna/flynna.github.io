@@ -175,28 +175,29 @@ reward:
 #       icon: ri:wechat-pay-line
 
 # 自定义主题的主色调。
-# colors:
-#   primary: '#6200ee'
-#   # bg: "#F5F5F5"
-#   selection_bg: '#8e71c1' # 选取文字时的背景色
-#   # 标签云中标签的起始色和结束色
-#   # tag_start_color:
-#   # tag_end_color:
+colors:
+  primary: '#4d1e90'
+  # bg: "#F5F5F5"
+  selection_bg: '#8e71c1' # 选取文字时的背景色
+  # 标签云中标签的起始色和结束色
+  # tag_start_color:
+  # tag_end_color:
 
 # 自定义标签颜色
 tags:
   hexo: '#0E834D'
   vscode: '#0066B8'
+  bug: '#cc0000'
   git: '#F14E32'
   git-bash: '#F14E32'
   node: '#026E00'
   javascript: '#F4DF4F'
+  vue: '#4fc08d'
+  typescript: '#317AC6'
+  react: '#61dafb'
   # CSS: '#5298d1'
-  # React: '#61dafb'
   # Python: '#3776ab'
   # PHP: '#8892BF'
-  # Vue: '#4fc08d'
-  # TypeScript: '#317AC6'
   # Laravel: '#F4645F'
 
 # 自定义分类颜色 - 同目录顺序
