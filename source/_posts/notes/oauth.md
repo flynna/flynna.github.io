@@ -1,5 +1,5 @@
 ---
-title: OAuth 认证的几种实现方式
+title: OAuth 认证的几种授权方式
 date: 2023-02-01 15:37:37
 updated: 2023-02-01 15:37:37
 tags:
