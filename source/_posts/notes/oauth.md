@@ -1,5 +1,5 @@
 ---
-title: OAuth 认证的几种授权方式
+title: OAuth2.0 的四种授权方式
 date: 2023-02-01 15:37:37
 updated: 2023-02-01 15:37:37
 tags:
@@ -64,6 +64,10 @@ categories:
   最终重定向回`A(client)`配置的一个地址。
 
   前端访问后端服务时，通过中间层代理，追加`token`信息到`header`中，如果`token`过期，则通过`refresh_token`更新令牌，如果登录过期，则重定向到登录地址。
+
+`基于这种方式认证，A(client)请求任何接口都将通过 A(node) 进行转发，在 A(client) 仅保存回话id(sessionId)，该 sessionId 由 A(node) 保存设置至 cookie 中(会话期间有效)，前端 A(client) 在发起 http 请求时会自动携带，A(node) 从 req.session 中解析前面步骤存入的 refresh_token 获取当前的 access_token(出于性能考虑，可以将 ak 存入 redis) 保存到 res.locals，设置 proxyMiddleWare 添加代理请求的 headers: proxyReq.setHeader('Authorization', token)`
+
+> `res.locals` 是一个对象，包含用于渲染视图的上下文。作用：在模板中直接使用、用来存储一些全局变量
 
 #### 凭证式
 
