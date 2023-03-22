@@ -6,7 +6,8 @@ tags:
   - git-commit
   - emoji
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Git
 ---
 
 ### 先看效果

@@ -7,8 +7,8 @@ tags:
   - prettier
   - typescript
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 前端工程化
+  - 代码规范约束
 ---
 
 ### 为什么是`eslint`和`prettier`？

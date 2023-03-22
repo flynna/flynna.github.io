@@ -6,8 +6,8 @@ tags:
   - javascript
   - 继承
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - JavaScript
 ---
 
 ### 继承(extends) 导语

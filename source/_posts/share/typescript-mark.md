@@ -5,8 +5,8 @@ updated: 2022-09-15 16:57:42
 tags:
   - typescript
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - TypeScript
 ---
 
 ### 索引类型查询操作符

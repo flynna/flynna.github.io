@@ -6,8 +6,8 @@ tags:
   - lerna
   - monorepo
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 前端工程化
+  - 模块化管理
 ---
 
 ### `lerna`是什么？

@@ -5,7 +5,8 @@ updated: 2022-07-24 18:41:36
 tags:
   - github
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Github
 ---
 
 本文主要是根据自己在摸索提交`pr (pull-request)`过程程的一些总结。

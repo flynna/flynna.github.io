@@ -8,8 +8,8 @@ tags:
   - vscode
   - terminal
 categories:
-  - 土豆の教程分享
   - 环境搭建
+  - Git
 ---
 
 ### 工具下载

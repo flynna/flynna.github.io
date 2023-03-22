@@ -5,8 +5,8 @@ updated: 2022-09-15 14:51:52
 tags:
   - typescript
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - TypeScript
 ---
 
 `typescript`支持与`javascript`几乎相同的数据类型，此外还提供了其他实用的类型方便我们使用。

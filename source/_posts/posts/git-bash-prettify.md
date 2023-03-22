@@ -7,7 +7,8 @@ tags:
   - terminal
   - 终端美化
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Git
 ---
 
 ### Before this

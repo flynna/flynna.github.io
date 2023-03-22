@@ -1,5 +1,5 @@
 ---
-title: 基于husky和commitlint实现git提交规范校验
+title: 基于 husky 和 commitlint 实现 git 提交规范校验
 date: 2022-08-01 11:07:39
 updated: 2022-08-01 11:07:39
 tags:
@@ -7,8 +7,8 @@ tags:
   - git-hooks
   - commitlint
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 前端工程化
+  - 代码规范约束
 ---
 
 ### Before...

@@ -6,8 +6,8 @@ tags:
   - hexo-cli
   - hexo
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 工具学习
+  - Hexo
 ---
 
 ### What is Hexo?

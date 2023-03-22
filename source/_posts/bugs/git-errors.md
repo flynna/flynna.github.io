@@ -6,8 +6,8 @@ tags:
   - bug
   - git
 categories:
-  - 土豆の踩坑之路
-  - 工具
+  - 踩坑记录
+  - Git
 ---
 
 > 用于记录由于`git`的不规范使用`or`其他问题导致的**错误和奇怪现象**，及其实际解决方案汇总。
@@ -63,7 +63,7 @@ git branch --set-upstream-to=origin/xxx
 
 ### 行尾结束符统一
 
-问题描述及解决方案详见[-> git 环境搭建](/share/git-install-and-terminal-config)
+问题描述及解决方案详见[-> git 环境搭建](/envConstruct/git-install-and-terminal-config)
 
 ### HttpRequestException encountered
 

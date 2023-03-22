@@ -6,8 +6,8 @@ tags:
   - npm
   - npm-publish
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 工具学习
+  - Npm
 ---
 
 ### 什么是`npm-package`？

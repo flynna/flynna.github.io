@@ -7,8 +7,8 @@ tags:
   - npx
   - yarn
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 工具学习
+  - Npm/Yarn
 ---
 
 > ### `npm，npx`概念及指令简单介绍

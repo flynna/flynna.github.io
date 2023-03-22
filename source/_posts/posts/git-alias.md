@@ -5,7 +5,8 @@ updated: 2022-08-18 12:48:13
 tags:
   - git-alias
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Git
 ---
 
 ### 点亮你的技巧点

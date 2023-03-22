@@ -6,8 +6,8 @@ tags:
   - javascript
   - 作用域
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - JavaScript
 ---
 
 ### 什么是作用域？

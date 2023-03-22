@@ -5,8 +5,8 @@ updated: 2022-09-14 11:02:26
 tags:
   - typescript
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - TypeScript
 ---
 
 > 前段时间项目忙，加之疫情原因，就没有更新。😊😊😊

@@ -6,8 +6,8 @@ tags:
   - javascript
   - 箭头函数
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - JavaScript
 ---
 
 ### 箭头函数是什么？

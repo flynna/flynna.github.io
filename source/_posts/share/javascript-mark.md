@@ -5,8 +5,8 @@ updated: 2022-09-15 15:12:50
 tags:
   - javascript
 categories:
-  - 土豆の学习笔记
-  - 大前端
+  - 技术分享
+  - JavaScript
 ---
 
 逆水行舟，不进则退。

@@ -6,8 +6,8 @@ tags:
   - git
   - git指令
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 工具学习
+  - Git
 ---
 
 > Git is a free and open source distributed version control system
@@ -22,7 +22,7 @@ categories:
 
 <!-- more -->
 
-环境搭建：[-> 戳这里](/share/git-install-and-terminal-config)
+环境搭建：[-> 戳这里](/envConstruct/git-install-and-terminal-config)
 
 ---
 

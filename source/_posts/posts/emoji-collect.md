@@ -5,7 +5,8 @@ updated: 2022-07-17 14:37:44
 tags:
   - emoji
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Emoji
 ---
 
 > 收集一些常用的 emoji，用他们来表达自己的情绪 😂。Emoji 虽然是文字，但是无法书写，必须使用其他方法插入文档 ，比如 CTRL C + CTRL V，此外也可以通过快捷键的方式插入，比如 windows 下的 win + 。

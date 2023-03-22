@@ -5,7 +5,8 @@ updated: 2022-07-31 19:11:09
 tags:
   - github
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - Github
 ---
 
 > 号称只需要`1s`，就可以在浏览器上使用`vscode`阅读`Github`代码. ~~当然`vscode`的快捷键也是支持的.~~

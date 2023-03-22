@@ -1,13 +1,13 @@
 ---
-title: vi、vim编辑器学习
+title: vi、vim 编辑器学习
 date: 2022-07-17 14:49:50
 updated: 2022-07-17 14:49:50
 tags:
   - vi
   - vim
 categories:
-  - 土豆の教程分享
-  - 工具使用
+  - 工具学习
+  - Vi/Vim
 ---
 
 ### Why study?

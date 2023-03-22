@@ -7,7 +7,8 @@ tags:
   - plugins
   - 设置
 categories:
-  - 土豆の收藏安利
+  - 收藏安利
+  - VScode插件
 ---
 
 ### 前言
