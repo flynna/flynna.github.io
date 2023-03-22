@@ -9,7 +9,7 @@ tags:
   - es7
 categories:
   - 技术分享
-  - JavaScript
+  - ECMAScript
 ---
 
 <!-- [!['decorator-p1'](/images/notes/decorator/p1.png)](https://zhuanlan.zhihu.com/p/63414586) -->
