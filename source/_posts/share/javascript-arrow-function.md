@@ -5,9 +5,10 @@ updated: 2022-07-22 23:54:15
 tags:
   - javascript
   - 箭头函数
+  - es6
 categories:
   - 技术分享
-  - JavaScript
+  - ECMAScript
 ---
 
 ### 箭头函数是什么？
