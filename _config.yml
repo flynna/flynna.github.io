@@ -106,7 +106,7 @@ theme: yun
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:flynna/flynna.github.io.git
+  repo: https://github.com/flynna/flynna.github.io.git
   branch: master
 
 # 看板娘
