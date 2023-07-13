@@ -7,7 +7,7 @@ tags:
   - UI
 categories:
   - 技术分享
-  - 功能实现
+  - 组件封装
 ---
 
 基于 `element` 的 `tree` 和 `select` 组件，实现的一个 `treeSelect` 组件，完整 `props` 和用法参考 `element`.
