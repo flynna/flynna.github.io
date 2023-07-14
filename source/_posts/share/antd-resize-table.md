@@ -14,6 +14,8 @@ categories:
 
 类似`vue-element`又支持了这个功能，所以想着封装一版`react`可拖拽列宽的表格组件。
 
+<!-- more -->
+
 ### ResizeTable 组件实现
 
 `组件接收的 Props 同 Table 一致`.
