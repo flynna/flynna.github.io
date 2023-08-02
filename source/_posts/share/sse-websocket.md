@@ -155,13 +155,13 @@ const ws = new WebSocket('ws://localhost:8080');
 
 属性返回实例对象的当前状态，共有四种。
 
-- 0：`CONNECTING`，表示正在连接。
+- `0`：`CONNECTING`，表示正在连接。
 
-- 1：`OPEN`，表示连接成功，可以通信了。
+- `1`：`OPEN`，表示连接成功，可以通信了。
 
-- 2：`CLOSING`，表示连接正在关闭。
+- `2`：`CLOSING`，表示连接正在关闭。
 
-- 3：`CLOSED`，表示连接已经关闭，或者打开连接失败。
+- `3`：`CLOSED`，表示连接已经关闭，或者打开连接失败。
 
 ###### `onopen` 和 `onclose`、 `onerror`
 
@@ -232,7 +232,7 @@ for (let i = 0; i < img.data.length; i++) {
 ws.send(binary.buffer);
 ```
 
-### `SSE` vs `WebSocket` 区别?
+### `SSE` 和 `WebSocket` 的区别?
 
 - `SSE` 使用 `HTTP` 协议，现有的服务器软件都支持。`WebSocket` 是一个独立协议。
 
@@ -286,78 +286,78 @@ import { Observable } from 'rxjs';
 import { Sse } from '@nestjs/common';
 
 @Sse('session-auth-status')
-  public checkSessionTokenStatus(
-    @Req() req: Request,
-    @Res() res: Response,
-  ): Observable<Partial<MessageEvent>> {
-    // 出于http连接问题， sse连接在5分钟后自动断开
-    const maxCheckDuration = 1000 * 60 * 5;
-    // 每两秒检查一次
-    const checkInterval = 2000;
+public checkSessionTokenStatus(
+  @Req() req: Request,
+  @Res() res: Response,
+): Observable<Partial<MessageEvent>> {
+  // 出于http连接问题， sse连接在5分钟后自动断开
+  const maxCheckDuration = 1000 * 60 * 5;
+  // 每两秒检查一次
+  const checkInterval = 2000;
 
-    let checkedCount = 0;
-    let needDispose = false;
-    return new Observable<Partial<MessageEvent>>((sub) => {
-      const doCheck = async () => {
-        try {
-          while (!needDispose) {
-            checkedCount++;
-            await new Promise<void>((resolve, reject) => {
-              req.session.reload((err) => {
-                if (err) return reject(err);
-                resolve();
-              });
+  let checkedCount = 0;
+  let needDispose = false;
+  return new Observable<Partial<MessageEvent>>((sub) => {
+    const doCheck = async () => {
+      try {
+        while (!needDispose) {
+          checkedCount++;
+          await new Promise<void>((resolve, reject) => {
+            req.session.reload((err) => {
+              if (err) return reject(err);
+              resolve();
             });
-
-            const token = await getAccessToken(req.session);
-            if (!token) {
-              throw new UnauthorizedException();
-            }
-
-            const res = await new AuthorizeService(req).getMeInfo(token, false);
-            sub.next({
-              data: {
-                message: 'OK',
-                status: 200,
-                payload: res.data,
-              },
-              // 控制前端断开后重连间隔时机
-              retry: 500,
-            });
-            await delayMs(checkInterval);
-          }
-        } catch (err) {
-          let message = 'failed to do check';
-          if (Axios.isAxiosError(err)) {
-            message = 'Token is expired';
-          } else if (err instanceof UnauthorizedException) {
-            message = `Got empty token`;
-          }
-
-          sub.next({
-            data: {
-              message,
-              status: 401,
-            },
-            retry: Number.MAX_SAFE_INTEGER,~
           });
 
-          logger.error('failed to do check %o', err);
-          needDispose = true;
-        } finally {
-          if (needDispose || checkedCount * checkInterval >= maxCheckDuration) {
-            sub.complete();
-            res.end();
+          const token = await getAccessToken(req.session);
+          if (!token) {
+            throw new UnauthorizedException();
           }
-        }
-      };
 
-      doCheck();
-      return () => {
+          const res = await new AuthorizeService(req).getMeInfo(token, false);
+          sub.next({
+            data: {
+              message: 'OK',
+              status: 200,
+              payload: res.data,
+            },
+            // 控制前端断开后重连间隔时机
+            retry: 500,
+          });
+          await delayMs(checkInterval);
+        }
+      } catch (err) {
+        let message = 'failed to do check';
+        if (Axios.isAxiosError(err)) {
+          message = 'Token is expired';
+        } else if (err instanceof UnauthorizedException) {
+          message = `Got empty token`;
+        }
+
+        sub.next({
+          data: {
+            message,
+            status: 401,
+          },
+          retry: Number.MAX_SAFE_INTEGER,~
+        });
+
+        logger.error('failed to do check %o', err);
         needDispose = true;
-      };
-    });
-  }
+      } finally {
+        if (needDispose || checkedCount * checkInterval >= maxCheckDuration) {
+          sub.complete();
+          res.end();
+        }
+      }
+    };
+
+    doCheck();
+    return () => {
+      needDispose = true;
+    };
+  });
+}
 ```
 
 ### 问题记录
