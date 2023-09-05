@@ -19,6 +19,8 @@ categories:
 
 针对不同类型的异常，可以采取不同的措施，`eg.` **弹出消息提示**、**跳转到错误页面**、**重新请求**等。
 
+<!-- more -->
+
 ### 处理异常
 
 针对 `axios` 的 `Interceptors`，我们可以通过定义并导出自定义的 `axios` 实例，并在实例中配置 `Interceptors.response` 来实现。
