@@ -8,7 +8,7 @@ tags:
   - WebSocket
 categories:
   - 技术分享
-  - 前后端交互
+  - 网络请求
 ---
 
 ### `What`？
