@@ -1,13 +1,14 @@
 ---
 title: vue-directive 指令的自定义封装案例
-date: 2023-09-05 18:19:34
-updated: 2023-09-05 18:19:34
+date: 2023-08-15 18:19:34
+updated: 2023-08-15 18:19:34
 tags:
   - vue
+  - 指令
   - directive
 categories:
   - 技术分享
-  - VUE自定义指令
+  - Vue
 ---
 
 ### 了解更多
