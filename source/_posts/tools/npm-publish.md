@@ -180,21 +180,19 @@ npm version premajor
 
 ### 过程中的错误记录
 
-<div class="error">
+#### 如何只发布指定文件至`npm`?
 
-> 400 Bad Request
+> 添加 .npmignore 规则同 .gitignore，添加 .gitignore 也是可以的
 
-</div>
+> 或者配置当前包的 package.json 的 files 字段指定
+
+#### 400 Bad Request
 
 `The password you have entered was detected on a public list of known compromised passwords. Please enter a different password.`
 
 重新设个密码... ~~密码设置简单了，抛了个异常...~~
 
-<div class="error">
-
-> 403 Forbidden
-
-</div>
+#### 403 Forbidden
 
 `You do not have permission to publish "test-publish-project". Are you logged in as the correct user?`
 

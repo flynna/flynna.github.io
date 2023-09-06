@@ -345,12 +345,6 @@ lerna publish -y
 }
 ```
 
-#### 如何只发布指定文件至`npm`?
-
-> 添加 .npmignore 规则同 .gitignore，添加 .gitignore 也是可以的
-
-> 或者配置当前包的 package.json 的 files 字段指定
-
 #### 如何将预先存在的独立包收集到`lerna`管理的仓库中?
 
 将带有提交历史记录的包导入 `packages/<directory-name>`. 保留原始提交作者、日期和消息。另外：如果您要在新的 lerna 存储库上导入外部存储库，请记住至少有一次提交。[-> 戳这里](https://github.com/lerna/lerna/tree/main/commands/import#readme)
