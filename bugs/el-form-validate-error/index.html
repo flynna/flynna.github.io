@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#4d1e90"><meta name="author" content="会飞的土豆"><meta name="copyright" content="会飞的土豆"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>ElForm 偶现表单字段校验异常 | 土豆子的躺平日常</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/images/avatar.jpg"><link rel="mask-icon" href="/images/avatar.jpg" color="#4d1e90"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"flynna.github.io","root":"/","title":"相信土豆真的会飞","version":"1.10.4","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="/font/iconfont.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js"></script><script src="/font/iconfont.js"></script><meta name="description" content="浅谈一下elementUI存在很多已知或者未知的问题需要我们去发现并解决，但不可否认它确实在曾经取得过很好的认可。 在使用 el-form-item 组件时，正常情况下，我们经常需要自定义校验规则来规范用户输入，比如这样： &lt;el-form-item prop&#x3D;&quot;name&quot; label&#x3D;&quot;姓名&quot; :rules&#x3D;&quot;rules.name&quot;&gt;   &lt;el-input v-model&#x3D;&quot;for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElForm 偶现表单字段校验异常">
+<meta property="og:url" content="https://flynna.github.io/bugs/el-form-validate-error/index.html">
+<meta property="og:site_name" content="土豆子的躺平日常">
+<meta property="og:description" content="浅谈一下elementUI存在很多已知或者未知的问题需要我们去发现并解决，但不可否认它确实在曾经取得过很好的认可。 在使用 el-form-item 组件时，正常情况下，我们经常需要自定义校验规则来规范用户输入，比如这样： &lt;el-form-item prop&#x3D;&quot;name&quot; label&#x3D;&quot;姓名&quot; :rules&#x3D;&quot;rules.name&quot;&gt;   &lt;el-input v-model&#x3D;&quot;for">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-08T02:32:05.596Z">
+<meta property="article:modified_time" content="2023-09-08T09:33:16.316Z">
+<meta property="article:author" content="会飞的土豆">
+<meta property="article:tag" content="elForm">
+<meta property="article:tag" content="rule">
+<meta property="article:tag" content="validate">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="会飞的土豆"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="会飞的土豆"><span class="site-author-status" title="Looking for dawn.">🍋</span></a><div class="site-author-name"><a href="/about/">会飞的土豆</a></div><span class="site-name">土豆子的躺平日常</span><sub class="site-subtitle">just do it</sub><div class="site-description">星光不问赶路人, 岁月不负有心人</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">53</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">38</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">85</span></a></div><a class="site-state-item hty-icon-button" href="/about/#comment" title="留言板"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:clipboard-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2274105875&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/flynna" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="flynnzhl@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/flynna" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=502374002" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/flynn-zhl" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/482340176" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E8%B0%88%E4%B8%80%E4%B8%8B"><span class="toc-number">1.</span> <span class="toc-text">浅谈一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%A4%8D%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">场景复现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.</span> <span class="toc-text">问题描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E8%A7%A6%E5%8F%91%E6%A0%A1%E9%AA%8C"><span class="toc-number">3.1.</span> <span class="toc-text">不触发校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#refs-childrenRef-no-reactive"><span class="toc-number">3.2.</span> <span class="toc-text">refs.childrenRef no-reactive</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#is-not-a-string-number-array"><span class="toc-number">3.3.</span> <span class="toc-text">is not a string&#x2F;number&#x2F;array</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">解决办法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#4d1e90;"><link itemprop="mainEntityOfPage" href="https://flynna.github.io/bugs/el-form-validate-error/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="会飞的土豆"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="土豆子的躺平日常"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">ElForm 偶现表单字段校验异常</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2023-09-08 10:32:05" itemprop="dateCreated datePublished" datetime="2023-09-08T10:32:05+08:00">2023-09-08</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">2.9k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">13m</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="--text-color:#cc0000" itemprop="url" rel="index"><span itemprop="text">踩坑记录</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/ElementUI/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">ElementUI</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/elForm/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">elForm</span></a><a class="tag-item" href="/tags/rule/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">rule</span></a><a class="tag-item" href="/tags/validate/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">validate</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h3 id="浅谈一下"><a href="#浅谈一下" class="headerlink" title="浅谈一下"></a>浅谈一下</h3><p><code>elementUI</code>存在很多已知或者未知的问题需要我们去发现并解决，但不可否认它确实在曾经取得过很好的认可。</p>
+<p>在使用 <code>el-form-item</code> 组件时，正常情况下，我们经常需要自定义校验规则来规范用户输入，比如这样：</p>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>姓名<span class="token punctuation">"</span></span> <span class="token attr-name">:rules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rules.name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form.name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-input</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>age<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>年龄<span class="token punctuation">"</span></span> <span class="token attr-name">:rules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rules.age<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input-number</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form.age<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-input-number</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">></span></span>
+...</code></pre>
+
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">public</span> rules <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> message<span class="token operator">:</span> <span class="token string">'姓名不能为空'</span><span class="token punctuation">,</span> trigger<span class="token operator">:</span> <span class="token string">'blur'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  age<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> message<span class="token operator">:</span> <span class="token string">'年龄不能为空'</span><span class="token punctuation">,</span> trigger<span class="token operator">:</span> <span class="token string">'change'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>当然你也可以把 <code>rules</code> 绑定到 <code>el-form</code> 上，因为两者在校验过程中起的作用和我所描述的问题并不冲突。</p>
+<p>😏😏😏 问题的产生往往是来自于部分特殊需求：</p>
+<span id="more"></span>
+
+<h3 id="场景复现"><a href="#场景复现" class="headerlink" title="场景复现"></a>场景复现</h3><h4 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h4><ul>
+<li><p><code>el-form-item</code> 包裹的子组件 <code>（自定义的独立页面组件）</code>能够由自身提供校验函数，然后由 <code>el-form-item</code> 触发校验</p>
+</li>
+<li><p>能够根据表单权限（比如只读、可写、隐藏）等动态生成校验规则。<code>（权限可以来自于组件的 prop）</code></p>
+</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>基于性能优化方面考虑，将 <code>rules</code> 绑定到了每个 <code>el-form-item</code> 而非 <code>el-form</code>。</p>
+<blockquote>
+<p><em>如果 <code>rules</code> 绑定到了 <code>el-form</code>，那么当其中某个组件的权限发生变更时，需要重新对整个 form 的 rules 计算并赋值，会影响到整个父级的 wrapper 组件 rerender，当组件数量达到一定程度时(刚好我所在场景下就会有很多…有的多达上千)，会明显感觉到性能差异</em></p>
+</blockquote>
+<p>为了满足上面的需求，<code>rules</code> 是绑定的计算属性，通过计算实时赋予 <code>el-form-item</code> 组件新的 <code>rules</code>，实现如下：</p>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">:prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prop<span class="token punctuation">"</span></span> <span class="token attr-name">:rules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>formItemRules<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CustomChildren</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>childrenRef<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>CustomChildren</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// CustomChildren 是动态组件，根据组件 tag 渲染</span>
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">Ref</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">readonly</span> childrenRef<span class="token operator">!</span><span class="token operator">:</span> CustomChildren<span class="token punctuation">;</span>
+
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">Prop</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">readonly</span> prop<span class="token operator">!</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">Prop</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">readonly</span> privilege<span class="token operator">!</span><span class="token operator">:</span> <span class="token string">'VIEW'</span> <span class="token operator">|</span> <span class="token string">'HIDDEN'</span> <span class="token operator">|</span> <span class="token string">'EDIT'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">get</span> <span class="token function">formItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 只有可编辑时需要 rule</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>privilege <span class="token operator">===</span> <span class="token string">'EDIT'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// getFormItemRules： rules 构建函数，具体实现由需求决定</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getFormItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token function">getFormItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 找到子组件实例 --- 具体的组件层级不做深究，由组件结构决定</span>
+  <span class="token keyword">const</span> controlRef <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>childrenRef<span class="token operator">?.</span>$children<span class="token operator">?.</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> ruleList<span class="token operator">:</span> ValidationRule<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// eg. nameRules，实际实现需要考虑通用性</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>prop <span class="token operator">===</span> <span class="token string">'name'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ruleList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> message<span class="token operator">:</span> <span class="token string">'请输入姓名'</span><span class="token punctuation">,</span> trigger<span class="token operator">:</span> <span class="token string">'blur'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">// ... other prop</span>
+
+  <span class="token comment">// add children customRules</span>
+  ruleList<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">(</span>controlRef<span class="token operator">?.</span>customRules <span class="token operator">??</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// children customRules：</span>
+<span class="token comment">// export default class Upload extends Vue &#123;</span>
+<span class="token comment">//   protected customRules: ValidationRule[] = [</span>
+<span class="token comment">//     &#123;</span>
+<span class="token comment">//       trigger: 'submit',</span>
+<span class="token comment">//       validator: (r, v, callback) => &#123;</span>
+<span class="token comment">//         if (this.uploading) &#123;</span>
+<span class="token comment">//           callback(new Error('文件正在上传中...'));</span>
+<span class="token comment">//         &#125;</span>
+<span class="token comment">//         return callback();</span>
+<span class="token comment">//       &#125;,</span>
+<span class="token comment">//     &#125;,</span>
+<span class="token comment">//   ];</span>
+<span class="token comment">// &#125;</span></code></pre>
+
+<p>是不是看上去没有任何的问题？嘿，我开始也是这么想的…</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><h4 id="不触发校验"><a href="#不触发校验" class="headerlink" title="不触发校验"></a>不触发校验</h4><p>给 <code>el-form-item</code> 绑定了 <code>rules</code> 后，变更了值，但是校验并没有触发，这是为什么呢？</p>
+<ul>
+<li>首先我怀疑是 <code>rules</code> 构建过程中出错了，没有传入正确的 <code>rules</code>.</li>
+</ul>
+<p>通过 <code>console.debug</code> 以及<code>vue-devtools</code> 进行查看，发现 <code>rules</code> 是正确的…那么会不会是出在 <code>el-form-item</code> 自身呢？</p>
+<ul>
+<li>翻阅 <code>el-form-item</code> 源码：<a target="_blank" rel="noopener" href="https://github.com/ElemeFE/element/blob/dev/packages/form/src/form-item.vue">https://github.com/ElemeFE/element/blob/dev/packages/form/src/form-item.vue</a></li>
+</ul>
+<p>发现了这么一句： <del>移除了其他干扰代码 😁😁😁</del></p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">getRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> formRules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">.</span>rules<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> selfRules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>rules<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> requiredRule <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>required <span class="token operator">!==</span> <span class="token keyword">undefined</span> <span class="token operator">?</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>required <span class="token punctuation">&#125;</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> prop <span class="token operator">=</span> <span class="token function">getPropByPath</span><span class="token punctuation">(</span>formRules<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>prop <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    formRules <span class="token operator">=</span> formRules <span class="token operator">?</span> <span class="token punctuation">(</span>prop<span class="token punctuation">.</span>o<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>prop <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">]</span> <span class="token operator">||</span> prop<span class="token punctuation">.</span>v<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>selfRules <span class="token operator">||</span> formRules <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>requiredRule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">addValidateEvents</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> rules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>rules<span class="token punctuation">.</span>length <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>required <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'el.form.blur'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onFieldBlur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'el.form.change'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>onFieldChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>prop<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addValidateEvents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span></code></pre>
+
+<p>从上面可以很清晰的看到，在 <code>el-form-item</code> 组件 <code>mounted</code> 的时候会添加 <code>el.form.blur</code> 和 <code>el.form.change</code> 事件监听，由表单组件内部 <code>dispatch</code>。<code>然而...🤔🤔🤔，它有个很致命的前提：rules.length</code></p>
+<p>继续分析：<code>getRules</code> 中，会优先从 <code>formRules 和 selfRules</code> 读取 rules<code>，然后根据 </code>required<code>决定是否生成</code>require rule<code>，最后返回新的 </code>rules&#96;。</p>
+<p><strong>这也是为什么我说 <code>rules</code> 绑定到 <code>el-form</code> 和 <code>el-form-item</code> 和这个 <code>bug</code> 不冲突</strong></p>
+<p>综上不难发现，由于我前面添加了 <code>formItemRules</code> 在非 <code>EDIT</code> 的时候，<strong>返回了空的 <code>rules</code>，<code>el-form-item</code> 未绑定 <code>change | blur</code> 的回调，导致就算 <code>rules</code> 新增 <code>change</code> 类的 <code>trigger</code>，也不会触发即时校验</strong>。</p>
+<p>为了解决这个问题，我就添加了一个空对象的 <code>rules</code>，即：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">public</span> <span class="token keyword">get</span> <span class="token function">formItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><strong>你以为这个问题就算解决了？其实没有！ 🤗🤗🤗</strong></p>
+<h4 id="refs-childrenRef-no-reactive"><a href="#refs-childrenRef-no-reactive" class="headerlink" title="refs.childrenRef no-reactive"></a><code>refs.childrenRef no-reactive</code></h4><p>由于需要从子组件本身获取自定义的 <code>customRules</code> 属性，所以这里采用了 <code>refs</code> 去找组件实例，从实例属性中获取，然而…<code>refs</code> 并非是响应式的….<del>乌鱼子啊兄弟们 😗😗😗</del></p>
+<p>怎么解决？🤨 它不是响应式的那我们就用其他的代替咯…比如标志位：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">public</span> itemRulesReady <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">get</span> <span class="token function">formItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>itemRulesReady <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>privilege <span class="token operator">===</span> <span class="token string">'EDIT'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getFormItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>itemRulesReady <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>通过标志位 <code>itemRulesReady</code> 来标识组件实例 <code>ref</code> 已完成加载，又由于 <code>itemRulesReady</code> 是响应式的，变更后计算属性就会重新计算，这个问题也就解决了。</p>
+<p>话又说回来，前面为什么我会说“不触发校验”没有彻底解决，请往下看…</p>
+<h4 id="is-not-a-string-number-array"><a href="#is-not-a-string-number-array" class="headerlink" title="is not a string/number/array"></a><code>is not a string/number/array</code></h4><p>虽然…添加了 <code>[&#123;&#125;]</code> 后，会触发即时校验了，但是当我 <code>submit</code> 表单的时候，却出现了 <code>is not a string/number/array</code> 的错误。<code>why???😫😫😫</code></p>
+<p>只有继续调试了，通过 <code>debug</code> 找到出现该校验提示的组件，发现它的 <code>rules</code> 是之前我设置的 <code>[&#123;&#125;]</code>，嘿~难不成是因为我传了空对象的原因？</p>
+<p>点击提交，代码执行调用了 <code>validateForm</code>，而 <code>validateForm</code> 的作用就是触发 <code>elForm.validate</code>，最后抛出校验结果：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">private</span> <span class="token function">validateForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> form <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>formRef <span class="token keyword">as</span> ElForm<span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">[</span><span class="token builtin">boolean</span><span class="token punctuation">,</span> FieldErrorList<span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span> FieldErrorList<span class="token punctuation">]</span><span class="token operator">></span></span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    form<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>isValid<span class="token punctuation">,</span> errors<span class="token punctuation">,</span> isNoWarning<span class="token punctuation">,</span> warnings<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">[</span>isValid<span class="token punctuation">,</span> errors <span class="token keyword">as</span> FieldErrorList<span class="token punctuation">,</span> isNoWarning<span class="token punctuation">,</span> warnings <span class="token keyword">as</span> FieldErrorList<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>去翻源码…找到 <code>el-form</code> 的 <code>validate</code> 方法，<strong>我这里移除了一些干扰代码并写了注释：比如不会进入的 <code>if</code> 语句和其他变量</strong></p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token function">validate</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>fields<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>field <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 这里的 field 为 el-form-item 的 ref 组件实例，调用组件自身的 validate 方法</span>
+    field<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>message<span class="token punctuation">,</span> field<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 当所有组件的 validate 方法执行完成后触发外部回调</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> callback <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">++</span>count <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fields<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 进入 el-form-item 的 validate 方法。 目前就是 age 所在组件的校验异常了...</span>
+<span class="token function">validate</span><span class="token punctuation">(</span>trigger<span class="token punctuation">,</span> callback <span class="token operator">=</span> noop<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> rules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getFilteredRule</span><span class="token punctuation">(</span>trigger<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这个方法是对 rules 进行过滤，返回的其实还是 [&#123;&#125;]</span>
+  <span class="token keyword">const</span> descriptor <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  descriptor<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> rules<span class="token punctuation">;</span> <span class="token comment">// descriptor => &#123; age: [&#123;&#125;] &#125;</span>
+
+  <span class="token keyword">const</span> validator <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AsyncValidator</span><span class="token punctuation">(</span>descriptor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> model <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  model<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span>prop<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fieldValue<span class="token punctuation">;</span> <span class="token comment">// age 值是数字类型 => model: &#123; age: 18 &#125;</span>
+
+  validator<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> firstFields<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>errors<span class="token punctuation">,</span> invalidFields<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>validateMessage <span class="token operator">=</span> errors <span class="token operator">?</span> errors<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>message <span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token comment">// 这里就是触发外部回调，并把校验失败的字段传递出去</span>
+    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>validateMessage<span class="token punctuation">,</span> invalidFields<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>好像越来越接近真相了，有点兴奋…😯😯😯，既然 <code>message</code> 是 <code>asyncValidator</code> 抛出的，那就找到 <code>AsyncValidator</code> 的 <code>validate</code> 实现 <del>篇幅有点长</del>：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// new 了一个 AsyncValidator 实例</span>
+<span class="token function">constructor</span><span class="token punctuation">(</span>descriptor<span class="token operator">:</span> Rules<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span>descriptor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">define</span><span class="token punctuation">(</span>rules<span class="token operator">:</span> Rules<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>rules <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 这一步做完，this.rules = &#123; age: [&#123;&#125;] &#125;</span>
+  Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>rules<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>name <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> item<span class="token operator">:</span> Rule <span class="token operator">=</span> rules<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>rules<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">Array</span><span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">?</span> item <span class="token operator">:</span> <span class="token punctuation">[</span>item<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 下面看 validate 实现，不用太关注其他配置，所以我删了些许代码</span>
+<span class="token function">validate</span><span class="token punctuation">(</span>source_<span class="token operator">:</span> Values<span class="token punctuation">,</span> o<span class="token operator">:</span> <span class="token builtin">any</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> oc<span class="token operator">:</span> <span class="token function-variable function">any</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>Values<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> source<span class="token operator">:</span> Values <span class="token operator">=</span> source_<span class="token punctuation">;</span> <span class="token comment">// &#123; age: 18 &#125;</span>
+  <span class="token keyword">let</span> options<span class="token operator">:</span> ValidateOption <span class="token operator">=</span> o<span class="token punctuation">;</span> <span class="token comment">// &#123; firstFields: true &#125;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>options<span class="token punctuation">.</span>messages<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ... 进入 else，设置 options.messages</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    options<span class="token punctuation">.</span>messages <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">messages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// _messages === defaultMessages ===  如下</span>
+    <span class="token comment">// &#123;</span>
+    <span class="token comment">//   types: &#123;</span>
+    <span class="token comment">//     string: '%s is not a %s',</span>
+    <span class="token comment">//     method: '%s is not a %s (function)',</span>
+    <span class="token comment">//     array: '%s is not an %s',</span>
+    <span class="token comment">//     object: '%s is not an %s',</span>
+    <span class="token comment">//     ...</span>
+    <span class="token comment">//   &#125;,</span>
+    <span class="token comment">//  ...</span>
+    <span class="token comment">// &#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">const</span> series<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> RuleValuePackage<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> keys <span class="token operator">=</span> options<span class="token punctuation">.</span>keys <span class="token operator">||</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>rules<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ['age']</span>
+
+  keys<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>z <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>rules<span class="token punctuation">[</span>z<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// [&#123;&#125;]</span>
+    <span class="token keyword">let</span> value <span class="token operator">=</span> source<span class="token punctuation">[</span>z<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 18</span>
+    arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>r <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">let</span> rule<span class="token operator">:</span> InternalRuleItem <span class="token operator">=</span> r<span class="token punctuation">;</span> <span class="token comment">// &#123;&#125;</span>
+
+      <span class="token comment">// rule.validator: https://github.com/yiminghe/async-validator/blob/HEAD/src/validator/string.ts</span>
+      rule<span class="token punctuation">.</span>validator <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getValidationMethod</span><span class="token punctuation">(</span>rule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// getValidationMethod(rule: InternalRuleItem) &#123;</span>
+      <span class="token comment">//   ...</span>
+      <span class="token comment">//   return validators[this.getType(rule)] || undefined; // asyncValidator 提供的 string 默认校验函数</span>
+      <span class="token comment">// &#125;</span>
+      <span class="token comment">// getType(rule: InternalRuleItem) &#123;</span>
+      <span class="token comment">//   ...</span>
+      <span class="token comment">//   由于 rule 是个 &#123;&#125;，不存在 type, getType(rule) 返回了默认值 string</span>
+      <span class="token comment">//   return rule.type || 'string';</span>
+      <span class="token comment">// &#125;</span>
+      rule<span class="token punctuation">.</span>field <span class="token operator">=</span> z<span class="token punctuation">;</span> <span class="token comment">// age</span>
+      rule<span class="token punctuation">.</span>fullField <span class="token operator">=</span> rule<span class="token punctuation">.</span>fullField <span class="token operator">||</span> z<span class="token punctuation">;</span> <span class="token comment">// age</span>
+      rule<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span>rule<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// string</span>
+      series<span class="token punctuation">[</span>z<span class="token punctuation">]</span> <span class="token operator">=</span> series<span class="token punctuation">[</span>z<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// series: &#123; age: [] &#125;</span>
+      series<span class="token punctuation">[</span>z<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        rule<span class="token punctuation">,</span>
+        value<span class="token punctuation">,</span>
+        source<span class="token punctuation">,</span>
+        field<span class="token operator">:</span> z<span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// series: &#123; age: [&#123; rule: &#123; field: 'age', type: 'string', fullField: 'age'， validator: ... &#125;, value: 18, source: &#123; age: 18 &#125;, field: 'age' &#125;] &#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token function">asyncMap</span><span class="token punctuation">(</span>
+    series<span class="token punctuation">,</span>
+    options<span class="token punctuation">,</span>
+    <span class="token punctuation">(</span>data<span class="token punctuation">,</span> doIt<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> rule <span class="token operator">=</span> data<span class="token punctuation">.</span>rule<span class="token punctuation">;</span> <span class="token comment">// 拿到处理后的 rule: &#123; field: 'age', type: 'string', fullField: 'age'， validator: ... &#125;</span>
+      <span class="token keyword">let</span> res<span class="token operator">:</span> ValidateResult<span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>rule<span class="token punctuation">.</span>asyncValidator<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// ...</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>rule<span class="token punctuation">.</span>validator<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 执行 validate</span>
+        res <span class="token operator">=</span> rule<span class="token punctuation">.</span><span class="token function">validator</span><span class="token punctuation">(</span>rule<span class="token punctuation">,</span> data<span class="token punctuation">.</span>value<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> data<span class="token punctuation">.</span>source<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    results <span class="token operator">=></span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    source<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 进入默认生成的 rule.validator 即 https://github.com/yiminghe/async-validator/blob/HEAD/src/validator/string.ts</span>
+<span class="token keyword">const</span> <span class="token builtin">string</span><span class="token operator">:</span> <span class="token function-variable function">ExecuteValidator</span> <span class="token operator">=</span> <span class="token punctuation">(</span>rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> callback<span class="token punctuation">,</span> source<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> errors<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> validate <span class="token operator">=</span>
+    rule<span class="token punctuation">.</span>required <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token operator">!</span>rule<span class="token punctuation">.</span>required <span class="token operator">&amp;&amp;</span> source<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>rule<span class="token punctuation">.</span>field<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// validate：true</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>validate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isEmptyValue</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token string">'string'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      rules<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> source<span class="token punctuation">,</span> errors<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// ...</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">callback</span><span class="token punctuation">(</span>errors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 进入 rules.type</span>
+<span class="token class-name"><span class="token keyword">const</span></span> type<span class="token operator">:</span> <span class="token function-variable function">ExecuteRule</span> <span class="token operator">=</span> <span class="token punctuation">(</span>rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> source<span class="token punctuation">,</span> errors<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> custom <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'integer'</span><span class="token punctuation">,</span> <span class="token string">'float'</span><span class="token punctuation">,</span> <span class="token string">'array'</span><span class="token punctuation">,</span> <span class="token string">'regexp'</span><span class="token punctuation">,</span> <span class="token string">'object'</span><span class="token punctuation">,</span> <span class="token string">'method'</span><span class="token punctuation">,</span> <span class="token string">'email'</span><span class="token punctuation">,</span> <span class="token string">'number'</span><span class="token punctuation">,</span> <span class="token string">'date'</span><span class="token punctuation">,</span> <span class="token string">'url'</span><span class="token punctuation">,</span> <span class="token string">'hex'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> ruleType <span class="token operator">=</span> rule<span class="token punctuation">.</span>type<span class="token punctuation">;</span>
+
+  <span class="token comment">// 下面都是做值和 ruleType 类型比对，只不过单独把 string 区分开了，string 类型直接通过 typeof 进行比对判断</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>custom<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>ruleType<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ruleType <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> value <span class="token operator">!==</span> rule<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    errors<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+      <span class="token comment">// format 是将 %s is not a %s 中的特殊字符进行替换，返回一个完整的 error message</span>
+      <span class="token function">format</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>types<span class="token punctuation">[</span>ruleType<span class="token punctuation">]</span><span class="token punctuation">,</span> rule<span class="token punctuation">.</span>fullField<span class="token punctuation">,</span> rule<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// age is not a string</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p><code>ok...我滴妈 终于找到源头了...</code></p>
+<p>因为空的 <code>rules: [&#123;&#125;]</code> 会在 <code>asyncValidator</code> 内生成 <code>[&#123; type: string, validator: ... &#125;]</code> 的默认 <code>rule</code>，那么怎么样才能让 <code>rules</code> 同 <code>[&#123;&#125;]</code> 不参与校验，同时也不会导致其他异常出现呢？<strong>总不能根据组件的类型，动态生成 type 再传进去吧？</strong></p>
+<p>细看上述源码，不可避免的会生成 <code>validator</code> 校验方法，目前能做的貌似只有让这个 <code>[&#123;&#125;]</code> 能够不影响校验结果，能够正常使用，那么就得先分析 <code>getValidationMethod</code> 方法了，毕竟所有的 <code>validator</code> 都是基于这个方法获取的：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token function">getValidationMethod</span><span class="token punctuation">(</span>rule<span class="token operator">:</span> InternalRuleItem<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> rule<span class="token punctuation">.</span>validator <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> rule<span class="token punctuation">.</span>validator<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">const</span> keys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>rule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> messageIndex <span class="token operator">=</span> keys<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>messageIndex <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    keys<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>messageIndex<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>keys<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> keys<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'required'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> validators<span class="token punctuation">.</span>required<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> validators<span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span>rule<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token comment">// 之前 [&#123;&#125;] 的步骤就走到这里，也就是返回了基于 string 的默认 validator 函数</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>很明朗了，只要不走默认的 <code>return</code> 貌似都能绕过去…</p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>附上之前的临时解决办法：</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">public</span> <span class="token keyword">get</span> <span class="token function">formItemRules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>终极方案：</p>
+<ul>
+<li><strong>方案一：将 <code>[&#123;&#125;]</code> 替换为 <code>[&#123; required: false &#125;]</code></strong>. （当只提供 <code>required</code>，的时候，<code>asyncValidator</code> 会采用默认的 <code>required</code> 的校验方法，即：）</li>
+</ul>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">if</span> <span class="token punctuation">(</span>keys<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> keys<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'required'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> validators<span class="token punctuation">.</span>required<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// validators.required 如下： 传入 false，永远都不会影响校验</span>
+<span class="token keyword">const</span> required<span class="token operator">:</span> <span class="token function-variable function">ExecuteRule</span> <span class="token operator">=</span> <span class="token punctuation">(</span>rule<span class="token punctuation">,</span> value<span class="token punctuation">,</span> source<span class="token punctuation">,</span> errors<span class="token punctuation">,</span> options<span class="token punctuation">,</span> type<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+    rule<span class="token punctuation">.</span>required <span class="token operator">&amp;&amp;</span>
+    <span class="token punctuation">(</span><span class="token operator">!</span>source<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>rule<span class="token punctuation">.</span>field<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">isEmptyValue</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> type <span class="token operator">||</span> rule<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    errors<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">format</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>messages<span class="token punctuation">.</span>required<span class="token punctuation">,</span> rule<span class="token punctuation">.</span>fullField<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<ul>
+<li><strong>方案二：传入自定义的 <code>validator</code>，将 [{}] 替换为 [{ validator: () &#x3D;&gt; {} }]</strong></li>
+</ul>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><blockquote>
+<p>如果你的项目在开发过程中有使用到 <code>elForm</code>，同时又有动态生成修改 <code>rules</code> 的需求：<strong>首先必须要为绑定的 <code>rules</code> 提供默认值，且默认值不能为空，否则会导致校验异常；其次为满足提供的默认 <code>rules</code> 不影响校验结果，不能直接传入 <code>[&#123;&#125;]</code>，而是采用上面两种解决方法避免影响.</strong></p>
+</blockquote>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>会飞的土豆</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://flynna.github.io/bugs/el-form-validate-error/" title="ElForm 偶现表单字段校验异常">https://flynna.github.io/bugs/el-form-validate-error/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/bugs/notification/" rel="next" title="由 Notification 引起的奇葩问题"><span class="post-nav-text">由 Notification 引起的奇葩问题</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/flynna/flynna.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><style>.utterances {
+  max-width: 100%;
+}</style><script src="https://giscus.app/client.js" data-repo="flynna/flynna.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkzNDE0MDgyNjE=" data-category="Announcements" data-category-id="DIC_kwDOFFl6Bc4CQHuO" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-theme="light" crossorigin="anonymous" async></script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 – 2023 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> 会飞的土豆</span></div><div class="live-time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-07T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = ` ${passDay} 天 ${passHour} 小时 ${passMinute} 分 ${passSecond} 秒`;
+}
+blog_live_time();
+</script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#4d1e90" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
