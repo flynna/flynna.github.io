@@ -7,7 +7,7 @@ tags:
   - notification
 categories:
   - 踩坑记录
-  - Vue
+  - ElementUI
 ---
 
 ### 吐槽
