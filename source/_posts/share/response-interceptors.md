@@ -183,7 +183,7 @@ if (!isErrorShowing) {
 
 可以参考 [axios-retry](https://github.com/softonic/axios-retry) 实现。
 
-##### 基于 `umi` 的请求重试
+##### 基于 `umi-request` 的请求重试
 
 借鉴了 `axios-retry`，具体实现如下：
 
