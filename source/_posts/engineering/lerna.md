@@ -1,5 +1,5 @@
 ---
-title: 基于 lerna 管理 monorepo 的一次实践记录
+title: 基于 Lerna 管理 Monorepo 的一次实践记录
 date: 2022-07-26 20:25:37
 updated: 2022-07-27 14:28:32
 tags:

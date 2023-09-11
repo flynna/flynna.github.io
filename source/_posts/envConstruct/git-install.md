@@ -1,22 +1,22 @@
 ---
-title: git环境搭建，vscode配置git-bash作为默认的terminal
+title: Git 环境搭建
 date: 2022-07-16 19:12:54
 updated: 2022-07-16 19:12:54
 tags:
   - git
   - git-bash
-  - vscode
-  - terminal
 categories:
   - 环境搭建
   - Git
 ---
 
+> `Git` 是一个分布式版本控制系统，用于跟踪文件和代码的变化，协作开发以及管理项目的版本。**是支持版本管理、多人协作、分支管理、轻量级、开源，并拥有丰富的生态系统**
+
+<!-- more -->
+
 ### 工具下载
 
 `傻瓜式安装，选择盘符- 注意安装过程中会提示是否将bash加入右键菜单，勾选`
-
-<!-- more -->
 
 [windows 下载](https://git-scm.com/download/win)
 
@@ -84,26 +84,4 @@ git config --global core.autocrlf false
 
 ```bash
 git config --global https.proxy http:\127.0.0.1:xxx
-```
-
-### `VsCode Terminal`配置为默认`git-bash`
-
-- 找到`Terminal > Integrated > Profiles: Windows`，选择在`settings.json`中编辑。
-
-- 添加`GItBash`子项（注意首字母大写，我配置的时候小写没有生效，不知道是不是版本问题导致的）修改`path`，如下图。
-
-- 配置默认的`terminal`为`GitBash`, 方式一：设置中搜索`Default Profile: Windows`，选择`GitBash`，方式二：直接在`settings`中添加下面配置。
-
-[!['vscode-terminal'](/images/share/git-install-and-terminal-config/p1.png)](/images/share/git-install-and-terminal-config/p1.png)
-
-### 配置指令的`alias`
-
-打开文件`bash.bashrc`，在安装目录下的`Git/etc/bash.bashrc`。
-
-末尾添加：
-
-```bash
-alias blog='cd /e/flynn/flynna.github.io'
-alias serve='yarn serve'
-# ...
 ```

@@ -1,5 +1,5 @@
 ---
-title: vue-directive 指令的自定义封装案例
+title: Vue-Directive 指令的自定义封装案例
 date: 2023-08-15 18:19:34
 updated: 2023-08-15 18:19:34
 tags:

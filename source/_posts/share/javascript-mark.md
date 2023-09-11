@@ -1,5 +1,5 @@
 ---
-title: javascript 中的符号集合
+title: Javascript 中的符号集合
 date: 2022-09-15 15:12:50
 updated: 2022-09-15 15:12:50
 tags:

@@ -1,5 +1,5 @@
 ---
-title: typescript 中的符号集合
+title: Typescript 中的符号集合
 date: 2022-09-15 16:57:42
 updated: 2022-09-15 16:57:42
 tags:

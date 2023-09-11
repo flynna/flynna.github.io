@@ -1,5 +1,5 @@
 ---
-title: git常用alias别名配置
+title: git 常用 alias 别名配置
 date: 2022-08-18 12:48:13
 updated: 2022-08-18 12:48:13
 tags:

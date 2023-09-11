@@ -1,5 +1,5 @@
 ---
-title: Nvm安装及Node环境搭建
+title: Nvm 安装及 Node 环境搭建
 date: 2022-07-13 22:38:09
 updated: 2022-07-13 22:38:09
 tags:
@@ -12,6 +12,12 @@ categories:
   - 环境搭建
   - Node
 ---
+
+`NVM（Node Version Manager）` 是一个用于管理和切换 `Node.js` 版本的开发工具。
+
+它允许开发者在同一台计算机上安装和管理多个 `Node.js` 版本，以便在不同的项目中使用不同的 `Node.js` 版本，或者在同一项目中切换到特定版本以确保兼容性。
+
+<!-- more -->
 
 > ### `nvm`下载及安装
 

@@ -1,5 +1,5 @@
 ---
-title: vue-ts-decorator 类组件装饰器使用
+title: Vue-Ts-Decorator 类组件装饰器使用
 date: 2023-08-22 14:55:07
 updated: 2023-08-22 14:55:07
 tags:

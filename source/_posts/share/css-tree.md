@@ -1,5 +1,5 @@
 ---
-title: 界面化配置自定义的组件css样式
+title: 界面化配置自定义的组件 Css 样式
 date: 2022-12-26 14:24:08
 updated: 2022-12-26 14:24:08
 tags:
@@ -102,8 +102,7 @@ export const styleHelper = {
     class="codemirror_dialog"
     :destroy-on-close="true"
     :close-on-click-modal="false"
-    :visible.sync="customStyleVisible"
-  >
+    :visible.sync="customStyleVisible">
     <VueCodemirror v-model="innerValue" :options="options" />
     <template v-slot:footer>
       <el-button @click="customStyleVisible = false">取 消</el-button>

@@ -1,5 +1,5 @@
 ---
-title: windows环境的git-bash终端美化
+title: windows 环境的 git-bash 终端美化
 date: 2022-07-16 21:01:38
 updated: 2022-07-16 21:01:38
 tags:

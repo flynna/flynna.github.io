@@ -1,5 +1,5 @@
 ---
-title: 需要了解的 typescript 知识点
+title: 需要了解的 Typescript 知识点
 date: 2022-09-14 11:02:26
 updated: 2022-09-14 11:02:26
 tags:

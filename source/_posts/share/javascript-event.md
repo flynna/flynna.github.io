@@ -1,5 +1,5 @@
 ---
-title: javascript中的事件组成、分类、绑定与监听
+title: Javascript 中的事件组成、分类、绑定与监听
 date: 2022-07-19 22:35:26
 updated: 2022-07-19 22:35:26
 tags:

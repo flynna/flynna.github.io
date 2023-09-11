@@ -1,5 +1,5 @@
 ---
-title: git-commit 添加emoji的message显示
+title: git-commit 添加 emoji 的 message 显示
 date: 2022-07-31 19:00:58
 updated: 2022-07-31 19:00:58
 tags:

@@ -1,5 +1,5 @@
 ---
-title: 基于 elementUI 实现的 treeSelect 组件
+title: 基于 ElementUI 实现的 TreeSelect 组件
 date: 2023-07-12 18:52:49
 updated: 2023-07-12 18:52:49
 tags:

@@ -1,5 +1,5 @@
 ---
-title: typescript 高级类型介绍
+title: Typescript 高级类型介绍
 date: 2022-09-15 14:51:52
 updated: 2022-09-15 14:51:52
 tags:

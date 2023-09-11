@@ -1,5 +1,5 @@
 ---
-title: 'Decorator 装饰器的实现原理及实践'
+title: Decorator 装饰器的实现原理及实践
 date: 2023-02-02 16:17:54
 updated: 2023-02-02 16:17:54
 tags:

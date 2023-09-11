@@ -1,5 +1,5 @@
 ---
-title: javascript 作用域理解
+title: Javascript 作用域理解
 date: 2022-07-17 21:34:45
 updated: 2022-07-17 21:34:45
 tags:
