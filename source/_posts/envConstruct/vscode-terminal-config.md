@@ -1,7 +1,7 @@
 ---
 title: Vscode 配置 GitBash 作为默认的 Terminal
-date: 2022-07-16 21:02:05
-updated: 2022-07-16 21:02:05
+date: 2022-07-17 21:02:05
+updated: 2022-07-17 21:02:05
 tags:
   - vscode
   - terminal

@@ -1,7 +1,7 @@
 ---
 title: 如何发布一个 npm-package?
-date: 2022-07-22 10:50:45
-updated: 2022-07-22 10:50:45
+date: 2022-07-28 10:50:45
+updated: 2022-07-28 10:50:45
 tags:
   - npm
   - npm-publish

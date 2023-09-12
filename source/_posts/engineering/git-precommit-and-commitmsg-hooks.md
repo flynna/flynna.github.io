@@ -1,7 +1,7 @@
 ---
 title: 基于 Husky 和 Commitlint 实现 Git 提交规范校验
-date: 2022-08-01 11:07:39
-updated: 2022-08-01 11:07:39
+date: 2022-07-23 11:07:39
+updated: 2022-07-23 11:07:39
 tags:
   - husky
   - git-hooks

@@ -1,7 +1,7 @@
 ---
 title: 基于 Antd-Table 二次封装的 ResizeTable 组件
-date: 2023-07-12 18:47:25
-updated: 2023-07-12 18:47:25
+date: 2023-04-12 18:47:25
+updated: 2023-04-12 18:47:25
 tags:
   - ResizeTable
   - react

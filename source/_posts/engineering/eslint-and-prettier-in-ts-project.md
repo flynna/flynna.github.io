@@ -1,7 +1,7 @@
 ---
 title: 在 Typescript 项目中使用 Eslint 和 Prettier
-date: 2022-08-07 10:27:23
-updated: 2022-08-07 10:27:23
+date: 2022-09-15 10:27:23
+updated: 2022-09-15 10:27:23
 tags:
   - eslint
   - prettier

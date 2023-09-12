@@ -1,7 +1,7 @@
 ---
 title: Hexo-Gitalk 评论模块的自动化创建
-date: 2022-07-11 16:48:14
-updated: 2022-07-11 16:48:14
+date: 2022-07-12 16:48:14
+updated: 2022-07-12 16:48:14
 tags:
   - hexo
   - gitalk

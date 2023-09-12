@@ -1,7 +1,7 @@
 ---
 title: Jest 测试框架搭建和简单使用
-date: 2022-07-19 21:23:31
-updated: 2022-07-19 21:23:31
+date: 2022-11-01 21:23:31
+updated: 2022-11-01 21:23:31
 tags:
   - jest
 categories:

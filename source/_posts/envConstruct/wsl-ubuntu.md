@@ -1,7 +1,7 @@
 ---
 title: 在 Windows 中安装和使用 WSL
-date: 2023-04-18 15:47:54
-updated: 2023-04-18 15:47:54
+date: 2022-07-16 15:47:54
+updated: 2022-07-16 15:47:54
 tags:
   - wsl
   - ubuntu

@@ -1,7 +1,7 @@
 ---
 title: github 上如何为开源项目提交 pr?
-date: 2022-07-24 18:41:36
-updated: 2022-07-24 18:41:36
+date: 2022-07-25 18:41:36
+updated: 2022-07-25 18:41:36
 tags:
   - github
 categories:

@@ -1,7 +1,7 @@
 ---
 title: Javascript 中的继承方案及其实现
-date: 2022-07-14 18:30:31
-updated: 2022-07-14 18:30:31
+date: 2022-08-05 18:30:31
+updated: 2022-08-05 18:30:31
 tags:
   - javascript
   - 继承
