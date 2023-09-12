@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#4d1e90"><meta name="author" content="会飞的土豆"><meta name="copyright" content="会飞的土豆"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Hexo-Gitalk 评论模块的自动初始化 | 土豆子的躺平日常</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#4d1e90"><meta name="author" content="会飞的土豆"><meta name="copyright" content="会飞的土豆"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>基于 Gitalk 实现评论功能 | 土豆子的躺平日常</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
   [".post-card",".markdown-body img"].forEach((target)=> {
     ScrollReveal().reveal(target);
   })
@@ -8,20 +8,22 @@ document.addEventListener("pjax:success", initScrollReveal);
 </script><link rel="icon" type="image/png" href="/images/avatar.jpg"><link rel="mask-icon" href="/images/avatar.jpg" color="#4d1e90"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
     window.Yun = {}
     window.CONFIG = {"hostname":"flynna.github.io","root":"/","title":"相信土豆真的会飞","version":"1.10.4","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://el-bot-api.vercel.app/api/words/young"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":null},"vendors":{"darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="/font/iconfont.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js"></script><script src="/font/iconfont.js"></script><meta name="description" content="目前几乎所有的 hexo 框架都为大家集成了 comment 评论模块，本文主要面向的是这部分已集成 Gitalk 评论的框架。 在该框架基础上，完成 写文章 -&gt; 文章发布 -&gt; issue 初始化 -&gt; 可评论 这个自动化流程。 避免打开新发布的博客文章后，底部提示 未找到相关的 Issues 进行评论 请联系\***\***\* 初始化创建，需要登陆 github，完成初始">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="/font/iconfont.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js"></script><script src="/font/iconfont.js"></script><meta name="description" content="关于 gitalkGitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。  https:&#x2F;&#x2F;gitalk.github.io&#x2F;  特性 使用 GitHub 登录 支持多语言 [en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja] 支持个人或组织 无干扰模式（设置 distractionFreeMode 为 true">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-Gitalk 评论模块的自动初始化">
+<meta property="og:title" content="基于 Gitalk 实现评论功能">
 <meta property="og:url" content="https://flynna.github.io/posts/hexo-gitalk-generate/index.html">
 <meta property="og:site_name" content="土豆子的躺平日常">
-<meta property="og:description" content="目前几乎所有的 hexo 框架都为大家集成了 comment 评论模块，本文主要面向的是这部分已集成 Gitalk 评论的框架。 在该框架基础上，完成 写文章 -&gt; 文章发布 -&gt; issue 初始化 -&gt; 可评论 这个自动化流程。 避免打开新发布的博客文章后，底部提示 未找到相关的 Issues 进行评论 请联系\***\***\* 初始化创建，需要登陆 github，完成初始">
+<meta property="og:description" content="关于 gitalkGitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。  https:&#x2F;&#x2F;gitalk.github.io&#x2F;  特性 使用 GitHub 登录 支持多语言 [en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja] 支持个人或组织 无干扰模式（设置 distractionFreeMode 为 true">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-11T08:48:14.000Z">
-<meta property="article:modified_time" content="2022-07-11T08:48:14.000Z">
+<meta property="og:image" content="https://flynna.github.io/images/posts/hexo-gitalk-generate/p1.png">
+<meta property="article:published_time" content="2022-07-11T03:37:32.000Z">
+<meta property="article:modified_time" content="2022-07-11T03:37:32.000Z">
 <meta property="article:author" content="会飞的土豆">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="gitalk">
 <meta property="article:tag" content="issue">
-<meta name="twitter:card" content="summary"><script>(function() {
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://flynna.github.io/images/posts/hexo-gitalk-generate/p1.png"><script>(function() {
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   const setting = localStorage.getItem('darken-mode') || 'auto'
   if (setting === 'dark' || (prefersDark && setting !== 'light'))
@@ -37,201 +39,252 @@ IconifyProviders = {
     // Wait for 1 second before switching API hosts
     rotate: 1000,
   },
-};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="会飞的土豆"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="会飞的土豆"><span class="site-author-status" title="Looking for dawn.">🍋</span></a><div class="site-author-name"><a href="/about/">会飞的土豆</a></div><span class="site-name">土豆子的躺平日常</span><sub class="site-subtitle">just do it</sub><div class="site-description">星光不问赶路人, 岁月不负有心人</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">56</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">41</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">88</span></a></div><a class="site-state-item hty-icon-button" href="/about/#comment" title="留言板"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:clipboard-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2274105875&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/flynna" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="flynnzhl@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/flynna" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=502374002" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/flynn-zhl" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/482340176" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E5%88%9B%E5%BB%BA-issues-%E8%AF%84%E8%AE%BA%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">自动化创建 issues 评论仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sitemap-%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">sitemap 站点地图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#access-token-%E8%8E%B7%E5%8F%96"><span class="toc-number">1.2.</span> <span class="toc-text">access token 获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">添加脚本文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">脚本执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.5.</span> <span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#4d1e90;"><link itemprop="mainEntityOfPage" href="https://flynna.github.io/posts/hexo-gitalk-generate/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="会飞的土豆"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="土豆子的躺平日常"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Hexo-Gitalk 评论模块的自动初始化</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-07-11 16:48:14" itemprop="dateCreated datePublished" datetime="2022-07-11T16:48:14+08:00">2022-07-11</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.5k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">6m</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%94%B6%E8%97%8F%E5%AE%89%E5%88%A9/" style="--text-color:#4fc08d" itemprop="url" rel="index"><span itemprop="text">收藏安利</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%94%B6%E8%97%8F%E5%AE%89%E5%88%A9/Hexo/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Hexo</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/hexo/" style="--text-color:#0E834D"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">hexo</span></a><a class="tag-item" href="/tags/gitalk/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">gitalk</span></a><a class="tag-item" href="/tags/issue/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">issue</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>目前几乎所有的 <code>hexo</code> 框架都为大家集成了 <code>comment</code> 评论模块，本文主要面向的是这部分已集成 <code>Gitalk</code> 评论的框架。</p>
-<p>在该框架基础上，完成 <code>写文章 -&gt; 文章发布 -&gt; issue 初始化 -&gt; 可评论</code> 这个自动化流程。</p>
-<p>避免打开新发布的博客文章后，<strong>底部提示 <code>未找到相关的 Issues 进行评论 请联系\***\***\* 初始化创建</code>，需要登陆 <code>github</code>，完成初始化后才能使用</strong>。</p>
-<p>​ 咱总不能新写一篇文章就去仓库手动初始化 <code>issue</code> 吧….有点阔怕 🤐🤐🤐</p>
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="会飞的土豆"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="会飞的土豆"><span class="site-author-status" title="Looking for dawn.">🍋</span></a><div class="site-author-name"><a href="/about/">会飞的土豆</a></div><span class="site-name">土豆子的躺平日常</span><sub class="site-subtitle">just do it</sub><div class="site-description">星光不问赶路人, 岁月不负有心人</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">57</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">41</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">88</span></a></div><a class="site-state-item hty-icon-button" href="/about/#comment" title="留言板"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:clipboard-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=2274105875&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/flynna" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="flynnzhl@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/flynna" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=502374002" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/flynn-zhl" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/482340176" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-gitalk"><span class="toc-number">1.</span> <span class="toc-text">关于 gitalk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">1.4.</span> <span class="toc-text">配置项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Github-App%E3%80%81OAuth-App"><span class="toc-number">2.</span> <span class="toc-text">关于 Github App、OAuth App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">第三方登录的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">添加 gitalk 评论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">创建仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-OAuth-App"><span class="toc-number">4.2.</span> <span class="toc-text">创建 OAuth App</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E6%8F%92%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">集成插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-number">5.</span> <span class="toc-text">过程问题记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#4d1e90;"><link itemprop="mainEntityOfPage" href="https://flynna.github.io/posts/hexo-gitalk-generate/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="会飞的土豆"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="土豆子的躺平日常"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">基于 Gitalk 实现评论功能</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <time title="创建时间：2022-07-11 11:37:32" itemprop="dateCreated datePublished" datetime="2022-07-11T11:37:32+08:00">2022-07-11</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">2k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">8m</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%94%B6%E8%97%8F%E5%AE%89%E5%88%A9/" style="--text-color:#4fc08d" itemprop="url" rel="index"><span itemprop="text">收藏安利</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%94%B6%E8%97%8F%E5%AE%89%E5%88%A9/Hexo/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Hexo</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/hexo/" style="--text-color:#0E834D"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">hexo</span></a><a class="tag-item" href="/tags/gitalk/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">gitalk</span></a><a class="tag-item" href="/tags/issue/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">issue</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h3 id="关于-gitalk"><a href="#关于-gitalk" class="headerlink" title="关于 gitalk"></a>关于 gitalk</h3><p><a target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk">Gitalk</a> 是一个基于 <code>GitHub Issue</code> 和 <code>Preact</code> 开发的评论插件。 <a target="_blank" rel="noopener" href="https://gitalk.github.io/"> https://gitalk.github.io/ </a></p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>使用 <code>GitHub</code> 登录</li>
+<li>支持多语言 <code>[en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja]</code></li>
+<li>支持个人或组织</li>
+<li>无干扰模式（设置 <code>distractionFreeMode</code> 为 <code>true</code> 开启）</li>
+<li>快捷键提交评论 （<code>cmd|ctrl + enter</code>）</li>
+</ul>
 <span id="more"></span>
 
-<h3 id="自动化创建-issues-评论仓库"><a href="#自动化创建-issues-评论仓库" class="headerlink" title="自动化创建 issues 评论仓库"></a>自动化创建 <code>issues</code> 评论仓库</h3><h4 id="sitemap-站点地图"><a href="#sitemap-站点地图" class="headerlink" title="sitemap 站点地图"></a><code>sitemap</code> 站点地图</h4><p>站点地图是一种文件，您可以通过该文件列出您网站上的网页，从而将您网站内容的组织架构告知 <code>Google</code> 和其他搜索引擎。搜索引擎网页抓取工具会读取此文件，以便更加智能地抓取您的网站 。</p>
-<p>​ 简言之，就是通过 <code>sitemap</code>，记录下当前博客的所有地址链接(包括所有的文章)，用于后期自动化创建。</p>
-<ul>
-<li>通过插件生成 <code>sitemap</code> ( 在你 <code>hexo</code> 的根目录，执行下面两个命令来安装针对 <code>google</code> 和百度的插件 )：</li>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
+<li><code>cdn</code> 方式直接引入</li>
 </ul>
-<blockquote>
-<p><code>npm i hexo-generator-sitemap hexo-generator-baidu-sitemap --save</code></p>
-</blockquote>
-<ul>
-<li>根目录下的 <code>_config.yml</code> 配置 <code>sitemap</code> 映射</li>
-</ul>
-<pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># hexo sitemap网站地图</span>
-<span class="token key atrule">sitemap</span><span class="token punctuation">:</span>
-  <span class="token key atrule">path</span><span class="token punctuation">:</span> sitemap.xml
-<span class="token key atrule">baidusitemap</span><span class="token punctuation">:</span>
-  <span class="token key atrule">path</span><span class="token punctuation">:</span> baidusitemap.xml</code></pre>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- or --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/gitalk/dist/gitalk.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/gitalk/dist/gitalk.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 
 <ul>
-<li>执行 <code>hexo generate</code> , <code>public</code> 文件夹下面，就会生成 <code>sitemap.xml</code>和<code>baidusitemap.xml </code></li>
+<li><code>npm</code> 方式安装</li>
 </ul>
-<h4 id="access-token-获取"><a href="#access-token-获取" class="headerlink" title="access token 获取"></a><code>access token</code> 获取</h4><p>​ 有了 <code>sitemap</code> 后， 我们需要调用 <code>github</code> 的相关接口，<code>token</code> 必不可少，<code>token</code> 怎么获取呢？ 创建一个就是了</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/settings/tokens/new">创建一个 <code>access token</code></a></li>
-<li><code>access token</code> 配置项： <code>Note</code> 描述(随便写), <code>Select scopes / repo</code> 勾选 <code>repo:status repo_deployment public_repo</code></li>
-<li>将生成的 <code>token</code> 记录下来，方便自动化时使用</li>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i --save gitalk</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">import</span> <span class="token string">'gitalk/dist/gitalk.css'</span>
+<span class="token function">import</span> Gitalk from <span class="token string">'gitalk'</span></code></pre>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul>
+<li>通过 <code>javascript</code> 代码生成插件</li>
 </ul>
-<h4 id="添加脚本文件"><a href="#添加脚本文件" class="headerlink" title="添加脚本文件"></a>添加脚本文件</h4><ul>
-<li>安装脚本文件依赖包</li>
-</ul>
-<blockquote>
-<p><code>npm i request xml-parser yamljs cheerio --save</code></p>
-</blockquote>
-<ul>
-<li>添加 <code>comment.js</code> 脚本代码（部分代码需要结合自身情况修改）</li>
-</ul>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> request <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'request'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> xmlParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'xml-parser'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token constant">YAML</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'yamljs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> cheerio <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cheerio'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 根据自己的情况进行配置</span>
-<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">'GitHub 用户名'</span><span class="token punctuation">,</span> <span class="token comment">// GitHub 用户名</span>
-  <span class="token literal-property property">token</span><span class="token operator">:</span> <span class="token string">'GitHub Token'</span><span class="token punctuation">,</span> <span class="token comment">// GitHub Token</span>
-  <span class="token literal-property property">repo</span><span class="token operator">:</span> <span class="token string">'xxx.github.io'</span><span class="token punctuation">,</span> <span class="token comment">// 存放 issues的git仓库</span>
-  <span class="token comment">// sitemap.xml的路径，commit.js放置在根目录下，无需修改，其他情况自行处理</span>
-  <span class="token literal-property property">sitemapUrl</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./public/sitemap.xml'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">kind</span><span class="token operator">:</span> <span class="token string">'Gitalk'</span><span class="token punctuation">,</span> <span class="token comment">// "Gitalk" or "Gitment"</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> issuesUrl <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://api.github.com/repos/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>config<span class="token punctuation">.</span>username<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>config<span class="token punctuation">.</span>repo<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/issues?access_token=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>config<span class="token punctuation">.</span>token<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-
-<span class="token keyword">let</span> requestGetOpt <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>issuesUrl<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&amp;page=1&amp;per_page=1000</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-  <span class="token literal-property property">json</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token string-property property">'User-Agent'</span><span class="token operator">:</span> <span class="token string">'github-user'</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> requestPostOpt <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token operator">...</span>requestGetOpt<span class="token punctuation">,</span>
-  <span class="token literal-property property">url</span><span class="token operator">:</span> issuesUrl<span class="token punctuation">,</span>
-  <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">form</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'开始初始化评论...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'开始检索链接，请稍等...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> websiteConfig <span class="token operator">=</span> <span class="token constant">YAML</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>
-      fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./_config.yml'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> urls <span class="token operator">=</span> <span class="token function">sitemapXmlReader</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>sitemapUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">共检索到</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>urls<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">个链接</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'开始获取已经初始化的issues:'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> issues <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">send</span><span class="token punctuation">(</span>requestGetOpt<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">已经存在</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>issues<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">个issues</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">let</span> notInitIssueLinks <span class="token operator">=</span> urls<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">link</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-      <span class="token keyword">return</span> <span class="token operator">!</span>issues<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        link <span class="token operator">=</span> <span class="token function">removeProtocol</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> item<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>notInitIssueLinks<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">本次有</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>notInitIssueLinks<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">个链接需要初始化issue：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>notInitIssueLinks<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'开始提交初始化请求, 大约需要40秒...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token comment">/**
-       * 部署好网站后，直接执行start，新增文章并不会生成评论
-       * 经测试，最少需要等待40秒，才可以正确生成， 怀疑跟github的api有关系，没有找到实锤
-       */</span>
-      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">let</span> initRet <span class="token operator">=</span> <span class="token keyword">await</span> notInitIssueLinks<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-          <span class="token keyword">let</span> html <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token operator">...</span>requestGetOpt<span class="token punctuation">,</span> <span class="token literal-property property">url</span><span class="token operator">:</span> item <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">let</span> title <span class="token operator">=</span> cheerio<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">let</span> pathLabel <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">.</span>path<span class="token punctuation">;</span>
-          <span class="token keyword">let</span> body <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>item<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;br>&lt;br></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>websiteConfig<span class="token punctuation">.</span>description<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token keyword">let</span> form <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> body<span class="token punctuation">,</span> <span class="token literal-property property">labels</span><span class="token operator">:</span> <span class="token punctuation">[</span>config<span class="token punctuation">.</span>kind<span class="token punctuation">,</span> pathLabel<span class="token punctuation">]</span><span class="token punctuation">,</span> title <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">return</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token operator">...</span>requestPostOpt<span class="token punctuation">,</span> form <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">已完成</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>initRet<span class="token punctuation">.</span>length<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">个！</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'可以愉快的发表评论了！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">40000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'本次发布无新增页面，无需初始化issue!!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">初始化issue出错，错误如下：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">sitemapXmlReader</span><span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> data <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>file<span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">let</span> sitemap <span class="token operator">=</span> <span class="token function">xmlParser</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> sitemap<span class="token punctuation">.</span>root<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> loc <span class="token operator">=</span> url<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token keyword">return</span> item<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'loc'</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> loc<span class="token punctuation">.</span>content<span class="token punctuation">;</span>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- 添加容器 用于显示评论 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gitalk-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- 代码生成 gitalk 插件 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">var</span> gitalk <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gitalk</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">clientID</span><span class="token operator">:</span> <span class="token string">'GitHub Application Client ID'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">clientSecret</span><span class="token operator">:</span> <span class="token string">'GitHub Application Client Secret'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">repo</span><span class="token operator">:</span> <span class="token string">'GitHub repo'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">owner</span><span class="token operator">:</span> <span class="token string">'GitHub repo owner'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">admin</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'GitHub repo owner and collaborators, only these guys can initialize github issues'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> location<span class="token punctuation">.</span>pathname<span class="token punctuation">,</span> <span class="token comment">// Ensure uniqueness and length less than 50</span>
+    <span class="token literal-property property">distractionFreeMode</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// Facebook-like distraction free mode</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">function</span> <span class="token function">removeProtocol</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> url<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">function</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">request</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> response<span class="token punctuation">,</span> body</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>error<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">resolve</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
+  <span class="token comment">// 实例方法： render 初始化渲染并挂载插件。</span>
+  gitalk<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">'gitalk-container'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 
 <ul>
-<li>修改代码中 <code>config</code> 部分 <code>username</code>、 <code>token</code>、<code> repo</code> (存放 <code>issues</code> 的仓库名称)</li>
+<li>通过组件方式使用</li>
 </ul>
-<h4 id="脚本执行"><a href="#脚本执行" class="headerlink" title="脚本执行"></a>脚本执行</h4><ul>
-<li>执行下面的命令，就可以部署站点，并初始化所有的评论了。</li>
-</ul>
-<pre class="language-bash" data-language="bash"><code class="language-bash">hexo clean
-hexo generate
-hexo deploy
-<span class="token function">node</span> ./comment.js</code></pre>
+<pre class="language-tsx" data-language="tsx"><code class="language-tsx"><span class="token keyword">import</span> GitalkComponent <span class="token keyword">from</span> <span class="token string">'gitalk/dist/gitalk-component'</span><span class="token punctuation">;</span>
 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">GitalkComponent</span></span>
+  <span class="token attr-name">options</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>
+    clientID<span class="token operator">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+    <span class="token comment">// ...</span>
+    <span class="token comment">// 设置项</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+<span class="token punctuation">/></span></span><span class="token punctuation">;</span></code></pre>
+
+<h4 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h4><p><code>非必须项均存在默认值。</code> <a target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">了解更多</a></p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>clientID</strong></td>
+<td>String</td>
+<td><strong>必须</strong></td>
+<td>GitHub Application Client ID.</td>
+</tr>
+<tr>
+<td><strong>clientSecret</strong></td>
+<td>String</td>
+<td><strong>必须</strong></td>
+<td>GitHub Application Client Secret.</td>
+</tr>
+<tr>
+<td><strong>repo</strong></td>
+<td>String</td>
+<td><strong>必须</strong></td>
+<td>GitHub repository.</td>
+</tr>
+<tr>
+<td><strong>owner</strong></td>
+<td>String</td>
+<td><strong>必须</strong></td>
+<td>GitHub repository 所有者，可以是个人或者组织。</td>
+</tr>
+<tr>
+<td><strong>admin</strong></td>
+<td>Array</td>
+<td><strong>必须</strong></td>
+<td>GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>页面的唯一标识。长度必须小于 50，Default: <code>location.href</code>.</td>
+</tr>
+<tr>
+<td><strong>number</strong></td>
+<td>Number</td>
+<td>非必须</td>
+<td>页面的 issue ID 标识，若未定义<code>number</code>属性则会用<code>id</code>定位。</td>
+</tr>
+<tr>
+<td><strong>labels</strong></td>
+<td>Array</td>
+<td>非必须</td>
+<td>GitHub issue 的标签。</td>
+</tr>
+<tr>
+<td><strong>title</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>GitHub issue 的标题。</td>
+</tr>
+<tr>
+<td><strong>body</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>GitHub issue 的内容。</td>
+</tr>
+<tr>
+<td><strong>language</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>语言支持 [en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja]。</td>
+</tr>
+<tr>
+<td><strong>perPage</strong></td>
+<td>Number</td>
+<td>非必须</td>
+<td>每次加载的数据大小，最多 100。</td>
+</tr>
+<tr>
+<td><strong>distractionFreeMode</strong></td>
+<td>Boolean</td>
+<td>非必须</td>
+<td>类似 Facebook 评论框的全屏遮罩效果</td>
+</tr>
+<tr>
+<td><strong>pagerDirection</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>评论排序 <code>last</code>为按评论创建时间倒序，<code>first</code>正序。</td>
+</tr>
+<tr>
+<td><strong>createIssueManually</strong></td>
+<td>Boolean</td>
+<td>非必须</td>
+<td>如果当前页面没有相应的 isssue 且登录的用户属于 admin，则会自动创建 issue。如果设置为 <code>true</code>，则显示一个初始化页面，创建 issue 需要点击 <code>init</code> 按钮。</td>
+</tr>
+<tr>
+<td><strong>proxy</strong></td>
+<td>String</td>
+<td>非必须</td>
+<td>GitHub oauth 请求到反向代理，为了支持 CORS。</td>
+</tr>
+<tr>
+<td><strong>flipMoveOptions</strong></td>
+<td>Object</td>
+<td>非必须</td>
+<td>评论列表的动画</td>
+</tr>
+<tr>
+<td><strong>enableHotKey</strong></td>
+<td>Boolean</td>
+<td>非必须</td>
+<td>启用快捷键(cmd|ctrl + enter) 提交评论</td>
+</tr>
+</tbody></table>
+<p><code>repo: github 仓库的名称(注意不是地址) ...</code></p>
+<p><code>必须项 clientID、clientSecret 是通过 Github App、OAuth App 创建生成的，怎么创建呢?</code></p>
+<h3 id="关于-Github-App、OAuth-App"><a href="#关于-Github-App、OAuth-App" class="headerlink" title="关于 Github App、OAuth App"></a>关于 <code>Github App、OAuth App</code></h3><p>官方的说法：</p>
+<blockquote>
+<p><code>GitHub Apps are first-class actors within GitHub. A GitHub App acts on its own behalf, taking actions via the API directly using its own identity, which means you don&#39;t need to maintain a bot or service account as a separate user.</code></p>
+</blockquote>
+<p>简言之就是： 通过 <code>Github</code> 提供的认证信息去调用 <code>Github API</code>。</p>
 <ul>
-<li>也可以通过在站点根目录的 <code>package.json</code> 文件中，新建 <code>npm</code> 脚本</li>
+<li>两者异同点：</li>
 </ul>
-<pre class="language-json" data-language="json"><code class="language-json"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token property">"talk"</span><span class="token operator">:</span> <span class="token string">"hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy &amp;&amp; node ./comment.js"</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
+<p>​ <code>OAuth App</code> 使用方式和 <code>Github App</code> 非常类似，最大的不同点是 <code>OAuth App</code> 所获取的权限都是<strong>固定</strong>且<strong>只读</strong>的，用户只能读取固定的数据而不能修改数据；而 <code>Github App</code> 几乎可以获取<strong>Github</strong>提供的所有功能权限，且所获取的权限可以被设定为“只读”，“可读可写”和“禁止访问”，对于权限的授权粒度会更细。</p>
+<h3 id="第三方登录的原理"><a href="#第三方登录的原理" class="headerlink" title="第三方登录的原理"></a>第三方登录的原理</h3><p><code>Github App</code> 可以免去用户在第三方页面输入账号密码或者 <code>Token</code> 的操作而完成授权，原理：</p>
 <ul>
-<li>执行 <code>yarn talk</code> 即可一键完成所有操作</li>
+<li><p><code>A</code> 网站跳转到 <code>Github</code> 的授权页面。</p>
+</li>
+<li><p><code>Github</code> 授权页面询问用户：“是否允许 <code>A</code> 网站获取下列权限”，用户点击“允许”，取得授权码。</p>
+</li>
+<li><p><code>Github</code> 授权页面重定向回 <code>A</code> 网站，同时在 <code>URL</code> 上带上授权码。</p>
+</li>
+<li><p><code>A</code> 网站通过 <code>URL</code> 上的授权码往 <code>Github</code> 取回 <code>Token</code>。</p>
+</li>
+<li><p><code>A</code> 网站使用这个 <code>Token</code> 去调用 <code>Github API</code>。</p>
+</li>
 </ul>
-<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p>​ 第一步中的 <code>sitemap</code> 插件会生成的 <code>sitemap.xml</code> 会包含<strong>全部的界面</strong>，包括标签页、关于页等，执行上面的代码也会对这些页面生成评论框(也就是 <code>issue</code>) ，我在原作者的基础上添加了文章的过滤逻辑：</p>
+<p>要完成上述的流程，首先必须先注册一个 <code>Github App</code>。</p>
+<h3 id="添加-gitalk-评论"><a href="#添加-gitalk-评论" class="headerlink" title="添加 gitalk 评论"></a>添加 <code>gitalk</code> 评论</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p><code>gitalk 是基于 Github 的 Issue的，需要指定仓库来承载评论， 当然这个仓库可以是你现有的 blog 仓库，也可以单独创建。</code></p>
+<h4 id="创建-OAuth-App"><a href="#创建-OAuth-App" class="headerlink" title="创建 OAuth App"></a>创建 <code>OAuth App</code></h4><p><code>创建成功后生成 clientID、clientSecret 凭证，供 hexo 获取用于调用 github-api 的 token.</code></p>
 <ul>
-<li>过滤 <code>sitemap</code> 中非文章的链接</li>
+<li><strong>登录</strong> -&gt; 点击头像进入 <strong>Settings</strong> -&gt; 点击进入 <strong>Developer settings</strong> -&gt; 点击左侧 <strong>OAuth App</strong>面板 -&gt; 点击 <strong>New OAuth App</strong></li>
+<li>or <a target="_blank" rel="noopener" href="https://github.com/settings/applications/new">链接</a></li>
 </ul>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// comment.js 42 行</span>
-<span class="token keyword">const</span> oUrls <span class="token operator">=</span> <span class="token function">sitemapXmlReader</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span>sitemapUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// oUrls 即为分析出的网站链接 字符串数组 --- 添加自身的过滤逻辑</span>
-<span class="token comment">// 我这里，访问每个文章时，链接上都有时间信息，即 2021/xx/xx 按照时间格式过滤掉非md文档的链接</span>
-<span class="token keyword">const</span> urls <span class="token operator">=</span> oUrls<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">l</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\/(\d&#123;4&#125;)\/(\d&#123;2&#125;)\/(\d&#123;2&#125;)\/</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-
+<p><a href="/images/posts/hexo-gitalk-generate/p1.png"><img src="/images/posts/hexo-gitalk-generate/p1.png" alt="hexo-gitalk-generate-p1" loading="lazy"></a></p>
+<h4 id="集成插件"><a href="#集成插件" class="headerlink" title="集成插件"></a>集成插件</h4><p><em>部分 <code>hexo</code> 框架已经集成了 <code>gitalk</code> 插件资源，只需要开启配置就可以了，如果是用于别的系统或博客，可以通过上面的“<code>gitalk</code> 安装使用” 完成集成</em>.</p>
+<h3 id="过程问题记录"><a href="#过程问题记录" class="headerlink" title="过程问题记录"></a>过程问题记录</h3><p>按着流程，一步一步小心翼翼的完成所有配置，遇到了一些坑，有因为自己 sb 导致的问题，也有因为版本导致的问题.</p>
 <ul>
-<li><code>id</code> 规则不一样导致的 <code>issues-lable</code> 与文章不匹配</li>
+<li><code>Error: Not Found.</code></li>
 </ul>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 在生成 gitalk时，每一篇文章有一个独立的 id， 规则是不同主题自己定的 即： new Gitalk 传入的 id 规则</span>
-<span class="token comment">// 调整 comment.js 66 行(3-hexo 主题 文章id 通过 decodeURI解过码)</span></code></pre>
+<p>出现这个现象，打开调试模式发现：<code>issues</code> 报错（找不到配置中填写的仓库），验证： 浏览器打开 <code>https://github.com/用户名/你配置的仓库名称</code>, 观察是否能够访问</p>
+<ul>
+<li>打开即显示：未找到相关的 <code>Issues</code> 进行评论 请联系<strong>***</strong> 初始化创建(同时接口报错)</li>
+</ul>
+<p>​ 开始我以为是真的没有初始化创建导致的，点击授权后，<code>redirect</code> 回来 评论这个地方一直 <code>loading</code> 然后报错 <code>403</code>。</p>
+<p>​ 打开调试模式： <code>issues</code> 接口正常，数据为空(现在还没有评论数据，正常),说明仓库没有问题，是创建好的，继续观察有没有接口报错: <code>user</code> 接口报错，说明配置的 <code>github</code> 账号在登录过程中出了问题，没有登录成功， <code>access_token</code> 报错 <code>403</code>。</p>
+<p>​ 通过查阅，最后发现了这个：</p>
+<blockquote>
+<p><code>PSA: Public demo server (cors-anywhere.herokuapp.com) will be very limited by January 2021, 31st</code></p>
+<p><code>The demo server of CORS Anywhere (cors-anywhere.herokuapp.com) is meant to be a demo of this project. But abuse has become so common that the platform where the demo is hosted (Heroku) has asked me to shut down the server, despite efforts to counter the abuse (rate limits in [#45](https://github.com/Rob--W/cors-anywhere/issues/45) and [#164](https://github.com/Rob--W/cors-anywhere/issues/164), and blocking other forms of requests). Downtime becomes increasingly frequent (e.g. recently [#300](https://github.com/Rob--W/cors-anywhere/issues/300), [#299](https://github.com/Rob--W/cors-anywhere/issues/299), [#295](https://github.com/Rob--W/cors-anywhere/issues/295), [#294](https://github.com/Rob--W/cors-anywhere/issues/294), [#287](https://github.com/Rob--W/cors-anywhere/issues/287)) due to abuse and its popularity.</code></p>
+<p><code>To counter this, I will make the following changes:</code></p>
+<p><code>1. The rate limit will decrease from 200 ([#164](https://github.com/Rob--W/cors-anywhere/issues/164)) per hour to 50 per hour.</code> &gt; <code>2. By January 31st, 2021, cors-anywhere.herokuapp.com will stop serving as an open proxy.</code> &gt; <code>3. From February 1st. 2021, cors-anywhere.herokuapp.com will only serve requests after the visitor has completed a challenge: The user (developer) must visit a page at cors-anywhere.herokuapp.com to temporarily unlock the demo for their browser. This allows developers to try out the functionality, to help with deciding on self-hosting or looking for alternatives.</code></p>
+</blockquote>
+<p>​ 因为 <code>gitalk</code> 是基于 <code>cors-anywhere.herokuapp.com</code> 实现的反向代理。<code>cors-anywhere</code> 禁用了， <code>gitalk</code> 没有拿到 <code>github</code> 的授权，导致问题出现。问题原因找到了，那我们怎么解决呢？白嫖公共的 <code>CORS proxy</code> ？ 自己部署？有没有师兄同样遇到了这个问题，怎么解决的？</p>
+<p>白嫖公共的 <code>CORS proxy</code>，得需要改 <code>gitalk.js</code> 的源码，局限性高，并不太好。想着 <code>gitalk</code> 也用到了这个，于是在翻了文档后发现：</p>
+<blockquote>
+<p>在 <code>1.7.2</code> 版本的 <code>gitalk.min.js</code> 中，<code>proxy</code> 已经换成了<br><code>https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</code></p>
+</blockquote>
+<p>更新版本到 <code>1.7.2</code> – 修改 <code>cdn</code> 引用即可</p>
+<pre class="language-diff" data-language="diff"><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> gitalk_js:
+</span><span class="token prefix deleted">-</span><span class="token line"> gitalk_css:
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js
+</span><span class="token prefix inserted">+</span><span class="token line"> gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css</span></span></code></pre>
 
-<pre class="language-diff" data-language="diff"><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> let pathLabel = url.parse(item).path;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> let pathLabel = decodeURI(url.parse(item).pathname);</span></span></code></pre>
-
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://daihaoxin.github.io/post/322747ae.html"><code>nodejs</code> 版本的 <code>Gitalk/Gitment</code> 评论自动初始化</a></p>
-</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>会飞的土豆</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://flynna.github.io/posts/hexo-gitalk-generate/" title="Hexo-Gitalk 评论模块的自动初始化">https://flynna.github.io/posts/hexo-gitalk-generate/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/envConstruct/nvm-and-node-install/" rel="prev" title="Nvm 安装及 Node 环境搭建"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Nvm 安装及 Node 环境搭建</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/tools/hexo/" rel="next" title="Hexo 的服务搭建和简单使用"><span class="post-nav-text">Hexo 的服务搭建和简单使用</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/flynna/flynna.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><style>.utterances {
+<p>​ 除此之外，在另外一篇文章里我介绍了添加自动化创建 <code>Issues</code> 的过程。详见 【<a href="/posts/hexo-gitalk-auto-init">Hexo-Gitalk 评论模块的自动化创建</a>】</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk/issues/429">在授权 gitalk 后出现 403 错误</a></li>
+<li><a target="_blank" rel="noopener" href="https://cuiqingcai.com/30010.html">Gitalk 评论登录 403 问题解决</a></li>
+</ul>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>会飞的土豆</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://flynna.github.io/posts/hexo-gitalk-generate/" title="基于 Gitalk 实现评论功能">https://flynna.github.io/posts/hexo-gitalk-generate/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/hexo-gitalk-auto-init/" rel="prev" title="Hexo-Gitalk 评论模块的自动化创建"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Hexo-Gitalk 评论模块的自动化创建</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/posts/emoji-collect/" rel="next" title="emoji 表情收藏分享"><span class="post-nav-text">emoji 表情收藏分享</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>如果您有任何关于博客内容的相关讨论，欢迎前往 <a href="https://github.com/flynna/flynna.github.io/discussions" target="_blank">GitHub Discussions</a> 与我交流。</span><br></div><style>.utterances {
   max-width: 100%;
 }</style><script src="https://giscus.app/client.js" data-repo="flynna/flynna.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkzNDE0MDgyNjE=" data-category="Announcements" data-category-id="DIC_kwDOFFl6Bc4CQHuO" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-theme="light" crossorigin="anonymous" async></script></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 – 2023 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> 会飞的土豆</span></div><div class="live-time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
   setTimeout(blog_live_time, 1000);
