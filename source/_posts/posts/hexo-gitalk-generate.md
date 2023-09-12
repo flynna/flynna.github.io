@@ -1,7 +1,7 @@
 ---
-title: Hexo-Gitalk 评论模块的自动初始化
-date: 2022-07-11 16:48:14
-updated: 2022-07-11 16:48:14
+title: 基于 Gitalk 实现评论功能
+date: 2022-07-10 11:37:32
+updated: 2022-07-10 11:37:32
 tags:
   - hexo
   - gitalk
@@ -11,219 +11,199 @@ categories:
   - Hexo
 ---
 
-目前几乎所有的 `hexo` 框架都为大家集成了 `comment` 评论模块，本文主要面向的是这部分已集成 `Gitalk` 评论的框架。
+### 关于 gitalk
 
-在该框架基础上，完成 `写文章 -> 文章发布 -> issue 初始化 -> 可评论` 这个自动化流程。
+[Gitalk](https://github.com/gitalk/gitalk) 是一个基于 `GitHub Issue` 和 `Preact` 开发的评论插件。 [ https://gitalk.github.io/ ](https://gitalk.github.io/)
 
-避免打开新发布的博客文章后，**底部提示 `未找到相关的 Issues 进行评论 请联系\***\***\* 初始化创建`，需要登陆 `github`，完成初始化后才能使用**。
+#### 特性
 
-​ 咱总不能新写一篇文章就去仓库手动初始化 `issue` 吧....有点阔怕 🤐🤐🤐
+- 使用 `GitHub` 登录
+- 支持多语言 `[en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja]`
+- 支持个人或组织
+- 无干扰模式（设置 `distractionFreeMode` 为 `true` 开启）
+- 快捷键提交评论 （`cmd|ctrl + enter`）
 
 <!-- more -->
 
-### 自动化创建 `issues` 评论仓库
+#### 安装
 
-#### `sitemap` 站点地图
+- `cdn` 方式直接引入
 
-站点地图是一种文件，您可以通过该文件列出您网站上的网页，从而将您网站内容的组织架构告知 `Google` 和其他搜索引擎。搜索引擎网页抓取工具会读取此文件，以便更加智能地抓取您的网站 。
-
-​ 简言之，就是通过 `sitemap`，记录下当前博客的所有地址链接(包括所有的文章)，用于后期自动化创建。
-
-- 通过插件生成 `sitemap` ( 在你 `hexo` 的根目录，执行下面两个命令来安装针对 `google` 和百度的插件 )：
-
-> `npm i hexo-generator-sitemap hexo-generator-baidu-sitemap --save`
-
-- 根目录下的 `_config.yml` 配置 `sitemap` 映射
-
-```yaml
-# hexo sitemap网站地图
-sitemap:
-  path: sitemap.xml
-baidusitemap:
-  path: baidusitemap.xml
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" />
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<!-- or -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 ```
 
-- 执行 `hexo generate` , `public` 文件夹下面，就会生成 `sitemap.xml`和`baidusitemap.xml `
-
-#### `access token` 获取
-
-​ 有了 `sitemap` 后， 我们需要调用 `github` 的相关接口，`token` 必不可少，`token` 怎么获取呢？ 创建一个就是了
-
-- [创建一个 `access token`](https://github.com/settings/tokens/new)
-- `access token` 配置项： `Note` 描述(随便写), `Select scopes / repo` 勾选 `repo:status repo_deployment public_repo`
-- 将生成的 `token` 记录下来，方便自动化时使用
-
-#### 添加脚本文件
-
-- 安装脚本文件依赖包
-
-> `npm i request xml-parser yamljs cheerio --save`
-
-- 添加 `comment.js` 脚本代码（部分代码需要结合自身情况修改）
-
-```javascript
-const request = require('request');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
-const xmlParser = require('xml-parser');
-const YAML = require('yamljs');
-const cheerio = require('cheerio');
-// 根据自己的情况进行配置
-const config = {
-  username: 'GitHub 用户名', // GitHub 用户名
-  token: 'GitHub Token', // GitHub Token
-  repo: 'xxx.github.io', // 存放 issues的git仓库
-  // sitemap.xml的路径，commit.js放置在根目录下，无需修改，其他情况自行处理
-  sitemapUrl: path.resolve(__dirname, './public/sitemap.xml'),
-  kind: 'Gitalk', // "Gitalk" or "Gitment"
-};
-let issuesUrl = `https://api.github.com/repos/${config.username}/${config.repo}/issues?access_token=${config.token}`;
-
-let requestGetOpt = {
-  url: `${issuesUrl}&page=1&per_page=1000`,
-  json: true,
-  headers: {
-    'User-Agent': 'github-user',
-  },
-};
-let requestPostOpt = {
-  ...requestGetOpt,
-  url: issuesUrl,
-  method: 'POST',
-  form: '',
-};
-
-console.log('开始初始化评论...');
-
-(async function () {
-  console.log('开始检索链接，请稍等...');
-
-  try {
-    let websiteConfig = YAML.parse(
-      fs.readFileSync(path.resolve(__dirname, './_config.yml'), 'utf8'),
-    );
-
-    let urls = sitemapXmlReader(config.sitemapUrl);
-    console.log(`共检索到${urls.length}个链接`);
-
-    console.log('开始获取已经初始化的issues:');
-    let issues = await send(requestGetOpt);
-    console.log(`已经存在${issues.length}个issues`);
-
-    let notInitIssueLinks = urls.filter((link) => {
-      return !issues.find((item) => {
-        link = removeProtocol(link);
-        return item.body.includes(link);
-      });
-    });
-    if (notInitIssueLinks.length > 0) {
-      console.log(`本次有${notInitIssueLinks.length}个链接需要初始化issue：`);
-      console.log(notInitIssueLinks);
-      console.log('开始提交初始化请求, 大约需要40秒...');
-      /**
-       * 部署好网站后，直接执行start，新增文章并不会生成评论
-       * 经测试，最少需要等待40秒，才可以正确生成， 怀疑跟github的api有关系，没有找到实锤
-       */
-      setTimeout(async () => {
-        let initRet = await notInitIssueLinks.map(async (item) => {
-          let html = await send({ ...requestGetOpt, url: item });
-          let title = cheerio.load(html)('title').text();
-          let pathLabel = url.parse(item).path;
-          let body = `${item}<br><br>${websiteConfig.description}`;
-          let form = JSON.stringify({ body, labels: [config.kind, pathLabel], title });
-          return send({ ...requestPostOpt, form });
-        });
-        console.log(`已完成${initRet.length}个！`);
-        console.log('可以愉快的发表评论了！');
-      }, 40000);
-    } else {
-      console.log('本次发布无新增页面，无需初始化issue!!');
-    }
-  } catch (e) {
-    console.log(`初始化issue出错，错误如下：`);
-    console.log(e);
-  } finally {
-  }
-})();
-
-function sitemapXmlReader(file) {
-  let data = fs.readFileSync(file, 'utf8');
-  let sitemap = xmlParser(data);
-  return sitemap.root.children.map(function (url) {
-    let loc = url.children.filter(function (item) {
-      return item.name === 'loc';
-    })[0];
-    return loc.content;
-  });
-}
-
-function removeProtocol(url) {
-  return url.substr(url.indexOf(':'));
-}
-
-function send(options) {
-  return new Promise(function (resolve, reject) {
-    request(options, function (error, response, body) {
-      if (!error) {
-        resolve(body);
-      } else {
-        reject(error);
-      }
-    });
-  });
-}
-```
-
-- 修改代码中 `config` 部分 `username`、 `token`、` repo` (存放 `issues` 的仓库名称)
-
-#### 脚本执行
-
-- 执行下面的命令，就可以部署站点，并初始化所有的评论了。
+- `npm` 方式安装
 
 ```bash
-hexo clean
-hexo generate
-hexo deploy
-node ./comment.js
+npm i --save gitalk
 ```
 
-- 也可以通过在站点根目录的 `package.json` 文件中，新建 `npm` 脚本
-
-```json
-"scripts": {
-    "talk": "hexo clean && hexo generate && hexo deploy && node ./comment.js"
-}
+```bash
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
 ```
 
-- 执行 `yarn talk` 即可一键完成所有操作
+#### 使用
 
-#### 注意事项
+- 通过 `javascript` 代码生成插件
 
-​ 第一步中的 `sitemap` 插件会生成的 `sitemap.xml` 会包含**全部的界面**，包括标签页、关于页等，执行上面的代码也会对这些页面生成评论框(也就是 `issue`) ，我在原作者的基础上添加了文章的过滤逻辑：
-
-- 过滤 `sitemap` 中非文章的链接
-
-```javascript
-// comment.js 42 行
-const oUrls = sitemapXmlReader(config.sitemapUrl);
-// oUrls 即为分析出的网站链接 字符串数组 --- 添加自身的过滤逻辑
-// 我这里，访问每个文章时，链接上都有时间信息，即 2021/xx/xx 按照时间格式过滤掉非md文档的链接
-const urls = oUrls.filter((l) => /\/(\d{4})\/(\d{2})\/(\d{2})\//.test(l));
+```html
+<!-- 添加容器 用于显示评论 -->
+<div id="gitalk-container"></div>
+<!-- 代码生成 gitalk 插件 -->
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'GitHub Application Client ID',
+    clientSecret: 'GitHub Application Client Secret',
+    repo: 'GitHub repo',
+    owner: 'GitHub repo owner',
+    admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false, // Facebook-like distraction free mode
+  });
+  // 实例方法： render 初始化渲染并挂载插件。
+  gitalk.render('gitalk-container');
+</script>
 ```
 
-- `id` 规则不一样导致的 `issues-lable` 与文章不匹配
+- 通过组件方式使用
 
-```javascript
-// 在生成 gitalk时，每一篇文章有一个独立的 id， 规则是不同主题自己定的 即： new Gitalk 传入的 id 规则
-// 调整 comment.js 66 行(3-hexo 主题 文章id 通过 decodeURI解过码)
+```tsx
+import GitalkComponent from 'gitalk/dist/gitalk-component';
+
+<GitalkComponent
+  options={{
+    clientID: '...',
+    // ...
+    // 设置项
+  }}
+/>;
 ```
+
+#### 配置项
+
+`非必须项均存在默认值。` [了解更多](https://github.com/gitalk/gitalk/blob/master/readme-cn.md)
+
+| key                     | type    | required | description                                                                                                                                          |
+| ----------------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **clientID**            | String  | **必须** | GitHub Application Client ID.                                                                                                                        |
+| **clientSecret**        | String  | **必须** | GitHub Application Client Secret.                                                                                                                    |
+| **repo**                | String  | **必须** | GitHub repository.                                                                                                                                   |
+| **owner**               | String  | **必须** | GitHub repository 所有者，可以是个人或者组织。                                                                                                       |
+| **admin**               | Array   | **必须** | GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。                                                                              |
+| **id**                  | String  | 非必须   | 页面的唯一标识。长度必须小于 50，Default: `location.href`.                                                                                           |
+| **number**              | Number  | 非必须   | 页面的 issue ID 标识，若未定义`number`属性则会用`id`定位。                                                                                           |
+| **labels**              | Array   | 非必须   | GitHub issue 的标签。                                                                                                                                |
+| **title**               | String  | 非必须   | GitHub issue 的标题。                                                                                                                                |
+| **body**                | String  | 非必须   | GitHub issue 的内容。                                                                                                                                |
+| **language**            | String  | 非必须   | 语言支持 [en, zh-CN, zh-TW, es-ES, fr, ru, de, pl, ko, fa, ja]。                                                                                     |
+| **perPage**             | Number  | 非必须   | 每次加载的数据大小，最多 100。                                                                                                                       |
+| **distractionFreeMode** | Boolean | 非必须   | 类似 Facebook 评论框的全屏遮罩效果                                                                                                                   |
+| **pagerDirection**      | String  | 非必须   | 评论排序 `last`为按评论创建时间倒序，`first`正序。                                                                                                   |
+| **createIssueManually** | Boolean | 非必须   | 如果当前页面没有相应的 isssue 且登录的用户属于 admin，则会自动创建 issue。如果设置为 `true`，则显示一个初始化页面，创建 issue 需要点击 `init` 按钮。 |
+| **proxy**               | String  | 非必须   | GitHub oauth 请求到反向代理，为了支持 CORS。                                                                                                         |
+| **flipMoveOptions**     | Object  | 非必须   | 评论列表的动画                                                                                                                                       |
+| **enableHotKey**        | Boolean | 非必须   | 启用快捷键(cmd\|ctrl + enter) 提交评论                                                                                                               |
+
+`repo: github 仓库的名称(注意不是地址) ...`
+
+`必须项 clientID、clientSecret 是通过 Github App、OAuth App 创建生成的，怎么创建呢?`
+
+### 关于 `Github App、OAuth App`
+
+官方的说法：
+
+> `GitHub Apps are first-class actors within GitHub. A GitHub App acts on its own behalf, taking actions via the API directly using its own identity, which means you don't need to maintain a bot or service account as a separate user.`
+
+简言之就是： 通过 `Github` 提供的认证信息去调用 `Github API`。
+
+- 两者异同点：
+
+​ `OAuth App` 使用方式和 `Github App` 非常类似，最大的不同点是 `OAuth App` 所获取的权限都是**固定**且**只读**的，用户只能读取固定的数据而不能修改数据；而 `Github App` 几乎可以获取**Github**提供的所有功能权限，且所获取的权限可以被设定为“只读”，“可读可写”和“禁止访问”，对于权限的授权粒度会更细。
+
+### 第三方登录的原理
+
+`Github App` 可以免去用户在第三方页面输入账号密码或者 `Token` 的操作而完成授权，原理：
+
+- `A` 网站跳转到 `Github` 的授权页面。
+
+- `Github` 授权页面询问用户：“是否允许 `A` 网站获取下列权限”，用户点击“允许”，取得授权码。
+
+- `Github` 授权页面重定向回 `A` 网站，同时在 `URL` 上带上授权码。
+
+- `A` 网站通过 `URL` 上的授权码往 `Github` 取回 `Token`。
+
+- `A` 网站使用这个 `Token` 去调用 `Github API`。
+
+要完成上述的流程，首先必须先注册一个 `Github App`。
+
+### 添加 `gitalk` 评论
+
+#### 创建仓库
+
+`gitalk 是基于 Github 的 Issue的，需要指定仓库来承载评论， 当然这个仓库可以是你现有的 blog 仓库，也可以单独创建。`
+
+#### 创建 `OAuth App`
+
+`创建成功后生成 clientID、clientSecret 凭证，供 hexo 获取用于调用 github-api 的 token.`
+
+- **登录** -> 点击头像进入 **Settings** -> 点击进入 **Developer settings** -> 点击左侧 **OAuth App**面板 -> 点击 **New OAuth App**
+- or [链接](https://github.com/settings/applications/new)
+
+[![hexo-gitalk-generate-p1](/images/posts/hexo-gitalk-generate/p1.png)](/images/posts/hexo-gitalk-generate/p1.png)
+
+#### 集成插件
+
+_部分 `hexo` 框架已经集成了 `gitalk` 插件资源，只需要开启配置就可以了，如果是用于别的系统或博客，可以通过上面的“`gitalk` 安装使用” 完成集成_.
+
+### 过程问题记录
+
+按着流程，一步一步小心翼翼的完成所有配置，遇到了一些坑，有因为自己 sb 导致的问题，也有因为版本导致的问题.
+
+- `Error: Not Found.`
+
+出现这个现象，打开调试模式发现：`issues` 报错（找不到配置中填写的仓库），验证： 浏览器打开 `https://github.com/用户名/你配置的仓库名称`, 观察是否能够访问
+
+- 打开即显示：未找到相关的 `Issues` 进行评论 请联系**\*\*\*** 初始化创建(同时接口报错)
+
+​ 开始我以为是真的没有初始化创建导致的，点击授权后，`redirect` 回来 评论这个地方一直 `loading` 然后报错 `403`。
+
+​ 打开调试模式： `issues` 接口正常，数据为空(现在还没有评论数据，正常),说明仓库没有问题，是创建好的，继续观察有没有接口报错: `user` 接口报错，说明配置的 `github` 账号在登录过程中出了问题，没有登录成功， `access_token` 报错 `403`。
+
+​ 通过查阅，最后发现了这个：
+
+> `PSA: Public demo server (cors-anywhere.herokuapp.com) will be very limited by January 2021, 31st`
+>
+> `The demo server of CORS Anywhere (cors-anywhere.herokuapp.com) is meant to be a demo of this project. But abuse has become so common that the platform where the demo is hosted (Heroku) has asked me to shut down the server, despite efforts to counter the abuse (rate limits in [#45](https://github.com/Rob--W/cors-anywhere/issues/45) and [#164](https://github.com/Rob--W/cors-anywhere/issues/164), and blocking other forms of requests). Downtime becomes increasingly frequent (e.g. recently [#300](https://github.com/Rob--W/cors-anywhere/issues/300), [#299](https://github.com/Rob--W/cors-anywhere/issues/299), [#295](https://github.com/Rob--W/cors-anywhere/issues/295), [#294](https://github.com/Rob--W/cors-anywhere/issues/294), [#287](https://github.com/Rob--W/cors-anywhere/issues/287)) due to abuse and its popularity.`
+>
+> `To counter this, I will make the following changes:`
+>
+> `1. The rate limit will decrease from 200 ([#164](https://github.com/Rob--W/cors-anywhere/issues/164)) per hour to 50 per hour.` > `2. By January 31st, 2021, cors-anywhere.herokuapp.com will stop serving as an open proxy.` > `3. From February 1st. 2021, cors-anywhere.herokuapp.com will only serve requests after the visitor has completed a challenge: The user (developer) must visit a page at cors-anywhere.herokuapp.com to temporarily unlock the demo for their browser. This allows developers to try out the functionality, to help with deciding on self-hosting or looking for alternatives.`
+
+​ 因为 `gitalk` 是基于 `cors-anywhere.herokuapp.com` 实现的反向代理。`cors-anywhere` 禁用了， `gitalk` 没有拿到 `github` 的授权，导致问题出现。问题原因找到了，那我们怎么解决呢？白嫖公共的 `CORS proxy` ？ 自己部署？有没有师兄同样遇到了这个问题，怎么解决的？
+
+白嫖公共的 `CORS proxy`，得需要改 `gitalk.js` 的源码，局限性高，并不太好。想着 `gitalk` 也用到了这个，于是在翻了文档后发现：
+
+> 在 `1.7.2` 版本的 `gitalk.min.js` 中，`proxy` 已经换成了
+> `https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token`
+
+更新版本到 `1.7.2` -- 修改 `cdn` 引用即可
 
 ```diff
-- let pathLabel = url.parse(item).path;
-+ let pathLabel = decodeURI(url.parse(item).pathname);
+- gitalk_js:
+- gitalk_css:
++ gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js
++ gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css
 ```
+
+​ 除此之外，在另外一篇文章里我介绍了添加自动化创建 `Issues` 的过程。详见 【[Hexo-Gitalk 评论模块的自动化创建](/posts/hexo-gitalk-auto-init)】
 
 ### 参考
 
-[`nodejs` 版本的 `Gitalk/Gitment` 评论自动初始化](https://daihaoxin.github.io/post/322747ae.html)
+- [在授权 gitalk 后出现 403 错误](https://github.com/gitalk/gitalk/issues/429)
+- [Gitalk 评论登录 403 问题解决](https://cuiqingcai.com/30010.html)
