@@ -250,3 +250,11 @@ aplayer:
 #### 最终效果
 
 [![hexo-music-install-p3](/images/posts/hexo-music-install/p3.png)](/images/posts/hexo-music-install/p3.png)
+
+### 参考：
+
+> [hexo-tag-aplayer](https://easyhexo.com/3-Plugins-use-and-config/3-1-hexo-tag-aplayer/#%E4%BB%8B%E7%BB%8D)
+
+> [APlayer](https://aplayer.js.org/#/zh-Hans/)
+
+> [MetingJS](https://github.com/metowolf/MetingJS)
