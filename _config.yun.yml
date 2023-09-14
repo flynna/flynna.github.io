@@ -24,8 +24,8 @@ banner:
     enable: true
     icon: icon-arrow-down-s-line
 
-# pjax:
-#   enable: true
+pjax:
+  enable: true
 
 # 字数统计
 wordcount:
@@ -332,11 +332,12 @@ types:
     icon: icon-juejin
     color: '#0022FF'
 # aplayer:
-#   global: false
+#   # https://yun.yunyoujun.cn/guide/additional-package-support.html#%E6%92%AD%E6%94%BE%E5%99%A8
+#   global: true
 #   meting: true
 #   # https://github.com/metowolf/MetingJS/tree/v1.2#option
 #   widget:
-#     enable: false
+#     enable: true
 #     autoplay: false
 #     # theme: "#2980b9"
 #     loop: all
@@ -347,11 +348,11 @@ types:
 #     lrcType: 0
 #     listFolded: false
 #     listMaxHeight: 340px
-#     audio:
-#       - name: 星宿计时
-#         artist: 杉田朗/洛天依
-#         url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
-#         cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
+#     # audio:
+#     #   - name: 星宿计时
+#     #     artist: 杉田朗/洛天依
+#     #     url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
+#     #     cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
 #     meting:
 #       enable: true
 #       id: 308168565

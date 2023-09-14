@@ -138,5 +138,5 @@ aplayer:
   cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js
   style_cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.css
   meting: true
-  asset_inject: false
+  # asset_inject: false
   meting_cdn: https://cdn.jsdelivr.net/npm/meting@1/dist/Meting.min.js
