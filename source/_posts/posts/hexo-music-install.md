@@ -2,6 +2,7 @@
 title: 为 Hexo 添加音乐播放器插件
 date: 2023-09-14 14:36:29
 updated: 2023-09-14 14:36:29
+sticky: 9999
 tags:
   - hexo
   - APlayer
