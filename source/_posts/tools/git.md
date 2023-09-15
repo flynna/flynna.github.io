@@ -374,34 +374,36 @@ git checkout -b version1 v1.0.0
 
 ### 代码提交规范
 
-每一次提交代码时都会写`commit message`，如果书写风格不统一，十分不利于阅读和维护。推荐格式：
+每一次提交代码时都会写 `commit message`，如果书写风格不统一，十分不利于阅读和维护。推荐格式：
 
 > type(scope) : subject
 
 `type`：指`commit`的类别，此项必填。
 
-- `feat`: 新功能
+- `feat`: `new feature for the user, not a new feature for build script`
 
-- `fix`: 修复 bug
+- `fix`: `bug fix for the user, not a fix to a build script`
 
-- `docs`: 文档改变
+- `docs`: `changes to the documentation`
 
-- `style`: 代码格式改变
+- `style`: `formatting, missing semi colons, etc; no production code change`
 
-- `refactor`: 某个已有功能重构
+- `refactor`: `refactoring production code, eg. renaming a variable`
 
-- `perf`: 性能优化
+- `perf`: `code or performance optimization`
 
-- `test`: 增加测试
+- `test`: `adding missing tests, refactoring tests; no production code change`
 
-- `build`: 改变了 build 工具 如 grunt 换成了 npm
+- `build`: `change the build tool such as grunt to npm`
 
-- `revert`: 撤销上一次的 commit
+- `revert`: `undo the last commit`
 
-- `chore`: 构建过程或辅助工具的变动
+- `chore`: `updating grunt tasks etc; no production code change`
 
-`scope`：说明`commit`影响的范围，此项选题
+`scope`：说明 `commit` 影响的范围，此项选题
 
-`subject`：`commit`的简短描述，不超过`50`个字符
+`subject`：`commit` 的简短描述，不超过 `50` 个字符
 
-> tips：仅作为一个推荐的规范格式，并不会对你的 commit-message 做任何校验，自觉遵守即可；另外如果你的团队有自己的提交规范，请优先以团队提交规范为主。
+> `tips`：仅作为一个推荐的规范格式，并不会对你的 `commit-message` 做任何校验，自觉遵守即可；另外如果你的团队有自己的提交规范，请优先以团队提交规范为主。
+
+> 参考：[Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
