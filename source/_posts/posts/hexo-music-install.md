@@ -212,11 +212,10 @@ aplayer:
   cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js
   style_cdn: https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.css
   meting: true
-  asset_inject: true
   meting_cdn: https://cdn.jsdelivr.net/npm/meting@1/dist/Meting.min.js
 ```
 
-#### 使用
+#### 通用使用
 
 如果你的博客框架使用的是单页面应用框架实现的，那么你只需要在公共组件`wrapper` 里添加相应挂载的 `dom` 即可，否则，你需要像前面提到的一样，另外手动引入 `pjax` 相关资源文件。
 
@@ -246,6 +245,40 @@ aplayer:
   }
 </style>
 </style>
+```
+
+#### 主题博客中使用
+
+如果你使用了和我相同的博客主题，开启全局播放器只需要修改主题下的 `_config.yml` 文件即可，如下（如果切换页面中断，只需要如上所说开启 `pjax` 即可）：
+
+```yaml
+aplayer:
+  # https://yun.yunyoujun.cn/guide/additional-package-support.html#%E6%92%AD%E6%94%BE%E5%99%A8
+  global: true
+  meting: true
+  # https://github.com/metowolf/MetingJS/tree/v1.2#option
+  widget:
+    enable: true
+    autoplay: false
+    theme: "#1da496"
+    # loop: all
+    order: list
+    preload: auto
+    volume: 0.5
+    mutex: true
+    lrcType: 0
+    listFolded: true
+    listMaxHeight: 340px
+    # audio:
+    #   - name: 星宿计时
+    #     artist: 杉田朗/洛天依
+    #     url: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/audio/star-timer.mp3
+    #     cover: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0.jpg
+    meting:
+      enable: true
+      id: 754708245
+      server: netease
+      type: playlist
 ```
 
 #### 最终效果
