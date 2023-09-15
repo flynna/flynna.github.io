@@ -56,7 +56,7 @@ fi
 
 > 关闭健康检查：在调试模式下，服务可能会进行一些非标准的操作或处于不稳定状态，这可能导致健康检查失败
 
-[![node-remote-debug-p1](/images/share/node-remote-debug/p1.png)](/images/share/node-remote-debug/p1.png)
+[![node-remote-debug-p1](/images/tools/node-remote-debug/p1.png)](/images/tools/node-remote-debug/p1.png)
 
 然后打开服务发现，在高级选项中配置端口映射规则：注意服务端口和主机端口的区别：
 
@@ -64,7 +64,7 @@ fi
 
 > 当容器内的服务监听特定的端口时，主机端口可以将外部请求映射到容器内的服务
 
-[![node-remote-debug-p2](/images/share/node-remote-debug/p2.png)](/images/share/node-remote-debug/p2.png)
+[![node-remote-debug-p2](/images/tools/node-remote-debug/p2.png)](/images/tools/node-remote-debug/p2.png)
 
 然后重启容器服务，接着处理本地 `vscode` 配置：
 
@@ -107,18 +107,18 @@ fi
 
 - 点击 `Open dedicated DevTools for Node`
 
-[![node-remote-debug-p3](/images/share/node-remote-debug/p3.png)](/images/share/node-remote-debug/p3.png)
+[![node-remote-debug-p3](/images/tools/node-remote-debug/p3.png)](/images/tools/node-remote-debug/p3.png)
 
 - 添加连接
 
-[![node-remote-debug-p4](/images/share/node-remote-debug/p4.png)](/images/share/node-remote-debug/p4.png)
+[![node-remote-debug-p4](/images/tools/node-remote-debug/p4.png)](/images/tools/node-remote-debug/p4.png)
 
 - 添加断点
 
-[![node-remote-debug-p5](/images/share/node-remote-debug/p5.png)](/images/share/node-remote-debug/p5.png)
+[![node-remote-debug-p5](/images/tools/node-remote-debug/p5.png)](/images/tools/node-remote-debug/p5.png)
 
 当用户下次访问该服务时，效果如下：
 
-[![node-remote-debug-p6](/images/share/node-remote-debug/p6.png)](/images/share/node-remote-debug/p6.png)
+[![node-remote-debug-p6](/images/tools/node-remote-debug/p6.png)](/images/tools/node-remote-debug/p6.png)
 
 这种方式虽然也能实现远程调试的效果，但是它是基于`build`后的产物调试的，不方便阅读和定位.

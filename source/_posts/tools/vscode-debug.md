@@ -63,13 +63,13 @@ node test.js
 
 如下图所示，选择调试器 `Nodejs` 开始调试，或者键盘键入 `F5` 启动。这种方式是最简单的一种，使用了 `vscode` 内置的调试配置，不会生成 `launch.json`.
 
-[![vscode-debug-p1](/images/share/vscode-debug/p1.png)](/images/share/vscode-debug/p1.png)
+[![vscode-debug-p1](/images/tools/vscode-debug/p1.png)](/images/tools/vscode-debug/p1.png)
 
 #### 调试面板功能介绍和使用
 
 启动调试后，面板会包含：代码区、调试工具栏、调试输出面板、左侧的调试工具栏等等，具体功能介绍如下图所示：
 
-[![vscode-debug-p2](/images/share/vscode-debug/p2.png)](/images/share/vscode-debug/p2.png)
+[![vscode-debug-p2](/images/tools/vscode-debug/p2.png)](/images/tools/vscode-debug/p2.png)
 
 ### 自定义调试 `launch.json` 配置介绍
 
@@ -87,7 +87,7 @@ node test.js
 
 > `.vscode` 是 `vscode` 的配置文件夹
 
-[![vscode-debug-p3](/images/share/vscode-debug/p3.png)](/images/share/vscode-debug/p3.png)
+[![vscode-debug-p3](/images/tools/vscode-debug/p3.png)](/images/tools/vscode-debug/p3.png)
 
 右下角的 `添加配置` 按钮，可以很方便的为我们自动化添加各种调试预配置。
 
@@ -175,7 +175,7 @@ node test.js
 
 编辑断点，可以选择“表达式”、“命中次数”和“日志信息”，如下图所示：
 
-[![vscode-debug-p4](/images/share/vscode-debug/p4.png)](/images/share/vscode-debug/p4.png)
+[![vscode-debug-p4](/images/tools/vscode-debug/p4.png)](/images/tools/vscode-debug/p4.png)
 
 - 表达式：当条件表达式值为真时，断点才会生效，否则断点不会生效. 例如：`req.headers['user-agent'].includes('iPhone')`，又或者 `i === 50`
 
