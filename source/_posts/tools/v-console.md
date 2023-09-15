@@ -103,8 +103,6 @@ console.clear();
 
 ---
 
-本文旨在介绍该工具在移动开发过程中带来的便利，方便后续有此需求是进行调试。详细文档和插件实现以及其原理见官方文档：
-
 ### 文档
 
 #### `vConsole` 本体
@@ -132,4 +130,171 @@ console.clear();
 
 ---
 
-> 文档和第三方插件列表摘自：官方文档：[https://github.com/Tencent/vConsole/blob/dev/README_CN.md#L160-L186](https://github.com/Tencent/vConsole/blob/dev/README_CN.md#L160-L186)
+### 源码剖析
+
+#### 思路
+
+- 通过 `window` 监听页面加载，加载完成后向页面追加调试相关的 `DOM`。
+
+- 类似 `log、network` 面板等相关的渲染显示，则是通过重写 `window` 下对应的系统方法，追加一些自定义操作完成。
+
+#### 原理实现
+
+##### 构造函数
+
+入口在 `src/core/core.js`，采用单例模式，只允许有一个 `vconsole` 实例：
+
+```js
+// ...
+class VConsole {
+  constructor(opt) {
+    if (!!$.one(VCONSOLE_ID)) {
+      console.debug('vConsole is already exists.');
+      return;
+    }
+// ...
+```
+
+`vConsole` 面板里的模块则是通过插件的形式集成进去的独立模块：
+
+```js
+// built-in plugins
+import VConsolePlugin from '../lib/plugin.js';
+import VConsoleLogPlugin from '../log/log.js';
+import VConsoleDefaultPlugin from '../log/default.js';
+import VConsoleSystemPlugin from '../log/system.js';
+import VConsoleNetworkPlugin from '../network/network.js';
+import VConsoleElementPlugin from '../element/element.js';
+import VConsoleStoragePlugin from '../storage/storage.js';
+```
+
+##### 加载 `DOM`
+
+监听 `window` 事件，确定加载结束后挂载 `vconsole` 相关 `dom`：
+
+```js
+// try to init
+let _onload = function () {
+  if (that.isInited) {
+    return;
+  }
+  that._render();
+  that._mockTap();
+  that._bindEvent();
+  that._autoRun();
+};
+if (document !== undefined) {
+  if (document.readyState === 'loading') {
+    $.bind(window, 'DOMContentLoaded', _onload);
+  } else {
+    _onload();
+  }
+} else {
+  // if document does not exist, wait for it
+  let _timer;
+  let _pollingDocument = function () {
+    if (!!document && document.readyState == 'complete') {
+      _timer && clearTimeout(_timer);
+      _onload();
+    } else {
+      _timer = setTimeout(_pollingDocument, 1);
+    }
+  };
+  _timer = setTimeout(_pollingDocument, 1);
+}
+```
+
+##### `Log` 模块实现
+
+通过重写 `window.console..` 的相关方法，执行自己的 `printLog` 并记录，最后渲染到 `vconsole` 面板：
+
+```js
+// src/log/log.js
+// ...
+/**
+ * replace window.console with vConsole method
+ * @private
+ */
+mockConsole() {
+  const that = this;
+  const methodList = ['log', 'info', 'warn', 'debug', 'error'];
+
+  if (!window.console) {
+    window.console = {};
+  } else {
+    methodList.map(function (method) {
+      that.console[method] = window.console[method];
+    });
+    that.console.time = window.console.time;
+    that.console.timeEnd = window.console.timeEnd;
+    that.console.clear = window.console.clear;
+  }
+
+  methodList.map(method => {
+    window.console[method] = (...args) => {
+      this.printLog({
+        logType: method,
+        logs: args,
+      });
+    };
+  });
+  // ...
+}
+```
+
+当 `vconsole destroy` 后，恢复 `window.console` 方法：
+
+```js
+// src/log/log.js
+onRemove() {
+  window.console.log = this.console.log;
+  window.console.info = this.console.info;
+  window.console.warn = this.console.warn;
+  window.console.debug = this.console.debug;
+  window.console.error = this.console.error;
+  window.console.time = this.console.time;
+  window.console.timeEnd = this.console.timeEnd;
+  window.console.clear = this.console.clear;
+  this.console = {};
+
+  const idx = ADDED_LOG_TAB_ID.indexOf(this.id);
+  if (idx > -1) {
+    ADDED_LOG_TAB_ID.splice(idx, 1);
+  }
+}
+```
+
+##### `Network` 模块实现
+
+也是重写了原生的 `window.XMLHttpRequest.prototype.open/send` 等方法，添加了拦截器：
+
+```js
+// src/network/network.js
+/**
+ * mock ajax request
+ * @private
+ */
+mockAjax() {
+  let _XMLHttpRequest = window.XMLHttpRequest;
+  if (!_XMLHttpRequest) { return; }
+
+  let that = this;
+  let _open = window.XMLHttpRequest.prototype.open,
+      _send = window.XMLHttpRequest.prototype.send;
+  that._open = _open;
+  that._send = _send;
+
+  // mock open()
+  window.XMLHttpRequest.prototype.open = function() {
+    let XMLReq = this;
+    let args = [].slice.call(arguments),
+  // ...
+  // mock send()
+  window.XMLHttpRequest.prototype.send = function() {
+    let XMLReq = this;
+    let args = [].slice.call(arguments),
+        data = args[0];
+    // ...
+```
+
+> 篇幅原因就不完整呈现源码了，另外文档和第三方插件列表摘自：官方文档：[https://github.com/Tencent/vConsole/blob/dev/README_CN.md#L160-L186](https://github.com/Tencent/vConsole/blob/dev/README_CN.md#L160-L186)
