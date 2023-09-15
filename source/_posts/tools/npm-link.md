@@ -7,7 +7,7 @@ tags:
   - npm-link
 categories:
   - 工具学习
-  - Npm
+  - 包管理器
 ---
 
 ### 浅谈一下

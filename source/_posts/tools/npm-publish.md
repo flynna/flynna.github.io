@@ -7,7 +7,7 @@ tags:
   - npm-publish
 categories:
   - 工具学习
-  - Npm
+  - 包管理器
 ---
 
 ### 什么是`npm-package`？

@@ -6,7 +6,7 @@ tags:
   - debug
   - 远程调试
 categories:
-  - 技术分享
+  - 工具学习
   - 程序调试
 ---
 

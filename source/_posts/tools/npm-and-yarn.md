@@ -8,7 +8,7 @@ tags:
   - yarn
 categories:
   - 工具学习
-  - Npm/Yarn
+  - 包管理器
 ---
 
 > ### `npm，npx`概念及指令简单介绍
