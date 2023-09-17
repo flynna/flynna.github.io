@@ -105,6 +105,32 @@ computed: {
 }
 ```
 
+#### 为什么要提供 `install`?
+
+细看 `vue` 源码，可以发现，`Vue.use` 调用后执行了插件提供的 `install` 方法，或者当插件本身是函数的时候，无需提供 `install`。此外在执行前，内置了 `this` 参数，也就是 `Vue` 构造器作为插件初始化的第一个参数：
+
+```ts
+import { toArray } from '../util/index';
+export function initUse(Vue: GlobalAPI) {
+  Vue.use = function (plugin: Function | Object) {
+    const installedPlugins = this._installedPlugins || (this._installedPlugins = []);
+    if (installedPlugins.indexOf(plugin) > -1) {
+      return this;
+    }
+    // additional parameters
+    const args = toArray(arguments, 1);
+    args.unshift(this);
+    if (typeof plugin.install === 'function') {
+      plugin.install.apply(plugin, args);
+    } else if (typeof plugin === 'function') {
+      plugin.apply(null, args);
+    }
+    installedPlugins.push(plugin);
+    return this;
+  };
+}
+```
+
 ### 差异总结
 
 - `Vue.component` 用于注册全局组件，以便在整个应用程序中使用。
