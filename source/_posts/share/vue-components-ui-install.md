@@ -236,30 +236,34 @@ const install: InstallFunction = function (Vue, options = {}) {
   // -------------------------------------------------------
 
   // vue3 使用 app.config.globalProperties 替代 prototype
-  Vue.config.globalProperties.$vui = {
-    ...options,
-    size: options.size || 'middle',
-    theme: options.theme || 'light',
-  };
-  // 组件内部 使用以下方式读取：
-  // import { getCurrentInstance } from 'vue';
+  if (Vue.config.globalProperties) {
+    Vue.config.globalProperties.$vui = {
+      ...options,
+      size: options.size || 'middle',
+      theme: options.theme || 'light',
+    };
+    // 组件内部 使用以下方式读取：
+    // import { getCurrentInstance } from 'vue';
 
-  // const app = getCurrentInstance();
-  // const vuiConfig = app?.appContext.config.globalProperties.$vui
-
-  // --------------------------------------------------------
-
-  // vue2 版本的全局配置
-  // Vue.prototype.$vui = {
-  //   ...options,
-  //   size: options.size || 'middle',
-  //   theme: options.theme || 'light',
-  // };
+    // const app = getCurrentInstance();
+    // const vuiConfig = app?.appContext.config.globalProperties.$vui
+  } else {
+    // vue2 版本的全局配置
+    Vue.prototype.$vui = {
+      ...options,
+      size: options.size || 'middle',
+      theme: options.theme || 'light',
+    };
+  }
 };
 
 // 直接给浏览器或 AMD loader 使用
 if (typeof window !== 'undefined' && (window as Window).Vue) {
   install((window as Window).Vue);
+
+  if (install.installed) {
+    install.installed = false;
+  }
 }
 
 export default {
