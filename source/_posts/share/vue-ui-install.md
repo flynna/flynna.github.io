@@ -135,7 +135,7 @@ categories:
 <template>
   <div>
     <!-- vue3 the $listeners is deprecated -->
-    <button class="vui-button" v-bind="$attrs">
+    <button type="button" class="vui-button" v-bind="$attrs">
       <slot></slot>
     </button>
   </div>
