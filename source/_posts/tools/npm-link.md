@@ -55,7 +55,7 @@ npm link
 
 结果预览：
 
-[![npm-link-p1](/images/share/npm-link/p1.png)](/images/share/npm-link/p1.png)
+[![npm-link-p1](/images/tools/npm-link/p1.png)](/images/tools/npm-link/p1.png)
 
 链接的位置就是你`nodejs`安装目录下的`node_modules`目录下，指向了当前的组件。
 
@@ -70,8 +70,8 @@ npm link my-test-component-zhl
 
 结果预览：
 
-[![npm-link-p2](/images/share/npm-link/p2.png)](/images/share/npm-link/p2.png)
-[![npm-link-p3](/images/share/npm-link/p3.png)](/images/share/npm-link/p3.png)
+[![npm-link-p2](/images/tools/npm-link/p2.png)](/images/tools/npm-link/p2.png)
+[![npm-link-p3](/images/tools/npm-link/p3.png)](/images/tools/npm-link/p3.png)
 
 实际使用调试：
 
@@ -79,7 +79,7 @@ npm link my-test-component-zhl
 require('my-test-component-zhl');
 ```
 
-[![npm-link-p4](/images/share/npm-link/p4.png)](/images/share/npm-link/p4.png)
+[![npm-link-p4](/images/tools/npm-link/p4.png)](/images/tools/npm-link/p4.png)
 
 #### 调试
 
@@ -87,7 +87,7 @@ require('my-test-component-zhl');
 
 效果：
 
-[![npm-link-p5](/images/share/npm-link/p5.png)](/images/share/npm-link/p5.png)
+[![npm-link-p5](/images/tools/npm-link/p5.png)](/images/tools/npm-link/p5.png)
 
 #### 解除`link`
 

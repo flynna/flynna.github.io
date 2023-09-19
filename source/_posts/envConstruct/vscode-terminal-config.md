@@ -32,7 +32,7 @@ categories:
 
 - 配置默认的`terminal`为`GitBash`, 方式一：设置中搜索`Default Profile: Windows`，选择`GitBash`，方式二：直接在`settings`中添加下面配置。
 
-[!['vscode-terminal'](/images/share/git-install-and-terminal-config/p1.png)](/images/share/git-install-and-terminal-config/p1.png)
+[!['vscode-terminal'](/images/envConstruct/vscode-terminal-config/p1.png)](/images/envConstruct/vscode-terminal-config/p1.png)
 
 ### 配置指令的`alias`
 

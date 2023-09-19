@@ -74,7 +74,7 @@ coverage
 
 > lerna init \-\-independent
 
-[![lerna-p1](/images/share/lerna/p1.png)](/images/share/lerna/p1.png)
+[![lerna-p1](/images/engineering/lerna/p1.png)](/images/engineering/lerna/p1.png)
 
 #### 完善`lerna.json`配置
 

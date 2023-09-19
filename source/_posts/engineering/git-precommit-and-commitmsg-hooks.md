@@ -85,8 +85,8 @@ npm set-script lint "vue-cli-service lint"
 
 > 钩子里配置的`npm run lint`，请确认你的项目已经包含了`lint`校验配置，并自行安装`devDependencies`。~~只是个栗子，不一定就是做`lint`校验 ❤❤❤~~ 效果图如下：
 
-[![git-precommit-and-commitmsg-hooks-p1](/images/share/git-precommit-and-commitmsg-hooks/p1.png)](/images/share/git-precommit-and-commitmsg-hooks/p1.png)
-[![git-precommit-and-commitmsg-hooks-p2](/images/share/git-precommit-and-commitmsg-hooks/p2.png)](/images/share/git-precommit-and-commitmsg-hooks/p2.png)
+[![git-precommit-and-commitmsg-hooks-p1](/images/engineering/git-precommit-and-commitmsg-hooks/p1.png)](/images/engineering/git-precommit-and-commitmsg-hooks/p1.png)
+[![git-precommit-and-commitmsg-hooks-p2](/images/engineering/git-precommit-and-commitmsg-hooks/p2.png)](/images/engineering/git-precommit-and-commitmsg-hooks/p2.png)
 
 ### `pre-commit`搭配`lint-staged`
 
@@ -202,7 +202,7 @@ yarn add -D commitizen cz-conventional-changelog
 
 后续`commit`，就可以使用`yarn commit`进行`commit`，其会自动做出如下提示：
 
-[![git-precommit-and-commitmsg-hooks-p3](/images/share/git-precommit-and-commitmsg-hooks/p3.png)](/images/share/git-precommit-and-commitmsg-hooks/p3.png)
+[![git-precommit-and-commitmsg-hooks-p3](/images/engineering/git-precommit-and-commitmsg-hooks/p3.png)](/images/engineering/git-precommit-and-commitmsg-hooks/p3.png)
 
 <div class="warning">
 
