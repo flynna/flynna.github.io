@@ -4,7 +4,8 @@ date: 2023-09-17 19:45:31
 updated: 2023-09-17 19:45:31
 tags:
   - vue
-  - UI
+  - vue3
+  - 插件注册
 categories:
   - 技术分享
   - Vue
@@ -12,7 +13,13 @@ categories:
 
 在此之前，你需要先了解如何发布一个 `npm`，参考 [如何发布一个 npm-package?](/tools/npm-publish)，以及 `Vue.use 和 Vue.component` 实现，参考 [Vue.component 和 Vue.use 两者之间的区别](/share/vue-component-vs-use)。
 
-在下一篇文章中，我将学习并介绍三方库说明文档搭建：~~先空着。。。🙄🙄🙄~~
+在下一篇文章中，我将学习并介绍三方库说明文档搭建。
+
+<div class="danger">
+
+> 注意：从 `UI` 组件功能实现到打包构建，本文主要是均是针对 `Vue3` 写的，如果你需要在 `Vue2` 中使用，需要单独提供可用于 `Vue2` 的 `UI` 库...
+
+</div>
 
 <!-- more -->
 
@@ -225,8 +232,6 @@ const vuiComponents = [VuiButton];
 
 // 支持 use.use 全局注册所有组件
 const install: InstallFunction = function (Vue, options = {}) {
-  if (install.installed) return;
-
   // 因为组件内部实现了 install 方法，所以可以直接 Vue.use
   vuiComponents.forEach((component) => Vue.use(component));
 
@@ -247,22 +252,34 @@ const install: InstallFunction = function (Vue, options = {}) {
 
     // const app = getCurrentInstance();
     // const vuiConfig = app?.appContext.config.globalProperties.$vui
-  } else {
-    // vue2 版本的全局配置
-    Vue.prototype.$vui = {
-      ...options,
-      size: options.size || 'middle',
-      theme: options.theme || 'light',
-    };
   }
+
+  // vue2 版本的全局配置
+  // Vue.prototype.$vui = {
+  //   ...options,
+  //   size: options.size || 'middle',
+  //   theme: options.theme || 'light',
+  // };
 };
 
-// 直接给浏览器或 AMD loader 使用
-if (typeof window !== 'undefined' && (window as Window).Vue) {
-  install((window as Window).Vue);
+// tips: 下面逻辑主要是为 vue2 提供，直接给浏览器或 AMD loader 使用，引入 script 即可完成注册
+{
+  const contentWindow = globalThis as unknown as Window;
 
-  if (install.installed) {
-    install.installed = false;
+  if (contentWindow?.Vue?.use) {
+    install(contentWindow.Vue);
+  }
+}
+
+//! 当在 Vue3 项目中作为 script 引入时：
+{
+  // 方案一: 推荐 --- 先引入 vue3 和 vui 的 script，然后通过 `app.use(window.Vui)` 来手动注册
+
+  // 方案二：将实例化后的 app 作为属性挂载到 window 上，例如 window.__VUE__，详见 ../docs/vue3Demo.html
+  const contentWindow = globalThis as unknown as Window;
+
+  if (contentWindow && !contentWindow.Vue?.use && contentWindow.__VUE__?.use) {
+    install(contentWindow.__VUE__);
   }
 }
 
@@ -283,49 +300,143 @@ export default {
 
 </div>
 
-### 组件本地测试
+### 打包构建 `umd`
 
-在 `example/main.ts` 中，引入并注册组件库：
+脚手架提供的 `build、build-only` 指令默认是打包的 `example` 内的资源（因为前面调整过 `index.html` 的入口路径）。
+
+为了保留对 `example` 资源的 `build` 构建，单独提供一个文件用于打包组件库相关的资源：
+
+#### 添加组件库打包配置文件 `viteLib.config.ts`
+
+`别忘记把打包后的 lib 文件夹添加到 .gitignore`
 
 ```ts
-// 测试自定义的组件
-import Vui from '../src/index';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
-const app = createApp(App);
-
-app.use(Vui);
-// ...
-
-app.mount('#app');
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue(), vueJsx()],
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
+  build: {
+    outDir: 'lib',
+    lib: {
+      // Could also be a dictionary or array of multiple entry points
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'Vui',
+      // the proper extensions will be added
+      fileName: 'vui',
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        format: 'umd', // 输出格式为 UMD
+        name: 'Vui', // UMD 全局变量名称 --- 未指定则使用 lib.name
+        globals: {
+          vue: 'Vue', // key: 库中的模块依赖项的名称, value: 在浏览器中访问这个模块依赖项时应该使用的全局变量的名称
+        },
+      },
+    },
+  },
+});
 ```
 
-在 `App.vue` 中使用组件库：
+> 因为 `UI` 库是由 `Vue3` 写的，使用一般也是在该环境下，为了避免造成产物冗余，需要在 `external` 中添加上外部化的依赖，以在打包的时候剔除。
+>
+> 当 `output` 产物是 `umd` 格式时，可以直接通过 `script` 引入使用，所以需要提供一个全局变量，支持开发者通过全局变量来访问库的一些功能。配置用于指定模块依赖项与全局变量之间的映射关系，例如上面配置的 `vue` 模块和 `Vue` 全局变量映射）
+>
+> `Vite` 默认的 `formats` 有 `es` 和 `umd` 两种格式，所以即使没有配置打包后也会生成两份文件。
 
-```html
-<script setup lang="ts">
-  import { RouterLink, RouterView } from 'vue-router';
-  import HelloWorld from './components/HelloWorld.vue';
-</script>
+#### 添加组件库打包脚本指令
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+```json
+// package.json
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-  <!-- 主要是下面这一句，由于是全局安装的组件，所以这里无需导入 -->
-  <vui-button>测试一下自定义的button</vui-button>
-  <RouterView />
-</template>
+{
+  // ...
+  "scripts": {
+    // ...
+    "build:lib": "vite build --config viteLib.config.ts"
+  }
+}
 ```
 
-看看效果：
+执行组件库打包命令：
+
+```bash
+yarn build:lib
+```
+
+生成构建后的资源文件，如下图所示：
 
 [![vue-components-ui-install-p3](/images/share/vue-components-ui-install/p3.png)](/images/share/vue-components-ui-install/p3.png)
+
+偶买噶...`css` 资源被单独打包出来了....
+
+#### 将 `CSS` 打包进 `JS`
+
+作为一个独立组件库，我不希望每次使用的时候再单独引入 `css` 资源，所以下面做一些优化处理：
+
+呃...翻了下 `vite` 文档，基于某些原因，官方并没有提供该类需求的配置，在 [issues](https://github.com/vitejs/vite/issues/1579) 里找到了实现方案：**通过 [vite-plugin-css-injected-by-js](https://www.npmjs.com/package/vite-plugin-css-injected-by-js) 插件，将 `css` 通过 `js` 注入到页面中**：
+
+> yarn add vite-plugin-css-injected-by-js -D
+
+修改 `viteLib.config.ts` 打包配置：
+
+```ts
+import { defineConfig } from 'vite';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+
+export default defineConfig({
+  plugins: [
+    cssInjectedByJsPlugin(),
+    // ... other plugins
+  ],
+  // ... other config
+});
+```
+
+重新执行 `yarn build:lib`，`css` 文件终于没了~~~，生成的两个文件：
+
+> `/lib/vui.mjs`：基于 `es` 格式的模块包（更好地利用模块化的优势，提高代码的可维护性和可重用性）
+>
+> `/lib/vui.umd.js`：一个直接给浏览器或 `AMD loader` 使用的 `umd` 格式包
+
+### 组件库测试
+
+#### `UMD` 链接测试
+
+新建 `docs/vue3Demo.html`，将生成的文件引入到 `html` 页面中，测试组件库是否正常工作：
+
+```html
+<head>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <vui-button>测试一下自定义的button</vui-button>
+  </div>
+  <script src="../lib/vui.umd.js"></script>
+  <script>
+    const { createApp } = Vue;
+    const app = createApp({});
+
+    app.use(window.Vui);
+    app.mount('#app');
+  </script>
+</body>
+```
+
+完整示例：[https://github.com/flynna/vui-project/blob/main/docs/vue3Demo.html](https://github.com/flynna/vui-project/blob/main/docs/vue3Demo.html)
+
+效果如下：
+
+[![vue-components-ui-install-p4](/images/share/vue-components-ui-install/p4.png)](/images/share/vue-components-ui-install/p4.png)
