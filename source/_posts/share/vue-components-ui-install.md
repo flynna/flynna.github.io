@@ -1,7 +1,7 @@
 ---
 title: 教你如何写一个 vue 的 UI 组件库
-date: 2023-09-17 19:45:31
-updated: 2023-09-17 19:45:31
+date: 2023-09-19 19:45:31
+updated: 2023-09-19 19:45:31
 tags:
   - vue
   - vue3
@@ -13,7 +13,7 @@ categories:
 
 在此之前，你需要先了解如何发布一个 `npm`，参考 [如何发布一个 npm-package?](/tools/npm-publish)，以及 `Vue.use 和 Vue.component` 实现，参考 [Vue.component 和 Vue.use 两者之间的区别](/share/vue-component-vs-use)。
 
-在下一篇文章中，我将学习并介绍三方库说明文档搭建。
+在下一篇文章中，我将学习并介绍组件库文档搭建。
 
 <div class="danger">
 
@@ -440,3 +440,103 @@ export default defineConfig({
 效果如下：
 
 [![vue-components-ui-install-p4](/images/share/vue-components-ui-install/p4.png)](/images/share/vue-components-ui-install/p4.png)
+
+### 组件库发布
+
+#### 修改 `package.json` 配置
+
+仅列出修改的字段：
+
+```json
+{
+  // ... 移除 private: true 配置
+  "version": "0.0.1",
+  // npm 包入口
+  "main": "lib/vui.mjs",
+  // cdn 相关
+  "unpkg": "lib/vui.umd.js",
+  // package description keywords
+  "author": "hrlin <flynnzhl@qq.com>",
+  "homepage": "https://github.com/flynna/vui-project/blob/main/README.md",
+  "license": "ISC",
+  // 添加发布指令钩子
+  "scripts": {
+    // ...
+    "prepublishOnly": "npm run build:lib"
+  },
+  // 指定需要发布的文件，效果同 .npmignore
+  "files": ["lib"],
+  // 发布配置
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  // 仓库配置
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flynna/vui-project.git"
+  },
+  // bugs
+  "bugs": {
+    "url": "https://github.com/flynna/vui-project/issues"
+  }
+}
+```
+
+#### 修改 `npm.registry` 配置
+
+因为公司在内网搭建的 `npm` 服务，所以如果我需要将包发到 `npm` 官网，需要修改 `npm` 源：
+
+```bash
+npm config set registry https://registry.npmjs.org
+```
+
+`ok`，修改成功，执行发布脚本~~（文章开头有提到如何发布一个 `npm` 包）~~：
+
+```bash
+npm login
+# 输入账号密码邮箱验证码... 没有账号可以先注册一个
+npm publish
+```
+
+#### 发布成功
+
+测试 `CDN` 服务是否有效（本地测过了，直接引用 `cdn` 功能正常的），效果图如下：
+
+[![vue-components-ui-install-p5](/images/share/vue-components-ui-install/p5.png)](/images/share/vue-components-ui-install/p5.png)
+
+[![vue-components-ui-install-p6](/images/share/vue-components-ui-install/p6.png)](/images/share/vue-components-ui-install/p6.png)
+
+#### 项目里使用
+
+在 `example/main.ts` 中，引入组件库，测试效果：
+
+```ts
+import { createApp } from 'vue';
+// 测试自定义的组件
+import Vui from 'vui-project';
+import App from './App.vue';
+
+const app = createApp(App);
+
+app.use(Vui);
+// ...
+app.mount('#app');
+```
+
+`App.vue` 修改，添加自定义的组件：
+
+```html
+<template>
+  <!-- ... other template -->
+  <vui-button>测试一下自定义的button</vui-button>
+</template>
+```
+
+效果：
+
+[![vue-components-ui-install-p7](/images/share/vue-components-ui-install/p7.png)](/images/share/vue-components-ui-install/p7.png)
+
+### 组件库文档搭建
+
+详细实现：[如何搭建一个库的官方文档](/share/official-document-construction)
