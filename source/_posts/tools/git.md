@@ -244,6 +244,13 @@ git branch A asgasgl
 git checkout -b B
 ```
 
+##### 重命名分支
+
+```bash
+# 重命名当前分支为 B
+git branch -M B
+```
+
 ##### 分支切换
 
 ```bash
@@ -282,6 +289,9 @@ git push origin --delete B
 ```bash
 # 功能分支的代码推送至远端
 git push origin feature/xxx
+
+# 推送代码并与分支建立关联关系 --- 建立关系后 后续提交可以直接 git push
+git push -u origin feature/xxx
 
 # 切换至主分支
 git checkout develop
