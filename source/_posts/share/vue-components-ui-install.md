@@ -140,7 +140,7 @@ categories:
 
 <script lang="ts">
   export default {
-    name: 'vui-button',
+    name: 'VuiButton',
   };
 </script>
 
