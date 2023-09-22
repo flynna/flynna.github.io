@@ -1,5 +1,5 @@
 ---
-title: 教你如何写一个 vue 的 UI 组件库
+title: 教你如何写一个 Vue 的 UI 组件库
 date: 2023-09-19 19:45:31
 updated: 2023-09-19 19:45:31
 tags:
