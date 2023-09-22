@@ -11,9 +11,7 @@ categories:
   - Vue
 ---
 
-在此之前，你需要先了解如何发布一个 `npm`，参考 [如何发布一个 npm-package?](/tools/npm-publish)，以及 `Vue.use 和 Vue.component` 实现，参考 [Vue.component 和 Vue.use 两者之间的区别](/share/vue-component-vs-use)。
-
-在下一篇文章中，我将学习并介绍组件库文档搭建。
+在此之前，你需要先了解[如何发布一个 npm-package?](/tools/npm-publish)，以及 [Vue.use 和 Vue.component](/share/vue-component-vs-use) 实现。
 
 <div class="danger">
 
@@ -127,7 +125,7 @@ categories:
 
 ### 组件库设计
 
-本文旨在记录组件库的实现过程和思路，所以只写了一个 `demo` 组件。~~后续如有需要，会在此基础上添加完善其他的组件实现 😶😶😶~~
+本文旨在记录组件库的实现过程和思路，所以只写了两个 `demo` 组件。~~后续如有需要，会在此基础上添加完善其他的组件实现 😶😶😶~~
 
 #### `Demo` 按钮组件实现
 
@@ -140,7 +138,7 @@ categories:
 
 <script setup lang="ts"></script>
 
-<script>
+<script lang="ts">
   export default {
     name: 'vui-button',
   };
@@ -162,21 +160,7 @@ categories:
 </style>
 ```
 
-#### 插件注册支持
-
-很多时候，使用第三方 `UI` 组件库，我们可以通过 `vue.use` 来注册全局组件，而 `vue.use` 需要我们提供 `install` 方法：
-
-```ts
-// packages/button/index.ts
-
-import VuiButton from './src/index.vue';
-
-VuiButton.install = function (Vue: any) {
-  Vue.component(VuiButton.name || VuiButton.__name, VuiButton);
-};
-
-export default VuiButton;
-```
+`style 样式也可以是单独的 less 文件，通过 src 引入即可.`
 
 #### `less` 支持
 
@@ -201,39 +185,69 @@ export default defineConfig({
 });
 ```
 
-**`ok，如上所示，一个单一的组件功能和结构就实现好了，它已经具备了被集成的基础条件`。**
+#### 单组件插件注册支持
+
+在此之前，回顾一下 `app.use(plugin)` 注册插件时，`plugin` 需要满足的基础结构：
+
+> `export default { install } 或者 export default function(app) {}...`
+
+`ok`，现在我们需要针对 `VuiButton` 完成插件设计，即`app.use(VuiButton)` 支持：
+
+```ts
+// packages/button/index.ts
+
+import type { App } from 'vue';
+import VuiButton from './src/index.vue';
+
+VuiButton.install = function (app: App) {
+  app.component((VuiButton.name || VuiButton.__name)!, VuiButton);
+};
+
+type WithInstall<T> = T & { install(app: App): void };
+
+export default VuiButton as WithInstall<typeof VuiButton>;
+```
+
+**`如上所示，一个单一的组件功能和结构就实现好了，它已经具备了被集成的基础条件`。**
+
+后续只需要同 `Button` 组件一样，在该 `packages/` 文件夹下开发其他组件就行了。
+
+额...你应该也发现了，封装成模块，貌似我们这个组件库还差一个程序入口...
 
 ---
 
-#### 全局批量注册支持
+#### 组件库入口文件设计
 
-上面的处理，让组件可以单独导入并通过 `Vue.use or Vue.component` 注册，下面将主要针对整个组件库的安装注册做介绍。
+在根目录下新创建的 `src` 下面新建入口文件 `index.ts`，实现并导出 `install` 方法。
 
-在根目录下新创建的 `src` 下面新建入口文件 `index.ts`，用于完成组件库的安装注册。如下：
+和单一组件库不同的是，组件库需要对所有组件进行全局注册，并添加额外的配置和扩展。~~详细可文章开头描述~~
+
+具体实现：
 
 ```ts
 // /src/index.ts
 
-import VuiButton from '../packages/button';
+import type { App } from 'vue';
+import Button from '../packages/button';
+import Text from '../packages/text';
 // ...other component
 
 type InstallFunction = {
-  (Vue: any, options?: { size?: 'small' | 'middle' | 'large'; theme?: 'dark' | 'light' }): void;
+  (app: App, options?: { size?: 'small' | 'middle' | 'large'; theme?: 'dark' | 'light' }): void;
   installed?: boolean;
 };
 
 interface Window extends globalThis.Window {
   [k: string]: any;
-  Vue?: any;
 }
 
 // 所有自定义的组件
-const vuiComponents = [VuiButton];
+const vuiComponents = [Button, Text];
 
 // 支持 use.use 全局注册所有组件
-const install: InstallFunction = function (Vue, options = {}) {
+const install: InstallFunction = function (app, options = {}) {
   // 因为组件内部实现了 install 方法，所以可以直接 Vue.use
-  vuiComponents.forEach((component) => Vue.use(component));
+  vuiComponents.forEach((component) => app.use(component));
 
   // 如果没有实现，则如下：
   // vuiComponents.forEach(component => Vue.component(component.name || component.__name, component))
@@ -241,8 +255,8 @@ const install: InstallFunction = function (Vue, options = {}) {
   // -------------------------------------------------------
 
   // vue3 使用 app.config.globalProperties 替代 prototype
-  if (Vue.config.globalProperties) {
-    Vue.config.globalProperties.$vui = {
+  if (app.config.globalProperties) {
+    app.config.globalProperties.$vui = {
       ...options,
       size: options.size || 'middle',
       theme: options.theme || 'light',
@@ -283,22 +297,93 @@ const install: InstallFunction = function (Vue, options = {}) {
   }
 }
 
+// 解构导入 eg. import { Button } from 'vui-project'; app.use(Button);
+export { default as Button } from '../packages/button';
+export { default as Text } from '../packages/text';
+
 export default {
   install, // 用于ES modules，import Vue 后直接使用 Vue.use()
-  VuiButton, // 解构赋值导出单个组件
+  Button,
+  Text, // eg. Vui.Text
   // ...other component
 };
 ```
 
 <div class="success">
 
-> 由于 `vue3 和 vue2` 的版本差异性，`vue3` 中插件 `install` 方法提第一个参数 `app`，并不能访问到 `prototype`
+> `Tips：`
 >
-> 意味着之前 `vue2` 通过 `prototype` 为全局添加配置的方式不适用了，可以通过 **`app.config.globalProperties 替代 prototype`**，具体用法可以参考上面实现。
+> 1. 由于 `vue3 和 vue2` 的版本差异性，`vue3` 中插件 `install` 方法的第一个参数 `app`，并不能访问到 `prototype`。意味着之前 `vue2` 通过 `prototype` 为全局添加配置的方式不适用了，可以通过 **`app.config.globalProperties 替代 prototype`**，参考上面实现。
 >
-> 可以在组件库实现的时候就考虑兼容，或者在后续组件库版本中升级迭代完成兼容性
+> 2. 导出 `export { default as Button } from '../packages/button';` 是为了支持解构导入。方便后续在使用该 `UI` 库时，仅引入部分组件进行注册。` eg. import { Button } from 'vui-project'; app.use(Button);`
+>
+> 3. 最后 `export default { install, Button}` 中也导出了组件，方便在使用该 `UI` 库时，可以通过 `import Vui from 'vui-project'; const { Button } = Vui; 或者 Vui.Button` 的方式使用单个组件。
 
 </div>
+
+#### `Typescript` 支持
+
+##### 定义类型
+
+根目录下新增 `types/` 文件夹，用于存放组件库相关的类型定义。
+
+例如：
+
+```ts
+// types/index.d.ts
+
+import Vue, { App, DefineComponent } from 'vue';
+
+export type VuiComponentSize = 'small' | 'middle' | 'large';
+
+export type VuiComponentTheme = 'dark' | 'light';
+
+export interface InstallFunctionOptions {
+  size?: VuiComponentSize;
+  theme?: VuiComponentTheme;
+}
+
+export function install(vue: App, options?: InstallFunctionOptions): void;
+
+/* --------------------------------------- */
+
+// Vue2
+// export declare class VuiComponent extends Vue {
+//   static install(app: App): void;
+// }
+
+// Vue3
+type WithInstall<T> = T & { install(app: App): void };
+// T is propsType
+export declare type VuiComponent<T> = WithInstall<DefineComponent<T>>;
+
+/* --------------------------------------- */
+
+// VuiButton  ---------- 可以单独将组件类型定义抽离至独立文件 eg. button.d.ts  ------------
+interface VuiButtonProps {
+  // component props...
+  type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text';
+  // ...
+}
+export declare const Button: VuiComponent<VuiButtonProps>;
+// ... other component
+```
+
+##### 修改配置
+
+修改 `package.json` 的 `typings 和 files` 字段：
+
+```diff
+{
+  # 指明模块的类型入口
++ "typings": "types/index.d.ts",
+  "files": [
+    "lib",
+    # npm 发布时，将 types 包含到模块内
++   "types"
+  ]
+}
+```
 
 ### 打包构建 `umd`
 
@@ -410,7 +495,7 @@ export default defineConfig({
 >
 > `/lib/vui.umd.js`：一个直接给浏览器或 `AMD loader` 使用的 `umd` 格式包
 
-### 组件库测试
+### 组件库功能测试
 
 #### `UMD` 链接测试
 
@@ -435,9 +520,7 @@ export default defineConfig({
 </body>
 ```
 
-完整示例：[https://github.com/flynna/vui-project/blob/main/docs/vue3Demo.html](https://github.com/flynna/vui-project/blob/main/docs/vue3Demo.html)
-
-效果如下：
+可以看到，效果一切正常：
 
 [![vue-components-ui-install-p4](/images/share/vue-components-ui-install/p4.png)](/images/share/vue-components-ui-install/p4.png)
 
@@ -509,12 +592,25 @@ npm publish
 
 #### 项目里使用
 
-在 `example/main.ts` 中，引入组件库，测试效果：
+`yarn add` 安装模块 `vui-project`，在 `example/main.ts` 中引入组件库。
+
+<div class="danger">
+
+> `Tips`：
+>
+> 1. 因为测试项目 `example` 和我组件库自身共用一个包(`package.json`)的缘故，调试完成我就把安装的 `vui-project` 移除了，避免产生循环依赖对后续版本发布产生影响。
+>
+> 2. 安装自身模块仅是为了测试模块发布后是否可用，仅测试功能的话可以不安装可以直接引入 `build` 过后的产物即可。
+
+</div>
 
 ```ts
 import { createApp } from 'vue';
+
 // 测试自定义的组件
 import Vui from 'vui-project';
+// import { Button, Text } from 'vui-project'; 经测试，组件单独注册也是可以的...
+
 import App from './App.vue';
 
 const app = createApp(App);
@@ -540,3 +636,15 @@ app.mount('#app');
 ### 组件库文档搭建
 
 详细实现：[如何搭建一个库的官方文档](/share/official-document-construction)
+
+### 参考
+
+<div class="info">
+
+> 完整源码：[https://github.com/flynna/vui-project](https://github.com/flynna/vui-project)
+>
+> [如何发布一个 npm-package?](/tools/npm-publish)
+>
+> [Vue.component 和 Vue.use 两者之间的区别](/share/vue-component-vs-use)
+
+</div>
