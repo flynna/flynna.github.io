@@ -389,7 +389,7 @@ export declare const Button: VuiComponent<VuiButtonProps>;
 
 脚手架提供的 `build、build-only` 指令默认是打包的 `example` 内的资源（因为前面调整过 `index.html` 的入口路径）。
 
-为了保留对 `example` 资源的 `build` 构建，单独提供一个文件用于打包组件库相关的资源：
+所以为了区分，单独提供一个文件用于打包组件库相关的资源：
 
 #### 添加组件库打包配置文件 `viteLib.config.ts`
 
@@ -528,7 +528,7 @@ export default defineConfig({
 
 #### 修改 `package.json` 配置
 
-仅列出修改的字段：
+同时，移除 `example` 相关的脚本指令，例如：`build、build-only`，同时将 `dependencies` 中的 `vue` 相关依赖移到 `devDependencies`。并添加组件包的前置依赖 `vue^3`（`example` 相关资源只在开发环境下调试使用）。
 
 ```json
 {
@@ -635,7 +635,13 @@ app.mount('#app');
 
 ### 组件库文档搭建
 
-详细实现：[如何搭建一个库的官方文档](/share/official-document-construction)
+详细实现：[基于 Vuepress 的静态网站生成器实践](/tools/vuepress)
+
+<div class="waring">
+
+> Tips: 由于 `Vuepress` 依赖的 `vue-server-renderer` 版本需要和 `vue` 保持一致，而我这个测试的组件库是基于 `vue3` 实现的，所以文档和调试项目 `example` 并没有共用一个 `package.json`
+
+</div>
 
 ### 参考
 
