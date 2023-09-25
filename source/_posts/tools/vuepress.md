@@ -134,9 +134,9 @@ module.exports = {
 
 翻了文档，有以下**解决办法**：
 
-- 1. 添加插件 [@vuepress/plugin-register-components](https://vuepress.vuejs.org/zh/plugin/official/plugin-register-components.html) 配置自定义组件的路径和组件名称。
+- 添加插件 [@vuepress/plugin-register-components](https://vuepress.vuejs.org/zh/plugin/official/plugin-register-components.html) 配置自定义组件的路径和组件名称。
 
-- 2. 通过添加 `enhanceApp.js` 文件注册第三方库的方式，将 `vui-project` 集成进来。
+- 通过添加 `enhanceApp.js` 文件注册第三方库的方式，将 `vui-project` 集成进来。
 
 `but` 由于我的组件库是由 `vue3` 写的，和 `vuepress` 存在兼容性问题，对我都不太适用...所以尝试着查阅了一下，果然有相关的 [issue](https://github.com/vuejs/vuepress/issues/2550)，可以发现，官方尝试着发行新的库 [vuepress-next](https://github.com/vuepress/vuepress-next) 来解决这个问题，但目前还没有正式版...
 
