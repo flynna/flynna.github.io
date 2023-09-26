@@ -82,7 +82,8 @@ categories:
 ```json
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true, // 尝试自动修复代码中的 Eslint 问题
+    "eslint.autoFixOnSave": true // 保存时自动应用 Eslint 的修复建议
   }
 }
 ```
@@ -263,6 +264,10 @@ export * from './b';
 
 LeetCode 在 VS Code 中刷题。~~（如果你觉得有必要）~~
 
+#### [`CodeGeeX`](https://marketplace.visualstudio.com/items?itemName=aminer.codegeex)-代码自动补全
+
+功能没有 `github Copilot` 强大，但胜在免费，可以白嫖...
+
 <div class="success">
 
 > 框架相关
@@ -277,11 +282,21 @@ LeetCode 在 VS Code 中刷题。~~（如果你觉得有必要）~~
 
 基于`Vue 2 Snippets`开发的兼容适配`Vue 3`的插件。另外一个片段插件`VueHelper`。
 
+#### [`TypeScript Vue Plugin (Volar)`](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)-`Ts-Vue` 插件
+
+用于让 `TS` 服务器识别 `*.vue` 文件。
+
+- 在 `*.ts` 文件中查找引用时，您还可以从 `*.vue` 文件中获取结果
+- 在 `*.ts` 文件中重命名时，对 `*.vue` 文件的引用也会进行调整
+- 当输入 `import` 语句时，`*.vue` 文件也会出现以进行自动补全
+
 #### [`Vue Language Features (Volar)`](https://marketplace.visualstudio.com/items?itemName=Vue.volar)-`Vue 语言扩展`
 
-为`Vue template`提供原生的`TypeScript`语言服务。推荐在`Vue3`项目中开启。
+为`Vue template`提供原生的`TypeScript`语言服务。**推荐在`Vue3`项目中开启。**
 
-#### [`Vetur`](https://marketplace.visualstudio.com/items?itemName=octref.vetur)-`Vue相关支持`
+#### [`Vetur`](https://marketplace.visualstudio.com/items?itemName=octref.vetur)-`Vue2相关支持`
+
+**推荐在`Vue2`项目中使用，`Vue3`项目请禁用。**
 
 - 语法、语义高亮
 - `Vue`代码片段
