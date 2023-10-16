@@ -329,4 +329,26 @@ export function getHashParams(queryKey?: string) {
 }
 ```
 
+### 获取 `hash` 内部的 `query` 参数值
+
+`形如：http://www.xxx.com/?d=1&e=2#/xxx?a=1&b=true&c=name` 从中获取 `d` 的值
+
+```ts
+import qs from 'querystring';
+
+/**
+ * 获取 hash 内部的 query 参数值
+ * @param {String} [queryKey] 可选，需要的 queryKey
+ * @returns {String | Object} 返回 queryKey 的值，未传 queryKey 时返回整个 query 对象
+ */
+function getHashInnerParams(queryKey?: string) {
+  const search = window.location.search;
+  const filterSearch = search.split(encodeURIComponent('#/'))[0];
+
+  const hashQuery = qs.parse(filterSearch?.slice(1));
+
+  return queryKey ? hashQuery[queryKey] : hashQuery;
+}
+```
+
 ## 持续更新中...
