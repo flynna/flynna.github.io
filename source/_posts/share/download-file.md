@@ -51,6 +51,8 @@ export function downloadFile(url: string, filename: string) {
 
 ### `iframe` 下载
 
+相较于前两种下载方式，`iframe` 下载方式没有并发数限制。
+
 ```ts
 export function downloadFile() {
   const iframe = document.createElement('iframe');
