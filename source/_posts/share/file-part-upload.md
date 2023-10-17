@@ -200,7 +200,7 @@ function httpRequestMethod(request: HttpRequestOptions) {
 如果接口要设配不同的文件服务器，比如`minio、华为obs、阿里云`，需要自己封装一套`OssClient`的抽象父类，由子类集成并重写`client`提供的`API`.
 
 ```typescript
-private client: MinioClient | ObsClient | AliOssClient;
+private client: MinioClient | ObsClient | AliOssClient = new Client({xxx});
 private DEFAULT_BUCKET = 'xxx';
 
 // 获取分段上传前置信息
