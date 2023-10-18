@@ -223,8 +223,6 @@ export function mount(props) {
 yarn add qiankun
 ```
 
-- 因为是手动加载的方式集成的子应用，所以需要外部路由和子应用路由相匹配：
-
 > 例如之前 `iframe` 是通过 `http://www.xxx.com:8080/appA/#/pc/pageA` 访问子应用 `A`，那么现在在主应用里应该也存在 `/pc/pageA` 的路由。
 
 以上述为例主应用 `/pc/pageA` ----> 指向的页面 `A.vue`。在 `A.vue` 需要手动加载子应用：
@@ -235,7 +233,7 @@ yarn add qiankun
 </template>
 
 <script setup lang="ts">
-  import type { MicroApp } from 'qiankun';
+  import type { MicroApp } from 'qiakun';
   import { loadMicroApp } from 'qiankun';
 
   const containerRef = ref<HTMLDivElement>();
@@ -297,7 +295,7 @@ export default defineConfig({
 });
 ```
 
-确保子应用中存在刚刚主应用需要的路由，没有则添加：
+确保子应用中存在刚刚主应用需要的路由（需要外部路由和子应用路由相匹配，除了 `memory` 模式，其他路由模式均匹配当前浏览器路由地址），没有则添加：
 
 ```ts
 // /config/routes.ts
