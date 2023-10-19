@@ -213,21 +213,48 @@ export function mount(props) {
 
 本次 `qiankun` 实践是在 `vue` 应用（`hash` 模式）里集成 `umi` 子应用（`hash` 模式）的部分页面。
 
-两个应用都是单独部署运行的，在改造之前，是通过 `iframe` 的方式集成。下面开始：
+在改造之前，两个应用都是单独部署运行的，是通过 `iframe` 的方式进行集成。所以这里采用了 `loadMicroApp` 进行子应用的加载：
 
-> `因为是 vue 应用里集成 umi 子应用，所以这里 vue 应用是主应用，umi 应用就需要改成微应用。案例采用的是手动加载的方式`：
+#### 主应用改造
 
-- 首先，在主应用里安装 `qiankun`：
+首先安装 `qiankun`：
 
 ```bash
 yarn add qiankun
 ```
 
-> 例如之前 `iframe` 是通过 `http://www.xxx.com:8000/appA/#/pageA` 访问子应用 `appA` 的 `/pageA` 路由。
+下面开始页面组件改造，通过 `loadMicroApp` 在组件内部动态加载和卸载子应用。例如之前集成了一个 `http://www.site.com:8000/appA/#/pageA` 这样一个页面。这个地址的组成：`http://www.site.com:8000/appA/` 是子应用 `appA` 的项目根地址，我们需要集成它的 `/pageA` 页面：
 
-以上述为例，我们需要将主应用 `/pc/pageA` 路由映射到子应用 `/pageA`（非 `memory` 路由模式下，主应用和子应用共用的浏览器地址栏信息，所以下面配置加载时给子应用添加路由前缀 `/pc`，保证两者路由的统一性，） ----> 指向的页面 `A.vue`（主应用）。在 `A.vue` 需要手动加载子应用：
+添加相关的路由，并保证一致性（最后总结有解释为什么需要添加子应用相关路由）：
+
+```ts
+// router/index.ts
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import type { RouteConfig } from 'vue-router';
+
+Vue.use(VueRouter);
+
+const routes: RouteConfig[] = [
+  {
+    path: '/pageA', // 和子应用路由一致 （当然你可以添加自定义的主应用路由前缀，例如 /pc，即 /pc/pageA，然后添加相关配置即可，后面有提到）
+    name: 'pageA',
+    component: () => import('@/views/pageA/index.vue'),
+  },
+];
+
+const router = new VueRouter({
+  routes,
+});
+
+export default router;
+```
+
+然后在 `pageA/index.vue` 组件中手动加载相关页面资源：
 
 ```html
+<!-- pageA/index.vue -->
+
 <template>
   <div ref="containerRef"></div>
 </template>
@@ -240,27 +267,34 @@ yarn add qiankun
   const app = ref<MicroApp>();
 
   // 子应用 appA 的根地址
-  const entryUrl = computed(
-    () =>
-      `${
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:8000/'
-          : `${process.env.BASE_URL}appA/`
-      }`,
-  );
+  const entryUrl = computed(() => `http://www.site.com:8000/appA/`);
 
   onMounted(() => {
     if (containerRef.value) {
       app.value = loadMicroApp({
         name: 'appA',
-        entry: entryUrl.value,
-        container: containerRef.value,
+        entry: entryUrl.value, // 子应用入口 index.html
+        container: containerRef.value, // 挂载的 dom
+        // eg.1
         props: {
           history: {
-            type: 'hash', // 子应用使用哈希路由模式，所以这里添加了 type: hash。详细如下面子应用配置
+            type: 'hash', // 指定子应用使用的路由模式
           },
-          base: '/pc', // 访问子应用时浏览器的路由前缀，如果不添加，默认就是 /
+          // 访问子应用时浏览器的路由前缀，默认就是 /，如果像上面我提到的路由前缀添加了 /pc，那么这里就是 /pc
+          // base: '/' 时： /pageA -> /pageA, base: '/pc' 时： /pc/pageA（主） -> /pageA（子）
+          base: '/',
         },
+        // eg.2
+        // props 指定默认的子应用页面 更加的动态化，就像是使用 iframe 一样方便
+        // props: {
+        //   history: {
+        //     // 子应用里不是这个模式，这里同样可以设置为 memory
+        //     // memory 模式下，子应用路由跳转不改变浏览器的 URl，通常用于 mobile 端
+        //     type: 'memory',
+        //     initialEntries: [initEntry.value], // 设置默认的子应用路由信息
+        //     initialIndex: 0, // 不传默认取 initialEntries 的第一个值，即默认访问的子应用路由
+        //   },
+        // },
       });
     }
   });
@@ -273,9 +307,13 @@ yarn add qiankun
 <style scoped lang="less"></style>
 ```
 
-- 然后改造子应用（是 `umi` 项目）：
+这里并没有指定默认打开的子应用路由页面，所以使用的是子应用根路由【**这里不是需要 `/pageA` 吗？两种方案：一种是上面的配置指定路由模式为 `memory`，然后配置默认的路由页面（并无限制子应用需要是这个路由模式）；一种是为子应用根路由添加重定向**】。
 
-> `umi` 项目内置了 `qiankun`，只需要开启配置即可：
+至此，主应用的改造就完成了，是不是很简单？
+
+#### 子应用改造
+
+`umi` 项目内置了 `qiankun`，只需要开启配置即可：
 
 ```ts
 // /config/config.ts
@@ -287,15 +325,15 @@ export default defineConfig({
   hash: true,
   base: pathPrefix,
   publicPath: pathPrefix,
-  headScripts: [{ src: './scripts/loading.js', async: true }], // from headScripts: [{ src: '/scripts/loading.js', async: true }],
-
+  headScripts: [{ src: './scripts/loading.js', async: true }], // 类似这样的配置，将资源路径改为相对路径
+  // 开启 qiankun
   qiankun: {
     slave: {},
   },
 });
 ```
 
-确保子应用中存在刚刚主应用需要的路由（需要外部路由和子应用路由相匹配，除了 `memory` 模式，其他路由模式均匹配当前浏览器路由地址），没有则添加：
+确保子应用中存在刚刚主应用集成的路由，没有则添加：
 
 ```ts
 // /config/routes.ts
@@ -303,77 +341,25 @@ export default defineConfig({
 export default [
   {
     path: '/',
-    redirect: '/pageA', // 前面配置时添加了 /pc 的前缀，这里又写了 redirect，所以主应用挂载时并没有指定具体路由
+    redirect: '/pageA', // 这里写了 redirect，所以主应用挂载时并没有指定具体路由
   },
   {
     path: '/pageA',
     component: '@/pages/pageA', // 组件正常编写即可，无需特殊处理
   },
-  {
-    path: '/mobile',
-    component: '@/pages/Mobile/index.tsx',
-    routes: [
-      {
-        path: '/mobile',
-        redirect: 'userInfo',
-      },
-      {
-        path: 'userInfo',
-        name: '个人信息',
-        component: '@/pages/Mobile/Info/index.tsx',
-      },
-    ],
-  },
 ];
 ```
 
----
+### 总结
 
-除了上面这种方式指向默认的子应用跟路由，我们也可以定义访问的子应用路由，例如（`/mobile/userInfo`），修改上面主应用的加载配置：
+<div class="info">
 
-```html
-<template>
-  <div ref="containerRef"></div>
-</template>
+> `Tips`:
+>
+> 1. 区分 `loadMicroApp` 和 `registerMicroApps` 两者在路由规则上的差异：前者本身并没有内置路由的管理和拦截机制，所以需要保证子应用路由和主应用路由一致，防止触发浏览器的页面刷新行为（`memory` 路由模式除外）。后者通过匹配到 `activeRule` 时，加载子应用模块，内部实现了路由拦截机制，所以无需保证子应用路由和主应用路由一致。
+>
+> 2. `loadMicroApp` 更适用于动态和个别子应用加载的场景（例如之前 `iframe` 集成某个页面时），而 `registerMicroApps` 适用于整体的子应用配置管理。
+>
+> 3. 只有 `memory` 路由模式下才能通过 `initialEntries` 设置初始化路由（这无关乎采用的是 `loadMicroApp` 还是 `registerMicroApps`）。
 
-<script setup lang="ts">
-  import type { MicroApp } from 'qiankun';
-  import { loadMicroApp } from 'qiankun';
-
-  const containerRef = ref<HTMLDivElement>();
-  const app = ref<MicroApp>();
-  const isDev = process.env.NODE_ENV === 'development';
-
-  // 子应用 appA 的根地址
-  const entryUrl = computed(
-    () => `${isDev ? 'http://localhost:8000/' : `${process.env.BASE_URL}appA/`}`,
-  );
-
-  const initEntry = computed(
-    () => `${isDev ? 'http://localhost:8000/' : entryUrl.value}mobile/userInfo`,
-  );
-
-  onMounted(() => {
-    if (containerRef.value) {
-      app.value = loadMicroApp({
-        name: 'appA',
-        entry: entryUrl.value,
-        container: containerRef.value,
-        props: {
-          history: {
-            type: 'memory', // memory 模式下，子应用路由跳转不改变浏览器的 URl，通常用于 mobile 端
-            initialEntries: [initEntry.value],
-            initialIndex: 0, // 不传默认取 initialEntries 的第一个值
-          },
-        },
-      });
-    }
-  });
-
-  onBeforeUnmount(() => {
-    app.value?.unmount();
-  });
-</script>
-
-<style scoped lang="less"></style>
-```
+</div>
