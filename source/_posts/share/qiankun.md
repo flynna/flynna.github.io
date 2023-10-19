@@ -223,9 +223,9 @@ export function mount(props) {
 yarn add qiankun
 ```
 
-> 例如之前 `iframe` 是通过 `http://www.xxx.com:8080/appA/#/pc/pageA` 访问子应用 `A`，那么现在在主应用里应该也存在 `/pc/pageA` 的路由。
+> 例如之前 `iframe` 是通过 `http://www.xxx.com:8000/appA/#/pageA` 访问子应用 `appA` 的 `/pageA` 路由。
 
-以上述为例主应用 `/pc/pageA` ----> 指向的页面 `A.vue`。在 `A.vue` 需要手动加载子应用：
+以上述为例，我们需要将主应用 `/pc/pageA` 路由映射到子应用 `/pageA`（非 `memory` 路由模式下，主应用和子应用共用的浏览器地址栏信息，所以下面配置加载时给子应用添加路由前缀 `/pc`，保证两者路由的统一性，） ----> 指向的页面 `A.vue`（主应用）。在 `A.vue` 需要手动加载子应用：
 
 ```html
 <template>
@@ -363,7 +363,7 @@ export default [
           history: {
             type: 'memory', // memory 模式下，子应用路由跳转不改变浏览器的 URl，通常用于 mobile 端
             initialEntries: [initEntry.value],
-            initialIndex: 1,
+            initialIndex: 0, // 不传默认取 initialEntries 的第一个值
           },
         },
       });
