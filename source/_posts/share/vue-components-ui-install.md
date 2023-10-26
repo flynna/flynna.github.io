@@ -637,7 +637,7 @@ app.mount('#app');
 
 详细实现：[基于 Vuepress 的静态网站生成器实践](/tools/vuepress)
 
-<div class="waring">
+<div class="warning">
 
 > Tips: 由于 `Vuepress` 依赖的 `vue-server-renderer` 版本需要和 `vue` 保持一致，而我这个测试的组件库是基于 `vue3` 实现的，所以文档和调试项目 `example` 并没有共用一个 `package.json`
 
