@@ -295,3 +295,9 @@ module.exports = {
   <el-link type="primary">primary</el-link>
 </template>
 ```
+
+<div class="waring">
+
+> **注意：在使用插件进行自动引入注册时，三方库的样式是后加载的。意味着可能存在自定义样式和组件自身样式优先级的问题。适当为自定义样式添加权重即可。**
+
+</div>
