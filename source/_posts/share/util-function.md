@@ -165,7 +165,7 @@ export function selectText(textEl: any, startIndex: number, stopIndex: number) {
 }
 ```
 
-### 文本复制到剪贴板
+### 文本复制到剪贴板（丢弃）
 
 考虑到复制的文本中存在换行符，所以使用的 `textarea`元素：
 
@@ -184,6 +184,61 @@ export function setClipboard(value: string) {
   document.body.removeChild(tempInput);
 }
 ```
+
+### 文本复制到系统剪贴板（新）
+
+```ts
+async function copyToClipboard(text: string) {
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      console.error('无法将文本复制到剪贴板：', error);
+      return false;
+    }
+  } else {
+    // 备用方案：在不支持 navigator.clipboard 的浏览器中创建临时输入框并复制文本
+    const tempInput = document.createElement('textarea');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    return true;
+  }
+}
+```
+
+### 从系统剪贴板读取内容
+
+```ts
+async function readFromClipboard() {
+  let text = '';
+  if (navigator.clipboard) {
+    try {
+      text = await navigator.clipboard.readText();
+    } catch (error) {
+      console.error('无法从剪贴板读取文本：', error);
+    }
+  } else {
+    // 备用方案：在不支持 navigator.clipboard 的浏览器中使用 document.execCommand('paste')
+    const tempInput = document.createElement('textarea');
+    document.body.appendChild(tempInput);
+    tempInput.focus();
+    document.execCommand('paste');
+    text = tempInput.value;
+    document.body.removeChild(tempInput);
+  }
+  return text;
+}
+```
+
+<div class='warning'>
+
+> 注意：基于安全性和隐私保护限制，`document.execCommand` 不会直接从系统剪贴板获取内容。所以更多时候请优先使用 `navigator.clipboard`，因为它提供了更安全的方法来执行这些任务，并且更具兼容性。
+
+</div>
 
 ### `HTML` 复制到剪贴板
 
