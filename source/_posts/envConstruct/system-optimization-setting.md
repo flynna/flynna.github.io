@@ -164,11 +164,13 @@ categories:
 
 #### `office` 全套安装以及破解
 
-待完善...
+安装包以及破解参考：[https://www.nruan.com/office2021.html](https://www.nruan.com/office2021.html)
+
+不一定使用 `kms` 激活，某宝买一个激活码也就几块钱...
 
 #### 常用软件和环境安装
 
-待完善...
+...
 
 ---
 
