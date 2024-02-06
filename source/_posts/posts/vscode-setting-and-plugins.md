@@ -228,6 +228,14 @@ export * from './b';
 
 后者：输入前半个标签`<div>`，会自动生成另外一半用于关闭的标签`</div>`
 
+#### [`Error Lens`](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
+
+通过使诊断更加突出来增强语言诊断功能，突出显示语言生成的诊断的整行，并内联打印消息。
+
+#### [`Pretty TypeScript Errors`](https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors)
+
+使 `VSCode` 中的 `TypeScript` 错误更加美观且易于阅读。
+
 #### [`Markdown All in One`](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)-`Markdown 所有功能支持`
 
 在`typora`开始收费后，发现的一款`markdown`插件。`.md`文件的右上角类似窗口扩展的查看图标，点击后会在右侧窗口打开`Markdown`的预览效果页面。
