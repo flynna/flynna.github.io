@@ -276,6 +276,14 @@ LeetCode 在 VS Code 中刷题。~~（如果你觉得有必要）~~
 
 功能没有 `github Copilot` 强大，但胜在免费，可以白嫖...
 
+#### [`GitHub Repositories`](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub)-在 `vscode` 中打开 `github` 项目
+
+方便查阅库源码...
+
+#### [`Jest`](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest)-`Jest` 测试工具
+
+此扩展支持 `vscode` 环境中的完整 `jest` 功能，使测试更加直观和有趣。如果扩展程序可以找到 `jest` 命令，默认情况下它将在启动时自动运行并监视监视模式下的所有测试，并且您应该在 `TestExplorer` 和编辑器中看到测试、状态、错误、覆盖率（如果启用）
+
 <div class="success">
 
 > 框架相关
