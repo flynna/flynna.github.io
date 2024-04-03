@@ -522,3 +522,7 @@ export default class MobileCascade extends Vue {
   }
 </style>
 ```
+
+### 最终效果
+
+[![mobile-cascader-multiple-p1](/images/share/mobile-cascader-multiple/p1.png)](/images/share/mobile-cascader-multiple/p1.png)
