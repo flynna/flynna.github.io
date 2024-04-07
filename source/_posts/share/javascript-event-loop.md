@@ -291,6 +291,212 @@ new Promise((resolve, reject) => {
 9 (7所在then被执行后，9所在then被追加到微任务队列末尾，在8所在then之后)
 ```
 
-**注意：`promise` 内部如果没有调用 `resolve` 或者 `reject` 那么 `promise` 内部代码（含新产生的微任务和宏任务）都执行完成后，此时 `promise` 状态会自动终止（执行栈清空，该模块微任务宏任务队列清空，由引擎终止回收，而非继续等待）**
+### 关于 `Promise` 对事件循环的的一些影响
 
-**`promise` 模块内如果同时调用了 `resolve` 和 `reject`，那么先被调用的生效，后调用的则不会生效，也不会触发 `then` 回或者 `catch`**，所以上面例子的 `reject` 不会被触发。
+#### 代码块内不存在 `resolve 和 reject` 调用
+
+> **即使 `Promise` 内部代码没有 `resolve 和 reject` 的相关调用，也不会阻塞程序以及抛出异常。**
+
+当 `Promise` 相关代码块回调执行完成后（含其内产生的微任务和宏任务完成），并且自身无相关引用（未赋值给某个外部变量等情况）时，即 `promise` 对象被垃圾回收释放前，其状态会变更为 `fulfilled`。由浏览器进行垃圾回收，避免造成内存泄露。
+
+> **关于是否会内存泄露的验证，参考：[既未 Resolve 又未 Reject 的 Promise 对象会导致内存泄漏吗？](https://k8w.cn/post/67)**
+
+eg.
+
+```js
+function fn() {
+  console.log(1);
+  new Promise((resolve, reject) => {
+    console.log(2);
+    setTimeout(() => {
+      console.log(4);
+    });
+  }).then(() => {
+    console.log(3); // 不会被执行
+  });
+}
+fn();
+```
+
+上面例子，在 `fn()` 执行后，依次执行 `log(1) 和 log(2)`，然后将 `console.log(4);` 所在的匿名添加到宏任务队列（延时队列）中，此时 `fn` 内的主执行栈清空，由于微任务队列里不存在任务，则继续等待延时队列中的 `log(4)` 执行，执行完成后，`fn` 所处线程代码执行完成。
+
+其内的 `promise` 虽然没有 `resolve` 和 `reject` 的调用，但此时状态依然会被置为 `fulfilled` 结束，且其后的 `.then 和 .catch` 不会被执行。因为：
+
+> **只有调用 `resolve` 和 `reject` 后才会将其后的 `.then` 或 `.catch` 的匿名回调函数添加到微任务队列中**
+
+为了验证上面的结论，下面看另一种添加了 `async/await` 的情况：
+
+```js
+async function fn() {
+  console.log(1);
+  await new Promise((resolve, reject) => {
+    console.log(2);
+    setTimeout(() => {
+      console.log(4);
+    });
+  });
+  console.log(3); // 不会被执行;
+}
+fn();
+new Promise((resolve, reject) => {
+  console.log(5);
+  resolve();
+}).then(() => {
+  console.log(6);
+});
+// 1 2 5 Promise {<fulfilled>: undefined} 6 4
+```
+
+这个例子，使用了 `ES7` 的 `async/await` 语法糖，根据最终的输出结果可以看到 `log(3)`（即 `promise.then`）的微任务并没有产生和执行，且状态会被置为 `fulfilled`。
+
+反推：**如果** `await` 关键字会产生新的微任务，那么它一定会在 `log(6)` 所属 `then` 微任务之前被放进微任务队列中，且 `log(6)` 会被阻塞（**这是假设的错误结论**）。但根据结果不难看出：
+
+> **即时使用了 `ES7` 的 `async/await` 语法糖，同样是在 `resolve/reject` 被调用之后，将 `（await 后的代码即 .then）/.catch` 放入微任务队列**
+
+<div class="success">
+
+> **结论：**
+>
+> **如果 `promise` 没有调用 `resolve` 以及 `reject`，那么它的所有 `.then（包括 await 后的代码块）` 和 `.catch` 都不会放入微任务队列执行**
+
+</div>
+
+#### 代码块内同时存在 `resolve 和 reject` 调用
+
+> **`promise` 模块内如果同时调用了 `resolve` 和 `reject`，那么先被调用（执行）的生效，后调用的则不会生效，也不会执行后者所触发的 `then` 或者 `catch`**
+
+所以上面 `eg.1` 例子的 `setTimeout 代码中的 reject` 并不会被触发，也不会执行其 `.catch（如果代码有写的话）`。
+
+#### 代码块内的 `resolve 或 reject` 并非在回调的末尾
+
+> **不管是 `resolve` 还是 `reject`，如果其所在位置并非在 `promise` 回调函数的末尾，而是在中间（表示其后还存在别的同步代码 or 新的 `promise`），那么会优先执行后面的同步代码，如果后面的代码存在异步任务，会优先将其放入（宏/微）任务队列中，然后再将（`resolve 或 reject`）自身的回调追加到微任务队列末尾。**
+>
+> **待本轮所有的宏/微任务加入到队列后，才会从微任务队列中取出首个任务继续向后执行**，如后面的 `eg.3`
+
+#### 关于 `promise` 的链式调用
+
+形如：
+
+> `Promise.resolve().then(() => {}).catch(() => {}).then(() => {})....`
+
+<div class="success">
+
+> **结论：**
+>
+> **和 `resolve 或 reject` 的是否同时调用先后顺序无关和是调用 `resolve` 还是 `reject` 无关，（只要满足其中一个被调用过，进入了 `promise` 链式调用操作后，其后的所有不管是 `.catch` 还是 `.then` 都会生成微任务参与事件循环）。**
+>
+> **每一次的 `.then` 或者 `.catch` 都是一个新的微任务，按顺序执行，且仅前一个 `.then 或 .catch` 的回调函数执行完成后（这里的执行完成代表：执行完成其内部的同步代码，并且将产生的新微任务（不会立即执行）追加到微任务队列末尾）才会继续向后执行。**
+>
+> **值得注意的是，尽管链式中例如 `.catch` 的回调函数不会被触发执行（尽管它不会被触发且处在链式的第一个），但它同样会参与到微任务队列中占位（你可以理解为它会生成微任务，但是任务的回调函数为空代码块而非实际的回调，从而影响微任务队列的排列顺序）**
+
+</div>
+
+对比下面的 `eg.3` 和 `eg.4` 的输出 `6 的位置变化`，不难得出上面结论，特别是结论的最后一点。
+
+`eg.3`
+
+```js
+new Promise((resolve, reject) => {
+  console.log(1);
+  resolve();
+})
+  .then(() => {
+    console.log(2);
+    new Promise((resolve, reject) => {
+      console.log(3);
+      setTimeout(() => {
+        console.log(10);
+        reject();
+      }, 3 * 1000);
+      resolve();
+      setTimeout(() => {
+        console.log(110);
+      }, 3 * 1000);
+      new Promise((res) => {
+        console.log(31);
+        res();
+      }).then(() => {
+        console.log(32);
+      });
+    })
+      .then(() => {
+        console.log(4);
+        new Promise((resolve, reject) => {
+          console.log(5);
+          resolve();
+        })
+          .then(() => {
+            console.log(7);
+          })
+          .then(() => {
+            console.log(9);
+          });
+      })
+      .then(() => {
+        console.log(22);
+      })
+      .then(() => {
+        console.log(8);
+      });
+  })
+  .then(() => {
+    console.log(6);
+  });
+// 1 2 3 31 32 4 5 6 7 22 9 8  10 110
+```
+
+`eg.4`:
+
+```js
+new Promise((resolve, reject) => {
+  console.log(1);
+  resolve();
+})
+  .then(() => {
+    console.log(2);
+    new Promise((resolve, reject) => {
+      console.log(3);
+      setTimeout(() => {
+        console.log(10);
+        // reject();
+      }, 3 * 1000);
+      resolve();
+      setTimeout(() => {
+        console.log(110);
+        // reject();
+      }, 3 * 1000);
+      new Promise((res) => {
+        console.log(31);
+        res();
+      }).then(() => {
+        console.log(32);
+      });
+    })
+      .catch(() => {
+        console.log(0);
+      })
+      .then(() => {
+        console.log(4);
+        new Promise((resolve, reject) => {
+          console.log(5);
+          resolve();
+        })
+          .then(() => {
+            console.log(7);
+          })
+          .then(() => {
+            console.log(9);
+          });
+      })
+      .then(() => {
+        console.log(22);
+      })
+      .then(() => {
+        console.log(8);
+      });
+  })
+  .then(() => {
+    console.log(6);
+  });
+// 1 2 3 31 32 6 4 5 7 22 9 8  10 110
+```
