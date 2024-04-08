@@ -41,7 +41,7 @@ categories:
 
 ### 什么是事件循环
 
-同步任务是由 `JS` 引擎发起并立即执行，异步任务则是通过宿主环境（浏览器、`node`）在正确时机发起并执行。
+同步任务是由 `JS` 引擎发起并立即执行，异步任务则是通过**宿主环境（浏览器、`node`）**在正确时机发起并执行。
 
 #### 执行栈
 
@@ -134,7 +134,7 @@ a();
 
 **注意：宏任务（内部代码）的执行也需要严格按照先同步再所有微任务再宏任务的顺序执行下一个宏任务**，意味着尽管宏任务 1 和 2 都是主线程依次产生，但是也需要先执行完宏任务 1 的所有微任务（如果这个过程中产生新的宏任务，则加入宏任务队列等待正确时机加入执行队列的末尾），再执行宏任务 2
 
-> 宏任务的同步代码 ---> 宏任务的所有微任务执行(根据生成顺序入队列) ---> 下一个宏任务的同步代码 ---> 下一个宏任务的所有微任务执行.....
+> 执行宏任务 ---> 然后执行宏任务产生的微任务 ---> 若微任务在执行过程中产生了新的微任务（加到队列末尾），则继续执行微任务 ---> 微任务执行完毕清空 ---> 下一个符合条件的宏任务进行下一轮循环.....
 
 依次类推，这种循环执行的过程被称之为事件循环。
 
@@ -146,7 +146,7 @@ a();
 
 ---> 微任务队列(由 js 引擎发起并执行的任务： 先进先执行，微任务产生的新的微任务追加到本轮微任务队列末尾，在宏任务之前执行【执行完本轮所有的微任务】)
 
----> 宏任务队列(由宿主环境【浏览器、node】发起并执行的任务：等待正确的时机【如定时器(从加入到宏任务队列开始计时，如果时间相同则按加入顺序放入)】，
+---> 宏任务队列(由**宿主环境【浏览器、node】**发起并执行的任务：等待正确的时机【如定时器(从加入到宏任务队列开始计时，如果时间相同则按加入顺序放入)】，
 
 【如点击或者监听事件被触发】时机到了后将执行代码放入宏任务执行队列【时机是否正确的监听判断，不需要等待微任务 or 主线程同步代码执行完成】)
 
@@ -155,7 +155,7 @@ a();
 一次事件循环：
 
 ```
-主线程所有同步代码（宏任务执行）--->
+主线程同步代码（宏任务执行）--->
 主线程产生的微任务 1 执行 ---->
 主线程产生的微任务 2 执行 ---->
 主线程产生的微任务 1 产生的微任务执行 ---->
@@ -294,6 +294,163 @@ new Promise((resolve, reject) => {
 
 ### 关于 `Promise` 对事件循环的的一些影响
 
+#### 关于 `ES7 的 async/await` 对事件循环的影响
+
+下面将分为两个维度来看，毕竟他们的表现不太一致。
+
+##### 如果 `await` 后是同步代码
+
+这里的同步代码指的是 `await` 后的函数直接调用的执行结果，而非函数自身是否标记为 `async`。
+
+`eg`:
+
+```js
+console.log('script start');
+async function async1() {
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  console.log('async2 end');
+}
+async1();
+setTimeout(function () {
+  console.log('setTimeout');
+}, 0);
+new Promise((resolve) => {
+  console.log('Promise');
+  resolve();
+})
+  .then(function () {
+    console.log('promise1');
+  })
+  .then(function () {
+    console.log('promise2');
+  });
+console.log('script end');
+```
+
+尽管上面例子中的 `async2` 函数标记为了 `async`，但是它的返回值是 `undefined`，`await async2()` 后的代码等价于 `Promise.resolve().then(() => { console.log('async1 end'); })`。当然类似于 `await 1` 这种直接跟上常量的也一样，无外乎变为了 `Promise..resolve(1)`。
+
+所以它会保持 `promise.then` 微任务的时序，不受函数执行栈的影响。最终的输出结果：
+
+```
+script start => async2 end => Promise => script end => async1 end => promise1 => promise2 => setTimeout
+```
+
+##### 如果 `await` 后是异步代码
+
+这里的异步代码取决于 `await fn()` 的 `fn()` 的返回结果。如下例子，返回的是异步函数的直接回调：
+
+`eg.x`:
+
+```js
+console.log('script start');
+async function async1() {
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  console.log('async2 end');
+  return Promise.resolve().then(() => {
+    console.log('async2 end1');
+  });
+}
+async1();
+setTimeout(function () {
+  console.log('setTimeout');
+}, 0);
+new Promise((resolve) => {
+  console.log('Promise');
+  resolve();
+})
+  .then(function () {
+    console.log('promise1');
+  })
+  .then(function () {
+    console.log('promise2');
+  });
+console.log('script end');
+```
+
+这个例子，它的输出结果和前面的分析不太一致，如下：
+
+```
+script start => async2 end => Promise => script end => async2 end1 => promise1 => promise2 => async1 end => setTimeout
+```
+
+你会发现 `promise2 在 async1 end` 之前被执行了...诶？`async2 end1` 所在的微任务回调在 `promise1` 所在 `then` 之前，那 `async1 end` 应该在 `promise2` 所在 `then` 之前加入微任务队列才对？为什么结果却不是这样的呢？emm...应该是分析错了...
+
+**其实严格来说，也不算是一种异常表现。**如上面例子 `await async2()` 中 `async2()` 的返回值是一个异步回调，那么 `await` 后的代码转换为 `promise` 后应该为下面伪代码：\*\*
+
+```js
+async function async1() {
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  console.log('async2 end');
+  return Promise.resolve().then(() => {
+    console.log('async2 end1');
+  });
+}
+async1();
+
+// 等价 <==>
+
+async function async1() {
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  console.log('async2 end');
+  const promise = await Promise.resolve().then(() => {
+    console.log('async2 end1');
+  });
+  return promise;
+}
+
+// 等价 <==>
+
+async function async1() {
+  console.log('async2 end');
+  const promise = await Promise.resolve().then(() => {
+    console.log('async2 end1');
+  });
+  await promise; // await async2() ===> await promise
+  console.log('async1 end');
+}
+
+// 等价 <==>
+
+async function async1() {
+  console.log('async2 end');
+  new Promise((resolve) => {
+    Promise.resolve()
+      .then(() => {
+        console.log('async2 end1');
+      })
+      .then((promise) => {
+        resolve(promise);
+      });
+  }).then(() => {
+    console.log('async1 end');
+  });
+}
+```
+
+<div class="success">
+
+> 如此再按照常理来分析最开始的例子 `eg.x`，先执行 `async2 end`， 然后将 `() => { console.log('async2 end1'); }` 放入微任务队列，（中间同步任务部分省略）然后后面将 `() { console.log('promise1'); }` 放入队列。
+>
+> 取出首个微任务，即 `() => { console.log('async2 end1'); }` 执行，产生新的微任务 `(promise) => { resolve(promise); }`，然后执行下一个微任务 `() { console.log('promise2'); }`\*\*
+>
+> 然后执行 `(promise) => { resolve(promise); }` 产生新的微任务 `() => { console.log('async1 end'); }` 入队列，由于此时微任务队列只有有且只有它，取出执行，微任务队列被清空。
+>
+> 如此，输出结果也就不意外了。**`await` 后的函数返回值即使是异步回调，通过等价转换，其实也无非就多了个获取异步回调执行结果并 `return` 给 `Promise.resolve` 的过程。如果是同步代码，那么直接就可以赋值为 `Promise.resolve(n)`， 而异步回调需要在其 `.then` 的回调参数中获取。**所以容易忽略这一次 `.then` （微任务）。
+
+</div>
+
 #### 代码块内不存在 `resolve 和 reject` 调用
 
 > **即使 `Promise` 内部代码没有 `resolve 和 reject` 的相关调用，也不会阻塞程序以及抛出异常。**
@@ -324,43 +481,6 @@ fn();
 其内的 `promise` 虽然没有 `resolve` 和 `reject` 的调用，但此时状态依然会被置为 `fulfilled` 结束，且其后的 `.then 和 .catch` 不会被执行。因为：
 
 > **（一般情况：不存在异常抛出的前提下）只有调用 `resolve` 或者 `reject`，并且等待后续同步代码执行完成（含异步任务入队列）后才会将其自身的 `.then` 或 `.catch` 的匿名回调函数添加到微任务队列中**
-
-为了验证上面的结论，下面看另一种添加了 `async/await` 的情况：
-
-```js
-async function fn() {
-  console.log(1);
-  await new Promise((resolve, reject) => {
-    console.log(2);
-    setTimeout(() => {
-      console.log(4);
-    });
-  });
-  console.log(3); // 不会被执行;
-}
-fn();
-new Promise((resolve, reject) => {
-  console.log(5);
-  resolve();
-}).then(() => {
-  console.log(6);
-});
-// 1 2 5 Promise {<fulfilled>: undefined} 6 4
-```
-
-这个例子，使用了 `ES7` 的 `async/await` 语法糖，根据最终的输出结果可以看到 `log(3)`（即 `promise.then`）的微任务并没有产生和执行，且状态会被置为 `fulfilled`。
-
-反推：**如果** `await` 关键字会产生新的微任务，那么它一定会在 `log(6)` 所属 `then` 微任务之前被放进微任务队列中，且 `log(6)` 会被阻塞（**这是假设的错误结论**）。但根据结果不难看出：
-
-> **即时使用了 `ES7` 的 `async/await` 语法糖，同样是存在 `resolve/reject` 调用，才会将 `（await 后的代码即 .then）/.catch` 放入微任务队列**
-
-<div class="success">
-
-> **结论：**
->
-> **（一般情况：不存在异常抛出的前提下）如果 `promise` 没有调用 `resolve` 或者 `reject`，那么它的所有 `.then（包括 await 后的代码块）` 和 `.catch` 都不会放入微任务队列执行**
-
-</div>
 
 #### 代码块内同时存在 `resolve 和 reject` 调用
 
