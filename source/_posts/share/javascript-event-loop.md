@@ -102,11 +102,11 @@ a();
 
 | #                     | 浏览器 | Node |
 | --------------------- | ------ | ---- |
-| I/O                   | ✅     | ✅   |
-| setTimeout            | ✅     | ✅   |
-| setInterval           | ✅     | ✅   |
-| setImmediate          | ❌     | ✅   |
-| requestAnimationFrame | ✅     | ❌   |
+| I/O                   | ✅      | ✅    |
+| setTimeout            | ✅      | ✅    |
+| setInterval           | ✅      | ✅    |
+| setImmediate          | ❌      | ✅    |
+| requestAnimationFrame | ✅      | ❌    |
 
 `script` 主线程代码其实也是宏任务，此外还有注入事件监听、点击事件等等都可以算作是宏任务。
 
@@ -116,9 +116,9 @@ a();
 
 | #                          | 浏览器 | Node |
 | -------------------------- | ------ | ---- |
-| process.nextTick           | ❌     | ✅   |
-| MutationObserver           | ✅     | ❌   |
-| Promise.then catch finally | ✅     | ✅   |
+| process.nextTick           | ❌      | ✅    |
+| MutationObserver           | ✅      | ❌    |
+| Promise.then catch finally | ✅      | ✅    |
 
 根据上面列出的常见宏任务和微任务，不难看出：类似不确定的执行时机的 `api` 都是宏任务，反之则是微任务。（~~方便记忆 😋😋😋~~）
 
@@ -166,6 +166,15 @@ undefined（主线程执行完成打印） --->
 ```
 
 将上面的‘主线程’文字替换为（‘宏任务’）同样适用，等全部完成后，表示该轮宏任务执行结束，开启下一个宏任务继续上面的循环执行...
+
+
+### 浏览器中的事件循环和node环境下的事件循环区别
+
+- 前面提到的都是浏览器中事件循环的表现（**Node11 版本后行为和浏览器一致**）。
+
+- 针对 `node 环境（10 以前）`：
+  - `process.nextTick()` 的优先级要高于其他微任务。而浏览器环境中是同优先级，看入队列的先后顺序
+  - node环境下有六个阶段的宏任务（`timers定时器`、 `pending callback回调`， `idle，prepare 系统内部使用`， `poll 轮询`， `check 检测，setImmediate 在这个阶段执行`， `close callbacks 关闭的回调 .on('close', callback)`），执行完一个阶段的任务后，会先执行 `process.nexTick()`，然后执行微任务队列，然后执行下一个阶段任务...
 
 ### 练习
 
