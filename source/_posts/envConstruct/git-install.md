@@ -80,8 +80,13 @@ git config --global core.autocrlf false
 打开设置->安全设置->ssh公钥，把本地的公钥文件全选复制进来，输入登录密码，就配置成功了。
 ```
 
-#### 配置`https.proxy`代理
+#### 配置`http.proxy`代理
 
 ```bash
-git config --global https.proxy http:\127.0.0.1:xxx
+#使用http代理 
+git config --global http.proxy http://127.0.0.1:10809
+git config --global https.proxy https://127.0.0.1:10809
+#使用socks5代理
+git config --global http.proxy socks5://127.0.0.1:10808
+git config --global https.proxy socks5://127.0.0.1:10808
 ```
