@@ -29,8 +29,10 @@ categories:
 
 ```bash
 # 方式一：手动添加到配置文件中：nvm安装目录/settings.txt 末尾追加
-node_mirror: https://npm.taobao.org/mirrors/node/
-npm_mirror: https://npm.taobao.org/mirrors/npm/
+node_mirror: https://npmmirror.com/mirrors/node/
+npm_mirror: https://npmmirror.com/mirrors/npm/
+#node_mirror: https://npm.taobao.org/mirrors/node/
+#npm_mirror: https://npm.taobao.org/mirrors/npm/
 
 # 方式二：通过指令修改
 nvm node_mirror [url]
